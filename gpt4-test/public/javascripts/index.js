@@ -23,6 +23,7 @@ $().ready(function(){
     })
 
     $("#submit").on("click", function(){
+        $("#loader").show();
         let payload = {
             img: uploadImg,
             description: $("#descTxt").val() || ''
@@ -33,6 +34,7 @@ $().ready(function(){
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
             if(payload.img) {
                 $.post(API, payload, function(data, status) {
+                    $("#loader").hide();
                     console.log("Get response success!");
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
@@ -42,6 +44,7 @@ $().ready(function(){
             // 若只有文字則送 gpt-3.5-turbo
             else {
                 $.post(API_txt, {description: payload.description}, function(data, status) {
+                    $("#loader").hide();
                     console.log("Get response success!");
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
