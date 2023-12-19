@@ -16,6 +16,10 @@ async function gptQuery(img = '', desc = null) {
       model: "gpt-4-vision-preview",
       messages: [
         {
+          role: "system",
+          content: "Please analyze the uploaded image, along with any additional textual description, focusing on the predominant food item if mentioned. Return the results in JSON format with the following fields: 'food' (main food in the image), 'ingredients' (basic nutritional composition, limit to 5), 'result' (scores on various indicators based on a baseline of 5 for white rice), {'methane' (amount of methane produced after consuming the food), 'electricity' (electricity generated based on the methane produced), 'constipate' (index indicating the likelihood of causing constipation), 'calorie' (caloric content of the food)}, 'reason' (explanation of the results), and 'suggest' (recommendations on how to consume the food to reduce carbon emissions). Please provide answers in Chinese for the 'reason' and 'suggest' fields."
+        },
+        {
           role: "user",
           content: [
             { type: "text", text: desc || "What’s in this image?" },
@@ -23,10 +27,11 @@ async function gptQuery(img = '', desc = null) {
               type: "image_url",
               // Could be img url or base 64 img data
               image_url: img
-            },
+            },          
           ],
         },
       ],
+      max_tokens: 2048
     });
     console.log("GPT response: "+JSON.stringify(response.choices[0]));
     return response.choices[0];
