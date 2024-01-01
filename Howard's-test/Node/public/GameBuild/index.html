@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
+    <!-- 內容在這裡 -->
+    <h1> HELLO</h1>
+    <button onclick="goToSpecificUrl()">回到指定網址</button>
+    <script>
+      function goToSpecificUrl() {
+        // 在這裡替換 'your-specific-url' 為你想要返回的網址
+        var targetUrl = 'http://127.0.0.1:3001';
+        // 使用 window.location.href 將網址設定為目標 URL
+        window.location.href = targetUrl;
+      }
+    </script>
+    <!-- 內容在這裡結束 -->
+
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=540 height=960 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -76,6 +89,9 @@
       // the canvas DOM size and WebGL render target sizes yourself.
       // config.matchWebGLToCanvasSize = false;
 
+      /*在這段程式碼中，如果裝置是 iPhone、iPad、iPod 或 Android，就會應用移動裝置的樣式。
+      這時會動態添加一個 <meta> 元素到 <head> 中，並設定 viewport，使 Canvas 的寬度和高度自動擴展到裝置的寬度和高度。
+      這樣就能夠保證在手機畫面上，Canvas 會填滿整個螢幕，剛好符合手機尺寸。*/
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
 
