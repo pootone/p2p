@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <title>Chart.js test</title>
+  </head>
+  <body>
+    <h2>Chart.js Demo</h2>
+    <a href="https://www.chartjs.org" target="_blank">Ref link</a>
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const ctx = document.getElementById("myChart");
+
+      const DATA_COUNT = 1;
+      const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 4 };
+
+      const labels = ["甲烷排放", "電力輸出", "###便秘風險", "###卡路里平分"];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "Dataset 1",
+            data: [2, 4, 3, 1],
+          },
+          {
+            label: "Dataset 2",
+            data: [3, 2, 3, 2]
+          },
+        ],
+      };
+
+      const chartConfig = {
+        type: "radar",
+        data: data,
+        options: {
+          elements: {
+            line: {
+              borderWidth: 2,
+              borderColor: "rgba(255, 255, 255, 1)",
+              backgroundColor: "rgba(221, 216, 204, 0.6)",
+            },
+            point: {
+              pointRadius: 4,
+              pointBackgroundColor: [
+                "rgba(130, 177, 153, 1)",
+                "rgba(219, 187, 87, 1)",
+                "rgba(115, 50, 17, 1)",
+                "rgba(179, 135, 134, 1)",
+              ],
+            },
+          },
+        },
+      };
+
+      // Create a chart
+      new Chart(ctx, chartConfig);
+    </script>
+  </body>
+</html>
