@@ -13,9 +13,9 @@ router.get('/play', function(req, res, next) {
 });
 
 
-router.use('/artest/ar', express.static('public/ARtest'));
-router.get('/artest', function(req, res, next) {
-  res.redirect('/artest/ar');
+router.use('/artest2/ar', express.static('public/ARtest'));
+router.get('/artest2', function(req, res, next) {
+  res.redirect('/artest2/ar');
 });
 
 
