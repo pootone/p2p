@@ -4,12 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width , initial-scale=1.0" />
     <title>Chart.js test</title>
+    <style>
+      #chartProp {
+        width: 327px;
+        background-image: url(./radar_bg.png);
+        background-repeat: no-repeat;
+        background-size: 290px;
+        background-position: center;
+      }
+    </style>
   </head>
   <body>
     <h2>Chart.js Demo</h2>
     <a href="https://www.chartjs.org" target="_blank">Ref link</a>
 
-    <div>
+    <div id="chartProp">
       <canvas id="myChart"></canvas>
     </div>
 
@@ -18,10 +27,7 @@
     <script>
       const ctx = document.getElementById("myChart");
 
-      const DATA_COUNT = 1;
-      const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 4 };
-
-      const labels = ["甲烷排放", "電力輸出", "###便秘風險", "###卡路里平分"];
+      const labels = ["甲烷排放", "電力輸出", "便秘風險", "###熱量"];
       const data = {
         labels: labels,
         datasets: [
@@ -31,7 +37,7 @@
           },
           {
             label: "Dataset 2",
-            data: [3, 2, 3, 2]
+            data: [3, 2, 3, 2],
           },
         ],
       };
@@ -40,6 +46,34 @@
         type: "radar",
         data: data,
         options: {
+          plugins: {
+            legend: {
+              display: false, // 上方資料 label 隱藏
+            },
+          },
+          scales: {
+            r: {
+              beginAtZero: true, // 從 0 度開始
+              startAngle: -45, // 旋轉度數
+              angleLines: {
+                display: false, // 對角線隱藏
+              },
+              grid: {
+                display: false // 隔線顯示
+              },
+              max: 4, // 最大數值
+              min: 0, // 最小數值
+              ticks: {
+                display: false, // 刻度顯示
+                stepSize: 1 // 隔線寬距
+              },
+              pointLabels: {
+                font: {
+                  size: 14 // 指標字型大小
+                }
+              }
+            }
+          },
           elements: {
             line: {
               borderWidth: 2,
