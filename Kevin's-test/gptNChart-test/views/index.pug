@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-6
+      .item
+        h1= title
+        //--- Input fields
+        input#descTxt(type="text")
+        //- Upload Button
+        input#imgFileInput(type="file" capture='environment' accept='image/*' style='display: none;')
+        //- Style for Button
+        label(for='imgFileInput' style='border: 1.5px solid black; border-radius: 5px; padding: 5px;') &#x4E0A;&#x50B3;&#x5716;&#x7247;
+        input#submit(type="button", value="submit")
+
+        //- Image preview
+        img#uploadImg(style="width: 200px; justify-content: fit;")
+        #loader
+        //- GPT response content
+        p#resContent
+  .row.justify-content-center
+    .col-sm-6.col-5
+      //- Radar chart
+      #chartProp.w-100
+        canvas#myChart
+
+  script(src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js") <!-- jquery -->
+  script(src="https://cdn.jsdelivr.net/npm/chart.js") <!-- chart.js -->
+  script(src="/javascripts/index.js") 
