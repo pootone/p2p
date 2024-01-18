@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <!-- font -->
+    <link href="https://fonts.cdnfonts.com/css/grandstander" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Shippori Mincho' rel='stylesheet'>
+    <link rel="stylesheet" href="style/badge.css">
+    <link rel="stylesheet" href="style/badge_floating.css">
+    <title>Your Webpage</title>
+</head>
+
+<body background="Assests/images/BG.png">
+    <div class="fixed-corner">
+        <div class="corner-button" onclick="handleButtonClick(1)">
+            <img src="Assests/images/menu_btn.png" alt="">
+        </div>
+        <div class="corner-button" onclick="handleButtonClick(2)">
+            <img src="Assests/images/排行榜.png" alt="">
+        </div>
+        <div class="corner-button" onclick="handleButtonClick(3)">
+            <img src="Assests/images/排行榜-1.png" alt="">
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="name">
+            Ubrr's<br>
+            Personal Dashboard
+        </div>
+        <div class="personal-photo">
+            <img src="Assests/images/頭貼.png" alt="">
+        </div>
+    </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="aquarium">
+                <img src="Assests/images/水族箱/水族箱.png" alt="Header Image">
+                <div class="Layer2">
+                    <img src="Assests/images/水族箱/漢堡王.png" alt="" class="hidden" id="badge1" onclick="showImage()">
+                </div>
+            </div>
+
+            <div class="mid d-flex justify-content-center">
+                <img src="Assests/images/任務框/限時任務.png" alt="" class="mx-3"
+                    onclick="scrollToSection('limited_mission_B')">
+                <img src="Assests/images/任務框/均衡飲食.png" alt="" class="mx-3" onclick="scrollToSection('balance_diet_B')">
+                <img src="Assests/images/任務框/素食挑戰.png" alt="" class="mx-3" onclick="scrollToSection('vegetarian_B')">
+                <img src="Assests/images/任務框/飲食累積.png" alt="" class="mx-3" onclick="scrollToSection('diet_combine_B')">
+            </div>
+
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="Assests/images/下滑任務框/限時任務.png" id="limited_mission_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/漢堡王.png" class="burgerKing" alt="">
+                                <img src="Assests/images/徽章/加.png" id="button-badge1" class="add1"
+                                    onclick="showImage('badge1')" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師.png" class="balance" alt="">
+                            <img src="Assests/images/徽章/進度條.png" class="progress-B" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="Assests/images/下滑任務框/均衡飲食.png" id="balance_diet_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師.png" class="balance" alt="">
+                            <img src="Assests/images/徽章/進度條.png" class="progress-B" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="Assests/images/下滑任務框/素食挑戰.png" id="vegetarian_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="Assests/images/下滑任務框/飲食累積.png" id="diet_combine_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="Assests/images/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" onclick="closeFloatingWindow()" alt="">
+                                均衡大師
+                            </div>
+                            <div class="floating-window-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="Assests/images/floating_window/說明.png" alt="">
+                                            <p class="with-space">
+                                                均衡飲食是每天都要均衡的攝取六大類食物
+                                                包括全穀雜糧類、乳品類、豆魚蛋肉類、蔬菜類、水果類、及油脂與堅果種子類。
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="Assests/images/floating_window/建議.png" alt="">
+                                            <p class="with-space">
+                                                為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。
+                                                為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="Assests/images/floating_window/紀錄.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <p>&copy; NO2</p>
+    </footer>
+    <script src="JS/badge.js"></script>
+</body>
+
+</html>
