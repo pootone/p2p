@@ -31,3 +31,13 @@ function scrollToSection(sectionId) {
         });
     }
 }
+
+function closeFloatingWindow() {
+    // 在此處添加關閉浮動視窗的程式碼
+    // 例如，您可以將浮動視窗的樣式設置為 display: none; 或透過其他方式關閉
+    // 這僅是一個簡單的示例，實際實現可能取決於您的代碼結構和需求
+    var floatingWindow = document.querySelector('.floating-window-container');
+    if (floatingWindow) {
+        floatingWindow.style.display = 'none';
+    }
+}

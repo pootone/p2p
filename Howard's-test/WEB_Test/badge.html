@@ -58,6 +58,8 @@
                 <img src="Assests/images/任務框/飲食累積.png" alt="" class="mx-3" onclick="scrollToSection('diet_combine_B')">
             </div>
 
+
+            <!-- badge跟點開badge都是開同一模板，靠按鈕ID去傳給JS修改裡面內容 -->
             <div class="badge">
                 <div class="badge-list col-12">
                     <img src="Assests/images/下滑任務框/限時任務.png" id="limited_mission_B" alt="">
@@ -166,37 +168,133 @@
                         <div class="floating-window-container">
                             <div class="floating-window-header">
                                 <img src="Assests/images/floating_window/back_icon.png"
-                                    class="floating-window-close-btn" onclick="closeFloatingWindow()" alt="">
-                                均衡大師
+                                    class="floating-window-close-btn " data-bs-dismiss="modal" alt="">
+                                <p class="title">均衡大師</p>
                             </div>
                             <div class="floating-window-content">
-                                <div class="container">
-                                    <div class="row">
+                                <div class="window_container">
+                                    <div class="row info_suggest">
                                         <div class="col-md-6">
                                             <img src="Assests/images/floating_window/說明.png" alt="">
-                                            <p class="with-space">
+                                            <p>
                                                 均衡飲食是每天都要均衡的攝取六大類食物
                                                 包括全穀雜糧類、乳品類、豆魚蛋肉類、蔬菜類、水果類、及油脂與堅果種子類。
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <img src="Assests/images/floating_window/建議.png" alt="">
-                                            <p class="with-space">
+                                            <p>
                                                 為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。
                                                 為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。
                                             </p>
                                         </div>
                                     </div>
+                                    <!-- 紀錄 -->
                                     <div class="row">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <img src="Assests/images/floating_window/紀錄.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-
+                                        <div class="col-md-6">
+                                            <img src="Assests/images/floating_window/紀錄.png" class="record_img" alt="">
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 mx-auto my-auto text-center">
+                                            <img src="Assests/images/floating_window/蛋.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                        </div>
+                                        <div class="col-md-10 position-relative">
+                                            <img src="Assests/images/floating_window/框.png" alt=""
+                                                style="width: 90%; height: auto;">
+                                            <div class="overlay-text">
+                                                <div class="row content_dis">
+                                                    <p>您消耗的蛋排放了約等級2的甲烷排放量</p>
+                                                </div>
+                                                <div class="row record_anim">
+                                                    <img src="Assests/images/floating_window/內容.png"
+                                                        style="width: 90%; height: auto;" alt="">
+                                                </div>
+                                                <div class="row content-trans">
+                                                    <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 mx-auto my-auto text-center">
+                                            <img src="Assests/images/floating_window/千層麵.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                        </div>
+                                        <div class="col-md-10 position-relative">
+                                            <img src="Assests/images/floating_window/框.png"
+                                                style="width: 90%; height: auto;" alt=""
+                                                style="width: 100%; height: auto;">
+                                            <div class="overlay-text">
+                                                <div class="row content_dis">
+                                                    <p>您消耗的千層麵排放了約等級9的甲烷排放量</p>
+                                                </div>
+                                                <div class="row record_anim">
+                                                    <img src="Assests/images/floating_window/內容.png"
+                                                        style="width: 90%; height: auto;" alt="">
+                                                </div>
+                                                <div class="row content-trans">
+                                                    <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 mx-auto my-auto text-center">
+                                            <img src="Assests/images/floating_window/蛋.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                        </div>
+                                        <div class="col-md-10 position-relative">
+                                            <img src="Assests/images/floating_window/未解鎖框.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                            <div class="overlay-text">
+                                                <div class="lockDiscribtion">
+                                                    <img src="Assests/images/floating_window/locker.png"class="lock-image" alt="">
+                                                    <p class="lock_word">尚未解鎖</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 mx-auto my-auto text-center">
+                                            <img src="Assests/images/floating_window/蛋.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                        </div>
+                                        <div class="col-md-10 position-relative">
+                                            <img src="Assests/images/floating_window/未解鎖框.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                            <div class="overlay-text">
+                                                <div class="lockDiscribtion">
+                                                    <img src="Assests/images/floating_window/locker.png"
+                                                        class="lock-image" alt="">
+                                                    <p class="lock_word">尚未解鎖</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2 mx-auto my-auto text-center">
+                                            <img src="Assests/images/floating_window/蛋.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                        </div>
+                                        <div class="col-md-10 position-relative">
+                                            <img src="Assests/images/floating_window/未解鎖框.png"
+                                                style="width: 90%; height: auto;" alt="">
+                                            <div class="overlay-text">
+                                                <div class="lockDiscribtion">
+                                                    <img src="Assests/images/floating_window/locker.png"class="lock-image" alt="">
+                                                    <p class="lock_word">尚未解鎖</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /紀錄 -->
 
                                 </div>
                             </div>
