@@ -1,3 +1,37 @@
+p {
+    font-family: 'Shippori Mincho';
+    color: #394038;
+}
+.badge-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.badge-icon {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 80%;
+}
+.badge-title {
+    font-size: 16px;
+    padding-top: 10px;
+    color: #313131;
+}
+.badge-info {
+    font-size: 14px;
+    color: #888888;
+}
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container:hover .add1 {
+    display: block;
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -143,21 +177,9 @@ body {
     width: 80%;
 }
 
-.BL {
-    width: 100%;
-}
 
 .add1 {
     width: 40%;
-}
-
-.image-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.image-container:hover .add1 {
-    display: block;
 }
 
 .add1 {

@@ -14,6 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Shippori Mincho' rel='stylesheet'>
     <link rel="stylesheet" href="style/badge.css">
     <link rel="stylesheet" href="style/badge_floating.css">
+    <link rel="stylesheet" href="style/weekRecord.css">
     <title>Your Webpage</title>
 </head>
 
@@ -59,7 +60,7 @@
             </div>
 
 
-            <!-- badge跟點開badge都是開同一模板，靠按鈕ID去傳給JS修改裡面內容 -->
+            <!-- badge跟點開badge都是開同一模板每個徽章都有獨立ID，原始是鎖定圖示，固定名稱描述，靠按鈕ID去傳給JS修改class="image-container"裡面內容 -->
             <div class="badge">
                 <div class="badge-list col-12">
                     <img src="Assests/images/下滑任務框/限時任務.png" id="limited_mission_B" alt="">
@@ -68,10 +69,34 @@
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
                             <div class="image-container">
-                                <img src="Assests/images/徽章/漢堡王.png" class="burgerKing" alt="">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
                                 <img src="Assests/images/徽章/加.png" id="button-badge1" class="add1"
                                     onclick="showImage('badge1')" alt="">
                             </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/badge1.png" alt="">
+                                <img src="Assests/images/徽章/加.png" id="button-badge1" class="add1"
+                                    onclick="showImage('badge1')" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                                <img src="Assests/images/徽章/加.png" id="button-badge1" class="add1"
+                                    onclick="showImage('badge1')" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
@@ -80,18 +105,9 @@
                             <img src="Assests/images/徽章/進度條.png" class="progress-B" alt="">
                         </div>
                     </div>
-                    <div class="col-12 col-md-3 px-5">
-                        <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 px-5">
-                        <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
-                        </div>
-                    </div>
                 </div>
             </div>
+            
             <div class="badge">
                 <div class="badge-list col-12">
                     <img src="Assests/images/下滑任務框/均衡飲食.png" id="balance_diet_B" alt="">
@@ -99,17 +115,44 @@
                 <div class="row flex">
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師.png" class="balance" alt="">
-                            <img src="Assests/images/徽章/進度條.png" class="progress-B" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                        </div>
+                        <p class="badge-title">吃來乍到</p>
+                        <p class="badge-info">首次拍照或上傳食物</p>
                     </div>
                 </div>
             </div>
+
+            
             <div class="badge">
                 <div class="badge-list col-12">
                     <img src="Assests/images/下滑任務框/素食挑戰.png" id="vegetarian_B" alt="">
@@ -117,21 +160,44 @@
                 <div class="row flex">
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                        </div>
+                        <p class="badge-title">吃來乍到</p>
+                        <p class="badge-info">首次拍照或上傳食物</p>
                     </div>
                 </div>
             </div>
+
+            
             <div class="badge">
                 <div class="badge-list col-12">
                     <img src="Assests/images/下滑任務框/飲食累積.png" id="diet_combine_B" alt="">
@@ -139,31 +205,51 @@
                 <div class="row flex">
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-3 px-5">
                         <div class="row flex-column">
-                            <img src="Assests/images/徽章/均衡大師鎖.png" class="BL" alt="">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                                <p class="badge-title">吃來乍到</p>
+                                <p class="badge-info">首次拍照或上傳食物</p>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="Assests/images/徽章/badge/BadgeLock.png" alt="">
+                            </div>
+                        </div>
+                        <p class="badge-title">吃來乍到</p>
+                        <p class="badge-info">首次拍照或上傳食物</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
+            <!-- Button badgeRecordModal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#badgeRecordModal">
+                Launch badgeRecordModal
             </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- badgeRecordModal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="floating-window-container">
                             <div class="floating-window-header">
@@ -253,7 +339,8 @@
                                                 style="width: 90%; height: auto;" alt="">
                                             <div class="overlay-text">
                                                 <div class="lockDiscribtion">
-                                                    <img src="Assests/images/floating_window/locker.png"class="lock-image" alt="">
+                                                    <img src="Assests/images/floating_window/locker.png"
+                                                        class="lock-image" alt="">
                                                     <p class="lock_word">尚未解鎖</p>
                                                 </div>
                                             </div>
@@ -288,7 +375,8 @@
                                                 style="width: 90%; height: auto;" alt="">
                                             <div class="overlay-text">
                                                 <div class="lockDiscribtion">
-                                                    <img src="Assests/images/floating_window/locker.png"class="lock-image" alt="">
+                                                    <img src="Assests/images/floating_window/locker.png"
+                                                        class="lock-image" alt="">
                                                     <p class="lock_word">尚未解鎖</p>
                                                 </div>
                                             </div>
@@ -302,7 +390,42 @@
                     </div>
                 </div>
             </div>
+
+
+            <button id="openButton">Click me</button>
+            <div class="floating-window" id="WeekWindow">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="Assests/images/floating_window/back_icon.png" id="closeButton" alt="">
+                    </div>
+                    <div class="col-md-10">
+                        <p style="font-size: 24px; margin:15px; text-align:center">飲食分析</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="padding: 30px;">
+                        <div class="row" style="height: 40%;">
+                            <img src="Assests/images/floating_window/說明.png" style="width:30%" alt="">
+                            <p style="margin: 20px;">
+                                均衡飲食是每天都要均衡的攝取六大類食物
+                                包括全穀雜糧類、乳品類、豆魚蛋肉類、蔬菜類、水果類、及油脂與堅果種子類。
+                            </p>
+                        </div>
+                        <div class="row" style="height: 30%;"></div>
+                        <img src="Assests/images/floating_window/建議.png" style="width:30%" alt="">
+                        <p style="margin: 20px;">
+                            為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。
+                            為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。
+                        </p>
+                    </div>
+                    <div class="col-md-6" style="text-align: center;">
+                        <img src="Assests/images/WeekRecord/雷達圖.png" alt="" style="width:80%; margin-top: 50px;">
+                    </div>
+                </div>
+            </div>
         </div>
+
+    </div>
     </div>
     </div>
 

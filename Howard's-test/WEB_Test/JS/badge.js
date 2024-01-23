@@ -41,3 +41,17 @@ function closeFloatingWindow() {
         floatingWindow.style.display = 'none';
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const openButton = document.getElementById("openButton");
+    const floatingWindow = document.getElementById("WeekWindow");
+    const closeButton = document.getElementById("closeButton");
+
+    openButton.addEventListener("click", function () {
+        floatingWindow.style.display = "block";
+    });
+
+    closeButton.addEventListener("click", function () {
+        floatingWindow.style.display = "none";
+    });
+});

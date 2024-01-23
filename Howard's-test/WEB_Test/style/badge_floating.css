@@ -2,6 +2,7 @@ p{
     font-family: 'Shippori Mincho';
 }
 
+
 .floating-window-container {
     position: fixed;
     top: 50%;
@@ -10,10 +11,10 @@ p{
     background-size: 100%;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 63%; 
-    max-height: 100%;
+    width: 68%;
+    height: 90%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid #ccc; */
     border-radius: 10px;
     padding: 20px;
 }
@@ -40,7 +41,7 @@ p{
 .floating-window-content {
     padding: 12px;
     overflow-y: auto;
-    max-height: 70vh; 
+    max-height: 73vh; 
     /* 定义滚动条样式 */
     scrollbar-width: thin;
     scrollbar-color: darkgrey lightgrey;
