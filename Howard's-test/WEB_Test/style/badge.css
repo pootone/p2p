@@ -2,35 +2,29 @@ p {
     font-family: 'Shippori Mincho';
     color: #394038;
 }
-.badge-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.badge-icon {
-    position: absolute;
-    top: 0;
-    left: 15px;
-    width: 80%;
-}
-.badge-title {
-    font-size: 16px;
+
+.header {
     padding-top: 10px;
-    color: #313131;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.badge-info {
-    font-size: 14px;
-    color: #888888;
+.header .name {
+    font-family: 'Grandstander';
+    font-style: normal;
+    font-size: 50px;
+    text-align: justify;
+    color: #394038;
+    margin-left: 100px;
 }
-.image-container {
-    position: relative;
-    overflow: hidden;
+.header .personal-photo img {
+    width: 100px;
+    /* 根据需要调整图片的大小 */
+    height: auto;
+    /* 保持宽高比 */
+    margin-right: 110px;
+    /* 根据需要调整文字和图片之间的间距 */
 }
-
-.image-container:hover .add1 {
-    display: block;
-}
-
 
 body {
     margin: 0;
@@ -51,40 +45,30 @@ body {
     /* 确保在最上层 */
     margin-top: 20px;
 }
-
 .corner-button {
     cursor: pointer;
     margin: 3px;
 }
-
 .corner-button img {
     width: 90%;
 }
 
-.header {
-    padding-top: 10px;
+.menu-bar {
+    position: relative;
+    display: none;
+}
+.menu_item {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 }
-
-.header .name {
-    font-family: 'Grandstander';
-    font-style: normal;
-    font-size: 50px;
-    text-align: justify;
-    color: #394038;
-    margin-left: 100px;
+.menu_item img {
+    margin: 17px;
 }
 
-.header .personal-photo img {
-    width: 100px;
-    /* 根据需要调整图片的大小 */
-    height: auto;
-    /* 保持宽高比 */
-    margin-right: 110px;
-    /* 根据需要调整文字和图片之间的间距 */
-}
 
 .container {
     max-width: 100%;
@@ -99,19 +83,16 @@ body {
     overflow: hidden;
     margin: 0px auto;
 }
-
 .aquarium img {
     width: 100%;
     height: 100%;
     height: auto;
 }
-
 .Layer2 {
     position: absolute;
     bottom: 45%;
     right: 30%;
 }
-
 @keyframes fadeInAndMoveDown {
     from {
         opacity: 0;
@@ -123,20 +104,49 @@ body {
         transform: translateY(0);
     }
 }
-
+.hidden {
+    display: none;
+}
 .show {
     animation: fadeInAndMoveDown 1s ease forwards;
 }
-
 
 .mid {
     display: flex;
     margin: 20px;
 }
-
 .mid img {
     width: 150px;
     height: auto;
+}
+
+.badge-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.badge-icon {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 80%;
+}
+.badge-title {
+    font-size: 16px;
+    padding-top: 10px;
+    color: #313131;
+}
+.badge-info {
+    font-size: 14px;
+    color: #888888;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+.image-container:hover .addBtn {
+    display: block;
 }
 
 .badge {
@@ -157,32 +167,7 @@ body {
     height: auto;
 }
 
-.flex {
-    display: flex;
-}
-
-.flex>[class*='col-'] {
-    flex: 1;
-}
-
-.burgerKing {
-    width: 100%;
-}
-
-.balance {
-    width: 85%;
-}
-
-.progress-B {
-    width: 80%;
-}
-
-
-.add1 {
-    width: 40%;
-}
-
-.add1 {
+.addBtn {
     position: absolute;
     top: 0;
     left: 15%;
@@ -191,10 +176,13 @@ body {
     transition: all 0.3s ease;
 }
 
-.hidden {
-    display: none;
+.flex {
+    display: flex;
 }
 
+.flex>[class*='col-'] {
+    flex: 1;
+}
 
 footer {
     /* background-color: #f8f9fa; */

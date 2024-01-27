@@ -2,6 +2,11 @@ p{
     font-family: 'Shippori Mincho';
 }
 
+.modal-backdrop {
+    opacity: 0.5; /* Adjust the opacity as needed */
+    background-color: rgba(0, 0, 0, 0); /* Adjust the color and alpha as needed */
+}
+
 
 .floating-window-container {
     position: fixed;
@@ -11,9 +16,9 @@ p{
     background-size: 100%;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    width: 68%;
+    width: 70%;
     height: 90%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     /* border: 1px solid #ccc; */
     border-radius: 10px;
     padding: 20px;
@@ -42,6 +47,7 @@ p{
     padding: 12px;
     overflow-y: auto;
     max-height: 73vh; 
+    
     /* 定义滚动条样式 */
     scrollbar-width: thin;
     scrollbar-color: darkgrey lightgrey;
