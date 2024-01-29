@@ -16,7 +16,7 @@ p{
     background-size: 100%;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    width: 70%;
+    width: 68%;
     height: 90%;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     /* border: 1px solid #ccc; */
@@ -99,6 +99,7 @@ p{
     font-size: 18px;
     text-align: right;
 }
+
 
 .lock-image {
     position: absolute;
