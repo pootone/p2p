@@ -53,7 +53,7 @@ p {
 
 .container {
     max-width: 100%;
-    background-image: url('../Assests/images/rank/RankBG.png');
+    background-image: url('../../images/badge/rank/RankBG.png');
     background-size: 90%;
     background-position: center;
     height: 105vh;
