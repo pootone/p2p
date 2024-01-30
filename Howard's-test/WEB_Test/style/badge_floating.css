@@ -8,7 +8,6 @@ p{
     background-color: rgba(0, 0, 0, 0); /* Adjust the color and alpha as needed */
 }
 
-
 .floating-window-container {
     position: fixed;
     top: 50%;
@@ -35,7 +34,6 @@ p{
     font-weight: bold;
     position: relative;
 }
-
 .floating-window-close-btn {
     position: absolute;
     left: 10px;
@@ -43,8 +41,6 @@ p{
     width: 50px; 
     height: 50px; 
 }
-
-
 .window_container{
     padding: 12px;
     overflow-y: auto;
@@ -52,22 +48,14 @@ p{
     
     /* 定义滚动条样式 */
     scrollbar-width: thin;
-    scrollbar-color: darkgrey lightgrey;
+    scrollbar-color: darkgrey transparent;
 
     
     max-width: 90%;
     margin: 0px auto;
 }
-.window_container::-webkit-scrollbar {
-    width: 1px;
-}
-.window_container::-webkit-scrollbar-thumb {
-    background-color: darkgrey; /* 滚动条滑块颜色 */
-}
-.window_container::-webkit-scrollbar-track {
-    background-color: lightgrey; /* 滚动条轨道颜色 */
-}
 
+/*badge內容*/
 .info_suggest img{
     width: 25%;
     height: auto;
@@ -77,11 +65,13 @@ p{
     font-size: 15px;
     padding: 20px;
 }
+/*紀錄字卡*/
 .record_img{
     width: 25%;
     height: auto;
     margin: 20px;
 }
+/*記錄框裡設定文字絕對位置*/
 .overlay-text {
     position: absolute;
     top: 10px;
@@ -92,16 +82,7 @@ p{
     justify-content: space-between;
     height: 100%;
 }
-.record_anim{
-    height: 40%;
-}
-.content_dis{
-    font-size: 18px;
-}
-.content-trans{
-    font-size: 18px;
-    text-align: right;
-}
+/*當無紀錄*/
 .lock-image {
     position: absolute;
     top: 50%; 
@@ -116,5 +97,17 @@ p{
     transform: translate(-50%, -50%);
     color: white; 
     font-size: 18px;
+}
+/*會有異動的*/
+/*當有紀錄*/
+.content_dis{
+    font-size: 18px;
+}
+.record_anim{
+    height: 40%;
+}
+.content-trans{
+    font-size: 18px;
+    text-align: right;
 }
 /* /ex_version */
