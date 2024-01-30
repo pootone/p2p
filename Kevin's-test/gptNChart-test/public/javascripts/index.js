@@ -3,8 +3,6 @@ let API_txt = "/gpt/txt";
 let uploadImg = null;
 let responseData = null;
 
-const ctx = document.getElementById("myChart");
-
 const labels = ["甲烷排放", "電力輸出", "便秘風險", "熱量"];
 
 let chartConfig = {
@@ -69,6 +67,14 @@ let chartConfig = {
 };
 
 $().ready(function () {
+    showAcheiveModel();
+    $("#guide-dialog-1").hide()
+    
+    setTimeout(function() {
+        $("#guide-dialog-1").show()
+        scrollToBottom();
+    }, 2000)
+
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -81,8 +87,30 @@ $().ready(function () {
             // 將文件內容轉換為 Base 64 格式
             uploadImg = file.target.result;
 
-            // Show the pic on front-end
-            $("#uploadImg").attr("src", uploadImg);
+            let row = document.createElement("div");
+            row.classList.add("row", "justify-content-end");            
+            
+                let container = document.createElement("div");
+                container.classList.add("col-6", "col-md-3", "d-flex", 
+                "justify-content-center", "align-items-center", "position-relative");
+                container.setAttribute("style", "height: 362px");
+              
+                    let bg = document.createElement("img");
+                    bg.classList.add("w-100");
+                    bg.setAttribute("src", "/images/AI_Cam/ask-img-bg-1.svg");
+
+                    //- Image preview
+                    let imgPre = document.createElement("img");
+                    imgPre.classList.add("position-absolute", "object-fit-cover", "border-0");
+                    imgPre.setAttribute("style", "width: 68%; height: 68%; top: 14%; left: 12%; border-radius: 18px")
+                    imgPre.setAttribute("src", uploadImg);
+
+            container.appendChild(bg);
+            container.appendChild(imgPre);
+            row.appendChild(container);
+            // Append upload img to the dialog
+            $("#dialog-container").append(row);
+            scrollToBottom();
         }
 
         // 讀取文件內容
@@ -90,7 +118,15 @@ $().ready(function () {
     })
 
     $("#submit").on("click", function () {
-        $("#loader").show();
+        let row = document.createElement("div")
+        row.classList.add("row");
+        let loader = document.createElement("div");
+        loader.id = "loader";
+        console.log(loader);
+        row.appendChild(loader);
+        $("#dialog-container").append(row);
+        scrollToBottom();
+
         let payload = {
             img: uploadImg,
             description: $("#descTxt").val() || ''
@@ -100,14 +136,19 @@ $().ready(function () {
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
             if (payload.img) {
+                // Remove last pic's id
+                $("#myChart").removeAttr("id");
+                // Remove last chart's id
+                $("#myChart").removeAttr("id");
+
                 $.post(API, payload, function (data, status) {
-                    $("#loader").hide();
+                    $("#loader").remove();
+
                     responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                     console.log("Get response success!");
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
                     uploadImg = null;
-
 
                     chartConfig.data.datasets[0].data =
                         [responseData.result.methane,
@@ -116,13 +157,38 @@ $().ready(function () {
                         responseData.result.calorie];
                     console.log("data.datasets: ", chartConfig.data.datasets[0].data);
                     // Create a chart
+                    row = document.createElement("div")
+                    row.classList.add("row");
+                    
+                    let container = document.createElement("div");
+                    container.classList.add("col-sm-6", "col-md-4");
+
+                    // Add radar chart
+                    let canvasContainer = document.createElement("div");
+                    canvasContainer.classList.add("w-100");
+                    canvasContainer.id = "chartProp";
+
+                    let canvas = document.createElement("canvas");
+                    canvas.id = "myChart";
+                    canvasContainer.appendChild(canvas);
+                    container.appendChild(canvasContainer);
+                    row.appendChild(container);
+
+                    // Add chart to the dialog block
+                    $("#dialog-container").append(row);
+                    let ctx = $("#myChart");
                     new Chart(ctx, chartConfig);
+                    scrollToBottom();
+
+                    // Show Achievement Model
+                    setTimeout(function(){showAcheiveModel()}, 1500);
                 })
             }
             // 若只有文字則送 gpt-3.5-turbo
             else {
                 $.post(API_txt, { description: payload.description }, function (data, status) {
-                    $("#loader").hide();
+                    $("#loader").remove();
+
                     console.log("Get response success!");
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
@@ -134,3 +200,12 @@ $().ready(function () {
         }
     })
 })
+
+function scrollToBottom() {
+    let scrollableDiv = $("#dialog-container");
+    scrollableDiv.scrollTop(scrollableDiv[0].scrollHeight);
+}
+
+function showAcheiveModel() {
+    $("#acheModel").modal('show');
+}

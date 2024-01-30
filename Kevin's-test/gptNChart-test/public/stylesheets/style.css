@@ -1,21 +1,67 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+h3 {
+    color: #555;
+    text-align: justify;
+    font-family: 'Grandstander', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
 }
 
-a {
-  color: #00B7FF;
+#dialog-container::-webkit-scrollbar {
+    display: none;
 }
 
-#loader{
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
-  display: none;
+.response-bg-1 {
+    background-image: url(../images/AI_Cam/dialog.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+
+.inputBg {
+    background-image: url(../images/AI_Cam/inputField.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#upload {
+    background-image: url("/images/AI_Cam/upload.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#submit {
+    background-image: url("/images/AI_Cam/send.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-cancel {
+    background-image: url(../images/AI_Cam/acheClose.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+}
+
+#ache-cancel:hover {
+    background-image: url(../images/AI_Cam/acheClose-hover.png);
+}
+
+#ache-collect {
+    background-image: url(../images/AI_Cam/acheCollect.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+}
+
+#ache-collect:hover {
+    background-image: url(../images/AI_Cam/acheCollect-hover.png);
 }
