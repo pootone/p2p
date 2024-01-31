@@ -71,7 +71,7 @@ $().ready(function () {
 
     setTimeout(function () {
         $("#guide-dialog-1").show();
-    }, 2000)
+    }, 2000);
 
 
     // Preview the image when image input change
@@ -197,7 +197,7 @@ function appendChart(methane, electricity, constipate, calorie) {
 
     // Create a chart
     let row = document.createElement("div")
-    row.classList.add("row");
+    row.classList.add("row", "d-flex");
 
     let container = document.createElement("div");
     container.classList.add("col-sm-6", "col-md-4");
@@ -210,7 +210,24 @@ function appendChart(methane, electricity, constipate, calorie) {
     canvas.id = "myChart";
     canvasContainer.appendChild(canvas);
     container.appendChild(canvasContainer);
+
+    let btnContainer = document.createElement("div");
+    btnContainer.classList.add("d-flex", "align-items-bottom", "position-relative");
+    btnContainer.setAttribute("style", "width: 10%; padding: 0%;")
+
+    let btn = document.createElement("button");
+    btn.classList.add("bg-transparent", "border-0", "position-absolute");
+    btn.setAttribute("style", "height: 10%; top: 75%;");
+
+    let img = document.createElement("img");
+    img.classList.add("w-100");
+    img.setAttribute("src", "/images/AI_Cam/more.svg");
+    img.setAttribute("style", "filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));")
+    btn.appendChild(img);
+    btnContainer.appendChild(btn);
+
     row.appendChild(container);
+    row.appendChild(btnContainer);
 
     // Add chart to the dialog block
     $("#dialog-container").append(row);
