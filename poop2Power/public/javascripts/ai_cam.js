@@ -50,15 +50,15 @@ let chartConfig = {
             line: { // https://www.chartjs.org/docs/latest/configuration/elements.html#line-configuration
                 borderWidth: 1,
                 borderColor: "rgba(255, 255, 255, 1)",
-                backgroundColor: "rgba(221, 216, 204, 0.6)",
+                backgroundColor: "rgba(239, 211, 146, 0.6)",
             },
             point: {
                 pointRadius: 4,
                 pointBackgroundColor: [
+                    "rgba(179, 135, 134, 1)",
                     "rgba(130, 177, 153, 1)",
                     "rgba(219, 187, 87, 1)",
                     "rgba(115, 50, 17, 1)",
-                    "rgba(179, 135, 134, 1)",
                 ],
                 pointStyle: 'rect' // https://www.chartjs.org/docs/latest/configuration/elements.html#point-styles
             },
@@ -70,8 +70,7 @@ $().ready(function () {
     $("#guide-dialog-1").hide();
 
     setTimeout(function () {
-        $("#guide-dialog-1").show()
-        scrollToBottom();
+        $("#guide-dialog-1").show();
     }, 2000)
 
 
@@ -118,15 +117,6 @@ $().ready(function () {
     })
 
     $("#submit").on("click", function () {
-        let row = document.createElement("div")
-        row.classList.add("row");
-        let loader = document.createElement("div");
-        loader.id = "loader";
-        console.log(loader);
-        row.appendChild(loader);
-        $("#dialog-container").append(row);
-        scrollToBottom();
-
         let payload = {
             img: uploadImg,
             description: $("#descTxt").val() || ''
@@ -137,6 +127,7 @@ $().ready(function () {
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
             if (payload.img) {
+                appendLoader();
                 // Remove last chart's id
                 $("#myChart").removeAttr("id");
 
@@ -163,6 +154,7 @@ $().ready(function () {
             // 若只有文字則送 gpt-3.5-turbo
             else {
                 appendAskMsg(payload.description);
+                appendLoader();
 
                 $.post(API_txt, { description: payload.description }, function (data, status) {
                     $("#loader").remove();
@@ -225,8 +217,7 @@ function appendChart(methane, electricity, constipate, calorie) {
 
 function appendAskMsg(inputMsg) {
     let row = document.createElement("div")
-    row.classList.add("row");
-    row.classList.add("d-flex", "justify-content-end");
+    row.classList.add("row", "d-flex", "justify-content-end", "m-4");
 
     let container = document.createElement("div");
     container.classList.add("col-6", "col-md-3", "position-relative", "d-flex",
@@ -246,7 +237,7 @@ function appendAskMsg(inputMsg) {
     let msg = document.createElement("p");
     msg.innerHTML = inputMsg;
     msg.classList.add("position-absolute", "fs-5");
-    msg.setAttribute("style", "top: 35%; left: 40%")
+    msg.setAttribute("style", "top: 35%;")
 
     container.appendChild(bg);
     container.appendChild(decorate);
@@ -255,4 +246,16 @@ function appendAskMsg(inputMsg) {
 
     // Add msg to the dialog block
     $("#dialog-container").append(row);
+}
+
+function appendLoader() {
+    let row = document.createElement("div")
+        row.classList.add("row");
+        let loader = document.createElement("div");
+        loader.id = "loader";
+        console.log(loader);
+        row.appendChild(loader);
+        $("#dialog-container").append(row);
+
+    scrollToBottom();
 }
