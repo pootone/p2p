@@ -169,6 +169,9 @@ $().ready(function () {
                         responseData.result.constipate,
                         responseData.result.calorie);
                     scrollToBottom();
+
+                    // Show Achievement Model
+                    setTimeout(function () { showAcheiveModel() }, 1500);
                 })
             }
         }
