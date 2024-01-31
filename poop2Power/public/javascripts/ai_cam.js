@@ -67,12 +67,13 @@ let chartConfig = {
 };
 
 $().ready(function () {
-    $("#guide-dialog-1").hide()
-    
-    setTimeout(function() {
+    $("#guide-dialog-1").hide();
+
+    setTimeout(function () {
         $("#guide-dialog-1").show()
         scrollToBottom();
     }, 2000)
+
 
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
@@ -87,22 +88,22 @@ $().ready(function () {
             uploadImg = file.target.result;
 
             let row = document.createElement("div");
-            row.classList.add("row", "justify-content-end");            
-            
-                let container = document.createElement("div");
-                container.classList.add("col-6", "col-md-3", "d-flex", 
-                "justify-content-center", "align-items-center", "position-relative");
-                container.setAttribute("style", "height: 362px");
-              
-                    let bg = document.createElement("img");
-                    bg.classList.add("w-100");
-                    bg.setAttribute("src", "/images/AI_Cam/ask-img-bg-1.svg");
+            row.classList.add("row", "justify-content-end");
 
-                    //- Image preview
-                    let imgPre = document.createElement("img");
-                    imgPre.classList.add("position-absolute", "object-fit-cover", "border-0");
-                    imgPre.setAttribute("style", "width: 68%; height: 68%; top: 14%; left: 12%; border-radius: 18px")
-                    imgPre.setAttribute("src", uploadImg);
+            let container = document.createElement("div");
+            container.classList.add("col-6", "col-md-3", "d-flex",
+                "justify-content-center", "align-items-center", "position-relative");
+            container.setAttribute("style", "height: 362px");
+
+            let bg = document.createElement("img");
+            bg.classList.add("w-100");
+            bg.setAttribute("src", "/images/AI_Cam/ask-img-bg-1.svg");
+
+            //- Image preview
+            let imgPre = document.createElement("img");
+            imgPre.classList.add("position-absolute", "object-fit-cover", "border-0");
+            imgPre.setAttribute("style", "width: 68%; height: 68%; top: 14%; left: 12%; border-radius: 18px")
+            imgPre.setAttribute("src", uploadImg);
 
             container.appendChild(bg);
             container.appendChild(imgPre);
@@ -130,13 +131,12 @@ $().ready(function () {
             img: uploadImg,
             description: $("#descTxt").val() || ''
         }
+        $("#descTxt").val('');
         console.log(payload);
 
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
             if (payload.img) {
-                // Remove last pic's id
-                $("#myChart").removeAttr("id");
                 // Remove last chart's id
                 $("#myChart").removeAttr("id");
 
@@ -149,51 +149,34 @@ $().ready(function () {
                     $("#resContent").text(data.message.content);
                     uploadImg = null;
 
-                    chartConfig.data.datasets[0].data =
-                        [responseData.result.methane,
+                    appendChart(responseData.result.methane,
                         responseData.result.electricity,
                         responseData.result.constipate,
-                        responseData.result.calorie];
-                    console.log("data.datasets: ", chartConfig.data.datasets[0].data);
-                    // Create a chart
-                    row = document.createElement("div")
-                    row.classList.add("row");
-                    
-                    let container = document.createElement("div");
-                    container.classList.add("col-sm-6", "col-md-4");
+                        responseData.result.calorie);
 
-                    // Add radar chart
-                    let canvasContainer = document.createElement("div");
-                    canvasContainer.classList.add("w-100");
-                    canvasContainer.id = "chartProp";
-
-                    let canvas = document.createElement("canvas");
-                    canvas.id = "myChart";
-                    canvasContainer.appendChild(canvas);
-                    container.appendChild(canvasContainer);
-                    row.appendChild(container);
-
-                    // Add chart to the dialog block
-                    $("#dialog-container").append(row);
-                    let ctx = $("#myChart");
-                    new Chart(ctx, chartConfig);
                     scrollToBottom();
 
                     // Show Achievement Model
-                    setTimeout(function(){showAcheiveModel()}, 1500);
+                    setTimeout(function () { showAcheiveModel() }, 1500);
                 })
             }
             // 若只有文字則送 gpt-3.5-turbo
             else {
+                appendAskMsg(payload.description);
+
                 $.post(API_txt, { description: payload.description }, function (data, status) {
                     $("#loader").remove();
 
+                    responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                     console.log("Get response success!");
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
 
-                    // Create a chart
-                    new Chart(ctx, chartConfig);
+                    appendChart(responseData.result.methane,
+                        responseData.result.electricity,
+                        responseData.result.constipate,
+                        responseData.result.calorie);
+                    scrollToBottom();
                 })
             }
         }
@@ -207,4 +190,69 @@ function scrollToBottom() {
 
 function showAcheiveModel() {
     $("#acheModel").modal('show');
+}
+
+function appendChart(methane, electricity, constipate, calorie) {
+    chartConfig.data.datasets[0].data =
+        [methane,
+            electricity,
+            constipate,
+            calorie];
+    console.log("data.datasets: ", chartConfig.data.datasets[0].data);
+
+    // Create a chart
+    let row = document.createElement("div")
+    row.classList.add("row");
+
+    let container = document.createElement("div");
+    container.classList.add("col-sm-6", "col-md-4");
+
+    let canvasContainer = document.createElement("div");
+    canvasContainer.classList.add("w-100");
+    canvasContainer.id = "chartProp";
+
+    let canvas = document.createElement("canvas");
+    canvas.id = "myChart";
+    canvasContainer.appendChild(canvas);
+    container.appendChild(canvasContainer);
+    row.appendChild(container);
+
+    // Add chart to the dialog block
+    $("#dialog-container").append(row);
+    let ctx = $("#myChart");
+    new Chart(ctx, chartConfig);
+}
+
+function appendAskMsg(inputMsg) {
+    let row = document.createElement("div")
+    row.classList.add("row");
+    row.classList.add("d-flex", "justify-content-end");
+
+    let container = document.createElement("div");
+    container.classList.add("col-6", "col-md-3", "position-relative", "d-flex",
+     "justify-content-center", "align-items-center");
+    container.setAttribute("style", "height: 100px");
+
+    let bg = document.createElement("img");
+    bg.classList.add("w-100", "position-absolute");
+    bg.setAttribute("src", "/images/AI_Cam/ask-txt-bg-1.svg");
+
+    let decorate = document.createElement("img");
+
+    decorate.setAttribute("src", "/images/AI_Cam/ask-txt-deco.png");
+    decorate.setAttribute("style", "position: absolute; left: 65%; top: -20%;")
+
+    //- msg
+    let msg = document.createElement("p");
+    msg.innerHTML = inputMsg;
+    msg.classList.add("position-absolute", "fs-5");
+    msg.setAttribute("style", "top: 35%; left: 40%")
+
+    container.appendChild(bg);
+    container.appendChild(decorate);
+    container.appendChild(msg);
+    row.appendChild(container);
+
+    // Add msg to the dialog block
+    $("#dialog-container").append(row);
 }
