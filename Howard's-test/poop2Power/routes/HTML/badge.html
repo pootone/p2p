@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <!-- font -->
+    <link href="https://fonts.cdnfonts.com/css/grandstander" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Shippori Mincho' rel='stylesheet'>
+    <link rel="stylesheet" href="../stylesheets/badge/badge.css">
+    <link rel="stylesheet" href="../stylesheets/badge/badge_floating.css">
+    <link rel="stylesheet" href="../stylesheets/badge/weekRecord.css">
+    <title>Your Webpage</title>
+</head>
+
+<body background="../images/badge/BG.png">
+    <div class="fixed-corner">
+        <div class="corner-button" id="toggleMenuBtn">
+            <img src="../images/badge/menu_btn.png" alt="">
+        </div>
+        <div class="menu-bar">
+            <img src="../images/badge/menuBar/menuBar_BG.png" alt="" srcset="">
+            <div class="menu_item">
+                <img src="../images/badge/menuBar/首頁.png" alt="" srcset="">
+                <a href="/aicam">
+                    <img src="../images/badge/menuBar/相機.png" alt="" srcset="">
+                </a>
+                <img src="../images/badge/menuBar/資訊.png" alt="" srcset="">
+                <a href="/users">
+                    <img src="../images/badge/menuBar/徽章.png" alt="" srcset="">
+                </a>
+                <img src="../images/badge/menuBar/關於我們.png" alt="" srcset="">
+            </div>
+        </div>
+        <div class="corner-button" id="openRankWindowBtn">
+            <a href="/users/ranking">
+                <img src="../images/badge/排行榜.png" alt="">
+            </a>
+        </div>
+        <div class="corner-button" id="openWeekWindowBtn">
+            <img src="../images/badge/排行榜-1.png" alt="">
+        </div>
+    </div>
+
+
+
+    <div class="header">
+        <div class="name">
+            Ubrr's<br>
+            Personal Dashboard
+        </div>
+        <div class="personal-photo">
+            <img src="../images/badge/頭貼.png" alt="">
+        </div>
+    </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="aquarium">
+                <img src="../images/badge/Aquarium/Aquarium.png" alt="Header Image">
+                <div class="Layer2">
+                    <img src="../images/badge/Aquarium/BA1.png" alt="" class="hidden" id="badge1" onclick="showImage()">
+                </div>
+            </div>
+
+            <div class="mid d-flex justify-content-center">
+                <img src="../images/badge/任務框/限時任務.png" alt="" class="mx-3"
+                    onclick="scrollToSection('limited_mission_B')">
+                <img src="../images/badge/任務框/均衡飲食.png" alt="" class="mx-3" onclick="scrollToSection('balance_diet_B')">
+                <img src="../images/badge/任務框/素食挑戰.png" alt="" class="mx-3" onclick="scrollToSection('vegetarian_B')">
+                <img src="../images/badge/任務框/飲食累積.png" alt="" class="mx-3" onclick="scrollToSection('diet_combine_B')">
+            </div>
+
+
+            <!-- badge跟點開badge都是開同一模板每個徽章都有獨立ID，原始是鎖定圖示，固定名稱描述，靠按鈕ID去傳給JS修改class="image-container"裡面內容 -->
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="../images/badge/下滑任務框/限時任務.png" id="limited_mission_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <!-- <div class="image-container">
+                                <img src="../images/badge/徽章/badge/badge1.png" alt="">
+                                <img src="../images/badge/徽章/加.png" id="button-badge1" class="addBtn"
+                                    onclick="showImage('badge1')" alt="">
+                            </div> -->
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge1Modal" alt="">
+                            </div>
+                            <p class="badge-title">吃來乍到</p>
+                            <p class="badge-info">首次拍照或上傳食物</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge2Modal" alt="">
+                            </div>
+                            <p class="badge-title">小吃貨</p>
+                            <p class="badge-info">完成一半種類</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge3Modal" alt="">
+                            </div>
+                            <p class="badge-title">吃心絕對</p>
+                            <p class="badge-info">連續上傳同種類食物三次</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge4Modal" alt="">
+                            </div>
+                            <p class="badge-title">二號探險家</p>
+                            <p class="badge-info">掃描圖卡上QR code<br>使用AR功能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="../images/badge/下滑任務框/均衡飲食.png" id="balance_diet_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge5Modal" alt="">
+                            </div>
+                        </div>
+                        <p class="badge-title">二號全能飲食大賞</p>
+                        <p class="badge-info">一天攝取六大類食物</p>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge6Modal" alt="">
+                            </div>
+                            <p class="badge-title">健康主食</p>
+                            <p class="badge-info">完成根莖類、蕎麥麵</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge7Modal" alt="">
+                            </div>
+                            <p class="badge-title">天然能量甜點</p>
+                            <p class="badge-info">完成水果類、堅果類、<br>全榖雜糧類</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="../images/badge/下滑任務框/素食挑戰.png" id="vegetarian_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge8Modal" alt="">
+                            </div>
+                            <p class="badge-title">素食主義</p>
+                            <p class="badge-info">上傳蔬菜類食物五次</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge9Modal" alt="">
+                            </div>
+                            <p class="badge-title">二號便順暢</p>
+                            <p class="badge-info">完成蔬菜類、水果類</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge">
+                <div class="badge-list col-12">
+                    <img src="../images/badge/下滑任務框/飲食累積.png" id="diet_combine_B" alt="">
+                </div>
+                <div class="row flex">
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge10Modal" alt="">
+                            </div>
+                            <p class="badge-title">今晚吃雞 大吉大利</p>
+                            <p class="badge-info">完成雞肉製品</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge11Modal" alt="">
+                            </div>
+                            <p class="badge-title">吃來乍到</p>
+                            <p class="badge-info">首次拍照或上傳食物</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 px-5">
+                        <div class="row flex-column">
+                            <div class="image-container">
+                                <img src="../images/badge/徽章/badge/BadgeLock.png" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#badge12Modal" alt="">
+                            </div>
+                        </div>
+                        <p class="badge-title">亞洲蒐集狂</p>
+                        <p class="badge-info">完成咖哩、炸醬麵、丼飯</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ex_version -->
+            <!-- Button badgeRecordModal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#badgeRecordModal">
+                Launch badgeRecordModal
+            </button>
+            <!-- badgeRecordModal -->
+            <div class="modal" id="badgeRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">均衡大師</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            均衡飲食是每天都要均衡的攝取六大類食物
+                                            包括全穀雜糧類、乳品類、豆魚蛋肉類、蔬菜類、水果類、及油脂與堅果種子類。
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。
+                                            為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/蛋.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/框.png" alt=""
+                                            style="width: 90%; height: auto;">
+                                        <div class="overlay-text">
+                                            <div class="row content_dis">
+                                                <p>您消耗的蛋排放了約等級2的甲烷排放量</p>
+                                            </div>
+                                            <div class="row record_anim">
+                                                <img src="../images/badge/floating_window/內容.png"
+                                                    style="width: 90%; height: auto;" alt="">
+                                            </div>
+                                            <div class="row content-trans">
+                                                <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/千層麵.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/框.png"
+                                            style="width: 90%; height: auto;" alt="" style="width: 100%; height: auto;">
+                                        <div class="overlay-text">
+                                            <div class="row content_dis">
+                                                <p>您消耗的千層麵排放了約等級9的甲烷排放量</p>
+                                            </div>
+                                            <div class="row record_anim">
+                                                <img src="../images/badge/floating_window/內容.png"
+                                                    style="width: 90%; height: auto;" alt="">
+                                            </div>
+                                            <div class="row content-trans">
+                                                <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" class="little_lockPhoto">
+                                        <p class="little_lockWord">hi</p>
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- badge1Modal -->
+            <div class="modal" id="badge1Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">吃來乍到</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            初次見面,去試試看AI時光機吧!
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            使用AI時光機首次拍照或上傳食物,即獲得成就
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- badge2Modal -->
+            <div class="modal" id="badge2Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">小吃貨</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            使用AI時光機拍照或上傳完一半種類的食物
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge3Modal -->
+            <div class="modal" id="badge3Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">吃心絕對</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            使用AI時光機連續拍照或上傳同種類食物三次
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge4Modal -->
+            <div class="modal" id="badge4Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">二號探險家</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            掃描圖卡上QR code，使用AR功能
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            請用手機掃描卡片上的QR code，可以啟動網站擴增實境（AR）功能，查看卡片上食物的資訊。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge5Modal -->
+            <div class="modal" id="badge5Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">二號全能飲食大賞</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            一天中攝取完六大類食物
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            均衡飲食是每天都要均衡的攝取六大類食物包括全穀雜糧類、乳品類、豆魚蛋肉類、蔬菜類、水果類、及油脂與堅果種子類
+                                            現代許多人的生活趨於靜態，常常攝取過多的熱量，營養卻不均衡，導致肥胖、慢性病包括心臟病、癌症、糖尿病及高血脂症等罹患率上升，
+                                            「均衡飲食」的目的，即是為了減少一般人微量營養素缺乏的問題，並預防上述的疾病而生，一般健康、無特殊疾病的人均適合採用「均衡飲食」。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge6Modal -->
+            <div class="modal" id="badge6Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">健康主食</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            完成地瓜、紫薯、馬鈴薯、蕎麥麵
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            長期食用類似於米飯麵條這類的精製碳水化合物，可能會攝入過高的熱量，進而影響身體健康。
+                                            相比於米飯麵條、油餅炸糕這類食物，更推薦吃粗糧類主食
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge7Modal -->
+            <div class="modal" id="badge7Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">天然能量甜點</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            完成水果類、堅果類、全榖雜糧類
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            水果、堅果類等，都是天然甜味的來源，而來自蔬果、穀類的糖分屬於多糖類，
+                                            營養價值較高，能使血糖穩定上升，緩和情緒。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge8Modal -->
+            <div class="modal" id="badge8Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">素食主義</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            連續完成拍照或上傳
+                                            蔬菜類或全穀雜糧類食物五次
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            健康的純素食飲食可以幫助降低罹患慢性病的風險，例如心臟病、中風、某些癌症和糖尿病，這是美國致病和死亡的主要原因。
+                                            如果方法正確，純素飲食可以帶來很多健康益處，也對環境有益。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge9Modal -->
+            <div class="modal" id="badge9Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">二號便順暢</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            完成蔬菜類、水果類
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            健康的便便，代表的是健康的腸道，然而健康的腸道代表的是良好身體狀態，所以吃蔬菜可說是牽一髮動全身啊！
+                                            大部分的水果，都富含膳食纖維，有助於排便順暢，特別是香蕉、奇異果、蘋果，
+                                            但攝取過多纖維質，卻沒有多補充水分，這樣變成無法促進腸道蠕動，也無法讓纖維質在腸道形成糞便的過程中，變得乾硬，以至於便秘的情況發生。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge10Modal -->
+            <div class="modal" id="badge10Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">今晚吃雞 大吉大利</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            拍照或上傳雞肉製品
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            雞肉是很棒的食材，雞肉含有豐富蛋白質、胺基酸，也含有維生素 A、菸鹼素與礦物質鋅等不同的人體必需營養素。
+                                            蛋白質能夠幫助生長發育、組織修復，是人體組織的 要構成物質，維生素 A、菸鹼素與鋅則分別有增進皮膚健康、骨骼生長、維持正常身體代謝等多重功效。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge11Modal -->
+            <div class="modal" id="badge11Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">你是我的堡</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            完成漢堡、三明治、米漢堡、潛艇堡
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            在堡類飲食方面，建議選擇全穀或全麥麵包，搭配瘦肉如雞胸肉或瘦牛肉作為主要蛋白質來源，並添加豐富的蔬菜如生菜、番茄、洋蔥等，
+                                            以增加營養素和纖維攝取。注意控制醬汁和調味料的份量，避免高糖、高鈉或高脂肪的選擇。
+                                            此外，儘量避免加工肉品，注意控制食物的份量，並可以考慮嘗試素食選擇，以維持均衡飲食和促進健康。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- badge12Modal -->
+            <div class="modal" id="badge12Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="floating-window-container">
+                            <div class="floating-window-header">
+                                <img src="../images/badge/floating_window/back_icon.png"
+                                    class="floating-window-close-btn" data-bs-dismiss="modal" alt="">
+                                <p class="title">異國風情</p>
+                            </div>
+                            <div class="window_container">
+                                <div class="row info_suggest">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/說明.png" alt="">
+                                        <p>
+                                            完成泰式料理、美式、日式、韓式、中式
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/建議.png" alt="">
+                                        <p>
+                                            飲食體現了不同的烹飪方法和傳統風格，通常與特定文化有關。
+                                            多樣化的料理提供了不同的營養元素，但仍應謹慎控制油脂、糖分和鈉的攝取量，
+                                            同時注重均衡攝取各種食材，以維持健康飲食。
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 紀錄 -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="../images/badge/floating_window/紀錄.png" class="record_img" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mx-auto my-auto text-center">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                    </div>
+                                    <div class="col-md-10 position-relative">
+                                        <img src="../images/badge/floating_window/未解鎖框.png"
+                                            style="width: 90%; height: auto;" alt="">
+                                        <div class="overlay-text">
+                                            <div class="lockDiscribtion">
+                                                <img src="../images/badge/floating_window/locker.png" class="lock-image"
+                                                    alt="">
+                                                <p class="lock_word">尚未解鎖</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /紀錄 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="floating-window" id="WeekWindow">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="../images/badge/floating_window/back_icon.png" id="closeWeekWindowBtn" alt="">
+                    </div>
+                    <div class="col-md-10">
+                        <p style="font-size: 24px; margin:15px; text-align:center">飲食分析</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="padding: 30px;">
+                        <div class="row" style="height: 40%;">
+                            <img src="../images/badge/WeekRecord/均衡飲食 (2).png" style="width:30%" alt="">
+                            <p style="margin: 20px;">
+                                確保飲食包含足夠的蛋白質、碳水化合物、脂肪、維生素和礦物質。
+                                這有助於維持身體的正常功能和營養需求。
+                            </p>
+                        </div>
+                        <div class="row" style="height: 30%;"></div>
+                        <img src="../images/badge/WeekRecord/飲食種類.png" style="width:30%" alt="">
+                        <p style="margin: 20px;">
+                            儘量選擇多樣化的食物，包括新鮮水果、蔬菜、全穀類、豆類、堅果、種子和蛋白質來源。
+                            這有助於確保您獲得不同類型的營養素。
+                        </p>
+                    </div>
+                    <div class="col-md-6" style="text-align: center;">
+                        <img src="../images/badge/WeekRecord/雷達圖.png" alt="" style="width:80%; margin-top: 50px;">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <footer>
+            <p>&copy; NO2</p>
+        </footer>
+        <script src="../javascripts/badge/badge.js"></script>
+        <script src="../javascripts/badge/badgeEarn.js"></script>
+</body>
+
+</html>

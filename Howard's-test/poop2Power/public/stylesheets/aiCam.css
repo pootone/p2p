@@ -1,0 +1,67 @@
+h3 {
+    color: #555;
+    text-align: justify;
+    font-family: 'Grandstander', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+#dialog-container::-webkit-scrollbar {
+    display: none;
+}
+
+.response-bg-1 {
+    background-image: url(../images/AI_Cam/dialog.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.inputBg {
+    background-image: url(../images/AI_Cam/inputField.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#upload {
+    background-image: url("/images/AI_Cam/upload.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#submit {
+    background-image: url("/images/AI_Cam/send.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-cancel {
+    background-image: url(../images/AI_Cam/acheClose.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+}
+
+#ache-cancel:hover {
+    background-image: url(../images/AI_Cam/acheClose-hover.png);
+}
+
+#ache-collect {
+    background-image: url(../images/AI_Cam/acheCollect.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+}
+
+#ache-collect:hover {
+    background-image: url(../images/AI_Cam/acheCollect-hover.png);
+}
