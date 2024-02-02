@@ -1,0 +1,113 @@
+/* ex_version */
+p{
+    font-family: 'Shippori Mincho';
+}
+
+.modal-backdrop {
+    opacity: 0.5; /* Adjust the opacity as needed */
+    background-color: rgba(0, 0, 0, 0); /* Adjust the color and alpha as needed */
+}
+
+.floating-window-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-image: url('../../images/badge/floating_window/BG.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    width: 68%;
+    height: 90%;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.floating-window-header {
+    position: sticky;
+    z-index: 100; 
+    top: 8px;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+.floating-window-close-btn {
+    position: absolute;
+    left: 10px;
+    cursor: pointer;
+    width: 50px; 
+    height: 50px; 
+}
+.window_container{
+    padding: 12px;
+    overflow-y: auto;
+    max-height: 73vh; 
+    
+    /* 定义滚动条样式 */
+    scrollbar-width: thin;
+    scrollbar-color: darkgrey transparent;
+
+    
+    max-width: 90%;
+    margin: 0px auto;
+}
+
+/*badge內容*/
+.info_suggest img{
+    width: 25%;
+    height: auto;
+    margin: 20px;
+}
+.info_suggest p{
+    font-size: 15px;
+    padding: 20px;
+}
+/*紀錄字卡*/
+.record_img{
+    width: 25%;
+    height: auto;
+    margin: 20px;
+}
+/*記錄框裡設定文字絕對位置*/
+.overlay-text {
+    position: absolute;
+    top: 10px;
+    left: 5%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+/*當無紀錄*/
+.lock-image {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 15%;
+}
+.lock_word {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; 
+    font-size: 18px;
+}
+/*會有異動的*/
+/*當有紀錄*/
+.content_dis{
+    font-size: 18px;
+}
+.record_anim{
+    height: 40%;
+}
+.content-trans{
+    font-size: 18px;
+    text-align: right;
+}
+/* /ex_version */
