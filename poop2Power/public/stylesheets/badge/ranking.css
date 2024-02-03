@@ -1,5 +1,5 @@
 p {
-    font-family: 'Grandstander', sans-serif;
+    font-family: 'Grandstander';
     color: #394038;
 }
 
@@ -46,9 +46,9 @@ p {
     margin: 17px;
 }
 
-
 .title {
     font-size: 50px;
+    font-family: 'Shippori Mincho';
 }
 
 .container {

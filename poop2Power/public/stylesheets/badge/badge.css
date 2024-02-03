@@ -53,6 +53,26 @@ body {
     width: 90%;
 }
 
+.rankBtnContainer:hover .rankBtn {
+    display: none;
+}
+.rankBtnContainer:hover .rankBtnHover {
+    display: block;
+}
+.rankBtnHover {
+    display: none;
+}
+.weekBtnContainer:hover .weekBtn {
+    display: none;
+}
+.weekBtnContainer:hover .weekBtnHover {
+    display: block;
+}
+.weekBtnHover {
+    display: none;
+}
+
+
 .menu-bar {
     position: relative;
     display: none;

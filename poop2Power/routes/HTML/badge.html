@@ -40,12 +40,14 @@
             </div>
         </div>
         <div class="corner-button" id="openRankWindowBtn">
-            <a href="/users/ranking">
-                <img src="../images/badge/排行榜.png" alt="">
-            </a>
+            <a href="/users/ranking" class="rankBtnContainer">
+                <img src="../images/badge/排行榜.png" class="rankBtn" alt="">
+                <img src="../images/badge/排行榜_Hover.png" class="rankBtnHover" alt="">
+            </a>            
         </div>
-        <div class="corner-button" id="openWeekWindowBtn">
-            <img src="../images/badge/排行榜-1.png" alt="">
+        <div class="corner-button weekBtnContainer" id="openWeekWindowBtn">
+            <img src="../images/badge/飲食分析.png" class="weekBtn" alt="">
+            <img src="../images/badge/飲食分析_Hover.png" class="weekBtnHover" alt="">
         </div>
     </div>
 
@@ -226,11 +228,12 @@
                     </div>
                 </div>
             </div>
+
             <!-- ex_version -->
             <!-- Button badgeRecordModal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#badgeRecordModal">
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#badgeRecordModal">
                 Launch badgeRecordModal
-            </button>
+            </button> -->
             <!-- badgeRecordModal -->
             <div class="modal" id="badgeRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
