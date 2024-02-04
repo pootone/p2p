@@ -35,17 +35,18 @@ p {
 
 
 /* trans */
-.badgeContain {
+.genie {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5%; /* 调整垂直位置 */
+    right: 5%; /* 调整水平位置 */
+    z-index: 1;
 }
+
 .B1, .B2, .B3, .B4, .B5 {
     text-align: center;
     padding: 10px;
     margin-top: 150px;
 }
-
 .B1, .B2, .B3, .B4, .B5 img {
     max-width: 100%;
     height: auto;
