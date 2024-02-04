@@ -3,6 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors'); // For cross request
+
+const corsOptions = {
+  origin: [
+    'https://kevinlin1120.github.io/full-stack-test',
+    'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 var indexRouter = require('./routes/index');
 var aiCamRouter = require('./routes/aiCam');
@@ -10,6 +20,7 @@ var usersRouter = require('./routes/users');
 var aboutUsRouter = require('./routes/aboutUs');
 
 var app = express();
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

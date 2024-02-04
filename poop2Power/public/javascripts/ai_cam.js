@@ -96,7 +96,7 @@ $().ready(function () {
 
             let bg = document.createElement("img");
             bg.classList.add("w-100");
-            bg.setAttribute("src", "/images/AI_Cam/ask-img-bg-1.svg");
+            bg.setAttribute("src", "../images/AI_Cam/ask-img-bg-1.svg");
 
             //- Image preview
             let imgPre = document.createElement("img");
@@ -221,7 +221,7 @@ function appendChart(methane, electricity, constipate, calorie) {
 
     let img = document.createElement("img");
     img.classList.add("w-100");
-    img.setAttribute("src", "/images/AI_Cam/more.svg");
+    img.setAttribute("src", "../images/AI_Cam/more.svg");
     img.setAttribute("style", "filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));")
     btn.appendChild(img);
     btnContainer.appendChild(btn);
@@ -246,11 +246,11 @@ function appendAskMsg(inputMsg) {
 
     let bg = document.createElement("img");
     bg.classList.add("w-100", "position-absolute");
-    bg.setAttribute("src", "/images/AI_Cam/ask-txt-bg-1.svg");
+    bg.setAttribute("src", "../images/AI_Cam/ask-txt-bg-1.svg");
 
     let decorate = document.createElement("img");
 
-    decorate.setAttribute("src", "/images/AI_Cam/ask-txt-deco.png");
+    decorate.setAttribute("src", "../images/AI_Cam/ask-txt-deco.png");
     decorate.setAttribute("style", "position: absolute; left: 65%; top: -20%;")
 
     //- msg

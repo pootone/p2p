@@ -26,7 +26,7 @@ h3 {
 }
 
 #upload {
-    background-image: url("/images/AI_Cam/upload.png"); 
+    background-image: url(../images/AI_Cam/upload.png); 
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -34,7 +34,7 @@ h3 {
 }
 
 #submit {
-    background-image: url("/images/AI_Cam/send.png"); 
+    background-image: url(../images/AI_Cam/send.png); 
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
