@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             shit.style.top = `${newY}px`;
 
             if (checkOverlap(shit, nextBtn)) {
-                window.location.href = "/index/trans";
+                window.location.href = "html/IndexTrans";
             }
         }
 
