@@ -7,7 +7,7 @@ var cors = require('cors'); // For cross request
 
 const corsOptions = {
   origin: [
-    'https://kevinlin1120.github.io/full-stack-test',
+    'https://p2p-c-2024.netlify.app',
     'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
