@@ -2,8 +2,39 @@ p {
     font-family: 'Shippori Mincho';
     font-size: 30px;
 }
+.custom-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+}
+.indexBG{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shit {
+    position: absolute;
+    top: 30%; 
+    left: 20%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1; 
+}
+.shit:hover {
+    cursor: grabbing; 
+}
+.nextBTN {
+    position: absolute;
+    width: 15%;
+    top: 90%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1;
+}
 
 
+/* trans */
 .badgeContain {
     position: absolute;
     top: 0;
