@@ -1,0 +1,42 @@
+p {
+    font-family: 'Shippori Mincho';
+    font-size: 30px;
+}
+
+
+.badgeContain {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.B1, .B2, .B3, .B4, .B5 {
+    text-align: center;
+    padding: 10px;
+    margin-top: 150px;
+}
+
+.B1, .B2, .B3, .B4, .B5 img {
+    max-width: 100%;
+    height: auto;
+}
+.B1 {
+    left: 50px;
+}
+.B2 {
+    left: 200px;
+}
+.B3 {
+    left: 350px;
+}
+.B4 {
+    left: 500px;
+}
+.B5 {
+    left: 650px;
+}
+
+footer {
+    /* background-color: #f8f9fa; */
+    padding: 30px 0;
+    text-align: center;
+}
