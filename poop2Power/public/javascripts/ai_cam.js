@@ -68,11 +68,10 @@ let chartConfig = {
 
 $().ready(function () {
     $("#guide-dialog-1").hide();
-
+    
     setTimeout(function () {
         $("#guide-dialog-1").show();
     }, 2000);
-
 
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
@@ -269,10 +268,18 @@ function appendAskMsg(inputMsg) {
 }
 
 function appendLoader() {
-    let row = document.createElement("div")
+    // <lottie-player src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    let row = document.createElement("div");
         row.classList.add("row");
-        let loader = document.createElement("div");
+        let loader = document.createElement("lottie-player");
         loader.id = "loader";
+        loader.classList.add("col-md-2");
+        loader.setAttribute("src", "../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json");
+        loader.setAttribute("background", "transparent");
+        loader.setAttribute("speed", "1");
+        loader.setAttribute("loop", "");
+        loader.setAttribute("autoplay", "");
+
         console.log(loader);
         row.appendChild(loader);
         $("#dialog-container").append(row);
