@@ -77,7 +77,7 @@ body {
 
 .mid {
     display: flex;
-    margin: 20px;
+    /* margin: 20px; */
 }
 .mid img {
     width: 150px;
