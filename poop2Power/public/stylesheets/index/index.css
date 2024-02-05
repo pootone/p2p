@@ -47,8 +47,8 @@ p {
     padding: 10px;
     margin-top: 150px;
 }
-.B1, .B2, .B3, .B4, .B5 img {
-    max-width: 100%;
+.B1 img, .B2 img, .B3 img, .B4 img, .B5 img {
+    max-width: 80%;
     height: auto;
 }
 .B1 {
