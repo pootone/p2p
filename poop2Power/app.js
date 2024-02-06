@@ -9,6 +9,7 @@ const corsOptions = {
   origin: [
     'https://p2p-c-2024.netlify.app',
     'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
+    '127.0.0.1:5000' //TODO DElETE WHEN DEPLOY!!!!!
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],

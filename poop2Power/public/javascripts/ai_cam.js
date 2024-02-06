@@ -72,7 +72,8 @@ $().ready(function () {
     setTimeout(function () {
         $("#guide-dialog-1").show();
     }, 2000);
-
+    // appendChart(0, 0, 0, 0);//TODO
+    // $("#chartMoreModal").modal('show');//TODO
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -186,6 +187,10 @@ function showAcheiveModel() {
     $("#acheModel").modal('show');
 }
 
+function showChartMore() {
+
+}
+
 function appendChart(methane, electricity, constipate, calorie) {
     chartConfig.data.datasets[0].data =
         [methane,
@@ -214,9 +219,12 @@ function appendChart(methane, electricity, constipate, calorie) {
     btnContainer.classList.add("d-flex", "align-items-bottom", "position-relative");
     btnContainer.setAttribute("style", "width: 10%; padding: 0%;")
 
+    // more
     let btn = document.createElement("button");
     btn.classList.add("bg-transparent", "border-0", "position-absolute");
     btn.setAttribute("style", "height: 10%; top: 75%;");
+    btn.setAttribute("data-bs-toggle", "modal");
+    btn.setAttribute("data-bs-target", "#chartMoreModal");
 
     let img = document.createElement("img");
     img.classList.add("w-100");
@@ -232,6 +240,7 @@ function appendChart(methane, electricity, constipate, calorie) {
     $("#dialog-container").append(row);
     let ctx = $("#myChart");
     new Chart(ctx, chartConfig);
+    new Chart($("#chartMoreRadar"), chartConfig);
 }
 
 function appendAskMsg(inputMsg) {
@@ -268,7 +277,6 @@ function appendAskMsg(inputMsg) {
 }
 
 function appendLoader() {
-    // <lottie-player src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
     let row = document.createElement("div");
         row.classList.add("row");
         let loader = document.createElement("lottie-player");
@@ -286,3 +294,7 @@ function appendLoader() {
 
     scrollToBottom();
 }
+
+$("#chartMoreModalBtn").on("click", function() {
+    $("#chartMoreModal").modal('hide');
+});

@@ -59,6 +59,61 @@
                 </div>
             </div>
         </div>
+        <div class="modal modal-xl" id="chartMoreModal" tabindex="-1">
+            <div class="modal-dialog w-100 h-100" style="background-image: url(../images/AI_Cam/moreBG.svg); background-size: contain; background-repeat: no-repeat;">
+                <div class="modal-content bg-transparent border-0" style="height: 70%; max-height: 860px; min-height: 650px; top: 3%;">
+                    <div class="modal-body">
+                        <div class="container h-100 px-5 py-4">
+                            <!-- Modal nav -->
+                            <!-- Description -->
+                            <div class="row mb-2" style="height: 9%;">
+                                <div class="col position-relative h-100">
+                                    <div class="w-100 h-100" style="background-image: url(../images/AI_Cam/Explanation.svg); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                                    <div class="d-flex w-100 position-absolute top-0">
+                                        <button type="button" id="chartMoreModalBtn" class="p-0 border-0 bg-transparent" style="width: 6%; height: 100%;" data-bs-toggle="modal" data-bs-target="#chartMoreModal">
+                                            <img src="../images/AI_Cam/back_icon.svg" alt="" style="object-fit: cover;" class="w-100 h-100">
+                                        </button>
+                                        <p class="my-auto fs-5">您消耗的漢堡......</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row w-100 d-flex justify-content-center mb-3 mx-0" style="height: 30%;">
+                                <div class="col-6">
+                                    <div class="h-100" style="background-image: url(../images/AI_Cam/LTBG.svg); background-size: contain; background-repeat: no-repeat; background-position: right;"></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h-100" style="background-image: url(../images/AI_Cam/RTBG.svg); background-size: contain; background-repeat: no-repeat; background-position: left;"></div>
+                                </div>
+                            </div>
+                            <div class="row w-100 d-flex justify-content-center mb-2 mx-0" style="height: 30%;">
+                                <div class="col-6">
+                                    <div class="h-100" style="background-image: url(../images/AI_Cam/LBBG.svg); background-size: contain; background-repeat: no-repeat; background-position: right;"></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h-100" style="background-image: url(../images/AI_Cam/RBBG.svg); background-size: contain; background-repeat: no-repeat; background-position: left;"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Suggestion -->
+                            <div class="row position-relative mb-2 mx-0" style="height: 9%;">
+                                <div class="h-100" style="background-image: url(../images/AI_Cam/Suggestion.svg); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-11">
+                                    <p class="fs-6">為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。最後，營養均衡才是最重要的呦。</p>
+                                </div>
+                            </div>
+
+                            <!-- Radar chart -->
+                            <div class="position-absolute" style="width: 30%; top: 17%; left: 35%;">
+                                <canvas id="chartMoreRadar" style="display: block; box-sizing: border-box;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js">
             <!-- jquery -->
         </script>
