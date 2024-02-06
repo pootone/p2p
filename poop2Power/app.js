@@ -7,7 +7,7 @@ var cors = require('cors'); // For cross request
 
 const corsOptions = {
   origin: [
-    'https://p2p-c-2024.netlify.app',
+    'https://no-2c.netlify.app',
     'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
     '127.0.0.1:5000' //TODO DElETE WHEN DEPLOY!!!!!
   ],
