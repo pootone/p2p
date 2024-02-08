@@ -13,9 +13,9 @@ var L2 = new Phaser.Class({
     },
     create: function() {
         // BG
-        this.add.image(config.width/2, config.height/2-50, "l2-bg").setScale(1.1, 1);
+        this.add.image(config.width/2, config.height/2-83, "l2-bg").setScale(0.9, 0.8);
 
-        nextBtn = this.add.image(config.width/2, config.height-340, "nextBtn").setScale(0.9);
+        nextBtn = this.add.image(config.width/2, config.height-280, "nextBtn").setScale(0.9);
         nextBtn.setInteractive({useHandCursor: true}).on('pointerdown', (pointer, localX, localY, event) => {
             this.scene.start("L3");
         });

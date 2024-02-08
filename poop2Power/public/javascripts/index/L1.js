@@ -27,9 +27,9 @@ var L1 = new Phaser.Class({
         // BG
         bg = this.add.image(config.width/2, config.height/2, "bg-empty");
 
-        burger = this.physics.add.staticSprite(config.width/2, config.height/2-45.5, "burger").refreshBody();
+        burger = this.physics.add.staticSprite(config.width/2, config.height/2-100, "burger").refreshBody();
 
-        ldPoop = this.physics.add.sprite(config.width-1, config.height/2-45.5, "loading-poop").setScale(0.8);
+        ldPoop = this.physics.add.sprite(config.width-1, config.height/2-100, "loading-poop").setScale(0.8);
         ldPoop.anims.create({
             key: "loading-poop",
             frames: this.anims.generateFrameNumbers('loading-poop', { start: 0, end: 1 }),
@@ -70,13 +70,13 @@ var L1 = new Phaser.Class({
         } else {
             burger.destroy();
             ldPoop.destroy();
-            bg = this.add.image(config.width/2, config.height/2, "l1-bg").setScale(1.1, 1);
+            bg = this.add.image(config.width/2, config.height/2-83, "l1-bg").setScale(0.9, 0.9);
 
             sideText = this.add.text(0, 0, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
                 
             });
 
-            nextBtn = this.add.image(config.width/2, config.height-340, "nextBtn").setScale(0.9);
+            nextBtn = this.add.image(config.width/2, config.height-280, "nextBtn").setScale(0.9);
             nextBtn.setInteractive({useHandCursor: true}).on('pointerdown', (pointer, localX, localY, event) => {
                 this.scene.start("L2");
             });
