@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>No.2</title>
-    <link rel="stylesheet" href="./stylesheets/cornerBtn.css">
+    <link rel="stylesheet" href="./stylesheets/cornerBtn.css" />
     <script src="./javascripts/phaser.min.js"></script>
     <script src="./javascripts/index/L1.js"></script>
     <script src="./javascripts/index/L2.js"></script>
@@ -12,68 +12,74 @@
     <script src="./javascripts/index/L4.js"></script>
     <script src="./javascripts/index/L5.js"></script>
     <style>
-        body::-webkit-scrollbar {
-            display: none;
-        }
-        body {
-            margin: 0px;
-            display: flex;
-            justify-content: center;
-        }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Menu btn -->
     <div class="fixed-corner">
-        <div class="corner-button" id="toggleMenuBtn">
-            <img src="./images/badge/menu_btn.png" alt="">
+      <div class="corner-button" id="toggleMenuBtn">
+        <img src="./images/badge/menu_btn.png" alt="" />
+      </div>
+      <div class="menu-bar">
+        <a href="/">
+          <img src="./images/badge/menuBar/menuBar_BG.png" alt="" srcset="" />
+        </a>
+        <div class="menu_item">
+          <a href="">
+            <img src="./images/badge/menuBar/首頁.png" alt="" srcset="" />
+          </a>
+          <a href="./html/aicam.html">
+            <img src="./images/badge/menuBar/相機.png" alt="" srcset="" />
+          </a>
+          <img src="./images/badge/menuBar/資訊.png" alt="" srcset="" />
+          <a href="./html/badge.html">
+            <img src="./images/badge/menuBar/徽章.png" alt="" srcset="" />
+          </a>
+          <a href="./html/aboutUs.html">
+            <img src="./images/badge/menuBar/關於我們.png" alt="" srcset="" />
+          </a>
         </div>
-        <div class="menu-bar">
-            <a href="/">
-                <img src="./images/badge/menuBar/menuBar_BG.png" alt="" srcset="">
-            </a>
-            <div class="menu_item">
-                <a href="">
-                    <img src="./images/badge/menuBar/首頁.png" alt="" srcset="">
-                </a>
-                <a href="./html/aicam.html">
-                    <img src="./images/badge/menuBar/相機.png" alt="" srcset="">
-                </a>
-                <img src="./images/badge/menuBar/資訊.png" alt="" srcset="">
-                <a href="./html/badge.html">
-                    <img src="./images/badge/menuBar/徽章.png" alt="" srcset="">
-                </a>
-                <a href="./html/aboutUs.html">
-                    <img src="./images/badge/menuBar/關於我們.png" alt="" srcset="">
-                </a>
-            </div>
-        </div>
+      </div>
     </div>
 
     <script>
-        let nextBtn;
-        const config = {
-            type: Phaser.AUTO,
-            width: "1512",
-            height: "899",
-            scale: {
-                // mode: Phaser.Scale.Fill,
-                // autoCenter: Phaser.Scale.CENTER_BOTH
-            },
-            physics:{
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 0 },  
-                    // debug: true
-                }
-            },
-            scene: [L1, L2, L3, L4, L5],
-            audio: {
-                disableWebAudio: true
-            }
-        };
-        var game = new Phaser.Game(config);
+      let nextBtn;
+      const config = {
+        type: Phaser.AUTO,
+        width: "1512",
+        height: "899",
+        scale: {
+          // mode: Phaser.Scale.Fill,
+          // autoCenter: Phaser.Scale.CENTER_BOTH
+        },
+        physics: {
+          default: "arcade",
+          arcade: {
+            gravity: { y: 0 },
+            // debug: true
+          },
+        },
+        scene: [L1, L2, L3, L4, L5],
+        audio: {
+          disableWebAudio: true,
+        },
+      };
+      let bg;
+      let game = new Phaser.Game(config);
+      let lastPointerX;
+      let lastPointerY;
+      let depth1 = 0.025;
+      let depth2 = 0.15;
+      let depth3 = 0.3;
     </script>
     <script src="./javascripts/CornerBTN.js"></script>
-</body>
+  </body>
 </html>

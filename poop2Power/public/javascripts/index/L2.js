@@ -14,7 +14,7 @@ var L2 = new Phaser.Class({
     },
     create: function () {
         // BG
-        this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
+        bg = this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
 
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(0.95, 0.9);
@@ -41,9 +41,21 @@ var L2 = new Phaser.Class({
         nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
             this.scene.start("L3");
         });
+
+        // Keep current pointer position
+        lastPointerX = this.input.activePointer.x;
+        lastPointerY = this.input.activePointer.y;
     },
     update: function () {
+        // Move the bg by pointer position
+        let pointerDeltaX = lastPointerX - this.input.activePointer.x;
+        let pointerDeltaY = lastPointerY - this.input.activePointer.y;
 
+        bg.x += pointerDeltaX * depth1;
+        bg.y += pointerDeltaY * depth1;
+
+        lastPointerX = this.input.activePointer.x;
+        lastPointerY = this.input.activePointer.y;
 
 
     }

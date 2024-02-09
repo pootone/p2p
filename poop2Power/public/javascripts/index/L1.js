@@ -1,4 +1,3 @@
-let bg;
 let burger;
 let ldPoop;
 let isStart = true;
@@ -107,58 +106,19 @@ var L1 = new Phaser.Class({
             callbackScope: this
         });
 
+        // Keep current pointer position
+        lastPointerX = this.input.activePointer.x;
+        lastPointerY = this.input.activePointer.y;
     },
     update: function () {
-        // if(isStart) {
-        //     if(burger.body.x < ldPoop.body.x && ldPoop.body.x < (burger.body.x + burger.body.width + 50)) {
-        //         stState = startState.ing;
-        //     } else if(0 < ldPoop.body.x && (ldPoop.body.x + ldPoop.body.width) < burger.body.x + 135) {
-        //         stState = startState.after;
-        //     } else if((ldPoop.body.x + ldPoop.body.width) < 0) {
-        //         isStart = false;
-        //     }
+        // Move the bg by pointer position
+        let pointerDeltaX = lastPointerX - this.input.activePointer.x;
+        let pointerDeltaY = lastPointerY - this.input.activePointer.y;
 
-        //     switch(stState) {
-        //         case startState.before: 
-        //             ldPoop.setVelocityX(-500);
-        //             break;
-        //         case startState.ing:
-        //             ldPoop.setVelocityX(-10);
-        //             setTimeout(function() {
-        //                 ldPoop.setVelocityX(-500);
-        //                 ldPoop.anims.play("loading-poop", true);
-        //             }, 250);
-        //             break;
-        //         case startState.after:
-        //             burger.visible = false;
-        //             ldPoop.anims.stop();
-        //             break;
-        //         default:
-        //             ldPoop.anims.stop();
-        //             break;
-        //     }
-        // } else {
-        //     burger.destroy();
-        //     ldPoop.destroy();
-        //     bg = this.add.image(config.width/2, config.height/2-83, "l1-bg").setScale(0.9, 0.9);
+        bg.x += pointerDeltaX * depth1;
+        bg.y += pointerDeltaY * depth1;
 
-        //     let guideContainer = this.add.container();
-        //     let guideTxtBG = this.add.image(400, 140, "guideTxtBG").setScale(0.95, 0.9);
-
-        //     sideText = this.add.text(guideTxtBG.x, guideTxtBG.y, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
-        //         // fontFamily: "",
-        //         fontSize: "24px",
-        //         color: "#000"
-        //     });
-        //     sideText.setOrigin(0.5);
-        //     guideContainer.add(guideTxtBG);
-        //     guideContainer.add(sideText);
-
-
-        //     nextBtn = this.add.image(config.width/2, config.height-280, "nextBtn").setScale(0.9);
-        //     nextBtn.setInteractive({useHandCursor: true}).on('pointerdown', (pointer, localX, localY, event) => {
-        //         this.scene.start("L2");
-        //     });
-        // }
+        lastPointerX = this.input.activePointer.x;
+        lastPointerY = this.input.activePointer.y;
     }
 });
