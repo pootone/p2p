@@ -72,9 +72,9 @@ var L1 = new Phaser.Class({
                                 bg = this.add.image(config.width / 2, config.height / 2 - 83, "l1-bg");
 
                                 let guideContainer = this.add.container();
-                                let guideTxtBG = this.add.image(390, 140, "guideTxtBG").setScale(0.95, 0.9);
+                                let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(0.95, 0.9);
 
-                                sideText = this.add.text(guideTxtBG.x, guideTxtBG.y, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
+                                sideText = this.add.text(0, 0, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
                                     // fontFamily: "",
                                     fontSize: "24px",
                                     color: "#000"
@@ -82,6 +82,15 @@ var L1 = new Phaser.Class({
                                 sideText.setOrigin(0.5);
                                 guideContainer.add(guideTxtBG);
                                 guideContainer.add(sideText);
+                                guideContainer.setPosition(-guideTxtBG.width, 120);
+                                this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
+                                    this.tweens.add({
+                                        targets: guideContainer,
+                                        x: 420,
+                                        duration: 1100,
+                                        ease: 'Back.out'
+                                    });
+                                },);
 
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
