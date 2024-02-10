@@ -241,6 +241,8 @@ function appendChart(methane, electricity, constipate, calorie) {
     let ctx = $("#myChart");
     new Chart(ctx, chartConfig);
     new Chart($("#chartMoreRadar"), chartConfig);
+
+    scrollToBottom();
 }
 
 function appendAskMsg(inputMsg) {
