@@ -7,6 +7,14 @@ let electricity = 0;
 let constipate = 0;
 let calorie = 0;
 
+let dialogObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if(mutation.addedNodes && mutation.addedNodes.length > 0) {
+            scrollToBottom();
+        }
+    })
+});
+
 const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
 
 let chartConfig = {
@@ -71,6 +79,10 @@ let chartConfig = {
 };
 
 $().ready(function () {
+    // Auto scroll to bottom, when append content to the container
+    var dialogContainer = document.getElementById('dialog-container');
+    dialogObserver.observe(dialogContainer, {childList: true});
+
     $("#guide-dialog-1").hide();
     
     setTimeout(function () {
@@ -113,7 +125,6 @@ $().ready(function () {
             row.appendChild(container);
             // Append upload img to the dialog
             $("#dialog-container").append(row);
-            scrollToBottom();
         }
 
         // 讀取文件內容
@@ -155,8 +166,6 @@ $().ready(function () {
                         calorie,
                         responseData.result.suggest);
 
-                    scrollToBottom();
-
                     // Show Achievement Model
                     setTimeout(function () { showAcheiveModel() }, 1500);
                 })
@@ -184,8 +193,6 @@ $().ready(function () {
                         constipate,
                         calorie,
                         responseData.result.suggest);
-
-                    scrollToBottom();
 
                     // Show Achievement Model
                     setTimeout(function () { showAcheiveModel() }, 1500);
@@ -273,8 +280,6 @@ function appendChart(methane, electricity, constipate, calorie, suggest="") {
     new Chart(ctx, chartConfig);
     
     new Chart($("#chartMoreRadar"), chartConfig);
-
-    scrollToBottom();
 }
 
 function appendAskMsg(inputMsg) {
@@ -325,8 +330,6 @@ function appendLoader() {
         console.log(loader);
         row.appendChild(loader);
         $("#dialog-container").append(row);
-
-    scrollToBottom();
 }
 
 $("#chartMoreModalBtn").on("click", function() {
