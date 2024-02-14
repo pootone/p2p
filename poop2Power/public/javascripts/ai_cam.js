@@ -2,8 +2,12 @@ let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
 let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
 let uploadImg = null;
 let responseData = null;
+let methane = 0;
+let electricity = 0;
+let constipate = 0;
+let calorie = 0;
 
-const labels = ["甲烷排放", "電力輸出", "便秘風險", "熱量"];
+const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
 
 let chartConfig = {
     type: "radar",
@@ -41,8 +45,8 @@ let chartConfig = {
                 },
                 pointLabels: {
                     font: {
-                        size: 20 // 指標字型大小
-                    }
+                        size: 16 // 指標字型大小
+                    },
                 }
             }
         },
@@ -72,7 +76,7 @@ $().ready(function () {
     setTimeout(function () {
         $("#guide-dialog-1").show();
     }, 2000);
-    // appendChart(0, 0, 0, 0);//TODO
+    // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
@@ -140,10 +144,16 @@ $().ready(function () {
                     $("#resContent").text(data.message.content);
                     uploadImg = null;
 
-                    appendChart(responseData.result.methane,
-                        responseData.result.electricity,
-                        responseData.result.constipate,
-                        responseData.result.calorie);
+                    mathane = responseData.result.methane;
+                    electricity = responseData.result.electricity;
+                    constipate = responseData.result.constipate;
+                    calorie = responseData.result.calorie;
+
+                    appendChart(methane,
+                        electricity,
+                        constipate,
+                        calorie,
+                        responseData.result.suggest);
 
                     scrollToBottom();
 
@@ -164,10 +174,17 @@ $().ready(function () {
                     console.log("Res data: ", data);
                     $("#resContent").text(data.message.content);
 
-                    appendChart(responseData.result.methane,
-                        responseData.result.electricity,
-                        responseData.result.constipate,
-                        responseData.result.calorie);
+                    mathane = responseData.result.methane;
+                    electricity = responseData.result.electricity;
+                    constipate = responseData.result.constipate;
+                    calorie = responseData.result.calorie;
+
+                    appendChart(methane,
+                        electricity,
+                        constipate,
+                        calorie,
+                        responseData.result.suggest);
+
                     scrollToBottom();
 
                     // Show Achievement Model
@@ -191,12 +208,17 @@ function showChartMore() {
 
 }
 
-function appendChart(methane, electricity, constipate, calorie) {
+function appendChart(methane, electricity, constipate, calorie, suggest="") {
     chartConfig.data.datasets[0].data =
         [methane,
             electricity,
             constipate,
             calorie];
+    chartConfig.data.labels[0][1] = methane;
+    chartConfig.data.labels[1][1] = electricity;
+    chartConfig.data.labels[2][1] = constipate;
+    chartConfig.data.labels[3][1] = calorie;
+
     console.log("data.datasets: ", chartConfig.data.datasets[0].data);
 
     // Create a chart
@@ -236,10 +258,20 @@ function appendChart(methane, electricity, constipate, calorie) {
     row.appendChild(container);
     row.appendChild(btnContainer);
 
+    /// more popWin
+    // Add suggest txt
+    $("#aiSug").text(suggest);
+    // level txt
+    $("#methaneSp").text("等級"+methane);
+    $("#electricitySp").text("等級"+electricity);
+    $("#constipateSp").text("等級"+constipate);
+    $("#calorieSp").text("等級"+calorie);
+
     // Add chart to the dialog block
     $("#dialog-container").append(row);
     let ctx = $("#myChart");
     new Chart(ctx, chartConfig);
+    
     new Chart($("#chartMoreRadar"), chartConfig);
 
     scrollToBottom();

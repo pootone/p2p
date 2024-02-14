@@ -39,10 +39,10 @@
             <div class="col"></div>
             <h3>What do you eat?</h3>
         </div>
-        <div id="dialog-container" class="h-75" style="overflow-y: scroll;">
+        <div id="dialog-container" class="h-75 pb-3" style="overflow-y: scroll;">
             <div class="row w-100" id="guide-dialog-1" style="height: 140px">
                 <div class="col-sm-6 col-md-8 py-md-3 px-md-5 d-flex justify-content-center align-items-center position-relative" style="width: 60%;"><img class="w-100" src="../images/AI_Cam/dialog.svg">
-                    <p class="position-absolute w-75 fs-5" style="top: 25%; left: 15%">您好！我是AI食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。</p>
+                    <p class="position-absolute w-75 fs-5" style="top: 25%; left: 15%">您好！我是 AI 食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。</p>
                 </div>
             </div>
         </div>
@@ -68,8 +68,8 @@
         </div>
         <div class="modal modal-xl" id="chartMoreModal" tabindex="-1">
             <div class="modal-dialog w-100 h-100" style="background-image: url(../images/AI_Cam/moreBG.svg); background-size: contain; background-repeat: no-repeat;">
-                <div class="modal-content bg-transparent border-0" style="height: 70%; max-height: 860px; min-height: 650px; top: 3%;">
-                    <div class="modal-body">
+                <div class="modal-content bg-transparent border-0" style="height: 70%; max-height: 860px; min-height: 650px; top: 2%;">
+                    <div class="modal-body h-100">
                         <div class="container h-100 px-5 py-4">
                             <!-- Modal nav -->
                             <!-- Description -->
@@ -84,20 +84,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row w-100 d-flex justify-content-center mb-3 mx-0" style="height: 30%;">
-                                <div class="col-6">
-                                    <div class="h-100" style="background-image: url(../images/AI_Cam/LTBG.png); background-size: contain; background-repeat: no-repeat; background-position: right;"></div>
+                            <div class="row w-100 d-flex justify-content-center mb-3 mx-0" style="height: 33%;">
+                                <div class="col-6 h-100" style="background-image: url(../images/AI_Cam/LTBG.png); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                    <p class="fs-6 ms-4 mt-4">排放了約<span id="methaneSp" class="p-2" style="background-image: url(../images/AI_Cam/lv_bg.svg); background-repeat: no-repeat; background-size: contain; background-position: center;"></span>的甲烷排放量</p>
+                                    <lottie-player id="loader" class="w-75 h-50" src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player>
                                 </div>
-                                <div class="col-6">
-                                    <div class="h-100" style="background-image: url(../images/AI_Cam/RTBG.png); background-size: contain; background-repeat: no-repeat; background-position: left;"></div>
+                                <div class="col-6 h-100" style="background-image: url(../images/AI_Cam/RTBG.png); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                    <p class="fs-6 ms-4 mt-4">製造了約<span id="electricitySp" class="p-2" style="background-image: url(../images/AI_Cam/lv_bg.svg); background-repeat: no-repeat; background-size: contain; background-position: center;"></span>的電力輸出</p>
+                                    <lottie-player id="loader" class="w-75 h-50" src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player>
                                 </div>
                             </div>
-                            <div class="row w-100 d-flex justify-content-center mb-2 mx-0" style="height: 30%;">
-                                <div class="col-6">
-                                    <div class="h-100" style="background-image: url(../images/AI_Cam/LBBG.png); background-size: contain; background-repeat: no-repeat; background-position: right;"></div>
+                            <div class="row w-100 d-flex justify-content-center mb-2 mx-0" style="height: 33%;">
+                                <div class="col-6 h-100" style="background-image: url(../images/AI_Cam/LBBG.png); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                    <p class="fs-6 ms-4 mt-4">產生了約<span id="constipateSp" class="p-2" style="background-image: url(../images/AI_Cam/lv_bg.svg); background-repeat: no-repeat; background-size: contain; background-position: center;"></span>的熱量</p>
+                                    <lottie-player id="loader" class="w-75 h-50" src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player>
                                 </div>
-                                <div class="col-6">
-                                    <div class="h-100" style="background-image: url(../images/AI_Cam/RBBG.png); background-size: contain; background-repeat: no-repeat; background-position: left;"></div>
+                                <div class="col-6 h-100" style="background-image: url(../images/AI_Cam/RBBG.png); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                    <p class="fs-6 mt-4" style="margin-left: 25%;">會有約<span id="calorieSp" class="p-2" style="background-image: url(../images/AI_Cam/lv_bg.svg); background-repeat: no-repeat; background-size: contain; background-position: center;"></span>的便秘風險</p>
+                                    <lottie-player id="loader" class="w-75 h-50" src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player>
                                 </div>
                             </div>
                             
@@ -108,12 +112,12 @@
 
                             <div class="row d-flex justify-content-center">
                                 <div class="col-11">
-                                    <p class="fs-6">為了減少漢堡的甲烷排放和卡路里含量，可以減少肉的用量或選擇瘦肉。為了降低漢堡引起的便秘風險，考慮添加像生菜或番茄這樣富含膳食纖維的成分。最後，營養均衡才是最重要的呦。</p>
+                                    <p class="fs-6" id="aiSug"></p>
                                 </div>
                             </div>
 
                             <!-- Radar chart -->
-                            <div class="position-absolute" style="width: 30%; top: 17%; left: 35%;">
+                            <div class="position-absolute" style="width: 30%; top: 20%; left: 35%;">
                                 <canvas id="chartMoreRadar" style="display: block; box-sizing: border-box;"></canvas>
                             </div>
                         </div>
