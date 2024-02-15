@@ -40,13 +40,12 @@
             <h3>What do you eat?</h3>
         </div>
         <div id="dialog-container" class="h-75 pb-3" style="overflow-y: scroll;">
-            <div class="row w-100" id="guide-dialog-1" style="height: 140px">
-                <div class="col-sm-6 col-md-8 py-md-3 px-md-5 d-flex justify-content-center align-items-center position-relative" style="width: 60%;"><img class="w-100" src="../images/AI_Cam/dialog.svg">
-                    <p class="position-absolute w-75 fs-5" style="top: 25%; left: 15%">您好！我是 AI 食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。</p>
+            <div id="guide-dialog-1" class="row w-100 mb-2">
+                <div class="col-sm-12 col-lg-7 py-md-3 px-md-5 d-flex justify-content-center align-items-center position-relative"><img class="w-100" src="../images/AI_Cam/res-bg-init.svg">
+                    <p class="position-absolute w-75 fs-5 my-auto" style="left: 15%;">您好！我是 AI 食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。</p>
                 </div>
             </div>
         </div>
-        <!-- <div class="row position-fixed w-100 bottom-0 mb-md-5"> -->
         <div class="row w-100 m-0" style="height: 12%;">
             <div class="col-8 h-100 ps-4 inputBg d-flex align-items-center" style="background-position-x: 20%;"><input class="h-100 p-3 form-control-plaintext fs-5" id="descTxt" type="text" placeholder="輸入..." style="width: 95%; border:0; background: transparent;"></div>
             <div class="col-2 d-flex justify-content-center align-items-center">
@@ -58,11 +57,16 @@
                 <input class="w-75" id="submit" type="button" style="height: 55%;">
             </div>
         </div>
-        <div class="modal modal-lg" id="acheModel" tabindex="-1">
+        <!-- Achieve Modal-->
+        <div class="modal modal-lg" id="acheModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-transparent border-0">
-                    <div class="modal-body position-relative"><img class="w-100" src="../images/AI_Cam/achievement.png">
-                        <div class="d-flex justify-content-center position-absolute w-100" style="top: 70%"><button id="ache-cancel" type="button" data-bs-dismiss="modal" style="width: 23%; height: 50px"></button><a id="ache-collect" href="./badge.html?isFirst=true" style="width: 23%; height: 50px"></a></div>
+                    <div class="modal-body position-relative">
+                        <img class="w-100" src="../images/AI_Cam/achievement.png">
+                        <div class="d-flex justify-content-center position-absolute w-100" style="top: 70%; height: 8%;">
+                            <button id="ache-cancel" class="mx-2 w-25 h-100" type="button" data-bs-dismiss="modal" onclick="awardClose()"></button>
+                            <a id="ache-collect" class="mx-2 w-25 h-100" href="./badge.html?isFirst=true"></a>
+                        </div>
                     </div>
                 </div>
             </div>

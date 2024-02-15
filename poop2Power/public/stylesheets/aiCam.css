@@ -43,25 +43,27 @@ h3 {
 }
 
 #ache-cancel {
-    background-image: url(../images/AI_Cam/acheClose.png);
+    background-image: url(../images/AI_Cam/close.svg);
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
     background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 #ache-cancel:hover {
-    background-image: url(../images/AI_Cam/acheClose-hover.png);
+    background-image: url(../images/AI_Cam/closeHover.svg);
 }
 
 #ache-collect {
-    background-image: url(../images/AI_Cam/acheCollect.png);
+    background-image: url(../images/AI_Cam/collect.svg);
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
     background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 #ache-collect:hover {
-    background-image: url(../images/AI_Cam/acheCollect-hover.png);
+    background-image: url(../images/AI_Cam/collectHover.svg);
 }
