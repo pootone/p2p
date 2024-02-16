@@ -100,7 +100,7 @@ var L1 = new Phaser.Class({
                                     frameRate: 6,
                                     repeat: -1 
                                 });
-                                poop.setInteractive({cursor: `url(./images/index/l1/hover.svg) 20 20, pointer`});
+                                poop.setInteractive({cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`});
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
                                 nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
