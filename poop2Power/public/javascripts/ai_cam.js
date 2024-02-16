@@ -174,7 +174,7 @@ $().ready(function () {
                     // Show Achievement Model
                     setTimeout(function () { 
                         isCloseAwardModal = false;
-                        showAcheiveModal() 
+                        showAchieveModal() 
                     }, 1500);
                 })
             }
@@ -206,7 +206,7 @@ $().ready(function () {
                     // Show Achievement Model
                     setTimeout(function () { 
                         isCloseAwardModal = false;
-                        showAcheiveModal()
+                        showAchieveModal()
                     }, 1500);
                 })
             }
@@ -219,7 +219,7 @@ function scrollToBottom() {
     scrollableDiv.scrollTop(scrollableDiv[0].scrollHeight);
 }
 
-function showAcheiveModal() {
+function showAchieveModal() {
     $("#acheModal").modal('show');
 }
 
@@ -365,7 +365,7 @@ function appendAwardCongratulation() {
     button.style.backgroundRepeat = "no-repeat";
     button.style.backgroundSize = "contain";
     button.textContent = "「" + "Burger King" + "」";
-    button.onclick = showAcheiveModal;
+    button.onclick = showAchieveModal;
 
     let reason = document.createTextNode("成就，"+"是利用相機拍下漢堡就可以解鎖的秘密成就"+"。");
 
