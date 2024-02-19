@@ -39,7 +39,7 @@ var L5 = new Phaser.Class({
 
         nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
         nextBtn.setInteractive({useHandCursor: true}).on('pointerdown', (pointer, localX, localY, event) => {
-            window.location="./html/IndexTrans.html"
+            window.location=".index-old.html"
         });
 
         // Keep current pointer position
