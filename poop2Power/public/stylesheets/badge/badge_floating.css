@@ -10,16 +10,16 @@ p{
 
 .floating-window-container {
     position: fixed;
-    top: 50%;
+    top: 48%;
     left: 50%;
     background-image: url('../../images/badge/floating_window/BG.png');
     background-size: cover;
     background-repeat: no-repeat;
-    transform: translate(-50%, -50%) scale(1.0); /* 调整 scale 的值来缩放内容 */
-    width: 68%;
-    height: 88%;
+    transform: translate(-50%, -50%) scale(0.90); /* 调整 scale 的值来缩放内容 */
+    width: 78%;
+    height: 100%;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
 }
 
 
@@ -55,18 +55,21 @@ p{
 }
 
 /*badge內容*/
+.title{
+    font-size: 30px;
+}
 .info_suggest img{
-    width: 25%;
+    width: 30%;
     height: auto;
     margin: 20px;
 }
 .info_suggest p{
-    font-size: 15px;
+    font-size: 20px;
     padding: 20px;
 }
 /*紀錄字卡*/
 .record_img{
-    width: 25%;
+    width: 30%;
     height: auto;
     margin: 20px;
 }
