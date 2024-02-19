@@ -30,18 +30,8 @@ function scrollToSection(sectionId) {
             top: middleOfElement,
             behavior: "smooth"
         });
-
-        // 添加背景顏色並使用過渡效果
-        targetElement.style.backgroundColor = "rgba(120, 136, 148, 0.5)";
-        targetElement.style.transition = "background-color 0.5s ease-in-out";
-
-        // 延遲0.5秒後刪除背景顏色
-        setTimeout(function() {
-            targetElement.style.backgroundColor = "";
-        }, 500);
     }
 }
-
 
 function closeFloatingWindow() {
     // 在此處添加關閉浮動視窗的程式碼
