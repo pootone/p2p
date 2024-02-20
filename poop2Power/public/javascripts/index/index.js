@@ -102,6 +102,7 @@ function showTooltip(tipId) {
 function hideTooltip() {
     document.getElementById("tipCam").style.display = 'none';
     document.getElementById("tipBadge").style.display = 'none';
+    document.getElementById("tipAnim").style.display = 'none';
     // Pause the carousel when hiding the tooltip
     badgeCarousel.pause();
 }

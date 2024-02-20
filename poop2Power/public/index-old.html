@@ -40,7 +40,7 @@
                             <img src="./images/index-old/overlay/circle_N.svg" id="circle2" onclick="goToSlide(2)"
                                 style="position: absolute; top: -30px; left: 70%; transform: translateX(-50%);" alt="">
                             <img src="./images/index-old/overlay/circle.png" alt="" style="max-width: 100%;">
-                            <div id="badgeCarousel" class=" carousel-fade position-absolute bottom-0 start-2"
+                            <div id="badgeCarousel" class=" carousel-fade position-absolute bottom-0 start-1"
                                 style="max-width: 90%;" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -88,9 +88,34 @@
                     <div class="col-2"></div>
                     <div class="col-2 B4">
                         <a href="./html/badge.html">
-                            <img src="./images/index-old/overlay/badge流程1.png" style="max-width: 90%;" class="mr-3" alt="Image">
+                            <img src="./images/index-old/overlay/badge流程.svg" style="max-width: 90%;" class="mr-3" alt="Image">
                         </a>
                     </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tipAnim" class="overlay">
+        <img class="p-4 position-absolute top-0 start-0" src="./images/index-old/Back.svg" onclick="hideTooltip()"
+            style="cursor: pointer;" alt="">
+        <div class="container" style="margin-top: 3%;">
+            <div class="genie" style="width: 50%; height:20%;">
+                <img src="./images/index-old/overlay/AnimTip.png" style="max-width: 60%; " alt="">
+                <img src="./images/index-old/overlay/indexGenie.png" style="max-width: 60%; " alt="">
+            </div>
+            <div class="row" style="position: relative;">
+                <div class="row badgeContain" style="margin-left: 100px; position: absolute; top: 40px; left: 0;">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2 B3">
+                        <a href="">
+                            <img src="./images/index-old/overlay/Anim流程.svg" style="max-width: 90%;" class="mr-3" alt="Image">
+                        </a>
+                    </div>
+                    <div class="col-2"></div>
                     <div class="col-2">
                     </div>
                 </div>
@@ -118,7 +143,8 @@
                 </div>
                 <div class="col-2 B3">
                     <a href="">
-                        <img src="./images/index-old/Anim.png" class="mr-3" alt="Image" onclick="">
+                        <img src="./images/index-old/Anim.png" class="mr-3" alt="Image"
+                        onmouseover="showTooltip('tipAnim')">
                     </a>
                     <p class="mt-0 p-3">電電自修室</p>
                 </div>
