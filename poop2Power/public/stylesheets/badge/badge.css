@@ -2,6 +2,9 @@ p {
     font-family: 'Shippori Mincho';
     color: #394038;
 }
+.row{
+    margin-right : 0;
+}
 
 .header {
     padding-top: 10px;
@@ -32,6 +35,11 @@ body {
     background-color: #F8F2EC;
 
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 
 
 .container {
