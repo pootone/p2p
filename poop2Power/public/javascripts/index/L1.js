@@ -20,7 +20,7 @@ var L1 = new Phaser.Class({
         this.load.image("l1-bg", './images/index/l1/l1-bg.png');
         this.load.image("burger", './images/index/loading/burger.svg');
         this.load.image("bg-empty", "./images/layout/bg.png");
-        this.load.spritesheet("poop", "./images/index/l1/poop.svg", {frameWidth: 109, frameHeight: 75.01});
+        this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
@@ -64,7 +64,7 @@ var L1 = new Phaser.Class({
                         ldPoop.setFrame(0);
                         this.tweens.add({
                             targets: ldPoop,
-                            x: -ldPoop.width/2,
+                            x: -ldPoop.width / 2,
                             duration: 4000,
                             ease: 'Power3',
                             onComplete: function () {
@@ -93,14 +93,17 @@ var L1 = new Phaser.Class({
                                     });
                                 },);
 
-                                poop = this.physics.add.sprite(config.width/2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
+                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
                                 poop.anims.create({
                                     key: "poop",
                                     frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 1 }),
                                     frameRate: 6,
-                                    repeat: -1 
+                                    repeat: -1
                                 });
-                                poop.setInteractive({cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`});
+                                poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
+                                    .on('drag', (pointer, dragX, dragY) => {
+                                        poop.setPosition(dragX, dragY);
+                                    });
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
                                 nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
