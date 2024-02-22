@@ -19,6 +19,47 @@
 
 
 <body background="./images/badge/BG.png">
+
+    <div id="tipIndex" class="overlay">
+        <img class="p-4 position-absolute top-0 start-0" src="./images/index-old/Back.svg" onclick="hideTooltip()"
+            style="cursor: pointer;" alt="">
+        <div class="container" style="margin-top: 3%;">
+            <div class="row" style="position: relative;">
+                <div class="row" style="margin-left: 100px; position: absolute; top: 30px; left: 0;">
+                    <div class="col-2 B1" style="margin-top: 170px; position: relative;">
+                        <a href="./index.html">
+                            <img src="./images/index-old/index.png" class="mr-3" alt="Image">
+                        </a>
+                    </div>
+                    <div class="col-2 B2" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipCam')">
+                        </a>
+                    </div>
+                    <div class="col-2 B3" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipAnim')">
+                        </a>
+                    </div>
+                    <div class="col-2 B4" style="margin-top: 170px; position: relative;">
+                        <a href="./html/badge.html">
+                            <img src="./images/index-old/badge.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipBadge')" onclick="">
+                        </a>
+                    </div>
+                    <div class="col-2 B5" style="margin-top: 170px; position: relative;">
+                        <a href="./html/aboutUs.html">
+                            <img src="./images/index-old/AboutUs.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmouseover="showTooltip('tipAbout')" onclick="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="tipCam" class="overlay">
         <img class="p-4 position-absolute top-0 start-0" src="./images/index-old/Back.svg" onclick="hideTooltip()"
             style="cursor: pointer;" alt="">
@@ -31,9 +72,9 @@
                 <div class="row" style="margin-left: 100px; position: absolute; top: 30px; left: 0;">
                     <div class="col-2 B1" style="margin-top: 170px; position: relative;">
                         <a href="./index.html">
-                            <img src="./images/index-old/index.png" style="opacity: 0;" class="mr-3" alt="Image">
+                            <img src="./images/index-old/index.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmousemove="showTooltip('tipIndex')">
                         </a>
-                        <p class="mt-0 p-3">變電</p>
                     </div>
                     <div class="col-2 B2">
                         <div class="container position-relative" style="margin-top: 10px; position: relative;">
@@ -73,7 +114,7 @@
                     <div class="col-2 B3" style="margin-top: 170px; position: relative;">
                         <a href="">
                             <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
-                            onmouseover="showTooltip('tipAnim')">
+                                onmouseover="showTooltip('tipAnim')">
                         </a>
                     </div>
                     <div class="col-2 B4" style="margin-top: 170px; position: relative;">
@@ -84,7 +125,53 @@
                     </div>
                     <div class="col-2 B5" style="margin-top: 170px; position: relative;">
                         <a href="./html/aboutUs.html">
-                            <img src="./images/index-old/AboutUs.png" style="opacity: 0;" class="mr-3" alt="Image">
+                            <img src="./images/index-old/AboutUs.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmouseover="showTooltip('tipAbout')" onclick="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tipAnim" class="overlay">
+        <img class="p-4 position-absolute top-0 start-0" src="./images/index-old/Back.svg" onclick="hideTooltip()"
+            style="cursor: pointer;" alt="">
+        <div class="container" style="margin-top: 3%;">
+            <div class="genie" style="width: 50%; height:20%;">
+                <img src="./images/index-old/overlay/AnimTip.png" style="max-width: 60%; " alt="">
+                <img src="./images/index-old/overlay/indexGenie.png" style="max-width: 60%; " alt="">
+            </div>
+            <div class="row" style="position: relative;">
+                <div class="row badgeContain" style="margin-left: 100px; position: absolute; top: 40px; left: 0;">
+                    <div class="col-2 B1" style="margin-top: 170px; position: relative;">
+                        <a href="./index.html">
+                            <img src="./images/index-old/index.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmousemove="showTooltip('tipIndex')">
+                        </a>
+                    </div>
+                    <div class="col-2 B2" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipCam')">
+                        </a>
+                    </div>
+                    <div class="col-2 B3">
+                        <a href="">
+                            <img src="./images/index-old/overlay/Anim流程.svg" style="max-width: 90%;" class="mr-3"
+                                alt="Image">
+                        </a>
+                    </div>
+                    <div class="col-2 B4" style="margin-top: 170px; position: relative;">
+                        <a href="./html/badge.html">
+                            <img src="./images/index-old/badge.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipBadge')" onclick="">
+                        </a>
+                    </div>
+                    <div class="col-2 B5" style="margin-top: 170px; position: relative;">
+                        <a href="./html/aboutUs.html">
+                            <img src="./images/index-old/AboutUs.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmouseover="showTooltip('tipAbout')" onclick="">
                         </a>
                     </div>
                 </div>
@@ -102,40 +189,75 @@
             </div>
             <div class="row" style="position: relative;">
                 <div class="row badgeContain" style="margin-left: 100px; position: absolute; top: 40px; left: 0;">
-                    <div class="col-2"></div>
-                    <div class="col-2"></div>
-                    <div class="col-2"></div>
-                    <div class="col-2 B4">
-                        <a href="./html/badge.html">
-                            <img src="./images/index-old/overlay/badge流程.svg" style="max-width: 90%;" class="mr-3" alt="Image">
+                    <div class="col-2 B1" style="margin-top: 170px; position: relative;">
+                        <a href="./index.html">
+                            <img src="./images/index-old/index.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmousemove="showTooltip('tipIndex')">
                         </a>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 B2" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipCam')">
+                        </a>
+                    </div>
+                    <div class="col-2 B3"style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipAnim')">
+                        </a>
+                    </div>
+                    <div class="col-2 B4">
+                        <a href="./html/badge.html">
+                            <img src="./images/index-old/overlay/badge流程.svg" style="max-width: 90%;" class="mr-3"
+                                alt="Image">
+                        </a>
+                    </div>
+                    <div class="col-2 B5" style="margin-top: 170px; position: relative;">
+                        <a href="./html/aboutUs.html">
+                            <img src="./images/index-old/AboutUs.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmouseover="showTooltip('tipAbout')" onclick="">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="tipAnim" class="overlay">
+    <div id="tipAbout" class="overlay">
         <img class="p-4 position-absolute top-0 start-0" src="./images/index-old/Back.svg" onclick="hideTooltip()"
             style="cursor: pointer;" alt="">
         <div class="container" style="margin-top: 3%;">
-            <div class="genie" style="width: 50%; height:20%;">
-                <img src="./images/index-old/overlay/AnimTip.png" style="max-width: 60%; " alt="">
-                <img src="./images/index-old/overlay/indexGenie.png" style="max-width: 60%; " alt="">
-            </div>
             <div class="row" style="position: relative;">
-                <div class="row badgeContain" style="margin-left: 100px; position: absolute; top: 40px; left: 0;">
-                    <div class="col-2"></div>
-                    <div class="col-2"></div>
-                    <div class="col-2 B3">
-                        <a href="">
-                            <img src="./images/index-old/overlay/Anim流程.svg" style="max-width: 90%;" class="mr-3" alt="Image">
+                <div class="row" style="margin-left: 100px; position: absolute; top: 30px; left: 0;">
+                    <div class="col-2 B1" style="margin-top: 170px; position: relative;">
+                        <a href="./index.html">
+                            <img src="./images/index-old/index.png" style="opacity: 0;" class="mr-3" alt="Image"
+                            onmousemove="showTooltip('tipIndex')">
                         </a>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-2">
+                    <div class="col-2 B2" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipCam')">
+                        </a>
+                    </div>
+                    <div class="col-2 B3" style="margin-top: 170px; position: relative;">
+                        <a href="">
+                            <img src="./images/index-old/Anim.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipAnim')">
+                        </a>
+                    </div>
+                    <div class="col-2 B4" style="margin-top: 170px; position: relative;">
+                        <a href="./html/badge.html">
+                            <img src="./images/index-old/badge.png" style="opacity: 0;" class="mr-3" alt="Image"
+                                onmouseover="showTooltip('tipBadge')" onclick="">
+                        </a>
+                    </div>
+                    <div class="col-2 B5" style="margin-top: 170px; position: relative;">
+                        <a href="./html/aboutUs.html">
+                            <img src="./images/index-old/AboutUs.png"class="mr-3" alt="Image" onclick="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -149,7 +271,8 @@
             <div class="row badgeContain" style="margin-left: 100px; position: absolute; top: 50px; left: 0;">
                 <div class="col-2 B1">
                     <a href="./index.html">
-                        <img src="./images/index-old/index.png" class="mr-3" alt="Image">
+                        <img src="./images/index-old/index.png" class="mr-3" alt="Image"
+                        onmouseover="showTooltip('tipIndex')">
                     </a>
                     <p class="mt-0 p-3">變電</p>
                 </div>
@@ -163,7 +286,7 @@
                 <div class="col-2 B3">
                     <a href="">
                         <img src="./images/index-old/Anim.png" class="mr-3" alt="Image"
-                        onmouseover="showTooltip('tipAnim')">
+                            onmouseover="showTooltip('tipAnim')">
                     </a>
                     <p class="mt-0 p-3">電電自修室</p>
                 </div>
@@ -176,7 +299,8 @@
                 </div>
                 <div class="col-2 B5">
                     <a href="./html/aboutUs.html">
-                        <img src="./images/index-old/AboutUs.png" class="mr-3" alt="Image">
+                        <img src="./images/index-old/AboutUs.png" class="mr-3" alt="Image"
+                        onmouseover="showTooltip('tipAbout')">
                     </a>
                     <p class="mt-0 p-3">關於我們</p>
                 </div>

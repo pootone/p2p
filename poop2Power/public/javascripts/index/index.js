@@ -93,6 +93,11 @@ function updateCircleImages() {
 
 function showTooltip(tipId) {
     setTimeout(function () {
+        document.getElementById("tipIndex").style.display = 'none';
+        document.getElementById("tipBadge").style.display = 'none';
+        document.getElementById("tipCam").style.display = 'none';
+        document.getElementById("tipAnim").style.display = 'none';
+        document.getElementById("tipAbout").style.display = 'none';
         document.getElementById(tipId).style.display = 'block';
         // Restart the carousel when the tooltip is shown
         badgeCarousel.cycle();
@@ -100,9 +105,11 @@ function showTooltip(tipId) {
 }
 
 function hideTooltip() {
-    document.getElementById("tipCam").style.display = 'none';
+    document.getElementById("tipIndex").style.display = 'none';
     document.getElementById("tipBadge").style.display = 'none';
+    document.getElementById("tipCam").style.display = 'none';
     document.getElementById("tipAnim").style.display = 'none';
+    document.getElementById("tipAbout").style.display = 'none';
     // Pause the carousel when hiding the tooltip
     badgeCarousel.pause();
 }
