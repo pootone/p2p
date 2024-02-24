@@ -146,7 +146,6 @@ $().ready(function () {
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
             if (payload.img) {
-                appendGetReq();
                 appendLoader();
                 // Remove last chart's id
                 $("#myChart").removeAttr("id");
@@ -170,6 +169,8 @@ $().ready(function () {
                         calorie,
                         responseData.result.suggest);
 
+                    $("#modalTitle").text("您消耗的" + (payload.description == "" ? responseData.food : payload.description) + "......");
+
                     // Show Achievement Model
                     setTimeout(function () {
                         isCloseAwardModal = false;
@@ -180,7 +181,7 @@ $().ready(function () {
             // 若只有文字則送 gpt-3.5-turbo
             else {
                 appendAskMsg(payload.description);
-                appendGetReq();
+                appendGetReq(payload.description);
                 appendLoader();
 
                 $.post(API_txt, { description: payload.description }, function (data, status) {
@@ -200,6 +201,8 @@ $().ready(function () {
                         constipate,
                         calorie,
                         responseData.result.suggest);
+
+                    $("#modalTitle").text("您消耗的" + payload.description + "......");
 
                     // Show Achievement Model
                     setTimeout(function () {
@@ -321,14 +324,14 @@ function appendAskMsg(inputMsg) {
     $("#dialog-container").append(row);
 }
 
-function appendGetReq() {
+function appendGetReq(food) {
     let bg = document.createElement("img");
     bg.classList.add("w-100");
     bg.setAttribute("src", "../images/AI_Cam/res-bg-1.svg");
 
     let txt = document.createElement("p");
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
-    txt.innerHTML = "收到！讓我們一起來看看一份漢堡會有多少甲烷排放量、電力輸出、熱量及便秘風險吧！";
+    txt.innerHTML = "收到！讓我們一起來看看一份" + food + "會有多少甲烷排放量、電力輸出、熱量及便秘風險吧！";
 
     let container = document.createElement("div");
     container.classList.add("col-sm-11", "col-lg-8", "py-md-3", "px-md-5",
