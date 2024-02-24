@@ -10,10 +10,6 @@ const startState = {
 let stState = startState.before;
 let sideText;
 
-// onmousemove = (e)=> {
-//     console.log("JS mouse: "+e.clientX+" "+e.clientY);
-// }
-
 var L1 = new Phaser.Class({
     Extends: Phaser.Scene,
     initialize: function () {
@@ -106,12 +102,7 @@ var L1 = new Phaser.Class({
                                 });
                                 poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
                                     .on('drag', (pointer, dragX, dragY) => {
-                                        // console.log(poop.body)
                                         poop.setPosition(dragX, dragY);
-                                    })
-                                    .on('dragend', (pointer, dragX, dragY) => {
-                                        console.log(pointer);
-                                        console.log(pointer.x, pointer.y, dragX, dragY);
                                     });
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
