@@ -22,12 +22,12 @@ var L1 = new Phaser.Class({
     init: function () { },
     preload: function () {
         this.load.image("l1-bg", './images/index/l1/l1-bg.png');
-        this.load.image("burger", './images/index/loading/burger.svg');
+        this.load.svg("burger", './images/index/loading/burger.svg');
         this.load.image("bg-empty", "./images/layout/bg.png");
         this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
-        this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
+        this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
     create: function () {
         // BG

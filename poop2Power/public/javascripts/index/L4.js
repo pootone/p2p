@@ -7,7 +7,6 @@ var L4 = new Phaser.Class({
     },
     init: function () { },
     preload: function () {
-        this.load.image("burger", './images/index/loading/burger.svg');
         this.load.image("l4-bg", "./images/index/l4/l4-bg.png");
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
