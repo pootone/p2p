@@ -17,7 +17,7 @@ var L4 = new Phaser.Class({
         bg = this.add.image(config.width / 2, config.height / 2 - 83, "l4-bg");
 
         let guideContainer = this.add.container();
-        let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(0.95, 0.9);
+        let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
         sideText = this.add.text(0, 0, "點擊沼氣，讓他們進行火力發電", {
             // fontFamily: "",
@@ -27,11 +27,11 @@ var L4 = new Phaser.Class({
         sideText.setOrigin(0.5);
         guideContainer.add(guideTxtBG);
         guideContainer.add(sideText);
-        guideContainer.setPosition(1120+750, 200);
+        guideContainer.setPosition(1600+750, isPortrait ? 190 : 250);
         this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
             this.tweens.add({
                 targets: guideContainer,
-                x: 1120,
+                x: isPortrait ? config.width/2 : 1600,
                 duration: 1100,
                 ease: 'Back.out'
             });

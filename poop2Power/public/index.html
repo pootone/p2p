@@ -15,10 +15,19 @@
       body::-webkit-scrollbar {
         display: none;
       }
+
       body {
+        width: 100vw;
+        height: 100vh;
         margin: 0px;
+      }
+
+      #phaserParent {
         display: flex;
         justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
@@ -50,15 +59,17 @@
       </div>
     </div>
 
+    <div id="phaserParent"></div>
+
     <script>
       let nextBtn;
       const config = {
         type: Phaser.AUTO,
-        width: "1512",
-        height: "899",
+        width: "1920",
+        height: "1080",
         scale: {
-          // mode: Phaser.Scale.Fill,
-          // autoCenter: Phaser.Scale.CENTER_BOTH
+          mode: Phaser.Scale.ENVELOP,
+          parent: "phaserParent",
         },
         physics: {
           default: "arcade",
@@ -79,6 +90,8 @@
       let depth1 = 0.025;
       let depth2 = 0.15;
       let depth3 = 0.3;
+
+      let isPortrait = window.innerHeight > window.innerWidth;
     </script>
     <script src="./javascripts/CornerBTN.js"></script>
   </body>
