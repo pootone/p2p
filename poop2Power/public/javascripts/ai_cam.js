@@ -13,7 +13,7 @@ let dialogObserver = new MutationObserver(function (mutations) {
         if (mutation.addedNodes && mutation.addedNodes.length > 0) {
             setTimeout(function () {
                 scrollToBottom();
-            }, 100);
+            }, 200);
         }
     })
 });
@@ -172,9 +172,9 @@ $().ready(function () {
                         responseData.result.suggest);
 
                     // Show Achievement Model
-                    setTimeout(function () { 
+                    setTimeout(function () {
                         isCloseAwardModal = false;
-                        showAchieveModal() 
+                        showAchieveModal()
                     }, 1500);
                 })
             }
@@ -204,7 +204,7 @@ $().ready(function () {
                         responseData.result.suggest);
 
                     // Show Achievement Model
-                    setTimeout(function () { 
+                    setTimeout(function () {
                         isCloseAwardModal = false;
                         showAchieveModal()
                     }, 1500);
@@ -356,7 +356,7 @@ function appendAwardCongratulation() {
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
     txt.setAttribute("style", "left: 15%;");
     txt.textContent = "恭喜！你得到了";
-    
+
     // Award name
     let button = document.createElement("button");
     button.setAttribute("type", "button");
@@ -367,7 +367,7 @@ function appendAwardCongratulation() {
     button.textContent = "「" + "Burger King" + "」";
     button.onclick = showAchieveModal;
 
-    let reason = document.createTextNode("成就，"+"是利用相機拍下漢堡就可以解鎖的秘密成就"+"。");
+    let reason = document.createTextNode("成就，" + "是利用相機拍下漢堡就可以解鎖的秘密成就" + "。");
 
     txt.appendChild(button);
     txt.appendChild(reason);
@@ -396,7 +396,7 @@ function appendAwardMore() {
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
     txt.setAttribute("style", "left: 15%;");
     txt.textContent = "還有更多有趣、可愛的成就等你解鎖喔！快來看看吧！";
-    
+
     // Go!
     let button = document.createElement("button");
     button.setAttribute("type", "button");
@@ -424,13 +424,13 @@ function appendAwardMore() {
 }
 
 function awardClose() {
-    if(!isCloseAwardModal) {
-        setTimeout(function() {
+    if (!isCloseAwardModal) {
+        setTimeout(function () {
             appendAwardCongratulation();
         }, 300);
-        setTimeout(function() {
+        setTimeout(function () {
             appendAwardMore();
-        }, 1000); 
+        }, 1000);
         isCloseAwardModal = !isCloseAwardModal;
     }
 }
