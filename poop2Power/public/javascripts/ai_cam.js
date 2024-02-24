@@ -157,7 +157,6 @@ $().ready(function () {
                     responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                     console.log("Get response success!");
                     console.log("Res data: ", data);
-                    $("#resContent").text(data.message.content);
                     uploadImg = null;
 
                     mathane = responseData.result.methane;
@@ -190,7 +189,6 @@ $().ready(function () {
                     responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                     console.log("Get response success!");
                     console.log("Res data: ", data);
-                    $("#resContent").text(data.message.content);
 
                     mathane = responseData.result.methane;
                     electricity = responseData.result.electricity;
@@ -447,7 +445,6 @@ function appendLoader() {
     loader.setAttribute("loop", "");
     loader.setAttribute("autoplay", "");
 
-    console.log(loader);
     row.appendChild(loader);
     $("#dialog-container").append(row);
 }
