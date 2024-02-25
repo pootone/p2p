@@ -91,6 +91,7 @@ $().ready(function () {
     setTimeout(function () {
         $("#guide-dialog-1").show();
     }, 2000);
+    // appendLoader(); //TODO
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // showAcheiveModal();
@@ -107,12 +108,11 @@ $().ready(function () {
             uploadImg = file.target.result;
 
             let row = document.createElement("div");
-            row.classList.add("row", "justify-content-end");
+            row.classList.add("row", "justify-content-end", "mb-2");
 
             let container = document.createElement("div");
             container.classList.add("col-6", "col-md-3", "d-flex",
                 "justify-content-center", "align-items-center", "position-relative");
-            container.setAttribute("style", "height: 362px");
 
             let bg = document.createElement("img");
             bg.classList.add("w-100");
@@ -239,7 +239,7 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
 
     // Create a chart
     let row = document.createElement("div")
-    row.classList.add("row", "d-flex");
+    row.classList.add("row", "d-flex", "mb-2", "px-5");
 
     let container = document.createElement("div");
     container.classList.add("col-sm-6", "col-md-4");
@@ -293,7 +293,7 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
 
 function appendAskMsg(inputMsg) {
     let row = document.createElement("div")
-    row.classList.add("row", "d-flex", "justify-content-end", "m-4");
+    row.classList.add("row", "d-flex", "justify-content-end", "m-2");
 
     let container = document.createElement("div");
     container.classList.add("col-6", "col-md-3", "position-relative", "d-flex",
@@ -334,7 +334,7 @@ function appendGetReq(food) {
     txt.innerHTML = "收到！讓我們一起來看看一份" + food + "會有多少甲烷排放量、電力輸出、熱量及便秘風險吧！";
 
     let container = document.createElement("div");
-    container.classList.add("col-sm-11", "col-lg-8", "py-md-3", "px-md-5",
+    container.classList.add("col-sm-11", "col-lg-8", "px-md-5",
         "d-flex", "justify-content-center", "align-items-center", "position-relative");
 
     container.appendChild(bg);
@@ -374,7 +374,7 @@ function appendAwardCongratulation() {
     txt.appendChild(reason);
 
     let container = document.createElement("div");
-    container.classList.add("col-sm-12", "col-lg-7", "py-md-3", "px-md-5",
+    container.classList.add("col-sm-12", "col-lg-7", "px-md-5",
         "d-flex", "justify-content-center", "align-items-center", "position-relative");
 
     container.appendChild(bg);
@@ -410,7 +410,7 @@ function appendAwardMore() {
     button.appendChild(buttonImg);
 
     let container = document.createElement("div");
-    container.classList.add("col-sm-12", "col-lg-7", "py-md-3", "px-md-5",
+    container.classList.add("col-sm-12", "col-lg-7", "px-md-5",
         "d-flex", "justify-content-center", "align-items-center", "position-relative");
 
     container.appendChild(bg);
@@ -438,10 +438,10 @@ function awardClose() {
 
 function appendLoader() {
     let row = document.createElement("div");
-    row.classList.add("row");
+    row.classList.add("row", "px-5");
     row.id = "loader";
     let loader = document.createElement("lottie-player");
-    loader.classList.add("col-md-2");
+    loader.classList.add("col-md-2", "px-0");
     loader.setAttribute("src", "../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json");
     loader.setAttribute("background", "transparent");
     loader.setAttribute("speed", "1");
