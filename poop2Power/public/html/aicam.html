@@ -46,11 +46,11 @@
                 </div>
             </div>
         </div>
-        <div class="row w-100 m-0" style="height: 12%;">
+        <div class="row w-100 m-0" id="nav">
             <div class="col-8 h-100 ps-4 inputBg d-flex align-items-center" style="background-position-x: 20%;"><input class="h-100 p-3 form-control-plaintext fs-5" id="descTxt" type="text" placeholder="輸入..." style="width: 95%; border:0; background: transparent;"></div>
-            <div class="col-2 d-flex justify-content-center align-items-center">
+            <div class="col-2 d-flex justify-content-center align-items-center p-0">
                 <input id="imgFileInput" type="file" capture="environment" accept="image/*" style="display: none;">
-                <label class="w-75" id="upload" for="imgFileInput" style="height: 55%;"></label>
+                <label id="upload" for="imgFileInput"></label>
             </div>
             <div class="col-2 d-flex justify-content-center align-items-center position-relative">
                 <img class="position-absolute w-75" src="../images/AI_Cam/flowers.png" style="top: -80%; left: 10%; object-fit: contain;">
