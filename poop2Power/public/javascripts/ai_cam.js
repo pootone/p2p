@@ -402,11 +402,14 @@ function appendAwardMore() {
     let button = document.createElement("button");
     button.setAttribute("type", "button");
     button.classList.add("position-absolute", "bg-transparent", "border-0");
-    button.style.right = "2%";
-    button.style.bottom = "1%";
+    button.style.left = "45%";
+    button.style.bottom = "-1%";
+    button.style.width = "10%";
     // button.onclick = showAcheiveModal; //TODO
     let buttonImg = document.createElement("img");
+    buttonImg.classList.add("w-100");
     buttonImg.setAttribute("src", "../images/AI_Cam/go.svg");
+    buttonImg.setAttribute("style", "filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));");
     button.appendChild(buttonImg);
 
     let container = document.createElement("div");
@@ -415,12 +418,13 @@ function appendAwardMore() {
 
     container.appendChild(bg);
     container.appendChild(txt);
-    container.appendChild(button);
+    // container.appendChild(button);
 
     let row = document.createElement("div");
-    row.classList.add("row", "w-100", "mb-2");
+    row.classList.add("row", "w-100", "mb-2", "position-relative");
 
     row.appendChild(container);
+    row.appendChild(button);
     $("#dialog-container").append(row);
 }
 
