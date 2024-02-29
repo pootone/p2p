@@ -158,7 +158,7 @@ $().ready(function () {
                     console.log("Res data: ", data);
                     uploadImg = null;
 
-                    mathane = responseData.result.methane;
+                    methane = responseData.result.methane;
                     electricity = responseData.result.electricity;
                     constipate = responseData.result.constipate;
                     calorie = responseData.result.calorie;
@@ -191,7 +191,7 @@ $().ready(function () {
                     console.log("Get response success!");
                     console.log("Res data: ", data);
 
-                    mathane = responseData.result.methane;
+                    methane = responseData.result.methane;
                     electricity = responseData.result.electricity;
                     constipate = responseData.result.constipate;
                     calorie = responseData.result.calorie;
