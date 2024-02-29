@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   // const filePath = __dirname + '/../public/HTML/badge.html';
   // res.sendFile(filePath);
 
-  res.sendFile(path.join(__dirname, 'HTML/aboutUs.html'));
+  res.sendFile(path.join(__dirname, 'html/aboutUs.html'));
 });
 
 module.exports = router;
