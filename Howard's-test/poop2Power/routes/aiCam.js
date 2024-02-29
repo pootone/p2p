@@ -67,12 +67,6 @@ async function gptQueryTxt(desc = null) {
   }
 }
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  // main();
-  res.render('ai_cam');
-});
-
 router.post('/gpt/img', async function (req, res, next) {
   console.log(req.body);
   try {
