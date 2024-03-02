@@ -80,7 +80,7 @@ var L1 = new Phaser.Class({
                                 ldPoop.destroy();
                                 bg = this.add.image(config.width / 2, config.height / 2 - 83, "l1-bg");
 
-                                flower = this.physics.add.sprite(config.width / 2, config.height - 330, "flower").setScale(0.7);
+                                flower = this.physics.add.sprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
                                 flower.anims.create({
                                     key: "flower",
                                     frames: this.anims.generateFrameNumbers('flower', { start: 0, end: 14 }),
@@ -146,7 +146,7 @@ var L1 = new Phaser.Class({
                                         poop.setPosition(dragX, dragY);
                                     });
 
-                                nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
+                                nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
                                 nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
                                     this.scene.start("L2");
                                 });
