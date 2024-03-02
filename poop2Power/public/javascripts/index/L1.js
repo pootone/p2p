@@ -2,6 +2,7 @@ let burger;
 let ldPoop;
 let isStart = true;
 let poop;
+let flower;
 const startState = {
     before: 0,
     ing: 1,
@@ -23,6 +24,7 @@ var L1 = new Phaser.Class({
         this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
+        this.load.spritesheet("flower", './images/index/l1/flower.png', { frameWidth: 700, frameHeight: 1070 });
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
     create: function () {
@@ -71,6 +73,16 @@ var L1 = new Phaser.Class({
                                 burger.destroy();
                                 ldPoop.destroy();
                                 bg = this.add.image(config.width / 2, config.height / 2 - 83, "l1-bg");
+
+                                flower = this.physics.add.sprite(config.width / 2, config.height - 350, "flower").setScale(0.6);
+                                flower.anims.create({
+                                    key: "flower",
+                                    frames: this.anims.generateFrameNumbers('flower', { start: 0, end: 14 }),
+                                    frameRate: 10,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                flower.anims.play('flower');
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
