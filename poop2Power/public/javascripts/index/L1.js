@@ -28,7 +28,7 @@ var L1 = new Phaser.Class({
     init: function () { },
     preload: function () {
         this.load.svg("burger", './images/index/loading/burger.svg');
-        this.load.image("bg-empty", "./images/layout/bg.png");
+        this.load.spritesheet("bg-empty", "./images/layout/bg.png", { frameWidth: 1920, frameHeight: 1080 });
         this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
@@ -54,7 +54,15 @@ var L1 = new Phaser.Class({
     },
     create: function () {
         // BG
-        bg = this.add.image(config.width / 2, config.height / 2, "bg-empty");
+        bg = this.physics.add.staticSprite(config.width / 2, config.height / 2, "bg-empty");
+        bg.setDisplaySize(config.width, config.height);
+        bg.anims.create({
+            key: "bg",
+            frames: this.anims.generateFrameNumbers("bg-empty", { start: 0, end: 7 }),
+            frameRate: 20,
+            repeat: -1
+        });
+        bg.anims.play("bg");
 
         burger = this.physics.add.staticSprite(config.width / 2, config.height / 2 - 100, "burger");
 
@@ -247,8 +255,8 @@ var L1 = new Phaser.Class({
         let pointerDeltaX = lastPointerX - this.input.activePointer.x;
         let pointerDeltaY = lastPointerY - this.input.activePointer.y;
 
-        bg.x += pointerDeltaX * depth1;
-        bg.y += pointerDeltaY * depth1;
+        // bg.x += pointerDeltaX * depth1;
+        // bg.y += pointerDeltaY * depth1;
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
