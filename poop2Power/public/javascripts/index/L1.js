@@ -6,6 +6,11 @@ let flower;
 let pinkFlower;
 let yellowFlower;
 let grass_r;
+let l2_yellow_flower_r;
+let l2_grass_r;
+let l2_grass_c;
+let l2_grass_l;
+
 const startState = {
     before: 0,
     ing: 1,
@@ -28,10 +33,17 @@ var L1 = new Phaser.Class({
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
 
+        // layer 1
         this.load.spritesheet("flower", './images/index/l1/flower.png', { frameWidth: 700, frameHeight: 1070 });
         this.load.spritesheet("pinkFlower_l", "./images/index/l1/pinkFlower_l.png", { frameWidth: 500, frameHeight: 320 });
         this.load.spritesheet("yellowFlower_l", "./images/index/l1/yellowFlower_l.png", { frameWidth: 500, frameHeight: 470 });
         this.load.spritesheet("grass_r", "./images/index/l1/grass_r.png", { frameWidth: 500, frameHeight: 730 });
+
+        // layer 2
+        this.load.spritesheet("l2_yellow_flower_r", "./images/index/l1/l2_yellow_flower_r.png", { frameWidth: 270, frameHeight: 460 });
+        this.load.spritesheet("l2_grass_r", "./images/index/l1/l2_grass_r.png", { frameWidth: 140, frameHeight: 200 });
+        this.load.spritesheet("l2_grass_c", "./images/index/l1/l2_grass_c.png", { frameWidth: 450, frameHeight: 470 });
+        this.load.spritesheet("l2_grass_l", "./images/index/l1/l2_grass_l.png", { frameWidth: 470, frameHeight: 530 });
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
@@ -82,15 +94,57 @@ var L1 = new Phaser.Class({
                                 ldPoop.destroy();
                                 bg = this.add.image(config.width / 2, config.height / 2 - 83, "l1-bg");
 
-                                flower = this.physics.add.sprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
-                                flower.anims.create({
-                                    key: "flower",
-                                    frames: this.anims.generateFrameNumbers('flower', { start: 0, end: 14 }),
-                                    frameRate: 9,
+                                // layer 4
+
+                                // layer 3
+                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
+                                poop.anims.create({
+                                    key: "poop",
+                                    frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 1 }),
+                                    frameRate: 6,
+                                    repeat: -1
+                                });
+                                poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
+                                    .on('drag', (pointer, dragX, dragY) => {
+                                        // 點擊會變成 layer 1
+                                        poop.setPosition(dragX, dragY);
+                                    });
+
+                                // layer 2
+                                l2_yellow_flower_r = this.physics.add.sprite(config.width - 500, config.height - 170, "l2_yellow_flower_r");
+                                l2_yellow_flower_r.anims.create({
+                                    key: "l2_yellow_flower_r",
+                                    frames: this.anims.generateFrameNumbers("l2_yellow_flower_r", { start: 0, end: 14 }),
+                                    frameRate: 8,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                l2_grass_r = this.physics.add.sprite(config.width - 250, config.height - 90, "l2_grass_r");
+                                l2_grass_r.anims.create({
+                                    key: "l2_grass_r",
+                                    frames: this.anims.generateFrameNumbers("l2_grass_r", { start: 0, end: 19 }),
+                                    frameRate: 10,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                l2_grass_c = this.physics.add.sprite(config.width / 2 + 70, config.height - 190, "l2_grass_c").setScale(0.9);
+                                l2_grass_c.anims.create({
+                                    key: "l2_grass_c",
+                                    frames: this.anims.generateFrameNumbers("l2_grass_c", { start: 0, end: 19 }),
+                                    frameRate: 10,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                l2_grass_l = this.physics.add.sprite(50, config.height - 170, "l2_grass_l").setScale(0.9);
+                                l2_grass_l.anims.create({
+                                    key: "l2_grass_l",
+                                    frames: this.anims.generateFrameNumbers("l2_grass_l", { start: 0, end: 19 }),
+                                    frameRate: 10,
                                     yoyo: true,
                                     repeat: -1
                                 });
 
+                                // layer 1
                                 pinkFlower = this.physics.add.sprite(500, config.height - 110, "pinkFlower_l").setScale(0.8);
                                 pinkFlower.anims.create({
                                     key: "pinkFlower_l",
@@ -101,7 +155,7 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
 
-                                yellowFlower = this.physics.add.sprite(0, config.height - 200, "yellowFlower_l").setScale(0.8);
+                                yellowFlower = this.physics.add.sprite(20, config.height - 200, "yellowFlower_l").setScale(0.8);
                                 yellowFlower.anims.create({
                                     key: "yellowFlower_l",
                                     startFrame: 7,
@@ -121,10 +175,23 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
 
+                                flower = this.physics.add.sprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
+                                flower.anims.create({
+                                    key: "flower",
+                                    frames: this.anims.generateFrameNumbers('flower', { start: 0, end: 14 }),
+                                    frameRate: 9,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+
                                 flower.anims.play('flower');
                                 pinkFlower.anims.play('pinkFlower_l');
                                 yellowFlower.anims.play('yellowFlower_l');
                                 grass_r.anims.play('grass_r');
+                                l2_yellow_flower_r.anims.play('l2_yellow_flower_r');
+                                l2_grass_r.anims.play('l2_grass_r');
+                                l2_grass_c.anims.play('l2_grass_c');
+                                l2_grass_l.anims.play('l2_grass_l');
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
@@ -146,18 +213,6 @@ var L1 = new Phaser.Class({
                                         ease: 'Back.out'
                                     });
                                 },);
-
-                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
-                                poop.anims.create({
-                                    key: "poop",
-                                    frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 1 }),
-                                    frameRate: 6,
-                                    repeat: -1
-                                });
-                                poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
-                                    .on('drag', (pointer, dragX, dragY) => {
-                                        poop.setPosition(dragX, dragY);
-                                    });
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
                                 nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
