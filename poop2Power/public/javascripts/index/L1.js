@@ -10,6 +10,7 @@ let l2_yellow_flower_r;
 let l2_grass_r;
 let l2_grass_c;
 let l2_grass_l;
+let l2_static_grass = [];
 
 const startState = {
     before: 0,
@@ -26,7 +27,6 @@ var L1 = new Phaser.Class({
     },
     init: function () { },
     preload: function () {
-        this.load.image("l1-bg", './images/index/l1/l1-bg.png');
         this.load.svg("burger", './images/index/loading/burger.svg');
         this.load.image("bg-empty", "./images/layout/bg.png");
         this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
@@ -44,6 +44,11 @@ var L1 = new Phaser.Class({
         this.load.spritesheet("l2_grass_r", "./images/index/l1/l2_grass_r.png", { frameWidth: 140, frameHeight: 200 });
         this.load.spritesheet("l2_grass_c", "./images/index/l1/l2_grass_c.png", { frameWidth: 450, frameHeight: 470 });
         this.load.spritesheet("l2_grass_l", "./images/index/l1/l2_grass_l.png", { frameWidth: 470, frameHeight: 530 });
+        this.load.image("2g", "./images/index/l1/2g.png");
+        this.load.image("2g2", "./images/index/l1/2g2.png");
+        this.load.image("2g3", "./images/index/l1/2g3.png");
+        this.load.image("2g4", "./images/index/l1/2g4.png");
+
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
@@ -92,7 +97,6 @@ var L1 = new Phaser.Class({
                             onComplete: function () {
                                 burger.destroy();
                                 ldPoop.destroy();
-                                bg = this.add.image(config.width / 2, config.height / 2 - 83, "l1-bg");
 
                                 // layer 4
 
@@ -143,6 +147,12 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l2_static_grass[0] = this.add.image(430, config.height - 50, "2g").setScale(0.2);
+                                l2_static_grass[1] = this.add.image(600, config.height - 50, "2g2").setScale(0.3);
+                                l2_static_grass[2] = this.add.image(1200, config.height - 35, "2g3").setScale(0.2);
+                                l2_static_grass[3] = this.add.image(900, config.height - 30, "2g4").setScale(0.2);
+                                l2_static_grass[4] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
+                                l2_static_grass[4].flipX = true;
 
                                 // layer 1
                                 pinkFlower = this.physics.add.sprite(500, config.height - 110, "pinkFlower_l").setScale(0.8);
