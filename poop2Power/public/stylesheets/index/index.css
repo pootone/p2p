@@ -46,6 +46,9 @@ p {
 
 
 /* trans */
+.badgeContain{
+    margin-left: 100px; position: absolute; left: 0;
+}
 .genie {
     position: absolute;
     top: 5%; /* 调整垂直位置 */
@@ -66,4 +69,8 @@ footer {
     /* background-color: #f8f9fa; */
     padding: 30px 0;
     text-align: center;
+}
+
+@media (max-width: 768px) { 
+    
 }
