@@ -6,11 +6,17 @@ let flower;
 let pinkFlower;
 let yellowFlower;
 let grass_r;
+let l1_static_flower = [];
 let l2_yellow_flower_r;
 let l2_grass_r;
 let l2_grass_c;
 let l2_grass_l;
 let l2_static_grass = [];
+let l3_pink_flower;
+let l3_grass_r;
+let l3_grass_l;
+let l3_static_flower = [];
+let l3_static_grass = [];
 
 const startState = {
     before: 0,
@@ -49,6 +55,18 @@ var L1 = new Phaser.Class({
         this.load.image("2g3", "./images/index/l1/2g3.png");
         this.load.image("2g4", "./images/index/l1/2g4.png");
 
+        // layer 3
+        this.load.spritesheet("l3_pink_flower", "./images/index/l1/l3_pink_flower.png", { frameWidth: 500, frameHeight: 330 });
+        this.load.spritesheet("l3_grass_r", "./images/index/l1/l3_grass_r.png", { frameWidth: 250, frameHeight: 340 });
+        this.load.spritesheet("l3_grass_l", "./images/index/l1/l3_grass_l.png", { frameWidth: 100, frameHeight: 150 });
+        this.load.image("3f", "./images/index/l1/3f.png");
+        this.load.image("3f2", "./images/index/l1/3f2.png");
+        this.load.image("3g", "./images/index/l1/3g.png");
+        this.load.image("3g2", "./images/index/l1/3g2.png");
+        this.load.image("3g3", "./images/index/l1/3g3.png");
+        this.load.image("3g4", "./images/index/l1/3g4.png");
+        this.load.image("3g5", "./images/index/l1/3g5.png");
+        this.load.image("3g6", "./images/index/l1/3g6.png");
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
@@ -109,6 +127,41 @@ var L1 = new Phaser.Class({
                                 // layer 4
 
                                 // layer 3
+                                l3_static_grass[0] = this.add.image(config.width - 470, config.height - 30, "3g").setScale(0.2);
+                                // TODO
+                                l3_static_grass[1] = this.add.image(250, config.height - 30, "3g1").setScale(0.2);
+                                l3_static_grass[2] = this.add.image(250, config.height - 30, "3g2").setScale(0.2);
+                                l3_static_grass[3] = this.add.image(250, config.height - 30, "3g3").setScale(0.2);
+                                l3_static_grass[4] = this.add.image(250, config.height - 30, "3g4").setScale(0.2);
+                                l3_static_grass[5] = this.add.image(250, config.height - 30, "3g5").setScale(0.2);
+                                l3_static_grass[6] = this.add.image(250, config.height - 30, "3g6").setScale(0.2);
+                                l3_static_grass[7] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
+                                l3_static_grass[7].flipX = true;
+                                l3_static_flower[0] = this.add.image(250, config.height - 60, "3f").setScale(0.3);
+                                l3_grass_l = this.physics.add.sprite(config.width / 2 - 170, config.height - 60, "l3_grass_l").setScale(0.8);
+                                l3_grass_l.anims.create({
+                                    key: "l3_grass_l",
+                                    frames: this.anims.generateFrameNumbers("l3_grass_l", { start: 0, end: 29 }),
+                                    frameRate: 15,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                l3_grass_r = this.physics.add.sprite(config.width - 400, config.height - 130, "l3_grass_r").setScale(0.8);
+                                l3_grass_r.anims.create({
+                                    key: "l3_grass_r",
+                                    frames: this.anims.generateFrameNumbers("l3_grass_r", { start: 0, end: 19 }),
+                                    frameRate: 8,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+                                l3_pink_flower = this.physics.add.sprite(config.width - 290, config.height - 100, "l3_pink_flower").setScale(0.8);
+                                l3_pink_flower.anims.create({
+                                    key: "l3_pink_flower",
+                                    frames: this.anims.generateFrameNumbers("l3_pink_flower", { start: 0, end: 14 }),
+                                    frameRate: 8,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
                                 poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
                                 poop.anims.create({
                                     key: "poop",
@@ -131,7 +184,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
-                                l2_grass_r = this.physics.add.sprite(config.width - 250, config.height - 90, "l2_grass_r");
+                                l2_grass_r = this.physics.add.sprite(config.width - 200, config.height - 90, "l2_grass_r");
                                 l2_grass_r.anims.create({
                                     key: "l2_grass_r",
                                     frames: this.anims.generateFrameNumbers("l2_grass_r", { start: 0, end: 19 }),
@@ -159,10 +212,9 @@ var L1 = new Phaser.Class({
                                 l2_static_grass[1] = this.add.image(600, config.height - 50, "2g2").setScale(0.3);
                                 l2_static_grass[2] = this.add.image(1200, config.height - 35, "2g3").setScale(0.2);
                                 l2_static_grass[3] = this.add.image(900, config.height - 30, "2g4").setScale(0.2);
-                                l2_static_grass[4] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
-                                l2_static_grass[4].flipX = true;
 
                                 // layer 1
+                                l1_static_flower[0] = this.add.image(config.width / 2 + 210, config.height - 90, "3f2").setScale(0.3);
                                 pinkFlower = this.physics.add.sprite(500, config.height - 110, "pinkFlower_l").setScale(0.8);
                                 pinkFlower.anims.create({
                                     key: "pinkFlower_l",
@@ -210,6 +262,9 @@ var L1 = new Phaser.Class({
                                 l2_grass_r.anims.play('l2_grass_r');
                                 l2_grass_c.anims.play('l2_grass_c');
                                 l2_grass_l.anims.play('l2_grass_l');
+                                l3_pink_flower.anims.play('l3_pink_flower');
+                                l3_grass_r.anims.play('l3_grass_r');
+                                l3_grass_l.anims.play('l3_grass_l');
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
