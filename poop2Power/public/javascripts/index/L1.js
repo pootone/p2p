@@ -59,7 +59,7 @@ var L1 = new Phaser.Class({
         bg.anims.create({
             key: "bg",
             frames: this.anims.generateFrameNumbers("bg-empty", { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 8,
             repeat: -1
         });
         bg.anims.play("bg");
