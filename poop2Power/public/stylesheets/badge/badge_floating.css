@@ -7,7 +7,9 @@ p{
     opacity: 0.5; /* Adjust the opacity as needed */
     background-color: rgba(0, 0, 0, 0); /* Adjust the color and alpha as needed */
 }
-
+.modal-content{
+    border: 0;
+}
 .floating-window-container {
     position: fixed;
     top: 50%;
