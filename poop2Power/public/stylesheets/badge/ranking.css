@@ -64,8 +64,6 @@ p {
     overflow: auto;
     max-height: 55vh;
     margin-left: 10%;
-    margin-top: 10px;
-    z-index: 0;
 }
 .rank4-10::-webkit-scrollbar {
     display: none;
