@@ -5,6 +5,7 @@ let poop;
 let flower;
 let pinkFlower;
 let yellowFlower;
+let grass_r;
 const startState = {
     before: 0,
     ing: 1,
@@ -30,6 +31,7 @@ var L1 = new Phaser.Class({
         this.load.spritesheet("flower", './images/index/l1/flower.png', { frameWidth: 700, frameHeight: 1070 });
         this.load.spritesheet("pinkFlower_l", "./images/index/l1/pinkFlower_l.png", { frameWidth: 500, frameHeight: 320 });
         this.load.spritesheet("yellowFlower_l", "./images/index/l1/yellowFlower_l.png", { frameWidth: 500, frameHeight: 470 });
+        this.load.spritesheet("grass_r", "./images/index/l1/grass_r.png", { frameWidth: 500, frameHeight: 730 });
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
     },
@@ -109,9 +111,20 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
 
+                                grass_r = this.physics.add.sprite(config.width - 1, config.height - 200, "grass_r").setScale(0.8);
+                                grass_r.anims.create({
+                                    key: "grass_r",
+                                    startFrame: 7,
+                                    frames: this.anims.generateFrameNumbers('grass_r', { start: 0, end: 19 }),
+                                    frameRate: 8,
+                                    yoyo: true,
+                                    repeat: -1
+                                });
+
                                 flower.anims.play('flower');
                                 pinkFlower.anims.play('pinkFlower_l');
                                 yellowFlower.anims.play('yellowFlower_l');
+                                grass_r.anims.play('grass_r');
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
