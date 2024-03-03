@@ -111,7 +111,7 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
 
-                                grass_r = this.physics.add.sprite(config.width - 1, config.height - 200, "grass_r").setScale(0.8);
+                                grass_r = this.physics.add.sprite(config.width - 1, config.height - 200, "grass_r").setScale(0.7);
                                 grass_r.anims.create({
                                     key: "grass_r",
                                     startFrame: 7,
