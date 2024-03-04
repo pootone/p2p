@@ -128,16 +128,15 @@ var L1 = new Phaser.Class({
 
                                 // layer 3
                                 l3_static_grass[0] = this.add.image(config.width - 470, config.height - 30, "3g").setScale(0.2);
-                                // TODO
-                                l3_static_grass[1] = this.add.image(250, config.height - 30, "3g1").setScale(0.2);
-                                l3_static_grass[2] = this.add.image(250, config.height - 30, "3g2").setScale(0.2);
-                                l3_static_grass[3] = this.add.image(250, config.height - 30, "3g3").setScale(0.2);
-                                l3_static_grass[4] = this.add.image(250, config.height - 30, "3g4").setScale(0.2);
-                                l3_static_grass[5] = this.add.image(250, config.height - 30, "3g5").setScale(0.2);
-                                l3_static_grass[6] = this.add.image(250, config.height - 30, "3g6").setScale(0.2);
-                                l3_static_grass[7] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
-                                l3_static_grass[7].flipX = true;
-                                l3_static_flower[0] = this.add.image(250, config.height - 60, "3f").setScale(0.3);
+                                l3_static_grass[1] = this.add.image(config.width / 2 - 100, config.height - 30, "3g2").setScale(0.2);
+                                l3_static_grass[2] = this.add.image(config.width / 2 + 370, config.height - 50, "3g3").setScale(0.2);
+                                l3_static_grass[3] = this.add.image(config.width / 2 + 320, config.height - 70, "3g4").setScale(0.2);
+                                l3_static_grass[4] = this.add.image(1780, config.height - 30, "3g5").setScale(0.3);
+                                l3_static_grass[5] = this.add.image(1580, config.height - 15, "3g6").setScale(0.2);
+                                // l3_static_grass[6] = this.add.image(250, config.height/2 - 30, "3g1").setScale(0.2);
+                                l3_static_grass[6] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
+                                l3_static_grass[6].flipX = true;
+                                l3_static_flower[0] = this.add.image(320, config.height - 60, "3f").setScale(0.3);
                                 l3_grass_l = this.physics.add.sprite(config.width / 2 - 170, config.height - 60, "l3_grass_l").setScale(0.8);
                                 l3_grass_l.anims.create({
                                     key: "l3_grass_l",
@@ -215,7 +214,7 @@ var L1 = new Phaser.Class({
 
                                 // layer 1
                                 l1_static_flower[0] = this.add.image(config.width / 2 + 210, config.height - 90, "3f2").setScale(0.3);
-                                pinkFlower = this.physics.add.sprite(500, config.height - 110, "pinkFlower_l").setScale(0.8);
+                                pinkFlower = this.physics.add.sprite(550, config.height - 110, "pinkFlower_l").setScale(0.8);
                                 pinkFlower.anims.create({
                                     key: "pinkFlower_l",
                                     startFrame: 7,
@@ -225,7 +224,7 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
 
-                                yellowFlower = this.physics.add.sprite(20, config.height - 200, "yellowFlower_l").setScale(0.8);
+                                yellowFlower = this.physics.add.sprite(70, config.height - 200, "yellowFlower_l").setScale(0.8);
                                 yellowFlower.anims.create({
                                     key: "yellowFlower_l",
                                     startFrame: 7,
