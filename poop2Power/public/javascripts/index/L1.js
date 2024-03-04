@@ -145,13 +145,13 @@ var L1 = new Phaser.Class({
                                 ldPoop.destroy();
 
                                 // layer 5
-                                l5_static_grass[0] = this.add.image(20, config.height -40, "5g").setScale(0.25);
+                                l5_static_grass[0] = this.add.image(20, config.height - 40, "5g").setScale(0.25);
                                 l5_static_flower[1] = this.add.image(980, config.height - 120, "5f").setScale(0.23);;
                                 l5_yellow_flower = this.physics.add.sprite(390, config.height - 250, "l5_yellow_flower").setScale(0.8);
                                 l5_yellow_flower.anims.create({
                                     key: "l5_yellow_flower",
                                     frames: this.anims.generateFrameNumbers("l5_yellow_flower", { start: 0, end: 19 }),
-                                    frameRate: 15,
+                                    frameRate: 5,
                                     yoyo: true,
                                     repeat: -1
                                 });
@@ -164,7 +164,7 @@ var L1 = new Phaser.Class({
                                 l4_yellow_flower.anims.create({
                                     key: "l4_yellow_flower",
                                     frames: this.anims.generateFrameNumbers("l4_yellow_flower", { start: 0, end: 14 }),
-                                    frameRate: 15,
+                                    frameRate: 7.8,
                                     yoyo: true,
                                     repeat: -1
                                 });
@@ -172,7 +172,7 @@ var L1 = new Phaser.Class({
                                 l4_white_flower.anims.create({
                                     key: "l4_white_flower",
                                     frames: this.anims.generateFrameNumbers("l4_white_flower", { start: 0, end: 19 }),
-                                    frameRate: 15,
+                                    frameRate: 10,
                                     yoyo: true,
                                     repeat: -1
                                 });
@@ -219,12 +219,13 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
-                                    .on('drag', (pointer, dragX, dragY) => {
-                                        // 點擊會變成 layer 1
-                                        poop.setPosition(dragX, dragY);
-                                    });
-
+                                .on('drag', (pointer, dragX, dragY) => {
+                                    // 點擊會變成 layer 1
+                                    poop.setPosition(dragX, dragY);
+                                });
+                                
                                 // layer 2
+                                l1_static_flower[0] = this.add.image(config.width / 2 + 230, config.height - 90, "3f2").setScale(0.25);
                                 l2_yellow_flower_r = this.physics.add.sprite(config.width - 540, config.height - 170, "l2_yellow_flower_r").setScale(0.8);
                                 l2_yellow_flower_r.anims.create({
                                     key: "l2_yellow_flower_r",
@@ -263,7 +264,6 @@ var L1 = new Phaser.Class({
                                 l2_static_grass[3] = this.add.image(900, config.height - 30, "2g4").setScale(0.2);
 
                                 // layer 1
-                                l1_static_flower[0] = this.add.image(config.width / 2 + 210, config.height - 90, "3f2").setScale(0.3);
                                 pinkFlower = this.physics.add.sprite(550, config.height - 110, "pinkFlower_l").setScale(0.8);
                                 pinkFlower.anims.create({
                                     key: "pinkFlower_l",
