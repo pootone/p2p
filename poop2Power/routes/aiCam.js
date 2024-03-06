@@ -6,7 +6,8 @@ require("dotenv").config();
 
 const OpenAI = require('openai');
 
-const openai = new OpenAI({ apiKey: process.env.API_KEY });
+const openai = new OpenAI({ apiKey: process.env.GPT_IMG_API_KEY });
+const openaiTxt = new OpenAI({ apiKey: process.env.GPT_TXT_API_KEY });
 
 let responseStr = "wonderland";
 
@@ -45,7 +46,7 @@ async function gptQuery(img = '', desc = null) {
 async function gptQueryTxt(desc = null) {
   try {
     console.log("Req data:"+desc);
-    const response = await openai.chat.completions.create({
+    const response = await openaiTxt.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
