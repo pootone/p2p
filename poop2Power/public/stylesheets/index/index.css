@@ -75,6 +75,14 @@ footer {
     .transBG {
         display: none;
     }
+    .container {
+        background-image: url('../../images/index-old/phoneBG.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100vh; /* Ensure the container takes the full height of the viewport */
+    }
+
     .badgeContain {
         display: flex;
         flex-wrap: wrap;
@@ -89,14 +97,19 @@ footer {
         margin-bottom: 10px;
         display: flex;
         align-items: center;
-        justify-content: center; 
     }
 
     .B1, .B2, .B3, .B4, .B5 {
-        margin-top: 0px;
+        margin-top: 20px;
+        
     }
     .B1 img, .B2 img, .B3 img, .B4 img, .B5 img {
-        max-width: 50%;
+        max-width: 40%;
+        height: auto;
+        pointer-events: none;
+    }
+    .B1 p, .B2 p, .B3 p, .B4 p, .B5 p {
+        font-size: 25px;
         height: auto;
     }
 }
