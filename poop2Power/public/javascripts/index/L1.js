@@ -42,7 +42,7 @@ var L1 = new Phaser.Class({
     preload: function () {
         this.load.svg("burger", './images/index/loading/burger.svg');
         this.load.spritesheet("bg-empty", "./images/layout/bg.png", { frameWidth: 1920, frameHeight: 1080 });
-        this.load.spritesheet("poop", "./images/index/l1/poop.svg", { frameWidth: 109, frameHeight: 75.01 });
+        this.load.spritesheet("poop", "./images/index/l1/poop.png", { frameWidth: 250, frameHeight: 180 });
         this.load.spritesheet("loading-poop", './images/index/loading/loading-spritesheet.svg', { frameWidth: 217, frameHeight: 147 });
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
 
@@ -211,19 +211,19 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
-                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.8);
+                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
                                 poop.anims.create({
                                     key: "poop",
-                                    frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 1 }),
-                                    frameRate: 6,
+                                    frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 29 }),
+                                    frameRate: 12,
                                     repeat: -1
                                 });
                                 poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
-                                .on('drag', (pointer, dragX, dragY) => {
-                                    // 點擊會變成 layer 1
-                                    poop.setPosition(dragX, dragY);
-                                });
-                                
+                                    .on('drag', (pointer, dragX, dragY) => {
+                                        // 點擊會變成 layer 1
+                                        poop.setPosition(dragX, dragY);
+                                    });
+
                                 // layer 2
                                 l1_static_flower[0] = this.add.image(config.width / 2 + 230, config.height - 90, "3f2").setScale(0.25);
                                 l2_yellow_flower_r = this.physics.add.sprite(config.width - 540, config.height - 170, "l2_yellow_flower_r").setScale(0.8);
@@ -317,6 +317,7 @@ var L1 = new Phaser.Class({
                                 l4_white_flower.anims.play('l4_white_flower');
                                 l4_yellow_flower.anims.play('l4_yellow_flower');
                                 l5_yellow_flower.anims.play('l5_yellow_flower');
+                                poop.anims.play("poop");
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
