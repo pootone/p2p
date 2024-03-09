@@ -94,6 +94,7 @@ $().ready(function () {
     // appendLoader(); //TODO
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
+    // appendImgCheck("test"); //TODO
     // showAcheiveModal();
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
@@ -158,24 +159,9 @@ $().ready(function () {
                     console.log("Res data: ", data);
                     uploadImg = null;
 
-                    methane = responseData.result.methane;
-                    electricity = responseData.result.electricity;
-                    constipate = responseData.result.constipate;
-                    calorie = responseData.result.calorie;
+                    responseData.food = payload.description == "" ? responseData.food : payload.description;
 
-                    appendChart(methane,
-                        electricity,
-                        constipate,
-                        calorie,
-                        responseData.result.suggest);
-
-                    $("#modalTitle").text("您消耗的" + (payload.description == "" ? responseData.food : payload.description) + "......");
-
-                    // Show Achievement Model
-                    setTimeout(function () {
-                        isCloseAwardModal = false;
-                        showAchieveModal()
-                    }, 1500);
+                    appendImgCheck(responseData.food);
                 })
             }
             // 若只有文字則送 gpt-3.5-turbo
@@ -321,6 +307,139 @@ function appendAskMsg(inputMsg) {
     row.appendChild(container);
 
     // Add msg to the dialog block
+    $("#dialog-container").append(row);
+}
+
+function appendImgCheck(food) {
+    // Check dialog
+    let bg = document.createElement("img");
+    bg.classList.add("w-100");
+    bg.setAttribute("src", "../images/AI_Cam/imgCheck.svg");
+
+    let txt = document.createElement("p");
+    txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
+    txt.setAttribute("style", "left: 25%");
+    txt.innerHTML = "請問您吃的是" + food + "嗎？";
+
+    let container = document.createElement("div");
+    container.classList.add("col-sm-12", "col-lg-4", "px-md-5",
+        "d-flex", "justify-content-center", "align-items-center", "position-relative");
+
+    container.appendChild(bg);
+    container.appendChild(txt);
+
+    let row = document.createElement("div");
+    row.classList.add("row", "w-100", "mb-2");
+
+    row.appendChild(container);
+
+    $("#dialog-container").append(row);
+
+    // Buttons
+    container = document.createElement("div");
+    container.classList.add("col-sm-12", "col-lg-4", "px-md-5",
+        "d-flex", "justify-content-end", "position-relative");
+
+    // Yes
+    let btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.classList.add("bg-transparent", "border-0", "position-relative", "imgYes", "p-0", "m-1");
+    btn.setAttribute("id", "imgYes");
+    btn.onclick = function () { imgResCorrect() };
+
+    bg = document.createElement("img");
+    bg.classList.add("imgCheckBtn");
+    txt = document.createElement("p");
+    txt.classList.add("position-absolute");
+    txt.style = "top: 22%; left: 39%";
+    txt.innerHTML = "是";
+
+    btn.appendChild(bg);
+    btn.appendChild(txt);
+    container.appendChild(btn);
+
+    // No
+    btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.classList.add("bg-transparent", "border-0", "position-relative", "imgNo", "p-0", "m-1");
+    btn.setAttribute("id", "imgNo");
+    btn.onclick = function () { appendRetryMsg() };
+
+    bg = document.createElement("img");
+    bg.classList.add("imgCheckBtn");
+    txt = document.createElement("p");
+    txt.classList.add("position-absolute");
+    txt.style = "top: 22%; left: 39%";
+    txt.innerHTML = "否";
+
+    btn.appendChild(bg);
+    btn.appendChild(txt);
+    container.appendChild(btn);
+
+    row = document.createElement("div");
+    row.classList.add("row", "w-100", "mb-2");
+
+    row.appendChild(container);
+
+    $("#dialog-container").append(row);
+}
+
+function imgResCorrect() {
+    $("#imgNo").removeClass("imgNo");
+    $("#imgYes").removeClass("imgYes");
+    $("#imgYes img:nth-child(1)").attr("src", "../images/AI_Cam/yes.svg");
+    $("#imgNo img:nth-child(1)").attr("src", "../images/AI_Cam/no.svg");
+    $("#imgNo").prop("disabled", true);
+    $("#imgYes").prop("disabled", true);
+    $("#imgYes").removeAttr("id");
+
+    appendGetReq(responseData.food);
+    appendChart(responseData.result.methane,
+        responseData.result.electricity,
+        responseData.result.constipate,
+        responseData.result.calorie,
+        responseData.result.suggest);
+
+    $("#modalTitle").text("您消耗的" + responseData.food + "......");
+
+    // Show Achievement Model
+    setTimeout(function () {
+        isCloseAwardModal = false;
+        showAchieveModal();
+    }, 1500);
+}
+
+function appendRetryMsg() {
+    $("#imgNo").removeClass("imgNo");
+    $("#imgYes").removeClass("imgYes");
+    $("#imgYes img:nth-child(1)").attr("src", "../images/AI_Cam/no.svg");
+    $("#imgNo img:nth-child(1)").attr("src", "../images/AI_Cam/yes.svg");
+    $("#imgNo").prop("disabled", true);
+    $("#imgYes").prop("disabled", true);
+    $("#imgNo").removeAttr("id");
+
+    console.log("Not correct food");
+    let bg = document.createElement("img");
+    bg.classList.add("w-100");
+    bg.setAttribute("src", "../images/AI_Cam/imgCheck.svg");
+
+    let txt = document.createElement("p");
+    txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
+    txt.setAttribute("style", "text-align: center; left: 15%");
+    txt.innerHTML = "請再試一次！";
+
+    let container = document.createElement("div");
+    container.classList.add("col-sm-11", "col-lg-3", "px-md-5",
+        "d-flex", "justify-content-center", "align-items-center", "position-relative");
+
+    container.appendChild(bg);
+    container.appendChild(txt);
+
+    let row = document.createElement("div");
+    row.classList.add("row", "w-100", "mb-2");
+
+    row.appendChild(container);
+
     $("#dialog-container").append(row);
 }
 

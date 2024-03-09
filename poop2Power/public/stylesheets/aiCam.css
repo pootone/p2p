@@ -8,6 +8,23 @@ h3 {
     line-height: normal;
 }
 
+/* Yes, No button */
+.imgYes>p, .imgNo>p{
+    color: #F2EFE8;
+}
+
+.imgYes>img , .imgNo>img{
+    content: url(../images/AI_Cam/no.svg);
+}
+
+.imgYes:hover>p, .imgNo:hover>p{
+    color: #313131;
+}
+
+.imgYes:hover>img, .imgNo:hover>img{
+    content: url(../images/AI_Cam/yes.svg);
+}
+
 #dialog-container::-webkit-scrollbar {
     display: none;
 }
