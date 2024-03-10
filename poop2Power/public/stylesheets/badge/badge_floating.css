@@ -92,9 +92,16 @@ p {
 }
 
 /*當無紀錄*/
-.lockBox{
-    width: 90%; height: auto;
+.lockBox {
+    width: 90%;
+    height: auto;
 }
+
+.lockTextBox{
+    width: 90%;
+    height: auto;
+}
+
 .lock-image {
     position: absolute;
     top: 50%;
@@ -143,19 +150,22 @@ p {
         border-radius: 10px;
         padding: 20px;
     }
-    .info_suggest img, .record_img {
+
+    .info_suggest img,
+    .record_img {
         width: 40%;
         height: auto;
         margin: 20px;
     }
-    
-.floating-window-close-btn {
-    position: absolute;
-    top: -10px;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-}
+
+    .floating-window-close-btn {
+        position: absolute;
+        top: -10px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+    }
+
     .window_container {
         padding: 12px;
         overflow-y: auto;
@@ -166,30 +176,31 @@ p {
         max-width: 90%;
         margin: 0px auto;
     }
-    .title{
+
+    .title {
         font-size: 15px;
     }
-    .lockBox{
-        width: 60%; height: auto;
+
+    .lockBox {
+        width: 30%;
+        height: auto;
+        transform: translate(30%, 0%);
     }
-    .lockTextBox{
-        width: 60%; height: auto;
+
+    .lockTextBox {
+        width: 30%;
+        height: auto;
         transform: translate(30%, 50%);
     }
+
     .lock-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(50%, -50%);
-        width: 10%;
+        display: none;
     }
-    
+
     .lock_word {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-30%, -50%);
+        transform: translate(-140%, -50%);
         color: white;
-        font-size: 14px;
+        font-size: 10px;
     }
 }
