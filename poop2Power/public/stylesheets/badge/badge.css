@@ -12,7 +12,7 @@ p {
     justify-content: space-between;
     align-items: center;
 }
-.header .name {
+.header .name p{
     font-family: 'Grandstander';
     font-style: normal;
     font-size: 50px;
@@ -22,11 +22,8 @@ p {
 }
 .header .personal-photo img {
     width: 100px;
-    /* 根据需要调整图片的大小 */
     height: auto;
-    /* 保持宽高比 */
     margin-right: 110px;
-    /* 根据需要调整文字和图片之间的间距 */
 }
 
 body {
@@ -83,9 +80,6 @@ body::-webkit-scrollbar {
     animation: fadeInAndMoveDown 1s ease forwards;
 }
 
-.mid {
-    display: flex;
-}
 .mid img {
     width: 150px;
     height: auto;
@@ -143,6 +137,56 @@ body::-webkit-scrollbar {
     display: none;
     transition: all 0.3s ease;
 }
+
+@media (max-width: 768px) {
+    .aquarium img {
+        display: none;
+    }
+    .header {
+        margin-top: 10px;
+        position: relative;
+        text-align: center; /* Optional: Center content text */
+    }
+    .header .name p {
+        font-size: 22px;
+        margin-top: 60px; /* Adjust the margin-top value as needed */
+    }
+    .header .personal-photo {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .header .personal-photo img {
+        width: 70px;
+        height: auto;
+        margin-right: 0;
+    }
+    .mid img{
+        display: none;
+    }
+
+    .badge .row {
+        flex-direction: column;
+    }
+
+    .badge .col-4 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px; /* Adjust the margin as needed */
+    }
+
+    .badge .col-8 {
+        width: 100%;
+    }
+
+    .badge .row > div {
+        width: 100%;
+        margin-bottom: 20px; /* Adjust the margin as needed */
+    }
+}
+
+
 
 
 footer {
