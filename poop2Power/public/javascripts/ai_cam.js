@@ -82,6 +82,7 @@ let chartConfig = {
 };
 
 $().ready(function () {
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) {});
     // Auto scroll to bottom, when append content to the container
     var dialogContainer = document.getElementById('dialog-container');
     dialogObserver.observe(dialogContainer, { childList: true });

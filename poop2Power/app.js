@@ -19,6 +19,7 @@ var indexRouter = require('./routes/index');
 var aiCamRouter = require('./routes/aiCam');
 var usersRouter = require('./routes/users');
 var aboutUsRouter = require('./routes/aboutUs');
+var wakeRouter = require('./routes/wake');
 
 var app = express();
 app.use(cors(corsOptions));
@@ -37,6 +38,7 @@ app.use('/index', indexRouter);
 app.use('/aicam', aiCamRouter);
 app.use('/users', usersRouter);
 app.use('/aboutUs', aboutUsRouter);
+app.use("/wake", wakeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
