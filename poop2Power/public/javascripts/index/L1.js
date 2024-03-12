@@ -155,7 +155,9 @@ var L1 = new Phaser.Class({
 
                                 // layer 5
                                 l5_static_grass[0] = this.add.image(20, config.height - 40, "5g").setScale(0.25);
-                                l5_static_flower[1] = this.add.image(980, config.height - 120, "5f").setScale(0.23);;
+                                l5_static_grass[0].depth = 1;
+                                l5_static_flower[0] = this.add.image(980, config.height - 120, "5f").setScale(0.23);
+                                l5_static_flower[0].depth = 1;
                                 l5_yellow_flower = this.physics.add.sprite(390, config.height - 250, "l5_yellow_flower").setScale(0.8);
                                 l5_yellow_flower.anims.create({
                                     key: "l5_yellow_flower",
@@ -164,11 +166,16 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l5_yellow_flower.depth = 1;
 
                                 // layer 4
                                 l4_static_grass[0] = this.add.image(700, config.height - 30, "4g").setScale(0.25);
                                 l4_static_grass[1] = this.add.image(1280, config.height - 30, "4g2").setScale(0.25);
+                                l4_static_grass.forEach(element => {
+                                    element.depth = 2;
+                                });
                                 l4_static_flower[0] = this.add.image(750, config.height - 60, "4f").setScale(0.25);
+                                l4_static_flower[0].depth = 2;
                                 l4_yellow_flower = this.physics.add.sprite(1450, 850, "l4_yellow_flower").setScale(0.75);
                                 l4_yellow_flower.anims.create({
                                     key: "l4_yellow_flower",
@@ -177,6 +184,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l4_yellow_flower.depth = 2;
                                 l4_white_flower = this.physics.add.sprite(config.width - 280, 700, "l4_white_flower").setScale(0.75);
                                 l4_white_flower.anims.create({
                                     key: "l4_white_flower",
@@ -185,6 +193,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l4_white_flower.depth = 2;
 
                                 // layer 3
                                 l3_static_grass[0] = this.add.image(config.width - 435, config.height - 30, "3g").setScale(0.15);
@@ -195,7 +204,11 @@ var L1 = new Phaser.Class({
                                 l3_static_grass[5] = this.add.image(1630, config.height - 10, "3g6").setScale(0.2);
                                 l3_static_grass[6] = this.add.image(250, config.height - 30, "2g4").setScale(0.2);
                                 l3_static_grass[6].flipX = true;
+                                l3_static_grass.forEach(element => {
+                                    element.depth = 3;
+                                });
                                 l3_static_flower[0] = this.add.image(390, config.height - 60, "3f").setScale(0.2);
+                                l3_static_flower[0].depth = 3;
                                 l3_grass_l = this.physics.add.sprite(config.width / 2 - 170, config.height - 60, "l3_grass_l").setScale(0.8);
                                 l3_grass_l.anims.create({
                                     key: "l3_grass_l",
@@ -204,6 +217,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l3_grass_l.depth = 3;
                                 l3_grass_r = this.physics.add.sprite(config.width - 350, config.height - 130, "l3_grass_r").setScale(0.8);
                                 l3_grass_r.anims.create({
                                     key: "l3_grass_r",
@@ -212,6 +226,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l3_grass_r.depth = 3;
                                 l3_pink_flower = this.physics.add.sprite(config.width - 175, config.height - 110, "l3_pink_flower").setScale(0.8);
                                 l3_pink_flower.anims.create({
                                     key: "l3_pink_flower",
@@ -220,6 +235,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l3_pink_flower.depth = 3;
                                 poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
                                 poop.anims.create({
                                     key: "poop",
@@ -232,13 +248,14 @@ var L1 = new Phaser.Class({
                                         // Change layer to top
                                         poop.depth = 999;
                                         poop.setPosition(dragX, dragY);
+                                    })
+                                    .on('dragend', (pointer, dragX, dragY) => {
+                                        poop.depth = 3;
                                     });
-                                // .on('dragend', (pointer, dragX, dragY) => {
-                                //     poop.depth = 0;
-                                // });
 
                                 // layer 2
                                 l1_static_flower[0] = this.add.image(config.width / 2 + 230, config.height - 90, "3f2").setScale(0.25);
+                                l1_static_flower[0].depth = 4;
                                 l2_yellow_flower_r = this.physics.add.sprite(config.width - 540, config.height - 170, "l2_yellow_flower_r").setScale(0.8);
                                 l2_yellow_flower_r.anims.create({
                                     key: "l2_yellow_flower_r",
@@ -247,6 +264,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l2_yellow_flower_r.depth = 4;
                                 l2_grass_r = this.physics.add.sprite(config.width - 230, config.height - 80, "l2_grass_r").setScale(0.8);
                                 l2_grass_r.anims.create({
                                     key: "l2_grass_r",
@@ -255,6 +273,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l2_grass_r.depth = 4;
                                 l2_grass_c = this.physics.add.sprite(config.width / 2 + 70, config.height - 190, "l2_grass_c").setScale(0.9);
                                 l2_grass_c.anims.create({
                                     key: "l2_grass_c",
@@ -263,6 +282,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l2_grass_c.depth = 4;
                                 l2_grass_l = this.physics.add.sprite(175, config.height - 170, "l2_grass_l").setScale(0.85);
                                 l2_grass_l.anims.create({
                                     key: "l2_grass_l",
@@ -271,10 +291,14 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l2_grass_l.depth = 4;
                                 l2_static_grass[0] = this.add.image(430, config.height - 50, "2g").setScale(0.2);
                                 l2_static_grass[1] = this.add.image(600, config.height - 95, "2g2").setScale(0.25);
                                 l2_static_grass[2] = this.add.image(1200, config.height - 35, "2g3").setScale(0.2);
                                 l2_static_grass[3] = this.add.image(900, config.height - 30, "2g4").setScale(0.2);
+                                l2_static_grass.forEach(element => {
+                                    element.depth = 4;
+                                });
 
                                 // layer 1
                                 pinkFlower = this.physics.add.sprite(550, config.height - 110, "pinkFlower_l").setScale(0.8);
@@ -286,6 +310,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                pinkFlower.depth = 5;
 
                                 yellowFlower = this.physics.add.sprite(95, config.height - 180, "yellowFlower_l").setScale(0.8);
                                 yellowFlower.anims.create({
@@ -296,6 +321,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                yellowFlower.depth = 5;
 
                                 grass_r = this.physics.add.sprite(config.width - 1, config.height - 200, "grass_r").setScale(0.7);
                                 grass_r.anims.create({
@@ -306,6 +332,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                grass_r.depth = 5;
 
                                 flower = this.physics.add.sprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
                                 flower.anims.create({
@@ -315,6 +342,7 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                flower.depth = 5;
 
                                 flower.anims.play('flower');
                                 pinkFlower.anims.play('pinkFlower_l');
@@ -352,11 +380,13 @@ var L1 = new Phaser.Class({
                                         ease: 'Back.out'
                                     });
                                 },);
+                                guideContainer.depth = 5;
 
                                 nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
                                 nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
                                     this.scene.start("L2");
                                 });
+                                nextBtn.depth = 6;
                             },
                             callbackScope: this
                         });
