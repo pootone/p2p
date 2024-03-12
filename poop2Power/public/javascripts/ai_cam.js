@@ -160,9 +160,13 @@ $().ready(function () {
                     console.log("Res data: ", data);
                     uploadImg = null;
 
-                    responseData.food = payload.description == "" ? responseData.food : payload.description;
-
-                    appendImgCheck(responseData.food);
+                    try{
+                        responseData.food = payload.description == "" ? responseData.food : payload.description;
+                        appendImgCheck(responseData.food);
+                    } catch(e) {
+                        appendRetryMsg();
+                        console.log(e);
+                    }
                 })
             }
             // 若只有文字則送 gpt-3.5-turbo
@@ -364,7 +368,16 @@ function appendImgCheck(food) {
     btn.setAttribute("type", "button");
     btn.classList.add("bg-transparent", "border-0", "position-relative", "imgNo", "p-0", "m-1");
     btn.setAttribute("id", "imgNo");
-    btn.onclick = function () { appendRetryMsg() };
+    btn.onclick = function () { 
+        $("#imgNo").removeClass("imgNo");
+        $("#imgYes").removeClass("imgYes");
+        $("#imgYes img:nth-child(1)").attr("src", "../images/AI_Cam/no.svg");
+        $("#imgNo img:nth-child(1)").attr("src", "../images/AI_Cam/yes.svg");
+        $("#imgNo").prop("disabled", true);
+        $("#imgYes").prop("disabled", true);
+        $("#imgNo").removeAttr("id");
+        appendRetryMsg();
+    };
 
     bg = document.createElement("img");
     bg.classList.add("imgCheckBtn");
@@ -411,14 +424,6 @@ function imgResCorrect() {
 }
 
 function appendRetryMsg() {
-    $("#imgNo").removeClass("imgNo");
-    $("#imgYes").removeClass("imgYes");
-    $("#imgYes img:nth-child(1)").attr("src", "../images/AI_Cam/no.svg");
-    $("#imgNo img:nth-child(1)").attr("src", "../images/AI_Cam/yes.svg");
-    $("#imgNo").prop("disabled", true);
-    $("#imgYes").prop("disabled", true);
-    $("#imgNo").removeAttr("id");
-
     console.log("Not correct food");
     let bg = document.createElement("img");
     bg.classList.add("w-100");
