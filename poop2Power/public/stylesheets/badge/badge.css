@@ -143,6 +143,9 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
+    #openRankWindowBtn, #openWeekWindowBtn {
+        display: none;
+    }
     .aquarium img {
         display: none;
     }

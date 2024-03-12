@@ -32,8 +32,20 @@ document.addEventListener('DOMContentLoaded', function () {
             weekWindowBtn.style.display = 'none';
         } else {
             menuBar.style.display = 'none';
-            rankWindowBtn.style.display = 'block';  // Adjust this to 'block' or 'inline-block' as needed
-            weekWindowBtn.style.display = 'block';  // Adjust this to 'block' or 'inline-block' as needed
+            if (window.innerWidth <= 768) {
+                rankWindowBtn.style.display = 'none';  
+                weekWindowBtn.style.display = 'none';  
+            } else {
+                rankWindowBtn.style.display = 'block';  
+                weekWindowBtn.style.display = 'block';  
+            }
         }
     });
+
+    // Additional check for initial load
+    if (window.innerWidth <= 768) {
+        rankWindowBtn.style.display = 'none';  
+        weekWindowBtn.style.display = 'none';  
+    }
 });
+
