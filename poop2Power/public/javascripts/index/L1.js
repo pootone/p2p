@@ -1,3 +1,4 @@
+let bgm;
 let burger;
 let ldPoop;
 let isStart = true;
@@ -89,6 +90,8 @@ var L1 = new Phaser.Class({
         this.load.image("5g2", "./images/index/l1/5g2.png");
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
+
+        this.load.audio('bgm', './music/bgm.mp3');
     },
     create: function () {
         // BG
@@ -101,6 +104,12 @@ var L1 = new Phaser.Class({
             repeat: -1
         });
         bg.anims.play("bg");
+
+        bgm = this.sound.add('bgm', {
+            volumn: 1,
+            loop: true
+        });
+        bgm.play();
 
         burger = this.physics.add.staticSprite(config.width / 2, config.height / 2 - 100, "burger");
 
@@ -218,12 +227,15 @@ var L1 = new Phaser.Class({
                                     frameRate: 12,
                                     repeat: -1
                                 });
-                                poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
+                                poop.setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
                                     .on('drag', (pointer, dragX, dragY) => {
                                         // Change layer to top
                                         poop.depth = 999;
                                         poop.setPosition(dragX, dragY);
                                     });
+                                // .on('dragend', (pointer, dragX, dragY) => {
+                                //     poop.depth = 0;
+                                // });
 
                                 // layer 2
                                 l1_static_flower[0] = this.add.image(config.width / 2 + 230, config.height - 90, "3f2").setScale(0.25);
