@@ -82,7 +82,7 @@ let chartConfig = {
 };
 
 $().ready(function () {
-    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) {});
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
     // Auto scroll to bottom, when append content to the container
     var dialogContainer = document.getElementById('dialog-container');
     dialogObserver.observe(dialogContainer, { childList: true });
@@ -152,22 +152,29 @@ $().ready(function () {
                 // Remove last chart's id
                 $("#myChart").removeAttr("id");
 
-                $.post(API, payload, function (data, status) {
-                    $("#loader").remove();
+                $.post(API, payload)
+                    .done(function (data) {
+                        $("#loader").remove();
 
-                    responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                    console.log("Get response success!");
-                    console.log("Res data: ", data);
-                    uploadImg = null;
+                        try {
+                            responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                            console.log("Get response success!");
+                            console.log("Res data: ", data);
+                            uploadImg = null;
 
-                    try{
-                        responseData.food = payload.description == "" ? responseData.food : payload.description;
-                        appendImgCheck(responseData.food);
-                    } catch(e) {
+                            responseData.food = payload.description == "" ? responseData.food : payload.description;
+                            appendImgCheck(responseData.food);
+                        } catch (e) {
+                            $("#loader").remove();
+                            appendRetryMsg();
+                            console.log(e);
+                        }
+                    })
+                    .fail(function (xhr, status, error) {
+                        $("#loader").remove();
                         appendRetryMsg();
-                        console.log(e);
-                    }
-                })
+                        console.log(error);
+                    });
             }
             // 若只有文字則送 gpt-3.5-turbo
             else {
@@ -178,29 +185,40 @@ $().ready(function () {
                 $.post(API_txt, { description: payload.description }, function (data, status) {
                     $("#loader").remove();
 
-                    responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                    console.log("Get response success!");
-                    console.log("Res data: ", data);
-
-                    methane = responseData.result.methane;
-                    electricity = responseData.result.electricity;
-                    constipate = responseData.result.constipate;
-                    calorie = responseData.result.calorie;
-
-                    appendChart(methane,
-                        electricity,
-                        constipate,
-                        calorie,
-                        responseData.result.suggest);
-
-                    $("#modalTitle").text("您消耗的" + payload.description + "......");
-
-                    // Show Achievement Model
-                    setTimeout(function () {
-                        isCloseAwardModal = false;
-                        showAchieveModal()
-                    }, 1500);
+                    try{
+                        responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                        console.log("Get response success!");
+                        console.log("Res data: ", data);
+    
+                        methane = responseData.result.methane;
+                        electricity = responseData.result.electricity;
+                        constipate = responseData.result.constipate;
+                        calorie = responseData.result.calorie;
+    
+                        appendChart(methane,
+                            electricity,
+                            constipate,
+                            calorie,
+                            responseData.result.suggest);
+    
+                        $("#modalTitle").text("您消耗的" + payload.description + "......");
+    
+                        // Show Achievement Model
+                        setTimeout(function () {
+                            isCloseAwardModal = false;
+                            showAchieveModal()
+                        }, 1500);
+                    } catch(e) {
+                        $("#loader").remove();
+                        appendRetryMsg();
+                        console.log(e);
+                    }
                 })
+                .fail(function(xhr, status, error) {
+                    $("#loader").remove();
+                    appendRetryMsg();
+                    console.log(error);
+                });
             }
         }
     })
@@ -368,7 +386,7 @@ function appendImgCheck(food) {
     btn.setAttribute("type", "button");
     btn.classList.add("bg-transparent", "border-0", "position-relative", "imgNo", "p-0", "m-1");
     btn.setAttribute("id", "imgNo");
-    btn.onclick = function () { 
+    btn.onclick = function () {
         $("#imgNo").removeClass("imgNo");
         $("#imgYes").removeClass("imgYes");
         $("#imgYes img:nth-child(1)").attr("src", "../images/AI_Cam/no.svg");
