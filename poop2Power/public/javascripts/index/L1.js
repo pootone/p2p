@@ -220,7 +220,8 @@ var L1 = new Phaser.Class({
                                 });
                                 poop.setInteractive({ cursor: `url(./images/index/l1/hover.svg) 30 30, pointer`, draggable: true })
                                     .on('drag', (pointer, dragX, dragY) => {
-                                        // 點擊會變成 layer 1
+                                        // Change layer to top
+                                        poop.depth = 999;
                                         poop.setPosition(dragX, dragY);
                                     });
 
