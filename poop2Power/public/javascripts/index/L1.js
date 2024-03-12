@@ -106,7 +106,7 @@ var L1 = new Phaser.Class({
         bg.anims.play("bg");
 
         // bgm = this.sound.add('bgm', {
-        //     volumn: 1,
+        //     volume: 1,
         //     loop: true
         // });
         // bgm.play();
