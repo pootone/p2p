@@ -2,7 +2,7 @@
 let burger;
 let ldPoop;
 let isStart = true;
-let poop;
+let poopArr = [];
 let flower;
 let pinkFlower;
 let yellowFlower;
@@ -26,13 +26,15 @@ let l5_yellow_flower;
 let l5_static_grass = [];
 let l5_static_flower = [];
 
+let timer;
+
 const startState = {
     before: 0,
     ing: 1,
     after: 2
 }
 let stState = startState.before;
-let sideText;
+let guideText;
 
 var L1 = new Phaser.Class({
     Extends: Phaser.Scene,
@@ -236,21 +238,21 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 l3_pink_flower.depth = 3;
-                                poop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
-                                poop.anims.create({
+                                poopArr[0] = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
+                                poopArr[0].anims.create({
                                     key: "poop",
                                     frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 29 }),
                                     frameRate: 12,
                                     repeat: -1
                                 });
-                                poop.setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
+                                poopArr[0].setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
                                     .on('drag', (pointer, dragX, dragY) => {
                                         // Change layer to top
-                                        poop.depth = 999;
-                                        poop.setPosition(dragX, dragY);
+                                        poopArr[0].depth = 999;
+                                        poopArr[0].setPosition(dragX, dragY);
                                     })
                                     .on('dragend', (pointer, dragX, dragY) => {
-                                        poop.depth = 3;
+                                        poopArr[0].depth = 3;
                                     });
 
                                 // layer 2
@@ -343,6 +345,8 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 flower.depth = 5;
+                                flower.body.setSize(200, 90);
+                                flower.body.setOffset(flower.width / 2 - 90, 210);
 
                                 flower.anims.play('flower');
                                 pinkFlower.anims.play('pinkFlower_l');
@@ -358,19 +362,19 @@ var L1 = new Phaser.Class({
                                 l4_white_flower.anims.play('l4_white_flower');
                                 l4_yellow_flower.anims.play('l4_yellow_flower');
                                 l5_yellow_flower.anims.play('l5_yellow_flower');
-                                poop.anims.play("poop");
+                                poopArr[0].anims.play("poop");
 
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
-                                sideText = this.add.text(0, 0, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
+                                guideText = this.add.text(0, 0, "請將賽賽拖進馬桶裡，開啟便電之旅...", {
                                     // fontFamily: "",
                                     fontSize: "24px",
                                     color: "#000"
                                 });
-                                sideText.setOrigin(0.5);
+                                guideText.setOrigin(0.5);
                                 guideContainer.add(guideTxtBG);
-                                guideContainer.add(sideText);
+                                guideContainer.add(guideText);
                                 guideContainer.setPosition(-guideTxtBG.width, 190);
                                 this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
                                     this.tweens.add({
@@ -400,8 +404,23 @@ var L1 = new Phaser.Class({
         // Keep current pointer position
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
+
+        timer = this.time.addEvent({
+            delay: 3000,
+            callback: this.addNewPoop,
+            callbackScope: this,
+            loop: true
+        });
     },
     update: function () {
+        for (let i = 0; i < poopArr.length; i++) {
+            this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
+                poop.destroy();
+                poopArr.splice(i, 1);
+                return;
+            });
+        }
+
         // Move the bg by pointer position
         let pointerDeltaX = lastPointerX - this.input.activePointer.x;
         let pointerDeltaY = lastPointerY - this.input.activePointer.y;
@@ -411,5 +430,27 @@ var L1 = new Phaser.Class({
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
+    },
+    addNewPoop: function () {
+        if (poopArr.length < 3) {
+            let newPoop = this.physics.add.sprite(Math.random()*config.width - 100, Math.random()*config.height- 100, "poop").setScale(0.4);
+            newPoop.anims.create({
+                key: "poop",
+                frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 29 }),
+                frameRate: 12,
+                repeat: -1
+            });
+            newPoop.setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
+                .on('drag', (pointer, dragX, dragY) => {
+                    // Change layer to top
+                    newPoop.depth = 999;
+                    newPoop.setPosition(dragX, dragY);
+                })
+                .on('dragend', (pointer, dragX, dragY) => {
+                    newPoop.depth = 3;
+                });
+            newPoop.anims.play("poop");
+            poopArr.push(newPoop);
+        }
     }
 });
