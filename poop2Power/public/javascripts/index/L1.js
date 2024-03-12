@@ -91,7 +91,7 @@ var L1 = new Phaser.Class({
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
 
-        this.load.audio('bgm', './music/bgm.mp3');
+        // this.load.audio('bgm', './music/bgm.mp3');
     },
     create: function () {
         // BG
