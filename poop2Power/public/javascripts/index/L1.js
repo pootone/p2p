@@ -1,4 +1,4 @@
-let bgm;
+// let bgm;
 let burger;
 let ldPoop;
 let isStart = true;
