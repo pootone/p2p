@@ -105,11 +105,11 @@ var L1 = new Phaser.Class({
         });
         bg.anims.play("bg");
 
-        bgm = this.sound.add('bgm', {
-            volumn: 1,
-            loop: true
-        });
-        bgm.play();
+        // bgm = this.sound.add('bgm', {
+        //     volumn: 1,
+        //     loop: true
+        // });
+        // bgm.play();
 
         burger = this.physics.add.staticSprite(config.width / 2, config.height / 2 - 100, "burger");
 
