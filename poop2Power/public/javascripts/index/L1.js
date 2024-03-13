@@ -238,22 +238,23 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 l3_pink_flower.depth = 3;
-                                poopArr[0] = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
-                                poopArr[0].anims.create({
+                                let newPoop = this.physics.add.sprite(config.width / 2 - 1, config.height / 2 - 100, "poop").setScale(0.4);
+                                newPoop.anims.create({
                                     key: "poop",
                                     frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 29 }),
                                     frameRate: 12,
                                     repeat: -1
                                 });
-                                poopArr[0].setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
+                                newPoop.setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
                                     .on('drag', (pointer, dragX, dragY) => {
                                         // Change layer to top
-                                        poopArr[0].depth = 999;
-                                        poopArr[0].setPosition(dragX, dragY);
+                                        newPoop.depth = 999;
+                                        newPoop.setPosition(dragX, dragY);
                                     })
                                     .on('dragend', (pointer, dragX, dragY) => {
-                                        poopArr[0].depth = 3;
+                                        newPoop.depth = 3;
                                     });
+                                poopArr.push(newPoop);
 
                                 // layer 2
                                 l1_static_flower[0] = this.add.image(config.width / 2 + 230, config.height - 90, "3f2").setScale(0.25);
@@ -364,6 +365,13 @@ var L1 = new Phaser.Class({
                                 l5_yellow_flower.anims.play('l5_yellow_flower');
                                 poopArr[0].anims.play("poop");
 
+                                timer = this.time.addEvent({
+                                    delay: 3000,
+                                    callback: this.addNewPoop,
+                                    callbackScope: this,
+                                    loop: true
+                                });
+
                                 let guideContainer = this.add.container();
                                 let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
@@ -404,13 +412,6 @@ var L1 = new Phaser.Class({
         // Keep current pointer position
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
-
-        timer = this.time.addEvent({
-            delay: 3000,
-            callback: this.addNewPoop,
-            callbackScope: this,
-            loop: true
-        });
     },
     update: function () {
         for (let i = 0; i < poopArr.length; i++) {
