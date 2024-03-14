@@ -17,6 +17,15 @@ function showImage(buttonId) {
     };
 }
 
+//aquarium layer2
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+const randomTop = getRandomNumber(10, 70);
+document.documentElement.style.setProperty('--random-top', `${randomTop}%`);
+const randomLeft = getRandomNumber(10, 90);
+document.documentElement.style.setProperty('--random-left', `${randomLeft}%`);
+
 
 function scrollToSection(sectionId) {
     var targetElement = document.getElementById(sectionId);

@@ -2,8 +2,9 @@ p {
     font-family: 'Shippori Mincho';
     color: #394038;
 }
-.row{
-    margin-right : 0;
+
+.row {
+    margin-right: 0;
 }
 
 .header {
@@ -12,7 +13,8 @@ p {
     justify-content: space-between;
     align-items: center;
 }
-.header .name p{
+
+.header .name p {
     font-family: 'Grandstander';
     font-style: normal;
     font-size: 50px;
@@ -20,6 +22,7 @@ p {
     color: #394038;
     margin-left: 100px;
 }
+
 .header .personal-photo img {
     width: 100px;
     height: auto;
@@ -43,9 +46,10 @@ body::-webkit-scrollbar {
     padding: 0;
 }
 
-.mid{
+.mid {
     margin: 20px;
 }
+
 .aquarium {
     position: relative;
     width: 85%;
@@ -53,20 +57,39 @@ body::-webkit-scrollbar {
     overflow: hidden;
     margin: 0px auto;
 }
+
 .aquarium img {
     width: 100%;
     height: 100%;
     height: auto;
 }
+
 .Layer2 {
     position: absolute;
-    bottom: 45%;
-    right: 30%;
+    bottom: 10%;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    z-index: 1;
 }
+
+.Layer2 img {
+    width: 5%;
+    height: auto;
+}
+
+#badge1 {
+    position: absolute;
+    /* top: 20%;
+    left: 20%; */
+    top: calc(var(--random-top));
+    left: calc(var(--random-left));
+}
+
 @keyframes fadeInAndMoveDown {
     from {
         opacity: 0;
-        transform: translateY(-90px);
+        transform: translateY(-30px);
     }
 
     to {
@@ -74,9 +97,11 @@ body::-webkit-scrollbar {
         transform: translateY(0);
     }
 }
+
 .hidden {
     display: none;
 }
+
 .show {
     animation: fadeInAndMoveDown 1s ease forwards;
 }
@@ -85,6 +110,7 @@ body::-webkit-scrollbar {
     width: 150px;
     height: auto;
 }
+
 /* 
 .badge-bg {
     position: absolute;
@@ -97,24 +123,29 @@ body::-webkit-scrollbar {
     left: 15px;
     width: 80%;
 }*/
-.badgeClassBTN{
-    width:35%; margin-bottom: 90px; margin-right:20px;
+.badgeClassBTN {
+    width: 35%;
+    margin-bottom: 90px;
+    margin-right: 20px;
 }
+
 .badge-title {
     font-size: 16px;
     padding-top: 10px;
     color: #313131;
 }
+
 .badge-info {
     font-size: 14px;
     color: #888888;
-    line-height: 1.5; 
+    line-height: 1.5;
 }
 
 .image-container {
     position: relative;
     overflow: hidden;
 }
+
 .image-container:hover .addBtn {
     display: block;
 }
@@ -143,60 +174,75 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
-    #openRankWindowBtn, #openWeekWindowBtn {
+
+    #openRankWindowBtn,
+    #openWeekWindowBtn {
         display: none;
     }
+
     .aquarium img {
         display: none;
     }
+
     .header {
         margin-top: 10px;
         position: relative;
-        text-align: center; /* Optional: Center content text */
+        text-align: center;
+        /* Optional: Center content text */
     }
-    .header .name p {
-        font-size: 22px;
-        margin-top: 60px; /* Adjust the margin-top value as needed */
+
+    .header .name {
+        text-align: center;
     }
+
     .header .personal-photo {
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
     }
+
     .header .personal-photo img {
         width: 70px;
         height: auto;
         margin-right: 0;
     }
-    .mid{
+
+    .mid {
         margin: 0;
     }
-    .mid img{
+
+    .mid img {
         display: none;
     }
-    .badgeClassBTN{
+
+    .badgeClassBTN {
         display: none;
     }
+
     .badge .row {
         flex-direction: column;
     }
-    .row>*{
+
+    .row>* {
         padding-right: 0;
     }
+
     .badge .col-4 {
         width: 100%;
         text-align: center;
-        margin-bottom: 20px; /* Adjust the margin as needed */
+        margin-bottom: 20px;
+        /* Adjust the margin as needed */
     }
 
     .badge .col-8 {
         width: 100%;
     }
 
-    .badge .row > div {
+    .badge .row>div {
         width: 100%;
-        margin-bottom: 20px; /* Adjust the margin as needed */
+        margin-bottom: 20px;
+        /* Adjust the margin as needed */
     }
 }
 
