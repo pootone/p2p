@@ -18,6 +18,8 @@ let dialogObserver = new MutationObserver(function (mutations) {
 
 const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
 
+let chartMoreRadar;
+
 let chartConfig = {
     type: "radar",
     data: {
@@ -140,15 +142,17 @@ $().ready(function () {
             img: uploadImg,
             description: $("#descTxt").val() || ''
         }
+        uploadImg = null;
         $("#descTxt").val('');
         console.log(payload);
 
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
+
+            // Remove last chart's id
+            $("#myChart").removeAttr("id");
             if (payload.img) {
                 appendLoader();
-                // Remove last chart's id
-                $("#myChart").removeAttr("id");
 
                 $.post(API, payload)
                     .done(function (data) {
@@ -287,10 +291,12 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
 
     // Add chart to the dialog block
     $("#dialog-container").append(row);
-    let ctx = $("#myChart");
-    new Chart(ctx, chartConfig);
+    new Chart($("#myChart"), chartConfig);
 
-    new Chart($("#chartMoreRadar"), chartConfig);
+    if (chartMoreRadar) {
+        chartMoreRadar.destroy();
+    }
+    chartMoreRadar = new Chart($("#chartMoreRadar"), chartConfig);
 }
 
 function appendAskMsg(inputMsg) {
