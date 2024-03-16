@@ -79,15 +79,28 @@
             style="width: 95%; border: 0; background: transparent"
           />
         </div>
-        <div class="col-2 d-flex justify-content-center align-items-center p-0">
-          <input
-            id="imgFileInput"
-            type="file"
-            capture="environment"
-            accept="image/*"
-            style="display: none"
-          />
-          <label id="upload" for="imgFileInput"></label>
+        <div
+          class="col-2 d-flex justify-content-center align-items-center p-0 position-relative"
+        >
+          <button
+            type="button"
+            id="upload"
+            class="border-0"
+            onclick="{$('#uploadGroup').addClass('d-block')}"
+          ></button>
+          <div id="uploadGroup" class="position-absolute">
+            <input
+              id="imgFileInput"
+              type="file"
+              capture="environment"
+              accept="image/*"
+              style="display: none"
+            />
+            <label
+              for="imgFileInput"
+              style="background-image: url(../images/AI_Cam/file.svg)"
+            ></label>
+          </div>
         </div>
         <div
           class="col-2 d-flex justify-content-center align-items-center position-relative"
@@ -311,7 +324,7 @@
                         src="../images/AI_Cam/road.json"
                         background="transparent"
                         class="w-75 mx-auto position-absolute"
-                        style="left: 10%; top: 47%; transform: scaleX(-1)"
+                        style="left: 10%; top: 47%"
                         speed="1"
                         loop=""
                         autoplay=""
