@@ -1,7 +1,7 @@
-// let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
-let API = "/aicam/gpt/img";
-// let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
-let API_txt = "/aicam/gpt/txt";
+let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
+// let API = "/aicam/gpt/img"; //TODO
+let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
+// let API_txt = "/aicam/gpt/txt"; //TODO
 let uploadImg = null;
 let responseData = null;
 let isCloseAwardModal = true;
@@ -187,7 +187,7 @@ $().ready(function () {
                         responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                         console.log("Get response success!");
                         console.log("Res data: ", data);
-                        
+
                         appendChart(responseData.result.methane.methane,
                             responseData.result.electricity.electricity_level,
                             responseData.result.constipate,
