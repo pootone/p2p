@@ -1,11 +1,9 @@
-let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
-let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
+// let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
+let API = "/aicam/gpt/img";
+// let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
+let API_txt = "/aicam/gpt/txt";
 let uploadImg = null;
 let responseData = null;
-let methane = 0;
-let electricity = 0;
-let constipate = 0;
-let calorie = 0;
 let isCloseAwardModal = true;
 
 let dialogObserver = new MutationObserver(function (mutations) {
@@ -185,40 +183,35 @@ $().ready(function () {
                 $.post(API_txt, { description: payload.description }, function (data, status) {
                     $("#loader").remove();
 
-                    try{
+                    try {
                         responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                         console.log("Get response success!");
                         console.log("Res data: ", data);
-    
-                        methane = responseData.result.methane;
-                        electricity = responseData.result.electricity;
-                        constipate = responseData.result.constipate;
-                        calorie = responseData.result.calorie;
-    
-                        appendChart(methane,
-                            electricity,
-                            constipate,
-                            calorie,
+                        
+                        appendChart(responseData.result.methane.methane,
+                            responseData.result.electricity.electricity_level,
+                            responseData.result.constipate,
+                            responseData.result.calorie.calorie_value,
                             responseData.result.suggest);
-    
+
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
-    
+
                         // Show Achievement Model
                         setTimeout(function () {
                             isCloseAwardModal = false;
                             showAchieveModal()
                         }, 1500);
-                    } catch(e) {
+                    } catch (e) {
                         $("#loader").remove();
                         appendRetryMsg();
                         console.log(e);
                     }
                 })
-                .fail(function(xhr, status, error) {
-                    $("#loader").remove();
-                    appendRetryMsg();
-                    console.log(error);
-                });
+                    .fail(function (xhr, status, error) {
+                        $("#loader").remove();
+                        appendRetryMsg();
+                        console.log(error);
+                    });
             }
         }
     })
@@ -426,10 +419,10 @@ function imgResCorrect() {
     $("#imgYes").removeAttr("id");
 
     appendGetReq(responseData.food);
-    appendChart(responseData.result.methane,
-        responseData.result.electricity,
+    appendChart(responseData.result.methane.methane,
+        responseData.result.electricity.electricity_level,
         responseData.result.constipate,
-        responseData.result.calorie,
+        responseData.result.calorie.calorie_value,
         responseData.result.suggest);
 
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
