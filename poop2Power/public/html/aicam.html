@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../stylesheets/layout.css" />
     <link rel="stylesheet" href="../stylesheets/cornerBtn.css" />
     <link rel="stylesheet" href="../stylesheets/aiCam.css" />
-    <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon" />
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
 
@@ -201,15 +201,32 @@
                       ></span
                       >的甲烷排放量
                     </p>
-                    <lottie-player
-                      id="loader"
-                      class="w-75 h-50"
-                      src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json"
-                      background="transparent"
-                      speed="1"
-                      loop=""
-                      autoplay=""
-                    ></lottie-player>
+                    <div class="position-relative">
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/car.json"
+                        background="transparent"
+                        style="
+                          width: 20%;
+                          margin-left: 25%;
+                          transform: scaleX(-1);
+                          margin-top: 15%;
+                        "
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 position-absolute mx-auto"
+                        style="left: 10%; top: 39%"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
                   </div>
                   <div
                     class="col-6 h-100"
@@ -233,15 +250,28 @@
                       ></span
                       >的電力輸出
                     </p>
-                    <lottie-player
-                      id="loader"
-                      class="w-75 h-50"
-                      src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json"
-                      background="transparent"
-                      speed="1"
-                      loop=""
-                      autoplay=""
-                    ></lottie-player>
+                    <div class="position-relative w-100">
+                      <lottie-player
+                        id="loader"
+                        class="h-50 m-auto"
+                        style="width: 15%; margin-top: 6%"
+                        src="../images/AI_Cam/phone.json"
+                        background="transparent"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 10%; top: 43%; transform: scaleX(-1)"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -270,15 +300,23 @@
                       ></span
                       >的熱量
                     </p>
-                    <lottie-player
-                      id="loader"
-                      class="w-75 h-50"
-                      src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json"
-                      background="transparent"
-                      speed="1"
-                      loop=""
-                      autoplay=""
-                    ></lottie-player>
+                    <div class="position-relative">
+                      <img
+                        src="../images/AI_Cam/run.gif"
+                        style="width: 10%; margin-left: 15%; margin-top: 6%"
+                        alt=""
+                      />
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 10%; top: 47%; transform: scaleX(-1)"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
                   </div>
                   <div
                     class="col-6 h-100"
@@ -302,15 +340,28 @@
                       ></span
                       >的便秘風險
                     </p>
-                    <lottie-player
-                      id="loader"
-                      class="w-75 h-50"
-                      src="../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json"
-                      background="transparent"
-                      speed="1"
-                      loop=""
-                      autoplay=""
-                    ></lottie-player>
+                    <div class="w-100 position-relative">
+                      <img
+                        src="../images/AI_Cam/poop.gif"
+                        style="
+                          width: 10%;
+                          margin-left: 50%;
+                          margin-top: 10%;
+                          transform: scaleX(-1);
+                        "
+                        alt=""
+                      />
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 14%; top: 48%; transform: scaleX(-1)"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
                   </div>
                 </div>
 
@@ -336,7 +387,7 @@
                 <!-- Radar chart -->
                 <div
                   class="position-absolute"
-                  style="width: 30%; top: 20%; left: 35%"
+                  style="width: 25%; top: 25%; left: 38%"
                 >
                   <canvas
                     id="chartMoreRadar"
