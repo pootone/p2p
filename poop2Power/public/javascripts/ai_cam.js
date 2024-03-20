@@ -1,11 +1,9 @@
 let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
+// let API = "/aicam/gpt/img"; //TODO
 let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
+// let API_txt = "/aicam/gpt/txt"; //TODO
 let uploadImg = null;
 let responseData = null;
-let methane = 0;
-let electricity = 0;
-let constipate = 0;
-let calorie = 0;
 let isCloseAwardModal = true;
 
 let dialogObserver = new MutationObserver(function (mutations) {
@@ -19,6 +17,8 @@ let dialogObserver = new MutationObserver(function (mutations) {
 });
 
 const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
+
+let chartMoreRadar;
 
 let chartConfig = {
     type: "radar",
@@ -142,15 +142,17 @@ $().ready(function () {
             img: uploadImg,
             description: $("#descTxt").val() || ''
         }
+        uploadImg = null;
         $("#descTxt").val('');
         console.log(payload);
 
         if (payload.img || payload.description) {
             // 若有圖片，則送出圖文至 gpt-4-vision-preview
+
+            // Remove last chart's id
+            $("#myChart").removeAttr("id");
             if (payload.img) {
                 appendLoader();
-                // Remove last chart's id
-                $("#myChart").removeAttr("id");
 
                 $.post(API, payload)
                     .done(function (data) {
@@ -185,40 +187,35 @@ $().ready(function () {
                 $.post(API_txt, { description: payload.description }, function (data, status) {
                     $("#loader").remove();
 
-                    try{
+                    try {
                         responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                         console.log("Get response success!");
                         console.log("Res data: ", data);
-    
-                        methane = responseData.result.methane;
-                        electricity = responseData.result.electricity;
-                        constipate = responseData.result.constipate;
-                        calorie = responseData.result.calorie;
-    
-                        appendChart(methane,
-                            electricity,
-                            constipate,
-                            calorie,
+
+                        appendChart(responseData.result.methane.methane,
+                            responseData.result.electricity.electricity_level,
+                            responseData.result.constipate,
+                            responseData.result.calorie.calorie_value,
                             responseData.result.suggest);
-    
+
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
-    
+
                         // Show Achievement Model
                         setTimeout(function () {
                             isCloseAwardModal = false;
                             showAchieveModal()
                         }, 1500);
-                    } catch(e) {
+                    } catch (e) {
                         $("#loader").remove();
                         appendRetryMsg();
                         console.log(e);
                     }
                 })
-                .fail(function(xhr, status, error) {
-                    $("#loader").remove();
-                    appendRetryMsg();
-                    console.log(error);
-                });
+                    .fail(function (xhr, status, error) {
+                        $("#loader").remove();
+                        appendRetryMsg();
+                        console.log(error);
+                    });
             }
         }
     })
@@ -294,10 +291,12 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
 
     // Add chart to the dialog block
     $("#dialog-container").append(row);
-    let ctx = $("#myChart");
-    new Chart(ctx, chartConfig);
+    new Chart($("#myChart"), chartConfig);
 
-    new Chart($("#chartMoreRadar"), chartConfig);
+    if (chartMoreRadar) {
+        chartMoreRadar.destroy();
+    }
+    chartMoreRadar = new Chart($("#chartMoreRadar"), chartConfig);
 }
 
 function appendAskMsg(inputMsg) {
@@ -426,10 +425,10 @@ function imgResCorrect() {
     $("#imgYes").removeAttr("id");
 
     appendGetReq(responseData.food);
-    appendChart(responseData.result.methane,
-        responseData.result.electricity,
+    appendChart(responseData.result.methane.methane,
+        responseData.result.electricity.electricity_level,
         responseData.result.constipate,
-        responseData.result.calorie,
+        responseData.result.calorie.calorie_value,
         responseData.result.suggest);
 
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
