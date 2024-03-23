@@ -64,6 +64,13 @@ $().ready(function () {
     $("#login_skip").click(function () {
         $("#loginModal").hide();
     });
+
+    $("#login_signout_btn").click(function() {
+        firebase.auth().signOut()
+        .then(function () {
+            window.location = "../";
+          });
+    });
 });
 
 function showImage(buttonId) {
