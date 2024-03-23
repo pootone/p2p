@@ -246,6 +246,19 @@ body::-webkit-scrollbar {
     }
 }
 
+.firebaseui-container {}
+
+#loginModalContent {
+    background-color: transparent;
+    background-image: url(../../images/badge/loginModal/bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 95%;
+}
+
+.firebaseui-idp-google .firebaseui-idp-text {
+color: #ffffff;
+}
 
 
 
