@@ -72,7 +72,6 @@ $().ready(function () {
         firebase.auth().signOut()
             .then(function () {
                 $.removeCookie("skipLogin");
-                window.location = "../";
             });
     });
 });
