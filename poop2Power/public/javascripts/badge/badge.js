@@ -43,7 +43,9 @@ initApp = function () {
                 $("#title").text(user.displayName + "'s Dashboard");
             } else {
                 // User is signed out.
-                $("#loginModal").show();
+                if ($.cookie("skipLogin") != 'true') {
+                    $("#loginModal").show();
+                }
                 $("#title").text("Personal Dashboard");
             }
         },
@@ -63,13 +65,15 @@ $().ready(function () {
 
     $("#login_skip").click(function () {
         $("#loginModal").hide();
+        $.cookie('skipLogin', 'true', { expires: 7 });
     });
 
-    $("#login_signout_btn").click(function() {
+    $("#login_signout_btn").click(function () {
         firebase.auth().signOut()
-        .then(function () {
-            window.location = "../";
-          });
+            .then(function () {
+                $.removeCookie("skipLogin");
+                window.location = "../";
+            });
     });
 });
 
