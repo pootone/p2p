@@ -137,7 +137,7 @@ $().ready(function () {
         reader.readAsDataURL(selectedFile);
     })
 
-    if (isMobileDevice() && isPortrait()) {
+    if (isPortrait()) {
         // Update id to btn
         $("#upload").attr("for", "imgFileInput");
     } else {
