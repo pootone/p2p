@@ -82,28 +82,39 @@
         <div
           class="col-2 d-flex justify-content-center align-items-center p-0 position-relative"
         >
-          <button
-            type="button"
-            id="upload"
-            class="border-0"
-            onclick="{$('#uploadGroup').addClass('d-block')}"
-          ></button>
-          <div id="uploadGroup" class="position-absolute">
-            <input
+          <label type="button" id="upload" class="border-0"></label>
+          <input
               id="imgFileInput"
+              type="file"
+              accept="image/*"
+              style="display: none"
+            />
+          <div
+            id="uploadGroup"
+            class="position-absolute justify-content-center"
+            style="width: 80%; top: -90%; display: none;"
+          >
+            <input
+              id="imgTakePic"
               type="file"
               capture="environment"
               accept="image/*"
               style="display: none"
             />
-            <label
-              for="imgFileInput"
-              style="background-image: url(../images/AI_Cam/file.svg)"
-            ></label>
+            <label for="imgTakePic" class="d-flex justify-content-center">
+              <img
+                src="../images/AI_Cam/take_pic.svg"
+                alt=""
+                style="width: 80%"
+              />
+            </label>
+            <label for="imgFileInput" class="d-flex justify-content-center">
+              <img src="../images/AI_Cam/file.svg" alt="" style="width: 80%" />
+            </label>
           </div>
         </div>
         <div
-          class="col-2 d-flex justify-content-center align-items-center position-relative"
+          class="col-2 d-flex justify-content-center align-items-center p-0 position-relative"
         >
           <img
             class="position-absolute w-75"
@@ -412,11 +423,9 @@
           </div>
         </div>
       </div>
-      <script
-        src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"
-      >
-        <!-- jquery -->
-      </script>
+      <!-- jquery -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js">
         <!-- chart.js -->
       </script>

@@ -137,6 +137,24 @@ $().ready(function () {
         reader.readAsDataURL(selectedFile);
     })
 
+    if (isMobileDevice() && isPortrait()) {
+        // Update id to btn
+        $("#upload").attr("for", "imgFileInput");
+    } else {
+        $("#upload").on("click", function () {
+            $("#uploadGroup:visible").animate({
+                opacity: '0'
+            }, 250, function () {
+                $(this).hide();
+            })
+
+            $("#uploadGroup:hidden").css("display", "flex").animate({
+                opacity: '1'
+            }, 250)
+        })
+    }
+
+
     $("#submit").on("click", function () {
         let payload = {
             img: uploadImg,
@@ -596,6 +614,14 @@ function appendLoader() {
 
     row.appendChild(loader);
     $("#dialog-container").append(row);
+}
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function isPortrait() {
+    return window.innerHeight > window.innerWidth;
 }
 
 $("#chartMoreModalBtn").on("click", function () {
