@@ -425,12 +425,46 @@ var L1 = new Phaser.Class({
     },
     update: function () {
         for (let i = 0; i < poopArr.length; i++) {
+            if (config.width < poopArr[i].x ||
+                poopArr[i].x + poopArr[i].body.width < 0 ||
+                config.height < poopArr[i].y ||
+                poopArr[i].y + poopArr[i].body.height < 0) {
+                poopArr[i].destroy();
+                poopArr.splice(i, 1);
+                i--; // 减小索引以防止跳过下一个游戏对象
+                continue; // 继续下一个循环迭代
+                // return;
+            }
             this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
                 poop.destroy();
                 poopArr.splice(i, 1);
                 return;
             });
         }
+
+        // poopArr.forEach(poop => {
+        //     // 生成随机方向和速度
+        //     var randomAngle = Phaser.Math.Between(0, 360);
+        //     var velocity = new Phaser.Math.Vector2();
+        //     velocity.setToPolar(randomAngle, 1); // 设置速度，这里假设速度为100
+
+        //     // 更新精灵位置
+        //     poop.x += velocity.x * this.time.deltaTime / 1000; // deltaTime用于使移动更加平滑
+        //     poop.y += velocity.y * this.time.deltaTime / 1000;
+
+        //     // 边界检测，如果精灵超出屏幕边界，重新定位到屏幕内
+        //     if (poop.x < 0) {
+        //         poop.x = 800;
+        //     } else if (poop.x > 800) {
+        //         poop.x = 0;
+        //     }
+
+        //     if (poop.y < 0) {
+        //         poop.y = 600;
+        //     } else if (poop.y > 600) {
+        //         poop.y = 0;
+        //     }
+        // })
 
         // Move the bg by pointer position
         let pointerDeltaX = lastPointerX - this.input.activePointer.x;
@@ -460,7 +494,19 @@ var L1 = new Phaser.Class({
                 .on('dragend', (pointer, dragX, dragY) => {
                     newPoop.depth = 3;
                 });
+            // 设置初始速度
+            newPoop.setVelocity(Phaser.Math.Between(-100, 100), Phaser.Math.Between(-100, 100));
             newPoop.anims.play("poop");
+            this.tweens.add({
+                targets: newPoop.body.velocity,
+                x: Phaser.Math.Between(-150, 150),
+                y: Phaser.Math.Between(-150, 150),
+                ease: 'Linear',
+                duration: 2000,
+                repeat: -1,
+                yoyo: true
+            });
+
             poopArr.push(newPoop);
         }
     }
