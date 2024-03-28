@@ -96,6 +96,16 @@ var L1 = new Phaser.Class({
         // this.load.audio('bgm', './music/bgm.mp3');
     },
     create: function () {
+        // Rectangle for adjust poop gen position
+        // const graphics = this.add.graphics({ lineStyle: { width: 2, color: 0x00ff00 }, fillStyle: { color: 0xff0000 } });
+
+        // const rect = new Phaser.Geom.Rectangle(100, 150, config.width - 200, 800);
+
+        // //  The green rectangle is the original one
+        // graphics.strokeRectShape(rect);
+        // graphics.depth = 99;
+        // Rectangle for adjust poop gen position
+
         // BG
         bg = this.physics.add.staticSprite(config.width / 2, config.height / 2, "bg-empty");
         bg.setDisplaySize(config.width, config.height);
@@ -434,7 +444,7 @@ var L1 = new Phaser.Class({
     },
     addNewPoop: function () {
         if (poopArr.length < 3) {
-            let newPoop = this.physics.add.sprite(Math.random()*config.width - 100, Math.random()*config.height- 100, "poop").setScale(0.4);
+            let newPoop = this.physics.add.sprite(100 + Math.random() * (config.width - 300), 150 + Math.random() * 650, "poop").setScale(0.4);
             newPoop.anims.create({
                 key: "poop",
                 frames: this.anims.generateFrameNumbers('poop', { start: 0, end: 29 }),
