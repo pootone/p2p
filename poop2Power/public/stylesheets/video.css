@@ -1,0 +1,10 @@
+.container-fluid {
+    padding: 0px;
+}
+@media screen and (orientation: portrait) {
+    #currentVideo {
+        min-width: 100vw;
+        height: 100vh;  
+        max-height: -webkit-fill-available;
+    }
+}
