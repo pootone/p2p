@@ -39,7 +39,7 @@ var L5 = new Phaser.Class({
             });
         },);
 
-        nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
+        nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.79);
         nextBtn.setInteractive({useHandCursor: true}).on('pointerdown', (pointer, localX, localY, event) => {
             window.location="./index-old.html"
         });
