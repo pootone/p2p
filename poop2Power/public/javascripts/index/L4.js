@@ -10,10 +10,13 @@ var L4 = new Phaser.Class({
         this.load.image("l4-bg", "./images/index/l4/l4-bg.png");
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
+        this.load.video('l4_video', './l4_video.mp4');
     },
     create: function () {
         // BG
-        bg = this.add.image(config.width / 2, config.height / 2 - 83, "l4-bg");
+        // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l4-bg");
+        video = this.add.video(config.width / 2, config.height / 2, 'l4_video').setScale(0.85);
+        video.play(true);
 
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
@@ -36,7 +39,7 @@ var L4 = new Phaser.Class({
             });
         },);
 
-        nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
+        nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
         nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
             this.scene.start("L5");
         });

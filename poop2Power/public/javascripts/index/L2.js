@@ -10,12 +10,12 @@ var L2 = new Phaser.Class({
         this.load.image("l2-bg", "./images/index/l2/l2-bg.png");
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
-        this.load.video('video', './l2_video.mp4');
+        this.load.video('l2_video', './l2_video.mp4');
     },
     create: function () {
         // BG
         // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
-        video = this.add.video(config.width / 2, config.height / 2, 'video').setScale(0.79);
+        video = this.add.video(config.width / 2, config.height / 2, 'l2_video').setScale(0.79);
         video.play(true);
 
         let guideContainer = this.add.container();
