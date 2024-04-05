@@ -10,10 +10,13 @@ var L3 = new Phaser.Class({
         this.load.image("l3-bg", "./images/index/l3/l3-bg.png");
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
+        this.load.video('l3_video', './l3_video.mp4');
     },
     create: function () {
         // BG
-        bg = this.add.image(config.width / 2, config.height / 2 - 83, "l3-bg");
+        // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l3-bg");
+        video = this.add.video(config.width / 2, config.height / 2, 'l3_video').setScale(0.79);
+        video.play(true);
 
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
@@ -30,14 +33,14 @@ var L3 = new Phaser.Class({
         this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
             this.tweens.add({
                 targets: guideContainer,
-                x: isPortrait ? config.width/2 : 390,
+                x: isPortrait ? config.width / 2 : 390,
                 duration: 1100,
                 ease: 'Back.out'
             });
         },);
 
 
-        nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
+        nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
         nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
             this.scene.start("L4");
         });

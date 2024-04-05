@@ -10,10 +10,13 @@ var L2 = new Phaser.Class({
         this.load.image("l2-bg", "./images/index/l2/l2-bg.png");
         this.load.image("guideTxtBG", "./images/index/guideTxtBG.png");
         this.load.image("nextBtn", "./images/index/NEXT_btn.svg");
+        this.load.video('video', './l2_video.mp4');
     },
     create: function () {
         // BG
-        bg = this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
+        // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
+        video = this.add.video(config.width / 2, config.height / 2, 'video').setScale(0.79);
+        video.play(true);
 
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
@@ -30,13 +33,13 @@ var L2 = new Phaser.Class({
         this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
             this.tweens.add({
                 targets: guideContainer,
-                x: isPortrait ? config.width/2 : 390,
+                x: isPortrait ? config.width / 2 : 390,
                 duration: 1100,
                 ease: 'Back.out'
             });
         },);
 
-        nextBtn = this.add.image(config.width / 2, config.height - 230, "nextBtn").setScale(0.9);
+        nextBtn = this.add.image(config.width / 2, config.height - 130, "nextBtn").setScale(0.9);
         nextBtn.setInteractive({ useHandCursor: true }).on('pointerdown', (pointer, localX, localY, event) => {
             this.scene.start("L3");
         });
@@ -50,8 +53,8 @@ var L2 = new Phaser.Class({
         let pointerDeltaX = lastPointerX - this.input.activePointer.x;
         let pointerDeltaY = lastPointerY - this.input.activePointer.y;
 
-        bg.x += pointerDeltaX * depth1;
-        bg.y += pointerDeltaY * depth1;
+        // bg.x += pointerDeltaX * depth1;
+        // bg.y += pointerDeltaY * depth1;
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
