@@ -1,4 +1,4 @@
-// let bgm;
+let bgm;
 let burger;
 let ldPoop;
 let isStart = true;
@@ -93,7 +93,7 @@ var L1 = new Phaser.Class({
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
 
-        // this.load.audio('bgm', './music/bgm.mp3');
+        this.load.audio('bgm1', './music/BGM1.wav');
     },
     create: function () {
         // Rectangle for adjust poop gen position
@@ -117,11 +117,11 @@ var L1 = new Phaser.Class({
         });
         bg.anims.play("bg");
 
-        // bgm = this.sound.add('bgm', {
-        //     volume: 1,
-        //     loop: true
-        // });
-        // bgm.play();
+        bgm = this.sound.add('bgm1', {
+            volume: 1,
+            loop: true
+        });
+        bgm.play();
 
         burger = this.physics.add.staticSprite(config.width / 2, config.height / 2 - 100, "burger");
 
@@ -205,6 +205,8 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
+                                l4_white_flower.body.setSize(200, 60);
+                                l4_white_flower.body.setOffset(l4_white_flower.width / 2 - 110, 180);
                                 l4_white_flower.depth = 2;
 
                                 // layer 3
@@ -431,11 +433,14 @@ var L1 = new Phaser.Class({
                 poopArr[i].y + poopArr[i].body.height < 0) {
                 poopArr[i].destroy();
                 poopArr.splice(i, 1);
-                i--; // 减小索引以防止跳过下一个游戏对象
-                continue; // 继续下一个循环迭代
-                // return;
+                return;
             }
             this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
+                poop.destroy();
+                poopArr.splice(i, 1);
+                return;
+            });
+            this.physics.add.collider(poopArr[i], l4_white_flower, function (poop, flower) {
                 poop.destroy();
                 poopArr.splice(i, 1);
                 return;
@@ -485,6 +490,8 @@ var L1 = new Phaser.Class({
                 frameRate: 12,
                 repeat: -1
             });
+            // 设置初始速度
+            newPoop.setVelocity(Phaser.Math.Between(-100, 100), Phaser.Math.Between(-100, 100));
             newPoop.setInteractive({ cursor: `url(./images/index/l1/cursor.svg) 30 30, pointer`, draggable: true })
                 .on('drag', (pointer, dragX, dragY) => {
                     // Change layer to top
@@ -494,8 +501,6 @@ var L1 = new Phaser.Class({
                 .on('dragend', (pointer, dragX, dragY) => {
                     newPoop.depth = 3;
                 });
-            // 设置初始速度
-            newPoop.setVelocity(Phaser.Math.Between(-100, 100), Phaser.Math.Between(-100, 100));
             newPoop.anims.play("poop");
             this.tweens.add({
                 targets: newPoop.body.velocity,
