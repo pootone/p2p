@@ -2,7 +2,7 @@
     padding: 0px;
 }
 @media screen and (orientation: portrait) {
-    #currentVideo {
+    .vidFrame {
         min-width: 100vw;
         height: 100vh;  
         max-height: -webkit-fill-available;

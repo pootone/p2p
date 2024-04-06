@@ -8,6 +8,8 @@ const firebaseConfig = {
     measurementId: "G-N9JH7N740F"
 };
 
+const currentUrl = new URL(document.location);
+
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 // FirebaseUI config.
@@ -56,12 +58,15 @@ initApp = function () {
 }
 
 $().ready(function () {
-    initApp();
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // The start method will wait until the DOM is loaded.
-    ui.start("#firebaseui-auth-container", uiConfig);
-
+    $("#title").text("Personal Dashboard");
+    // Check whether get new achieve
+    if(!isNewAchieve()){
+        initApp();
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start("#firebaseui-auth-container", uiConfig);
+    }
 
     $("#login_skip").click(function () {
         $("#loginModal").hide();
@@ -128,5 +133,38 @@ function closeFloatingWindow() {
     if (floatingWindow) {
         floatingWindow.style.display = 'none';
     }
+}
+
+// Check wether there's new achieve
+function isNewAchieve() {
+    console.log(currentUrl);
+    const range = currentUrl.searchParams.get("range");
+    const badge = currentUrl.searchParams.get("badge");
+
+    // Visit exhibition
+    if(range) {
+        switch (range) {
+            case "1": {
+                break;
+            }
+            case "2": {
+                break;
+            }
+            case "3": {
+                break;
+            }
+            case "4": {
+                break;
+            }
+        }
+        return true;
+    } else if(badge) {
+        switch(badge){
+            case "1st":
+                break;
+        }
+        return true;
+    }
+    return false;
 }
 

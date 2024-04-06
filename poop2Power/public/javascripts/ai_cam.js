@@ -96,7 +96,7 @@ $().ready(function () {
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
-    // showAcheiveModal();
+    // showAchieveModal();
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -457,6 +457,29 @@ function imgResCorrect() {
         showAchieveModal();
     }, 1500);
 }
+
+function achieCheck() {
+    // Get achie data
+
+    // if() {
+    // First try
+    // } else if() {
+    // } else {
+    let payload = {
+        food: "早午餐",
+        ingredient: "eggs, bacon, toast, coffee"
+    }
+    // $.post("https://p2p-contest-backend.onrender.com/wake", )
+    $.post("/aicam/achie", payload)
+        .done(function (data) {
+            console.log(data);
+        })
+        .fail(function (xhr, status, error) {
+            console.log(error);
+        })
+    // }
+}
+// achieCheck();
 
 function appendRetryMsg() {
     console.log("Not correct food");

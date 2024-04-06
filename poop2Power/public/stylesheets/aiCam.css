@@ -1,3 +1,7 @@
+.container-fluid {
+    padding: 38px 53px;
+}
+
 h3 {
     color: #555;
     text-align: justify;
@@ -102,8 +106,8 @@ h3 {
 
     #upload {
         background-image: url(../images/AI_Cam/upload_pro.svg);
-        width: 100%!important;
-        height: 100%!important;
+        width: 100% !important;
+        height: 100% !important;
         background-position: center;
     }
 
@@ -120,6 +124,44 @@ h3 {
 
     #descTxt {
         font-size: 40px !important;
+    }
+
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+
+    #achieCongrate {
+        font-size: 90px !important;
+        top: 0% !important;
+    }
+
+    #achieBG {
+        width: 1000% !important;
+    }
+
+    #ache-cancel {
+        width: 40% !important;
+    }
+
+    #buttonContainer {
+        height: 10% !important;
+    }
+
+    #ache-collect {
+        width: 40% !important;
+    }
+
+    #achieText {
+        top: 17% !important;
+        width: 30%;
+    }
+
+    #achieText>div>img {
+        width: 100%;
+    }
+
+    #achieText>div>p {
+        font-size: 50px !important;
     }
 }
 

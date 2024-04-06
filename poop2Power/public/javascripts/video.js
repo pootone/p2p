@@ -1,10 +1,13 @@
 $().ready(function () {
-    // if (window.orientation == 0 && isMobileDevice()) {
-    //   // Portrait Mode
-    //   $("#rotatePhone").css("display", "block");
-    // }
-    // // if(isMobileDevice)
-    // // Rotate phone animation
+    if (isMobileDevice()) {
+      // Portrait Mode
+      $("#mobileCarousel").css("display", "block");
+    } else {
+        $("#mobileCarousel").css("display", "none");
+    }
+
+    // if(isMobileDevice)
+    // Rotate phone animation
     // $(window).on("orientationchange", function (event) {
     //   if (window.orientation == 0 && isMobileDevice()) {
     //     // Portrait Mode

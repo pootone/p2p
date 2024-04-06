@@ -28,13 +28,13 @@ async function gptQuery(img = '', desc = null) {
               type: "image_url",
               // Could be img url or base 64 img data
               image_url: img
-            },          
+            },
           ],
         },
       ],
       max_tokens: 2048
     });
-    console.log("GPT response: "+JSON.stringify(response.choices[0]));
+    console.log("GPT response: " + JSON.stringify(response.choices[0]));
     return response.choices[0];
   } catch (error) {
     console.log("Error in gpt query: ", error);
@@ -45,7 +45,7 @@ async function gptQuery(img = '', desc = null) {
 
 async function gptQueryTxt(desc = null) {
   try {
-    console.log("Req data:"+desc);
+    console.log("Req data:" + desc);
     const response = await openaiTxt.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -59,7 +59,7 @@ async function gptQueryTxt(desc = null) {
         },
       ],
     });
-    console.log("GPT response: "+JSON.stringify(response.choices[0]));
+    console.log("GPT response: " + JSON.stringify(response.choices[0]));
     return response.choices[0];
   } catch (error) {
     console.log("Error in gpt query: ", error);
@@ -68,11 +68,34 @@ async function gptQueryTxt(desc = null) {
   }
 }
 
+async function gptAchieQuery(data = null) {
+  try {
+    console.log("Req data:" + data);
+    const response = await openaiTxt.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "" //TODO
+        },
+        {
+          role: "user",
+          content: data || "",
+        },
+      ],
+    });
+    console.log("GPT response: " + JSON.stringify(response.choices[0]));
+    return response.choices[0];
+  } catch (error) {
+    console.log("Error in gpt achieve query: ", error);
+    throw error;
+  }
+}
+
 router.post('/gpt/img', async function (req, res, next) {
   console.log(req.body);
   try {
     let gptRes = await gptQuery(req.body.img, req.body.description) || "Gpt didn't response.";
-    console.log(typeof gptRes);
     console.log(JSON.stringify(gptRes));
     res.json(gptRes);
   } catch (error) {
@@ -84,12 +107,22 @@ router.post('/gpt/txt', async function (req, res, next) {
   console.log(req.body);
   try {
     let gptRes = await gptQueryTxt(req.body.description) || "Gpt didn't response.";
-    console.log(typeof gptRes);
     console.log(JSON.stringify(gptRes));
     res.json(gptRes);
   } catch (error) {
     res.status(500).json({ error: "GPT Response error." });
   }
 });
+
+router.post("/achie", async function (req, res, next) {
+  console.log(req.body);
+  try {
+    let gptRes = await gptAchieQuery(JSON.stringify(req.body)) || "Gpt didn't response.";
+    
+  } catch (error) {
+    res.status(500).json({error: "Achieve gpt res error"});
+  }
+  res.sendStatus(200);
+})
 
 module.exports = router;
