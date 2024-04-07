@@ -1,0 +1,184 @@
+.container-fluid {
+    padding: 38px 53px;
+}
+
+h3 {
+    color: #555;
+    text-align: justify;
+    font-family: 'Grandstander', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+/* Yes, No button */
+.imgYes>p,
+.imgNo>p {
+    color: #F2EFE8;
+}
+
+.imgYes>img,
+.imgNo>img {
+    content: url(../images/AI_Cam/no.svg);
+}
+
+.imgYes:hover>p,
+.imgNo:hover>p {
+    color: #313131;
+}
+
+.imgYes:hover>img,
+.imgNo:hover>img {
+    content: url(../images/AI_Cam/yes.svg);
+}
+
+#dialog-container::-webkit-scrollbar {
+    display: none;
+}
+
+.response-bg-1 {
+    background-image: url(../images/AI_Cam/dialog.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.inputBg {
+    background-image: url(../images/AI_Cam/inputField.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#nav {
+    height: 13%;
+}
+
+#upload {
+    background-image: url(../images/AI_Cam/upload.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 75%;
+    height: 55%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#submit {
+    background-image: url(../images/AI_Cam/send.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-cancel {
+    background-image: url(../images/AI_Cam/close.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-cancel:hover {
+    background-image: url(../images/AI_Cam/closeHover.svg);
+}
+
+#ache-collect {
+    background-image: url(../images/AI_Cam/collect.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-collect:hover {
+    background-image: url(../images/AI_Cam/collectHover.svg);
+}
+
+@media screen and (orientation: portrait) {
+    #nav {
+        height: 7%;
+    }
+
+    #upload {
+        background-image: url(../images/AI_Cam/upload_pro.svg);
+        width: 100% !important;
+        height: 100% !important;
+        background-position: center;
+    }
+
+    #submit {
+        background-image: url(../images/AI_Cam/send-mobile.svg);
+        width: 100% !important;
+        height: 100% !important;
+        background-position: center;
+    }
+
+    .inputBg {
+        background-image: url(../images/AI_Cam/descTxtParent.svg);
+    }
+
+    #descTxt {
+        font-size: 40px !important;
+    }
+
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+
+    #achieCongrate {
+        font-size: 90px !important;
+        top: 0% !important;
+    }
+
+    #achieBG {
+        width: 1000% !important;
+    }
+
+    #ache-cancel {
+        width: 40% !important;
+    }
+
+    #buttonContainer {
+        height: 10% !important;
+    }
+
+    #ache-collect {
+        width: 40% !important;
+    }
+
+    #achieText {
+        top: 17% !important;
+        width: 30%;
+    }
+
+    #achieImg {
+        width: 100%;
+    }
+
+    #achieTextContent {
+        font-size: 50px !important;
+    }
+}
+
+#loginModalContent {
+    background-color: transparent;
+    background-image: url(../../images/badge/loginModal/bg.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 95%;
+}
+
+.firebaseui-idp-google .firebaseui-idp-text {
+color: #ffffff;
+}
+
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+    .inputBg {
+        background-image: url(../images/AI_Cam/inputField.svg);
+    }
+}

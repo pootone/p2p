@@ -1,0 +1,10 @@
+.container-fluid {
+    padding: 0px;
+}
+@media screen and (orientation: portrait) {
+    .vidFrame {
+        min-width: 100vw;
+        height: 100vh;  
+        max-height: -webkit-fill-available;
+    }
+}

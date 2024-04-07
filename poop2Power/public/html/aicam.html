@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>No.2</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth__zh_tw.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.cdnfonts.com/css/grandstander"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../stylesheets/layout.css" />
+    <link rel="stylesheet" href="../stylesheets/cornerBtn.css" />
+    <link rel="stylesheet" href="../stylesheets/aiCam.css" />
+    <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid" style="height: 100vh">
+      <div class="fixed-corner">
+        <div class="corner-button" id="toggleMenuBtn">
+          <img src="../images/badge/menu_btn.png" alt="" />
+        </div>
+        <div class="menu-bar">
+          <img src="../images/badge/menuBar/menuBar_BG.png" alt="" srcset="" />
+          <div class="menu_item">
+            <a href="../index.html">
+              <img src="../images/badge/menuBar/首頁.png" alt="" srcset="" />
+            </a>
+            <a href="">
+              <img src="../images/badge/menuBar/相機.png" alt="" srcset="" />
+            </a>
+            <a href="./video.html">
+              <img src="../images/badge/menuBar/資訊.png" alt="" srcset="" />
+            </a>
+            <a href="./badge.html">
+              <img src="../images/badge/menuBar/徽章.png" alt="" srcset="" />
+            </a>
+            <a href="./aboutUs.html">
+              <img
+                src="../images/badge/menuBar/關於我們.png"
+                alt=""
+                srcset=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col"></div>
+        <h3>What do you eat?</h3>
+      </div>
+      <div id="dialog-container" class="h-75 pb-3" style="overflow-y: scroll">
+        <div id="guide-dialog-1" class="row w-100 mb-2">
+          <div
+            class="col-sm-12 col-lg-7 px-md-5 d-flex justify-content-center align-items-center position-relative"
+          >
+            <img class="w-100" src="../images/AI_Cam/res-bg-init.svg" />
+            <p class="position-absolute w-75 fs-5 my-auto" style="left: 15%">
+              您好！我是 AI
+              食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。
+            </p>
+          </div>
+        </div>
+        <div id="guide-dialog-login" class="row w-100 mb-2">
+          <div
+            class="col-sm-12 col-lg-7 px-md-5 d-flex justify-content-center align-items-center position-relative"
+          >
+            <img class="w-100" src="../images/AI_Cam/res-bg-init.svg" />
+            <p class="position-absolute w-75 fs-5 my-auto" style="left: 15%">
+              想保留體驗數據並獲得徽章，請 <button type="button" onclick="showLoginModal()">登入</button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row w-100 m-0" id="nav">
+        <div
+          class="col-8 h-100 ps-4 inputBg d-flex align-items-center"
+          style="background-position-x: 20%"
+        >
+          <input
+            class="h-100 p-3 form-control-plaintext fs-5"
+            id="descTxt"
+            type="text"
+            placeholder="輸入..."
+            style="width: 95%; border: 0; background: transparent"
+          />
+        </div>
+        <div
+          class="col-2 d-flex justify-content-center align-items-center p-0 position-relative"
+        >
+          <label type="button" id="upload" class="border-0"></label>
+          <input
+            id="imgFileInput"
+            type="file"
+            accept="image/*"
+            style="display: none"
+          />
+          <div
+            id="uploadGroup"
+            class="position-absolute justify-content-center"
+            style="width: 80%; top: -90%; display: none"
+          >
+            <input
+              id="imgTakePic"
+              type="file"
+              capture="environment"
+              accept="image/*"
+              style="display: none"
+            />
+            <label for="imgTakePic" class="d-flex justify-content-center">
+              <img
+                src="../images/AI_Cam/take_pic.svg"
+                alt=""
+                style="width: 80%"
+              />
+            </label>
+            <label for="imgFileInput" class="d-flex justify-content-center">
+              <img src="../images/AI_Cam/file.svg" alt="" style="width: 80%" />
+            </label>
+          </div>
+        </div>
+        <div
+          class="col-2 d-flex justify-content-center align-items-center p-0 position-relative"
+        >
+          <img
+            class="position-absolute w-75"
+            src="../images/AI_Cam/flowers.png"
+            style="top: -80%; left: 10%; object-fit: contain"
+          />
+          <input class="w-75" id="submit" type="button" style="height: 55%" />
+        </div>
+      </div>
+      <!-- Achieve Modal-->
+      <div class="modal modal-lg" id="achieModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-transparent border-0">
+            <div
+              class="modal-body position-relative d-flex justify-content-center"
+            >
+              <img
+                id="achieBG"
+                class="w-100"
+                src="../images/AI_Cam/achieBg.svg"
+              />
+              <p
+                id="achieCongrate"
+                class="fw-bold position-absolute text-light"
+                style="top: 15%; font-size: 50px"
+              >
+                成就解鎖！
+              </p>
+              <div id="achieText" class="position-absolute" style="top: 28%">
+                <div
+                  class="position-relative d-flex justify-content-center align-items-center"
+                >
+                  <img
+                    id="achieTxtImg"
+                    src="../images/AI_Cam/achieText-1.svg"
+                    style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
+                  />
+                  <p
+                    id="achieTextContent"
+                    class="position-absolute fw-bold"
+                    style="color: #7c2d01; font-size: 25px; margin: 0px"
+                  >
+                    吃來乍到
+                  </p>
+                </div>
+              </div>
+              <img
+                id="achieImg"
+                class="position-absolute"
+                style="width: 20%; top: 37%"
+                src="../images/AI_Cam/badge/1.gif"
+              />
+              <div
+                id="buttonContainer"
+                class="d-flex justify-content-center position-absolute w-100"
+                style="top: 70%; height: 8%"
+              >
+                <button
+                  id="ache-cancel"
+                  class="mx-2 w-25 h-100"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  onclick="awardClose()"
+                ></button>
+                <a
+                  id="ache-collect"
+                  class="mx-2 w-25 h-100"
+                  href="./badge.html?isFirst=true"
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal modal-xl" id="chartMoreModal" tabindex="-1">
+        <div
+          class="modal-dialog w-100 h-100"
+          style="
+            background-image: url(../images/AI_Cam/moreBG.svg);
+            background-size: contain;
+            background-repeat: no-repeat;
+          "
+        >
+          <div
+            class="modal-content bg-transparent border-0"
+            style="height: 70%; max-height: 860px; min-height: 650px; top: 2%"
+          >
+            <div class="modal-body h-100">
+              <div class="container h-100 px-5 py-4">
+                <!-- Modal nav -->
+                <!-- Description -->
+                <div class="row mb-2" style="height: 9%">
+                  <div class="col position-relative h-100">
+                    <div
+                      class="w-100 h-100"
+                      style="
+                        background-image: url(../images/AI_Cam/Explanation.svg);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                      "
+                    ></div>
+                    <div class="d-flex w-100 position-absolute top-0">
+                      <button
+                        type="button"
+                        id="chartMoreModalBtn"
+                        class="p-0 border-0 bg-transparent"
+                        style="width: 6%; height: 100%"
+                        data-bs-toggle="modal"
+                        data-bs-target="#chartMoreModal"
+                      >
+                        <img
+                          src="../images/AI_Cam/back_icon.svg"
+                          alt=""
+                          style="object-fit: cover"
+                          class="w-100 h-100"
+                        />
+                      </button>
+                      <p class="my-auto fs-5" id="modalTitle"></p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="row w-100 d-flex justify-content-center mb-3 mx-0"
+                  style="height: 33%"
+                >
+                  <div
+                    class="col-6 h-100"
+                    style="
+                      background-image: url(../images/AI_Cam/LTBG.png);
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                    "
+                  >
+                    <p class="fs-6 ms-4 mt-4">
+                      排放了約<span
+                        id="methaneSp"
+                        class="p-2"
+                        style="
+                          background-image: url(../images/AI_Cam/lv_bg.svg);
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          background-position: center;
+                        "
+                      ></span
+                      >的甲烷排放量
+                    </p>
+                    <div class="position-relative">
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/car.json"
+                        background="transparent"
+                        style="
+                          width: 20%;
+                          margin-left: 25%;
+                          transform: scaleX(-1);
+                          margin-top: 15%;
+                        "
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 position-absolute mx-auto"
+                        style="left: 10%; top: 39%"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
+                  </div>
+                  <div
+                    class="col-6 h-100"
+                    style="
+                      background-image: url(../images/AI_Cam/RTBG.png);
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                    "
+                  >
+                    <p class="fs-6 ms-4 mt-4">
+                      製造了約<span
+                        id="electricitySp"
+                        class="p-2"
+                        style="
+                          background-image: url(../images/AI_Cam/lv_bg.svg);
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          background-position: center;
+                        "
+                      ></span
+                      >的電力輸出
+                    </p>
+                    <div class="position-relative w-100">
+                      <lottie-player
+                        id="loader"
+                        class="h-50 m-auto"
+                        style="width: 15%; margin-top: 6%"
+                        src="../images/AI_Cam/phone.json"
+                        background="transparent"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 10%; top: 43%; transform: scaleX(-1)"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="row w-100 d-flex justify-content-center mb-2 mx-0"
+                  style="height: 33%"
+                >
+                  <div
+                    class="col-6 h-100"
+                    style="
+                      background-image: url(../images/AI_Cam/LBBG.png);
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                    "
+                  >
+                    <p class="fs-6 ms-4 mt-4">
+                      產生了約<span
+                        id="calorieSp"
+                        class="p-2"
+                        style="
+                          background-image: url(../images/AI_Cam/lv_bg.svg);
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          background-position: center;
+                        "
+                      ></span
+                      >的熱量
+                    </p>
+                    <div class="position-relative">
+                      <img
+                        src="../images/AI_Cam/run.gif"
+                        style="width: 10%; margin-left: 15%; margin-top: 6%"
+                        alt=""
+                      />
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 10%; top: 47%"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
+                  </div>
+                  <div
+                    class="col-6 h-100"
+                    style="
+                      background-image: url(../images/AI_Cam/RBBG.png);
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                    "
+                  >
+                    <p class="fs-6 mt-4" style="margin-left: 25%">
+                      會有約<span
+                        id="constipateSp"
+                        class="p-2"
+                        style="
+                          background-image: url(../images/AI_Cam/lv_bg.svg);
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          background-position: center;
+                        "
+                      ></span
+                      >的便秘風險
+                    </p>
+                    <div class="w-100 position-relative">
+                      <img
+                        src="../images/AI_Cam/poop.gif"
+                        style="
+                          width: 10%;
+                          margin-left: 50%;
+                          margin-top: 10%;
+                          transform: scaleX(-1);
+                        "
+                        alt=""
+                      />
+                      <lottie-player
+                        id="loader"
+                        src="../images/AI_Cam/road.json"
+                        background="transparent"
+                        class="w-75 mx-auto position-absolute"
+                        style="left: 14%; top: 48%; transform: scaleX(-1)"
+                        speed="1"
+                        loop=""
+                        autoplay=""
+                      ></lottie-player>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Suggestion -->
+                <div class="row position-relative mb-2 mx-0" style="height: 9%">
+                  <div
+                    class="h-100"
+                    style="
+                      background-image: url(../images/AI_Cam/Suggestion.svg);
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                    "
+                  ></div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                  <div class="col-11">
+                    <p class="fs-6" id="aiSug"></p>
+                  </div>
+                </div>
+
+                <!-- Radar chart -->
+                <div
+                  class="position-absolute"
+                  style="width: 25%; top: 25%; left: 38%"
+                >
+                  <canvas
+                    id="chartMoreRadar"
+                    style="display: block; box-sizing: border-box"
+                  ></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">
+        <div class="modal-dialog modal-dialog-centered h-100">
+            <div class="modal-content w-100 h-100 position-relative" id="loginModalContent">
+                <div class="modal-body position-relative d-flex align-items-center justify-content-center" style="padding: 0%;">
+                    <img src="../images/badge/loginModal/border.svg" alt="" class="position-absolute w-100 h-100">
+                    <div id="firebaseui-auth-container" class="top-0"></div>
+                </div>
+                <button class="position-absolute border-0 bg-transparent" id="login_skip" style="top: 6%; right: 5%;">
+                    <img src="../images/badge/loginModal/skip_btn.svg">
+                </button>
+            </div>
+          </div>
+        </div>
+    </div>
+      <!-- jquery -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js">
+        <!-- chart.js -->
+      </script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+      <script src="../javascripts/CornerBTN.js"></script>
+      <script src="../javascripts/ai_cam.js"></script>
+    </div>
+  </body>
+</html>
