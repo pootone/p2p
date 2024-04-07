@@ -8,6 +8,8 @@ var cors = require('cors'); // For cross request
 const corsOptions = {
   origin: [
     'https://no-2c.netlify.app',
+    'https://no-2t.netlify.app',
+    'https://no-2.netlify.app',
     'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
     '127.0.0.1:5500', //TODO DElETE WHEN DEPLOY!!!!!
     '127.0.0.1:3000' //TODO DElETE WHEN DEPLOY!!!!!
