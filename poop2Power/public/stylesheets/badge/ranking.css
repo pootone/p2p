@@ -1,0 +1,96 @@
+p {
+    font-family: 'Grandstander';
+    color: #394038;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 55px;
+    font-family: 'Shippori Mincho';
+}
+
+.container {
+    max-width: 100%;
+    height: 90vh;
+    background-image: url('../../images/badge/rank/RankBG.png');
+    background-size: 80%;
+    background-position: center;
+    /* max-height: 100vh; */
+    background-repeat: no-repeat;
+    margin-top: -40px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.rank1-3 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 30%;
+}
+.rank1{
+    margin-top: -50px;
+}
+.rank1 img {
+    width: 250px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+.rank2 img,
+.rank3 img {
+    /* margin-top: 100px; */
+    width: 250px; /* Adjust the width as needed */
+    height: auto;
+}
+.rank1 p,
+.rank2 p,
+.rank3 p{
+    font-size: 30px;
+    text-align: center;
+    margin-top: -60px;
+}
+
+.rank4-10 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 80%;
+    height: 70%;
+    max-width: 100%; 
+    overflow: auto;
+    max-height: 55vh;
+    margin-left: 10%;
+}
+.rank4-10::-webkit-scrollbar {
+    display: none;
+}
+.rank-list {
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+    max-height: 100%;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+}
+.rank-list img {
+    /* max-width: 100%; */
+    height: auto;
+}
+.rank-list p {
+    position: absolute;
+    bottom: 15px;
+    left: 45%;
+    font-size: 30px;
+}
+
+
+footer {
+    /* background-color: #f8f9fa; */
+    padding: 30px 0;
+    text-align: center;
+}
