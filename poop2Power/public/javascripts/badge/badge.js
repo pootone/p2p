@@ -9,9 +9,12 @@ const firebaseConfig = {
 };
 
 const currentUrl = new URL(document.location);
+let currentUser;
+let currentUserData;
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 // FirebaseUI config.
 var uiConfig = {
     signInSuccessUrl: "./badge.html",
@@ -36,19 +39,29 @@ var uiConfig = {
     signInFlow: "popup",
 };
 
-initApp = function () {
+initApp = function (isnewachieve) {
     firebase.auth().onAuthStateChanged(
         function (user) {
             // User is signed in.
             if (user) {
                 $("#loginModal").hide();
                 $("#title").text(user.displayName + "'s Dashboard");
+                currentUser = user;
+                getUserData();
+                if($.cookie("toSaveAchieve")) {
+                    collectAchieve();
+                }
+                // updateUserData();
             } else {
                 // User is signed out.
-                if ($.cookie("skipLogin") != 'true') {
+                if ($.cookie("skipLogin") != 'true' && !isnewachieve) {
                     $("#loginModal").show();
                 }
                 $("#title").text("Personal Dashboard");
+                $("#electricity").text();
+                currentUser = null;
+                currentUserData = null;
+                updateUserData();
             }
         },
         function (error) {
@@ -60,13 +73,13 @@ initApp = function () {
 $().ready(function () {
     $("#title").text("Personal Dashboard");
     // Check whether get new achieve
-    if(!isNewAchieve()){
-        initApp();
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        // The start method will wait until the DOM is loaded.
-        ui.start("#firebaseui-auth-container", uiConfig);
-    }
+    initApp(isNewAchieve());
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start("#firebaseui-auth-container", uiConfig);
+    // if (!) {
+    // }
 
     $("#login_skip").click(function () {
         $("#loginModal").hide();
@@ -142,24 +155,33 @@ function isNewAchieve() {
     const badge = currentUrl.searchParams.get("badge");
 
     // Visit exhibition
-    if(range) {
+    if (range) {
         switch (range) {
             case "1": {
+                adjustAchieveModalContent("二號探險家", "4-1.svg");
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "10" }), { expires: 7 });
                 break;
             }
             case "2": {
+                adjustAchieveModalContent("二號探險家", "4-2.svg");
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "20" }), { expires: 7 });
                 break;
             }
             case "3": {
+                adjustAchieveModalContent("二號探險家", "4-3.svg");
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "30" }), { expires: 7 });
                 break;
             }
             case "4": {
+                adjustAchieveModalContent("二號探險家", "4-4.svg");
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "40" }), { expires: 7 });
                 break;
             }
         }
+        showAchieveModal();
         return true;
-    } else if(badge) {
-        switch(badge){
+    } else if (badge) {
+        switch (badge) {
             case "1st":
                 break;
         }
@@ -168,3 +190,64 @@ function isNewAchieve() {
     return false;
 }
 
+function showAchieveModal() {
+    $("#achieModal").modal('show');
+}
+
+function adjustAchieveModalContent(achieveName, achieveImg) {
+    let nameLen = achieveName.length;
+    if (7 < nameLen) {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-3.svg")
+    } else if (4 < nameLen) {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-2.svg")
+    } else {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-1.svg")
+    }
+    $("#achieTextContent").text(achieveName);
+    $("#achieImg").attr("src", `../images/AI_Cam/badge/${achieveImg}`);
+}
+
+function getUserData() {
+    let userRef = db.collection("users").doc(currentUser.uid);
+
+    userRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            currentUserData = doc.data();
+            updateUserData();
+        } else {
+            console.log("No user data yet");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+}
+
+function updateUserData() {
+    $("#electricity").text(currentUserData.electricity || "");
+}
+
+function collectAchieve() {
+    console.log(currentUser);
+    if (currentUser) {
+        var userRef = db.collection('users').doc(currentUser.uid);
+
+        let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
+        
+        // console.log(currentUserData.electricity + toSaveData.electricity);
+        console.log(currentUserData.electricity);
+        console.log(currentUserData);
+
+        let originalElectricity = parseInt(currentUserData.electricity) || 0;
+
+        userRef.set({
+            electricity: originalElectricity + parseInt(toSaveData.electricity)
+        });
+        $("#achieModal").modal('hide');
+        getUserData();
+        $.removeCookie('toSaveAchieve', { path: '/' });
+    } else {
+        $("#achieModal").modal('hide');
+        $("#loginModal").show();
+    }
+}

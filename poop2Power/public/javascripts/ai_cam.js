@@ -1,3 +1,65 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyBuGBwRToBzDRfahNTopteuS9fOmEg1so8",
+    authDomain: "no2-2024.firebaseapp.com",
+    projectId: "no2-2024",
+    storageBucket: "no2-2024.appspot.com",
+    messagingSenderId: "350892065045",
+    appId: "1:350892065045:web:83e08ce22324bac4e8291c",
+    measurementId: "G-N9JH7N740F"
+};
+
+let currentUser;
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+// FirebaseUI config.
+var uiConfig = {
+    signInSuccessUrl: "./aicam.html",
+    signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        {
+            provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            buttonColor: '#777E94',
+            iconUrl: '../images/badge/loginModal/google_icon.svg'
+        },
+        {
+            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            buttonColor: '#D1A4A4',
+            iconUrl: '../images/badge/loginModal/mail_icon.svg'
+        },
+        {
+            provider: firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+            buttonColor: '#C6B896',
+            iconUrl: '../images/badge/loginModal/anom_icon.svg'
+        }
+    ],
+    signInFlow: "popup",
+};
+
+initApp = function () {
+    firebase.auth().onAuthStateChanged(
+        function (user) {
+            // User is signed in.
+            if (user) {
+                // $("#loginModal").hide();
+                currentUser = user;
+                // console.log(currentUser.uid);
+            } else {
+                // User is signed out.
+                // if ($.cookie("skipLogin") != 'true') {
+                //     $("#loginModal").show();
+                // }
+                $("#guide-dialog-login").show();
+                currentUser = null;
+            }
+        },
+        function (error) {
+            console.log(error);
+        }
+    );
+}
+
 let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
 // let API = "/aicam/gpt/img"; //TODO
 let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
@@ -83,15 +145,24 @@ let chartConfig = {
 
 $().ready(function () {
     $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
+
+    initApp();
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start("#firebaseui-auth-container", uiConfig);
+
     // Auto scroll to bottom, when append content to the container
     var dialogContainer = document.getElementById('dialog-container');
     dialogObserver.observe(dialogContainer, { childList: true });
 
     $("#guide-dialog-1").hide();
+    $("#guide-dialog-login").hide();
 
     setTimeout(function () {
         $("#guide-dialog-1").show();
     }, 2000);
+
     // appendLoader(); //TODO
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
@@ -219,10 +290,11 @@ $().ready(function () {
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
 
                         // Show Achievement Model
-                        setTimeout(function () {
-                            isCloseAwardModal = false;
-                            showAchieveModal()
-                        }, 1500);
+                        achieCheck();
+                        // setTimeout(function () {
+                        //     isCloseAwardModal = false;
+                        //     showAchieveModal()
+                        // }, 1500);
                     } catch (e) {
                         $("#loader").remove();
                         appendRetryMsg();
@@ -245,7 +317,20 @@ function scrollToBottom() {
 }
 
 function showAchieveModal() {
-    $("#acheModal").modal('show');
+    $("#achieModal").modal('show');
+}
+
+function adjustAchieveModalContent(achieveName, achieveIndex) {
+    let nameLen = achieveName.length;
+    if (7 < nameLen) {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-3.svg")
+    } else if (4 < nameLen) {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-2.svg")
+    } else {
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-1.svg")
+    }
+    $("#achieTextContent").text(achieveName);
+    $("#achieImg").attr("src", `../images/AI_Cam/badge/${achieveIndex}.gif`);
 }
 
 function appendChart(methane, electricity, constipate, calorie, suggest = "") {
@@ -452,31 +537,54 @@ function imgResCorrect() {
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
 
     // Show Achievement Model
-    setTimeout(function () {
-        isCloseAwardModal = false;
-        showAchieveModal();
-    }, 1500);
+    achieCheck();
+    // setTimeout(function () {
+    //     isCloseAwardModal = false;
+    //     showAchieveModal();
+    // }, 1500);
 }
 
 function achieCheck() {
+    // Get the badge
+    // let payload = {
+    //     food: "早午餐",
+    //     ingredient: "eggs, bacon, toast, coffee"
+    // }
+    // // $.post("https://p2p-contest-backend.onrender.com/wake", )
+    // $.post("/aicam/achie", payload)
+    //     .done(function (data) {
+    //         console.log(data);
+    //     })
+    //     .fail(function (xhr, status, error) {
+    //         console.log(error);
+    //     })
+
     // Get achie data
+    console.log(currentUser.uid);
+
+    let userRef = db.collection("users").doc(currentUser.uid);
+    let badgeRef = userRef.collection("badges");
+
+    badgeRef.get().then((querySnapshot) => {
+        console.log(querySnapshot);
+        console.log(typeof querySnapshot);
+        console.log(querySnapshot.length);
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data()}`);
+        });
+    }).catch((error) => {
+        console.log("Error getting badges:", error);
+    });
 
     // if() {
     // First try
+    // adjustAchieveModalContent("吃來乍到", 1);
+    // showAchieveModal();
     // } else if() {
+    // 小吃貨
+    // 拍照或上傳完一半種類的食物
     // } else {
-    let payload = {
-        food: "早午餐",
-        ingredient: "eggs, bacon, toast, coffee"
-    }
-    // $.post("https://p2p-contest-backend.onrender.com/wake", )
-    $.post("/aicam/achie", payload)
-        .done(function (data) {
-            console.log(data);
-        })
-        .fail(function (xhr, status, error) {
-            console.log(error);
-        })
+
     // }
 }
 // achieCheck();
@@ -650,3 +758,7 @@ function isPortrait() {
 $("#chartMoreModalBtn").on("click", function () {
     $("#chartMoreModal").modal('hide');
 });
+
+function showLoginModal() {
+    $("#loginModal").show();
+}

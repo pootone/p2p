@@ -156,13 +156,25 @@ h3 {
         width: 30%;
     }
 
-    #achieText>div>img {
+    #achieImg {
         width: 100%;
     }
 
-    #achieText>div>p {
+    #achieTextContent {
         font-size: 50px !important;
     }
+}
+
+#loginModalContent {
+    background-color: transparent;
+    background-image: url(../../images/badge/loginModal/bg.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 95%;
+}
+
+.firebaseui-idp-google .firebaseui-idp-text {
+color: #ffffff;
 }
 
 @media screen and (orientation: portrait) and (min-width: 1000px) {

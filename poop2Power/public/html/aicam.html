@@ -2,12 +2,17 @@
 <html>
   <head>
     <title>No.2</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth__zh_tw.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"/>
     <link
       rel="stylesheet"
       href="https://fonts.cdnfonts.com/css/grandstander"
@@ -64,6 +69,16 @@
             <p class="position-absolute w-75 fs-5 my-auto" style="left: 15%">
               您好！我是 AI
               食光機，您可以打字輸入或是上傳圖片告訴我今天吃了什麼，我將為您分析該食物的甲烷排放量、電力輸出、熱量及便秘風險。
+            </p>
+          </div>
+        </div>
+        <div id="guide-dialog-login" class="row w-100 mb-2">
+          <div
+            class="col-sm-12 col-lg-7 px-md-5 d-flex justify-content-center align-items-center position-relative"
+          >
+            <img class="w-100" src="../images/AI_Cam/res-bg-init.svg" />
+            <p class="position-absolute w-75 fs-5 my-auto" style="left: 15%">
+              想保留體驗數據並獲得徽章，請 <button type="button" onclick="showLoginModal()">登入</button>
             </p>
           </div>
         </div>
@@ -127,7 +142,7 @@
         </div>
       </div>
       <!-- Achieve Modal-->
-      <div class="modal modal-lg" id="acheModal" tabindex="-1">
+      <div class="modal modal-lg" id="achieModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content bg-transparent border-0">
             <div
@@ -150,10 +165,12 @@
                   class="position-relative d-flex justify-content-center align-items-center"
                 >
                   <img
+                    id="achieTxtImg"
                     src="../images/AI_Cam/achieText-1.svg"
                     style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
                   />
                   <p
+                    id="achieTextContent"
                     class="position-absolute fw-bold"
                     style="color: #7c2d01; font-size: 25px; margin: 0px"
                   >
@@ -162,9 +179,10 @@
                 </div>
               </div>
               <img
+                id="achieImg"
                 class="position-absolute"
                 style="width: 20%; top: 37%"
-                src="../images/AI_Cam/badge/01.gif"
+                src="../images/AI_Cam/badge/1.gif"
               />
               <div
                 id="buttonContainer"
@@ -460,6 +478,20 @@
           </div>
         </div>
       </div>
+      <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">
+        <div class="modal-dialog modal-dialog-centered h-100">
+            <div class="modal-content w-100 h-100 position-relative" id="loginModalContent">
+                <div class="modal-body position-relative d-flex align-items-center justify-content-center" style="padding: 0%;">
+                    <img src="../images/badge/loginModal/border.svg" alt="" class="position-absolute w-100 h-100">
+                    <div id="firebaseui-auth-container" class="top-0"></div>
+                </div>
+                <button class="position-absolute border-0 bg-transparent" id="login_skip" style="top: 6%; right: 5%;">
+                    <img src="../images/badge/loginModal/skip_btn.svg">
+                </button>
+            </div>
+          </div>
+        </div>
+    </div>
       <!-- jquery -->
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

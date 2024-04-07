@@ -76,7 +76,7 @@ async function gptAchieQuery(data = null) {
       messages: [
         {
           role: "system",
-          content: "" //TODO
+          content: '{// Search for attributes "food" and "ingredient" based on the input text.// List all values of the "ingredient" attribute and iterate through each string contained in the "ingredient" attribute to determine multiple categories."FoodFlavor": "string", // Determine whether the string found in the "food" attribute is "Korean cuisine", "Chinese cuisine", "American cuisine", "Thai cuisine", "Japanese cuisine". If there is a matching option, output its name. If not, output a single space."Six Major Food Categories": "string", // Based on all the strings in the "ingredient" attribute, determine whether they belong to the following food categories: "whole grains and tubers", "legumes, fish, eggs, and meats", "vegetables", "fruits", "fats and nuts", "dairy products". If there is a matching option, output its name. If not, output a single space."Healthy Staple Foods": "string", // Based on all the strings in the "ingredient" attribute, determine whether they are "purple sweet potato", "sweet potato", "potato", "buckwheat noodles". If there is a matching option, output "Healthy Staple Foods". If not, output a single space."Chicken": "string", // Based on all the strings in the "ingredient" attribute, determine whether they are "chicken". If there is a match, output "Chicken". If not, output a single space."Burger": "string" // Based on all the strings in the "ingredient" attribute, determine whether they are "burger", "rice burger", "sandwich", "submarine sandwich". If there is a match, output "Burger". If not, output a single space.}'
         },
         {
           role: "user",
@@ -118,7 +118,8 @@ router.post("/achie", async function (req, res, next) {
   console.log(req.body);
   try {
     let gptRes = await gptAchieQuery(JSON.stringify(req.body)) || "Gpt didn't response.";
-    
+    console.log(JSON.stringify(gptRes));
+    res.json(gptRes);
   } catch (error) {
     res.status(500).json({error: "Achieve gpt res error"});
   }

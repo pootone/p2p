@@ -8,19 +8,26 @@ p {
 }
 
 .header {
+    width: 80%;
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header .name p {
+
+.header .name p,
+#electricity {
     font-family: 'Grandstander';
     font-style: normal;
     font-size: 50px;
     text-align: justify;
     color: #394038;
     margin-left: 100px;
+}
+
+#electricity {
+    font-size: 30px;
 }
 
 .header .personal-photo img {
@@ -173,6 +180,23 @@ body::-webkit-scrollbar {
     transition: all 0.3s ease;
 }
 
+#ache-cancel:hover {
+    background-image: url(../../images/AI_Cam/closeHover.svg);
+}
+
+#ache-collect {
+    background-image: url(../../images/AI_Cam/collect.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#ache-collect:hover {
+    background-image: url(../../images/AI_Cam/collectHover.svg);
+}
+
 @media (max-width: 768px) {
 
     #openRankWindowBtn,
@@ -246,6 +270,74 @@ body::-webkit-scrollbar {
     }
 }
 
+@media screen and (orientation: portrait) {
+    /* #nav {
+        height: 7%;
+    }
+
+    #upload {
+        background-image: url(../images/AI_Cam/upload_pro.svg);
+        width: 100% !important;
+        height: 100% !important;
+        background-position: center;
+    }
+
+    #submit {
+        background-image: url(../images/AI_Cam/send-mobile.svg);
+        width: 100% !important;
+        height: 100% !important;
+        background-position: center;
+    }
+
+    .inputBg {
+        background-image: url(../images/AI_Cam/descTxtParent.svg);
+    }
+
+    #descTxt {
+        font-size: 40px !important;
+    }*/
+
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+
+    #achieCongrate {
+        font-size: 45px !important;
+        top: 20% !important;
+    }
+
+    #achieBG {
+        width: 1000% !important;
+    }
+
+    #ache-cancel {
+        width: 40% !important;
+    }
+
+    #buttonContainer {
+        top: 55% !important;
+        height: 10% !important;
+    } 
+
+    #ache-collect {
+        width: 40% !important;
+    }
+
+    #achieText {
+        top: 30% !important;
+        width: 100%;
+    }
+
+    #achieImg {
+        top: 41% !important;
+        width: 100%;
+    }
+
+    #achieTextContent {
+        font-size: 25px !important;
+    }
+}
+
 .firebaseui-container {}
 
 #loginModalContent {
@@ -257,7 +349,7 @@ body::-webkit-scrollbar {
 }
 
 .firebaseui-idp-google .firebaseui-idp-text {
-color: #ffffff;
+    color: #ffffff;
 }
 
 
