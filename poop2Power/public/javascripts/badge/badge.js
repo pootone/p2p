@@ -45,20 +45,19 @@ initApp = function (isnewachieve) {
             // User is signed in.
             if (user) {
                 $("#loginModal").hide();
-                $("#title").text(user.displayName + "'s Dashboard");
                 currentUser = user;
-                getUserData();
-                if($.cookie("toSaveAchieve")) {
-                    collectAchieve();
-                }
+                getUserData().then(() => {
+                    updateUserData();
+                    if (!isnewachieve && $.cookie("toSaveAchieve")) {
+                        collectAchieve();
+                    }
+                });
                 // updateUserData();
             } else {
                 // User is signed out.
                 if ($.cookie("skipLogin") != 'true' && !isnewachieve) {
                     $("#loginModal").show();
                 }
-                $("#title").text("Personal Dashboard");
-                $("#electricity").text();
                 currentUser = null;
                 currentUserData = null;
                 updateUserData();
@@ -150,7 +149,6 @@ function closeFloatingWindow() {
 
 // Check wether there's new achieve
 function isNewAchieve() {
-    console.log(currentUrl);
     const range = currentUrl.searchParams.get("range");
     const badge = currentUrl.searchParams.get("badge");
 
@@ -208,32 +206,40 @@ function adjustAchieveModalContent(achieveName, achieveImg) {
 }
 
 function getUserData() {
-    let userRef = db.collection("users").doc(currentUser.uid);
+    return new Promise((resolve, reject) => {
+        console.log("in get user data");
+        let userRef = db.collection("users").doc(currentUser.uid);
 
-    userRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            currentUserData = doc.data();
-            updateUserData();
-        } else {
-            console.log("No user data yet");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                currentUserData = doc.data();
+                // updateUserData();
+            } else {
+                console.log("No user data yet");
+            }
+            resolve();
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+            reject(error);
+        });
+        console.log("out get user data");
+    })
 }
 
 function updateUserData() {
-    $("#electricity").text(currentUserData.electricity || "");
+    console.log("update data");
+    $("#electricity").text(currentUserData ? currentUserData.electricity : "");
+    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard": "Personal Dashboard");
 }
 
 function collectAchieve() {
-    console.log(currentUser);
+    // console.log(currentUser);
     if (currentUser) {
         var userRef = db.collection('users').doc(currentUser.uid);
 
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
-        
+
         // console.log(currentUserData.electricity + toSaveData.electricity);
         console.log(currentUserData.electricity);
         console.log(currentUserData);
@@ -244,8 +250,10 @@ function collectAchieve() {
             electricity: originalElectricity + parseInt(toSaveData.electricity)
         });
         $("#achieModal").modal('hide');
-        getUserData();
-        $.removeCookie('toSaveAchieve', { path: '/' });
+        getUserData().then(()=> {
+            updateUserData();
+            $.removeCookie('toSaveAchieve');
+        })
     } else {
         $("#achieModal").modal('hide');
         $("#loginModal").show();
