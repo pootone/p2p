@@ -165,7 +165,7 @@ $().ready(function () {
 
     // appendLoader(); //TODO
     // appendChart(1, 2, 3, 4);//TODO
-    $("#chartMoreModal").modal('show');//TODO
+    // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
     // showAchieveModal();
     // Preview the image when image input change
