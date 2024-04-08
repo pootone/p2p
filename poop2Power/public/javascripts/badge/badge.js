@@ -226,10 +226,10 @@ function getUserData() {
 
 function updateUserData() {
     $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
-    $("#electricity").text(currentUserData.electricity ? currentUserData.electricity : "");
+    $("#electricity").text(currentUserData ? currentUserData.electricity : "");
     // Go through all badge
     // Toggle badge icon display
-    if (currentUserData.badge) {
+    if (currentUserData && currentUserData.badge) {
         Object.entries(currentUserData.badge).forEach((obj) => {
             console.log($(`#badge${obj[0]}Modal`));
             // console.log($(`#badge${obj[0]}Modal`));
@@ -245,11 +245,12 @@ function collectAchieve() {
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
 
         // console.log(currentUserData.electricity + toSaveData.electricity);
-        console.log(currentUserData.electricity);
-        console.log(currentUserData);
+        // console.log(currentUserData.electricity);
+        // console.log(currentUserData);
 
-        let currentElectricity = parseInt(currentUserData.electricity) || 0;
-        let currentBadge = currentUserData.badge || {};
+        let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+
+        let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
 
         currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
 
