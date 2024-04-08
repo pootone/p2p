@@ -157,22 +157,22 @@ function isNewAchieve() {
         switch (range) {
             case "1": {
                 adjustAchieveModalContent("二號探險家", "4-1.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "10" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "1", electricity: "10" }), { expires: 7 });
                 break;
             }
             case "2": {
                 adjustAchieveModalContent("二號探險家", "4-2.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "20" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "2", electricity: "20" }), { expires: 7 });
                 break;
             }
             case "3": {
                 adjustAchieveModalContent("二號探險家", "4-3.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "30" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "3", electricity: "30" }), { expires: 7 });
                 break;
             }
             case "4": {
                 adjustAchieveModalContent("二號探險家", "4-4.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "40" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "4", electricity: "40" }), { expires: 7 });
                 break;
             }
         }
@@ -207,14 +207,12 @@ function adjustAchieveModalContent(achieveName, achieveImg) {
 
 function getUserData() {
     return new Promise((resolve, reject) => {
-        console.log("in get user data");
         let userRef = db.collection("users").doc(currentUser.uid);
 
         userRef.get().then((doc) => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
                 currentUserData = doc.data();
-                // updateUserData();
             } else {
                 console.log("No user data yet");
             }
@@ -223,18 +221,24 @@ function getUserData() {
             console.log("Error getting document:", error);
             reject(error);
         });
-        console.log("out get user data");
     })
 }
 
 function updateUserData() {
-    console.log("update data");
-    $("#electricity").text(currentUserData ? currentUserData.electricity : "");
-    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard": "Personal Dashboard");
+    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
+    $("#electricity").text(currentUserData.electricity ? currentUserData.electricity : "");
+    // Go through all badge
+    // Toggle badge icon display
+    if (currentUserData.badge) {
+        Object.entries(currentUserData.badge).forEach((obj) => {
+            console.log($(`#badge${obj[0]}Modal`));
+            // console.log($(`#badge${obj[0]}Modal`));
+            $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+        })
+    }
 }
 
 function collectAchieve() {
-    // console.log(currentUser);
     if (currentUser) {
         var userRef = db.collection('users').doc(currentUser.uid);
 
@@ -244,16 +248,23 @@ function collectAchieve() {
         console.log(currentUserData.electricity);
         console.log(currentUserData);
 
-        let originalElectricity = parseInt(currentUserData.electricity) || 0;
+        let currentElectricity = parseInt(currentUserData.electricity) || 0;
+        let currentBadge = currentUserData.badge || {};
+
+        currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
 
         userRef.set({
-            electricity: originalElectricity + parseInt(toSaveData.electricity)
+            electricity: currentElectricity + parseInt(toSaveData.electricity),
+            badge: currentBadge
+        }).then(() => {
+            $("#achieModal").modal('hide');
+            getUserData().then(() => {
+                updateUserData();
+                $.removeCookie('toSaveAchieve');
+            });
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
         });
-        $("#achieModal").modal('hide');
-        getUserData().then(()=> {
-            updateUserData();
-            $.removeCookie('toSaveAchieve');
-        })
     } else {
         $("#achieModal").modal('hide');
         $("#loginModal").show();
