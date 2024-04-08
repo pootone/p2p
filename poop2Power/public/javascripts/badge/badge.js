@@ -45,20 +45,19 @@ initApp = function (isnewachieve) {
             // User is signed in.
             if (user) {
                 $("#loginModal").hide();
-                $("#title").text(user.displayName + "'s Dashboard");
                 currentUser = user;
-                getUserData();
-                if($.cookie("toSaveAchieve")) {
-                    collectAchieve();
-                }
+                getUserData().then(() => {
+                    updateUserData();
+                    if (!isnewachieve && $.cookie("toSaveAchieve")) {
+                        collectAchieve();
+                    }
+                });
                 // updateUserData();
             } else {
                 // User is signed out.
                 if ($.cookie("skipLogin") != 'true' && !isnewachieve) {
                     $("#loginModal").show();
                 }
-                $("#title").text("Personal Dashboard");
-                $("#electricity").text();
                 currentUser = null;
                 currentUserData = null;
                 updateUserData();
@@ -150,7 +149,6 @@ function closeFloatingWindow() {
 
 // Check wether there's new achieve
 function isNewAchieve() {
-    console.log(currentUrl);
     const range = currentUrl.searchParams.get("range");
     const badge = currentUrl.searchParams.get("badge");
 
@@ -159,22 +157,22 @@ function isNewAchieve() {
         switch (range) {
             case "1": {
                 adjustAchieveModalContent("二號探險家", "4-1.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "10" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "1", electricity: "10" }), { expires: 7 });
                 break;
             }
             case "2": {
                 adjustAchieveModalContent("二號探險家", "4-2.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "20" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "2", electricity: "20" }), { expires: 7 });
                 break;
             }
             case "3": {
                 adjustAchieveModalContent("二號探險家", "4-3.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "30" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "3", electricity: "30" }), { expires: 7 });
                 break;
             }
             case "4": {
                 adjustAchieveModalContent("二號探險家", "4-4.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "40" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "4", electricity: "40" }), { expires: 7 });
                 break;
             }
         }
@@ -208,44 +206,65 @@ function adjustAchieveModalContent(achieveName, achieveImg) {
 }
 
 function getUserData() {
-    let userRef = db.collection("users").doc(currentUser.uid);
+    return new Promise((resolve, reject) => {
+        let userRef = db.collection("users").doc(currentUser.uid);
 
-    userRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            currentUserData = doc.data();
-            updateUserData();
-        } else {
-            console.log("No user data yet");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                currentUserData = doc.data();
+            } else {
+                console.log("No user data yet");
+            }
+            resolve();
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+            reject(error);
+        });
+    })
 }
 
 function updateUserData() {
-    $("#electricity").text(currentUserData.electricity || "");
+    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
+    $("#electricity").text(currentUserData.electricity ? currentUserData.electricity : "");
+    // Go through all badge
+    // Toggle badge icon display
+    if (currentUserData.badge) {
+        Object.entries(currentUserData.badge).forEach((obj) => {
+            console.log($(`#badge${obj[0]}Modal`));
+            // console.log($(`#badge${obj[0]}Modal`));
+            $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+        })
+    }
 }
 
 function collectAchieve() {
-    console.log(currentUser);
     if (currentUser) {
         var userRef = db.collection('users').doc(currentUser.uid);
 
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
-        
+
         // console.log(currentUserData.electricity + toSaveData.electricity);
         console.log(currentUserData.electricity);
         console.log(currentUserData);
 
-        let originalElectricity = parseInt(currentUserData.electricity) || 0;
+        let currentElectricity = parseInt(currentUserData.electricity) || 0;
+        let currentBadge = currentUserData.badge || {};
+
+        currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
 
         userRef.set({
-            electricity: originalElectricity + parseInt(toSaveData.electricity)
+            electricity: currentElectricity + parseInt(toSaveData.electricity),
+            badge: currentBadge
+        }).then(() => {
+            $("#achieModal").modal('hide');
+            getUserData().then(() => {
+                updateUserData();
+                $.removeCookie('toSaveAchieve');
+            });
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
         });
-        $("#achieModal").modal('hide');
-        getUserData();
-        $.removeCookie('toSaveAchieve', { path: '/' });
     } else {
         $("#achieModal").modal('hide');
         $("#loginModal").show();
