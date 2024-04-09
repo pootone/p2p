@@ -37,31 +37,96 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
   <body>
+    <!-- Google Calendar Appointment Scheduling begin -->
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script>
+      (function() {
+        var target = document.currentScript;
+        window.addEventListener('load', function() {
+          calendar.schedulingButton.load({
+            url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ39AaoPbeRd7ycsfUWxdB9NcBY4Lk0APYtu1kxSGgg4CAqgTWlGaWfZJb5QIXOOT1wJ2lWYYsgk?gv=true',
+            color: '#039BE5',
+            label: '進行預約',
+            target,
+          });
+          
+          let btn = document.getElementById("booking");
+          let gbtn = document.getElementsByClassName("qxCTlb")[0];
+          gbtn.style.display = "none";
+          btn.addEventListener("click", function() {
+            console.log("ci");
+            gbtn.click();
+          });
+        });
+      })();
+    </script>
+    <!-- end Google Calendar Appointment Scheduling -->
     <!-- Menu btn -->
     <div class="fixed-corner">
-      <div class="corner-button" id="toggleMenuBtn">
-        <img src="./images/badge/menu_btn.png" alt="" />
+      <div class="corner-button" id="toggleMenuBtn" style="width: 60px">
+        <img src="./images/badge/menu_btn.svg" alt="" />
       </div>
       <div class="menu-bar">
-        <a href="/">
-          <img src="./images/badge/menuBar/menuBar_BG.png" alt="" srcset="" />
-        </a>
+        <img
+          src="./images/badge/menuBar/menubarBg.svg"
+          alt=""
+          srcset=""
+          style="width: 60px; padding-top: 3px"
+        />
+        <!-- <a href="/">
+          </a> -->
         <div class="menu_item">
           <a href="">
-            <img src="./images/badge/menuBar/首頁.png" alt="" srcset="" />
+            <img
+              width="32"
+              height="32"
+              src="./images/badge/menuBar/index.svg"
+              alt=""
+              srcset=""
+            />
           </a>
           <a href="./html/aicam.html">
-            <img src="./images/badge/menuBar/相機.png" alt="" srcset="" />
+            <img
+              width="32"
+              height="32"
+              src="./images/badge/menuBar/cam.svg"
+              alt=""
+              srcset=""
+            />
           </a>
           <a href="./html/video.html">
-            <img src="./images/badge/menuBar/資訊.png" alt="" srcset="" />
+            <img
+              width="35"
+              height="35"
+              src="./images/badge/menuBar/video.svg"
+              alt=""
+              srcset=""
+            />
           </a>
           <a href="./html/badge.html">
-            <img src="./images/badge/menuBar/徽章.png" alt="" srcset="" />
+            <img
+              width="32"
+              height="32"
+              src="./images/badge/menuBar/badge.svg"
+              alt=""
+              srcset=""
+            />
           </a>
-          <a href="./html/aboutUs.html">
-            <img src="./images/badge/menuBar/關於我們.png" alt="" srcset="" />
-          </a>
+          <!-- <a href="./aboutUs.html">
+                  <img src="../images/badge/menuBar/關於我們.png" alt="" srcset="">
+              </a> -->
+          <button
+            type="button"
+            style="background-color: transparent; border: none; cursor: pointer;"
+            id="booking"
+          >
+            <img
+              width="32"
+              height="32"
+              src="./images/badge/menuBar/booking.svg"
+            />
+          </button>
         </div>
       </div>
     </div>
