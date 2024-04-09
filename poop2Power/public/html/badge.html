@@ -27,44 +27,70 @@
 </head>
 
 <body background="../images/badge/BG.png">
+     <!-- Google Calendar Appointment Scheduling begin -->
+     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+     <script>
+       (function() {
+         var target = document.currentScript;
+         window.addEventListener('load', function() {
+           calendar.schedulingButton.load({
+             url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ39AaoPbeRd7ycsfUWxdB9NcBY4Lk0APYtu1kxSGgg4CAqgTWlGaWfZJb5QIXOOT1wJ2lWYYsgk?gv=true',
+             color: '#039BE5',
+             label: '進行預約',
+             target,
+           });
+           
+           let btn = document.getElementById("booking");
+           let gbtn = document.getElementsByClassName("qxCTlb")[0];
+           gbtn.style.display = "none";
+           btn.addEventListener("click", function() {
+             console.log("ci");
+             gbtn.click();
+           });
+         });
+       })();
+     </script>
+     <!-- end Google Calendar Appointment Scheduling -->
     <div class="fixed-corner">
-        <div class="corner-button" id="toggleMenuBtn">
-            <img src="../images/badge/menu_btn.png" alt="">
+        <div class="corner-button" id="toggleMenuBtn" style="width: 60px;">
+            <img src="../images/badge/menu_btn.svg" alt="">
         </div>
         <div class="menu-bar">
-            <a href="/">
-                <img src="../images/badge/menuBar/menuBar_BG.png" alt="" srcset="">
-            </a>
+            <img src="../images/badge/menuBar/menubarBg_long.svg" alt="" srcset="" style="width: 60px; padding-top: 3px;">
             <div class="menu_item">
                 <a href="../index.html">
-                    <img src="../images/badge/menuBar/首頁.png" alt="" srcset="">
+                    <img width="32" height="32" src="../images/badge/menuBar/index.svg" alt="" srcset="">
                 </a>
                 <a href="./aicam.html">
-                    <img src="../images/badge/menuBar/相機.png" alt="" srcset="">
+                    <img width="32" height="32" src="../images/badge/menuBar/cam.svg" alt="" srcset="">
                 </a>
                 <a href="./video.html">
-                    <img src="../images/badge/menuBar/資訊.png" alt="" srcset="">
+                    <img width="35" height="35" src="../images/badge/menuBar/video.svg" alt="" srcset="">
                 </a>
                 <a href="">
-                    <img src="../images/badge/menuBar/徽章.png" alt="" srcset="">
+                    <img width="32" height="32" src="../images/badge/menuBar/badge.svg" alt="" srcset="">
                 </a>
-                <a href="./aboutUs.html">
+                <!-- <a href="./aboutUs.html">
                     <img src="../images/badge/menuBar/關於我們.png" alt="" srcset="">
-                </a>
+                </a> -->
+                <button type="button" class="bg-transparent border-0" id="booking">
+                    <img width="32" height="32" src="../images/badge/menuBar/booking.svg">
+                </button>
                 <button type="button" id="login_signout_btn" class="bg-transparent border-0">
-                    <img width="32" height="32" src="https://img.icons8.com/puffy-filled/512/login-rounded-right.png" alt="login-rounded-right"/>
+                    <img width="32" height="32" src="../images/badge/menuBar/logout.svg" alt="login-rounded-right"/>
                 </button>
             </div>
         </div>
-        <div class="corner-button" id="openRankWindowBtn">
+        <div class="corner-button" id="openRankWindowBtn" style="width: 60px">
             <a href="./ranking.html" class="rankBtnContainer">
-                <img src="../images/badge/排行榜.png" class="rankBtn" alt="">
-                <img src="../images/badge/排行榜_Hover.png" class="rankBtnHover" alt="">
+                <img src="../images/badge/rank.svg" class="rankBtn" alt="">
+                <img src="../images/badge/rank_hover.svg" class="rankBtnHover" alt="">
             </a>
         </div>
-        <div class="corner-button weekBtnContainer" id="openWeekWindowBtn">
-            <img src="../images/badge/飲食分析.png" class="weekBtn" alt="">
-            <img src="../images/badge/飲食分析_Hover.png" class="weekBtnHover" alt="">
+        <div class="corner-button weekBtnContainer" id="openWeekWindowBtn" style="width: 60px">
+            <img src="../images/badge/analysis.svg" class="weekBtn" alt="">
+            <img src="../images/badge/analysis_hover.svg" class="weekBtnHover" alt="">
         </div>
     </div>
 
