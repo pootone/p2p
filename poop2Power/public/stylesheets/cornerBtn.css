@@ -1,4 +1,3 @@
-
 .fixed-corner {
     position: fixed;
     top: 0px;
@@ -10,50 +9,59 @@
     z-index: 1000;
     margin-top: 20px;
 }
+
 .corner-button {
     cursor: pointer;
     margin: 3px;
 }
-.corner-button img {
+
+/* .corner-button img {
     width: 80%;
-}
+} */
 
 .rankBtnContainer:hover .rankBtn {
     display: none;
 }
+
 .rankBtnContainer:hover .rankBtnHover {
     display: block;
 }
+
 .rankBtnHover {
     display: none;
 }
+
 .weekBtnContainer:hover .weekBtn {
     display: none;
 }
+
 .weekBtnContainer:hover .weekBtnHover {
     display: block;
 }
+
 .weekBtnHover {
     display: none;
 }
+
 .menu-bar {
     position: relative;
     display: none;
 }
+
 .menu_item {
-    position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 13%;
+    transform: translateY(-100%);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .menu_item img {
-    margin: 17px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 @media (max-width: 768px) {
-    .fixed-corner {
-        right: 0px;
-    }
+    
 }
