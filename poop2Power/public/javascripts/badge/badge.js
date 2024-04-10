@@ -80,6 +80,8 @@ $().ready(function () {
     // if (!) {
     // }
 
+    // Wake aicam page backend
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
     $("#login_skip").click(function () {
         $("#loginModal").hide();
         $.cookie('skipLogin', 'true', { expires: 7 });
