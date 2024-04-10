@@ -55,6 +55,7 @@ body::-webkit-scrollbar {
 
 .mid {
     margin: 20px;
+    justify-content: center;
 }
 
 .aquarium {
@@ -203,20 +204,23 @@ body::-webkit-scrollbar {
     #openWeekWindowBtn {
         display: none;
     }
-
+    #title{
+        margin-left: 40px;
+    }
     .aquarium img {
-        display: none;
+        content: url('../../images/badge/Aquarium/AquariumRWD.svg');
+        float: left;
     }
 
     .header {
         margin-top: 10px;
         position: relative;
-        text-align: center;
+        text-align: left;
         /* Optional: Center content text */
     }
 
     .header .name {
-        text-align: center;
+        text-align: left;
     }
 
     .header .personal-photo {
@@ -233,11 +237,13 @@ body::-webkit-scrollbar {
     }
 
     .mid {
-        margin: 0;
+        overflow-x: auto;
+        justify-content: flex-start;
     }
 
     .mid img {
-        display: none;
+        width: 40%;
+        
     }
 
     .badgeClassBTN {
