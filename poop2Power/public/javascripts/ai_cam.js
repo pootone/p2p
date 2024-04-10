@@ -9,6 +9,7 @@ const firebaseConfig = {
 };
 
 let currentUser;
+let currentUserData;
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -44,6 +45,12 @@ initApp = function () {
             if (user) {
                 // $("#loginModal").hide();
                 currentUser = user;
+                getUserData().then(() => {
+                    // updateUserData();
+                    if ($.cookie("toSaveAchieve") || $.cookie("toSaveElectricity")) {
+                        collectAchieve();
+                    }
+                });
                 // console.log(currentUser.uid);
             } else {
                 // User is signed out.
@@ -290,7 +297,14 @@ $().ready(function () {
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
 
                         // Show Achievement Model
-                        achieCheck();
+                        if(currentUser){
+                            getUserData().then(()=> {
+                                achieCheck();
+                                collectElectricity();
+                            });
+                        } else {
+                            achieCheck();
+                        }
                         // setTimeout(function () {
                         //     isCloseAwardModal = false;
                         //     showAchieveModal()
@@ -309,6 +323,13 @@ $().ready(function () {
             }
         }
     })
+
+    $("#login_signout_btn").click(function () {
+        firebase.auth().signOut()
+            .then(function () {
+                $.removeCookie("skipLogin");
+            });
+    });
 })
 
 function scrollToBottom() {
@@ -323,11 +344,11 @@ function showAchieveModal() {
 function adjustAchieveModalContent(achieveName, achieveIndex) {
     let nameLen = achieveName.length;
     if (7 < nameLen) {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-3.svg")
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-3.svg")
     } else if (4 < nameLen) {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-2.svg")
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-2.svg")
     } else {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/badge/achieText-1.svg")
+        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-1.svg")
     }
     $("#achieTextContent").text(achieveName);
     $("#achieImg").attr("src", `../images/AI_Cam/badge/${achieveIndex}.gif`);
@@ -537,57 +558,124 @@ function imgResCorrect() {
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
 
     // Show Achievement Model
-    achieCheck();
+    if(currentUser){
+        getUserData().then(()=> {
+            achieCheck();
+            collectElectricity();
+        });
+    } else {
+        achieCheck();
+    }
     // setTimeout(function () {
     //     isCloseAwardModal = false;
     //     showAchieveModal();
     // }, 1500);
 }
 
+function getUserData() {
+    return new Promise((resolve, reject) => {
+        let userRef = db.collection("users").doc(currentUser.uid);
+
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                currentUserData = doc.data();
+            } else {
+                console.log("No user data yet");
+            }
+            resolve();
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+            reject(error);
+        });
+    })
+}
+
 function achieCheck() {
     // Get the badge
-    // let payload = {
-    //     food: "早午餐",
-    //     ingredient: "eggs, bacon, toast, coffee"
-    // }
-    // // $.post("https://p2p-wnkb.onrender.com/wake", )
-    // $.post("/aicam/achie", payload)
-    //     .done(function (data) {
-    //         console.log(data);
-    //     })
-    //     .fail(function (xhr, status, error) {
-    //         console.log(error);
-    //     })
+    let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
 
-    // Get achie data
-    console.log(currentUser.uid);
-
-    let userRef = db.collection("users").doc(currentUser.uid);
-    let badgeRef = userRef.collection("badges");
-
-    badgeRef.get().then((querySnapshot) => {
-        console.log(querySnapshot);
-        console.log(typeof querySnapshot);
-        console.log(querySnapshot.length);
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
-        });
-    }).catch((error) => {
-        console.log("Error getting badges:", error);
-    });
-
-    // if() {
     // First try
-    // adjustAchieveModalContent("吃來乍到", 1);
-    // showAchieveModal();
-    // } else if() {
-    // 小吃貨
-    // 拍照或上傳完一半種類的食物
-    // } else {
+    if (currentUser && !("1" in currentBadge)) {
+        adjustAchieveModalContent("吃來乍到", 1);
+        $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
+        $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
+        showAchieveModal();
+    } else{
+        // Query for achieve
+        // let payload = {
+        //     food: "早午餐",
+        //     ingredient: "eggs, bacon, toast, coffee"
+        // }
+        // // $.post("https://p2p-contest-backend.onrender.com/wake", )
+        // $.post("/aicam/achie", payload)
+        //     .done(function (data) {
+        //         console.log(data);
+        //     })
+        //     .fail(function (xhr, status, error) {
+        //         console.log(error);
+        //     })
+        if(!currentUser) {
 
-    // }
+        } else {
+
+        }
+        // 小吃貨
+        // 拍照或上傳完一半種類的食物
+    }
 }
-// achieCheck();
+
+function collectAchieve() {
+    if (currentUser) {
+        var userRef = db.collection('users').doc(currentUser.uid);
+
+        let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
+        let toSaveElectricity = JSON.parse($.cookie("toSaveElectricity"));
+
+        // console.log(currentUserData.electricity + toSaveData.electricity);
+        // console.log(currentUserData.electricity);
+        // console.log(currentUserData);
+
+        let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+
+        let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
+
+        currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
+
+        userRef.set({
+            electricity: currentElectricity + parseInt(toSaveElectricity.electricity) + parseInt(toSaveData.electricity),
+            badge: currentBadge
+        }, { merge: true }).then(() => {
+            $("#achieModal").modal('hide');
+            getUserData().then(() => {
+                $.removeCookie('toSaveAchieve');
+            });
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
+        });
+    } else {
+        $("#achieModal").modal('hide');
+        $("#loginModal").show();
+    }
+}
+
+// Save electricity without new badge
+function collectElectricity() {
+    // Need to login first
+    if(currentUser && !$.cookie("toSaveAchieve")) {
+        var userRef = db.collection('users').doc(currentUser.uid);
+        let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+        
+        userRef.set({
+            electricity: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
+        }, { merge: true }).then(() => {
+            $.removeCookie('toSaveElectricity');
+            // Add collect electricity txt res TODO 
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
+        });
+    }
+}
 
 function appendRetryMsg() {
     console.log("Not correct food");

@@ -80,6 +80,8 @@ $().ready(function () {
     // if (!) {
     // }
 
+    // Wake aicam page backend
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
     $("#login_skip").click(function () {
         $("#loginModal").hide();
         $.cookie('skipLogin', 'true', { expires: 7 });
@@ -257,7 +259,7 @@ function collectAchieve() {
         userRef.set({
             electricity: currentElectricity + parseInt(toSaveData.electricity),
             badge: currentBadge
-        }).then(() => {
+        }, { merge: true }).then(() => {
             $("#achieModal").modal('hide');
             getUserData().then(() => {
                 updateUserData();

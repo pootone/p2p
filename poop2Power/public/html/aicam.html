@@ -62,13 +62,13 @@
                 <a href="../index.html">
                     <img width="32" height="32" src="../images/badge/menuBar/index.svg" alt="" srcset="">
                 </a>
-                <a href="./aicam.html">
+                <a href="">
                     <img width="32" height="32" src="../images/badge/menuBar/cam.svg" alt="" srcset="">
                 </a>
                 <a href="./video.html">
                     <img width="35" height="35" src="../images/badge/menuBar/video.svg" alt="" srcset="">
                 </a>
-                <a href="">
+                <a href="./badge.html">
                     <img width="32" height="32" src="../images/badge/menuBar/badge.svg" alt="" srcset="">
                 </a>
                 <!-- <a href="./aboutUs.html">
@@ -223,11 +223,12 @@
                   data-bs-dismiss="modal"
                   onclick="awardClose()"
                 ></button>
-                <a
+                <button
                   id="ache-collect"
+                  type="button"
                   class="mx-2 w-25 h-100"
-                  href="./badge.html?isFirst=true"
-                ></a>
+                  onclick="collectAchieve()"
+                ></button>
               </div>
             </div>
           </div>
@@ -511,6 +512,7 @@
     </div>
       <!-- jquery -->
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js">
         <!-- chart.js -->
