@@ -309,6 +309,13 @@ $().ready(function () {
             }
         }
     })
+
+    $("#login_signout_btn").click(function () {
+        firebase.auth().signOut()
+            .then(function () {
+                $.removeCookie("skipLogin");
+            });
+    });
 })
 
 function scrollToBottom() {
