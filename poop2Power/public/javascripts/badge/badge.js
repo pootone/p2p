@@ -259,7 +259,7 @@ function collectAchieve() {
         userRef.set({
             electricity: currentElectricity + parseInt(toSaveData.electricity),
             badge: currentBadge
-        }).then(() => {
+        }, { merge: true }).then(() => {
             $("#achieModal").modal('hide');
             getUserData().then(() => {
                 updateUserData();
