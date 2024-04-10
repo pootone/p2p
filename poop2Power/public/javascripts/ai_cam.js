@@ -67,9 +67,9 @@ initApp = function () {
     );
 }
 
-let API = "https://p2p-contest-backend.onrender.com/aicam/gpt/img";
+let API = "https://p2p-wnkb.onrender.com/aicam/gpt/img";
 // let API = "/aicam/gpt/img"; //TODO
-let API_txt = "https://p2p-contest-backend.onrender.com/aicam/gpt/txt";
+let API_txt = "https://p2p-wnkb.onrender.com/aicam/gpt/txt";
 // let API_txt = "/aicam/gpt/txt"; //TODO
 let uploadImg = null;
 let responseData = null;
@@ -151,7 +151,7 @@ let chartConfig = {
 };
 
 $().ready(function () {
-    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
+    $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
 
     initApp();
     // Initialize the FirebaseUI Widget using Firebase.
@@ -593,7 +593,6 @@ function getUserData() {
 
 function achieCheck() {
     // Get the badge
-    console.log("enter achieve check...");
     let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
 
     // First try
