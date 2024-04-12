@@ -174,7 +174,8 @@ $().ready(function () {
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
-    // showAchieveModal();
+    // appendGetReq("漢堡"); //TODO
+    showAchieveModal();
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -297,8 +298,8 @@ $().ready(function () {
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
 
                         // Show Achievement Model
-                        if(currentUser){
-                            getUserData().then(()=> {
+                        if (currentUser) {
+                            getUserData().then(() => {
                                 achieCheck();
                                 collectElectricity();
                             });
@@ -369,10 +370,10 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
 
     // Create a chart
     let row = document.createElement("div")
-    row.classList.add("row", "d-flex", "mb-2", "px-5");
+    row.classList.add("row", "d-flex", "mb-2", "px-sm-5", "custom-justify-content-center");
 
     let container = document.createElement("div");
-    container.classList.add("col-sm-6", "col-md-4");
+    container.classList.add("col-11", "col-md-7", "col-lg-4");
 
     let canvasContainer = document.createElement("div");
     canvasContainer.classList.add("w-100");
@@ -384,7 +385,7 @@ function appendChart(methane, electricity, constipate, calorie, suggest = "") {
     container.appendChild(canvasContainer);
 
     let btnContainer = document.createElement("div");
-    btnContainer.classList.add("d-flex", "align-items-bottom", "position-relative");
+    btnContainer.classList.add("d-flex", "align-items-bottom", "position-relative", "custom-chart-more-btn");
     btnContainer.setAttribute("style", "width: 10%; padding: 0%;")
 
     // more
@@ -558,8 +559,8 @@ function imgResCorrect() {
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
 
     // Show Achievement Model
-    if(currentUser){
-        getUserData().then(()=> {
+    if (currentUser) {
+        getUserData().then(() => {
             achieCheck();
             collectElectricity();
         });
@@ -602,7 +603,7 @@ function achieCheck() {
         $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
         $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
         showAchieveModal();
-    } else{
+    } else {
         // Query for achieve
         // let payload = {
         //     food: "早午餐",
@@ -616,7 +617,7 @@ function achieCheck() {
         //     .fail(function (xhr, status, error) {
         //         console.log(error);
         //     })
-        if(!currentUser) {
+        if (!currentUser) {
 
         } else {
 
@@ -663,10 +664,10 @@ function collectAchieve() {
 // Save electricity without new badge
 function collectElectricity() {
     // Need to login first
-    if(currentUser && !$.cookie("toSaveAchieve")) {
+    if (currentUser && !$.cookie("toSaveAchieve")) {
         var userRef = db.collection('users').doc(currentUser.uid);
         let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
-        
+
         userRef.set({
             electricity: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
         }, { merge: true }).then(() => {
@@ -707,11 +708,12 @@ function appendRetryMsg() {
 function appendGetReq(food) {
     let bg = document.createElement("img");
     bg.classList.add("w-100");
-    bg.setAttribute("src", "../images/AI_Cam/res-bg-1.svg");
+    bg.setAttribute("src", isPortrait() ? "../images/AI_Cam/res-bg-1-mobile.svg" : "../images/AI_Cam/res-bg-1.svg");
 
     let txt = document.createElement("p");
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
     txt.innerHTML = "收到！讓我們一起來看看一份" + food + "會有多少甲烷排放量、電力輸出、熱量及便秘風險吧！";
+    if (isPortrait()) { txt.style.setProperty("font-size", "1.1rem", "important"); };
 
     let container = document.createElement("div");
     container.classList.add("col-sm-11", "col-lg-8", "px-md-5",
