@@ -175,7 +175,7 @@ $().ready(function () {
     // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
     // appendGetReq("漢堡"); //TODO
-    showAchieveModal();
+    // showAchieveModal();
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
