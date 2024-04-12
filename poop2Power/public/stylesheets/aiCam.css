@@ -100,6 +100,56 @@ h3 {
 }
 
 @media screen and (orientation: portrait) {
+    h3 {
+        font-size: 32px;
+    }
+
+    .container {
+        padding: 1rem 2.7rem !important;
+        overflow-y: scroll;
+        height: 90% !important;
+    }
+
+    .container-fluid {
+        padding: 19px !important;
+    }
+
+    #dialog-container {
+        margin-top: 1rem;
+    }
+
+    #guide-dialog-1>div>img {
+        content: url(../images/AI_Cam/res-bg-init_mobile.svg) !important;
+    }
+
+    #guide-dialog-1>div>p {
+        font-size: 1.1rem !important;
+    }
+
+    .custom-chart-more-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    .custom-chart-more-btn>button {
+        width: 35% !important;
+    }
+
+    .custom-justify-content-center {
+        justify-content: center !important;
+    }
+
+    #ache-cancel {
+        width: 40% !important;
+        background-image: url(../images/AI_Cam/close-mobile.svg);
+        background-position: center;
+    }
+
+    #ache-collect {
+        background-image: url(../images/AI_Cam/collect-mobile.svg);
+        background-position: center;
+    }
+
     #nav {
         height: 7%;
     }
@@ -123,7 +173,9 @@ h3 {
     }
 
     #descTxt {
-        font-size: 40px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        padding: 0px !important;
     }
 
     .modal-dialog {
@@ -131,16 +183,12 @@ h3 {
     }
 
     #achieCongrate {
-        font-size: 90px !important;
-        top: 0% !important;
+        font-size: 50px !important;
+        top: 10% !important;
     }
 
     #achieBG {
-        width: 1000% !important;
-    }
-
-    #ache-cancel {
-        width: 40% !important;
+        width: 180% !important;
     }
 
     #buttonContainer {
@@ -152,16 +200,46 @@ h3 {
     }
 
     #achieText {
-        top: 17% !important;
+        top: 25% !important;
         width: 30%;
     }
 
     #achieImg {
-        width: 100%;
+        width: 30% !important;
+        top: 39% !important;
     }
 
-    #achieTextContent {
-        font-size: 50px !important;
+    #chartMoreModal>.modal-dialog {
+        background-image: url(../images/AI_Cam/moreBG_mobile.svg) !important;
+        background-position-x: center;
+        width: 100% !important;
+        height: 95% !important;
+    }
+
+    #chartMoreRadar {
+        display: none !important;
+    }
+
+    #chartMoreModalBtn {
+        width: 11% !important;
+    }
+
+    #explanTitle {
+        background-image: url(../images/AI_Cam/Explanation_mobile.svg) !important;
+        width: 25% !important;
+        margin-top: 10% !important;
+        margin-left: 3% !important;
+    }
+
+    #suggestTitle {
+        background-image: url(../images/AI_Cam/Suggestion_mobile.svg) !important;
+        width: 25% !important;
+        margin-top: -80% !important;
+        margin-left: 3% !important;
+    }
+
+    #sugRow {
+        margin-bottom: 70% !important;
     }
 }
 
@@ -174,7 +252,7 @@ h3 {
 }
 
 .firebaseui-idp-google .firebaseui-idp-text {
-color: #ffffff;
+    color: #ffffff;
 }
 
 @media screen and (orientation: portrait) and (min-width: 1000px) {
@@ -182,3 +260,9 @@ color: #ffffff;
         background-image: url(../images/AI_Cam/inputField.svg);
     }
 }
+
+/* @media (min-width: 1200px){
+    .modal-xl {
+        --bs-modal-width: 80%;
+    }
+} */

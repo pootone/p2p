@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>No.2</title>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
@@ -261,6 +263,7 @@
                         background-repeat: no-repeat;
                         background-position: center;
                       "
+                      id="explanTitle"
                     ></div>
                     <div class="d-flex w-100 position-absolute top-0">
                       <button
@@ -283,11 +286,12 @@
                   </div>
                 </div>
                 <div
-                  class="row w-100 d-flex justify-content-center mb-3 mx-0"
+                  id="sugRow"
+                  class="row mb-3 mx-0"
                   style="height: 33%"
                 >
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100"
                     style="
                       background-image: url(../images/AI_Cam/LTBG.png);
                       background-size: contain;
@@ -336,7 +340,7 @@
                     </div>
                   </div>
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100"
                     style="
                       background-image: url(../images/AI_Cam/RTBG.png);
                       background-size: contain;
@@ -376,7 +380,7 @@
                   style="height: 33%"
                 >
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100"
                     style="
                       background-image: url(../images/AI_Cam/LBBG.png);
                       background-size: contain;
@@ -416,7 +420,7 @@
                     </div>
                   </div>
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100"
                     style="
                       background-image: url(../images/AI_Cam/RBBG.png);
                       background-size: contain;
@@ -466,6 +470,7 @@
                 <div class="row position-relative mb-2 mx-0" style="height: 9%">
                   <div
                     class="h-100"
+                    id="suggestTitle"
                     style="
                       background-image: url(../images/AI_Cam/Suggestion.svg);
                       background-size: contain;
