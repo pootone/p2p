@@ -200,8 +200,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 768px) {
 
-    #openRankWindowBtn,
-    #openWeekWindowBtn {
+    #openRankWindowBtn{
         display: none;
     }
     #title{
@@ -247,7 +246,9 @@ body::-webkit-scrollbar {
     }
 
     .badgeClassBTN {
-        display: none;
+        width: 50%;
+        margin-bottom: 0;
+        margin-right: 50%;
     }
 
 
@@ -261,7 +262,7 @@ body::-webkit-scrollbar {
     }
 
     .badge .row {
-        flex-direction: column;
+        /* flex-direction: column; */
     }
     .badge .col-4 {
         width: 100%;
@@ -273,7 +274,7 @@ body::-webkit-scrollbar {
     }
 
     .badge .row>div {
-        width: 100%;
+        /* width: 100%; */
         margin-bottom: 20px;
     }
 }
