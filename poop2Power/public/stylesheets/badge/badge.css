@@ -200,8 +200,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 768px) {
 
-    #openRankWindowBtn,
-    #openWeekWindowBtn {
+    #openRankWindowBtn{
         display: none;
     }
     #title{
