@@ -110,9 +110,9 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.show {
+/* .show {
     animation: fadeInAndMoveDown 1s ease forwards;
-}
+} */
 
 .mid img {
     width: 150px;
