@@ -107,8 +107,13 @@ h3 {
     .container {
         padding: 1rem 2.7rem !important;
         overflow-y: scroll;
-        height: 90% !important;
+        height: 93% !important;
     }
+
+    .modal-content {
+        height: 95% !important;
+    }
+
 
     .container-fluid {
         padding: 19px !important;
@@ -123,16 +128,19 @@ h3 {
     }
 
     #guide-dialog-1>div>p {
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
     }
 
     .custom-chart-more-btn {
         width: 100% !important;
+        height: 55px !important;
         justify-content: center !important;
     }
 
     .custom-chart-more-btn>button {
         width: 35% !important;
+        height: 100% !important;
+        top: 0px !important;
     }
 
     .custom-justify-content-center {
@@ -234,12 +242,12 @@ h3 {
     #suggestTitle {
         background-image: url(../images/AI_Cam/Suggestion_mobile.svg) !important;
         width: 25% !important;
-        margin-top: -80% !important;
         margin-left: 3% !important;
     }
 
-    #sugRow {
-        margin-bottom: 70% !important;
+    .sugRow {
+        margin-bottom: 50% !important;
+        height: 25% !important;
     }
 }
 

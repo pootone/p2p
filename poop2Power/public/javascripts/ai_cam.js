@@ -10,6 +10,7 @@ const firebaseConfig = {
 
 let currentUser;
 let currentUserData;
+let currentBadgeName;
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -174,8 +175,11 @@ $().ready(function () {
     // appendChart(1, 2, 3, 4);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
+    // appendAskMsg("測試");
     // appendGetReq("漢堡"); //TODO
     // showAchieveModal();
+    // appendAwardCongratulation(); //TODO
+    // appendAwardMore(); //TODO
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -339,6 +343,7 @@ function scrollToBottom() {
 }
 
 function showAchieveModal() {
+    isCloseAwardModal = false; //todelete
     $("#achieModal").modal('show');
 }
 
@@ -437,10 +442,6 @@ function appendAskMsg(inputMsg) {
     bg.classList.add("w-100", "position-absolute");
     bg.setAttribute("src", "../images/AI_Cam/ask-txt-bg-1.svg");
 
-    let decorate = document.createElement("img");
-
-    decorate.setAttribute("src", "../images/AI_Cam/ask-txt-deco.png");
-    decorate.setAttribute("style", "position: absolute; left: 65%; top: -20%;")
 
     //- msg
     let msg = document.createElement("p");
@@ -449,7 +450,13 @@ function appendAskMsg(inputMsg) {
     msg.setAttribute("style", "top: 35%;")
 
     container.appendChild(bg);
-    container.appendChild(decorate);
+    if (!isMobileDevice()) {
+        let decorate = document.createElement("img");
+
+        decorate.setAttribute("src", "../images/AI_Cam/ask-txt-deco.png");
+        decorate.setAttribute("style", "position: absolute; left: 65%; top: -20%;")
+        container.appendChild(decorate);
+    }
     container.appendChild(msg);
     row.appendChild(container);
 
@@ -598,9 +605,11 @@ function achieCheck() {
 
     // First try
     if (currentUser && !("1" in currentBadge)) {
+        currentBadgeName = "吃來乍到";
         adjustAchieveModalContent("吃來乍到", 1);
         $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
         $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
+        isCloseAwardModal = false;
         showAchieveModal();
     } else {
         // Query for achieve
@@ -658,6 +667,7 @@ function collectAchieve() {
         $("#achieModal").modal('hide');
         $("#loginModal").show();
     }
+    currentBadgeName = null;
 }
 
 // Save electricity without new badge
@@ -732,11 +742,12 @@ function appendGetReq(food) {
 function appendAwardCongratulation() {
     let bg = document.createElement("img");
     bg.classList.add("w-100");
-    bg.setAttribute("src", "../images/AI_Cam/res-bg-award.svg");
+    bg.setAttribute("src", "../images/AI_Cam/res-bg-award" + (isMobileDevice() ? "-mobile" : "") + ".svg");
 
     let txt = document.createElement("p");
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
     txt.setAttribute("style", "left: 15%;");
+    if (isMobileDevice) { txt.setAttribute("style", "font-size: 1rem!important;"); }
     txt.textContent = "恭喜！你得到了";
 
     // Award name
@@ -746,7 +757,7 @@ function appendAwardCongratulation() {
     button.style.backgroundImage = "url(../images/AI_Cam/highlight.svg)";
     button.style.backgroundRepeat = "no-repeat";
     button.style.backgroundSize = "contain";
-    button.textContent = "「" + "Burger King" + "」";
+    button.textContent = "「" + currentBadgeName + "」";
     button.onclick = showAchieveModal;
 
     let reason = document.createTextNode("成就，" + "是利用相機拍下漢堡就可以解鎖的秘密成就" + "。");
@@ -767,29 +778,32 @@ function appendAwardCongratulation() {
     row.appendChild(container);
 
     $("#dialog-container").append(row);
+    currentBadgeName = null;
 }
 
 function appendAwardMore() {
     let bg = document.createElement("img");
     bg.classList.add("w-100");
-    bg.setAttribute("src", "../images/AI_Cam/res-bg-4.svg");
+    bg.setAttribute("src", "../images/AI_Cam/res-bg-4" + (isMobileDevice() ? "-mobile" : "") + ".svg");
 
     let txt = document.createElement("p");
     txt.classList.add("position-absolute", "w-75", "fs-5", "my-auto");
     txt.setAttribute("style", "left: 15%;");
+    if (isMobileDevice) { txt.setAttribute("style", "font-size: 1rem!important;"); }
     txt.textContent = "還有更多有趣、可愛的成就等你解鎖喔！快來看看吧！";
 
     // Go!
-    let button = document.createElement("button");
-    button.setAttribute("type", "button");
+    let button = document.createElement("a");
+    // button.setAttribute("type", "button");
+    button.href = "./badge.html";
     button.classList.add("position-absolute", "bg-transparent", "border-0");
-    button.style.left = "45%";
-    button.style.bottom = "-1%";
-    button.style.width = "10%";
+    button.style.left = isMobileDevice() ? "70%" : "45%";
+    button.style.bottom = isMobileDevice() ? "-13%" : "-1%";
+    button.style.width = isMobileDevice() ? "25%" : "10%";
     // button.onclick = showAcheiveModal; //TODO
     let buttonImg = document.createElement("img");
     buttonImg.classList.add("w-100");
-    buttonImg.setAttribute("src", "../images/AI_Cam/go.svg");
+    buttonImg.setAttribute("src", "../images/AI_Cam/go" + (isMobileDevice() ? "-mobile" : "") + ".svg");
     buttonImg.setAttribute("style", "filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));");
     button.appendChild(buttonImg);
 
@@ -823,10 +837,10 @@ function awardClose() {
 
 function appendLoader() {
     let row = document.createElement("div");
-    row.classList.add("row", "px-5");
+    row.classList.add("row", "px-3", "px-sm-5");
     row.id = "loader";
     let loader = document.createElement("lottie-player");
-    loader.classList.add("col-md-2", "px-0");
+    loader.classList.add("col-5", "col-lg-2", "px-0");
     loader.setAttribute("src", "../images/AI_Cam/AICamera_loadingDialogBox_Lottie.json");
     loader.setAttribute("background", "transparent");
     loader.setAttribute("speed", "1");
