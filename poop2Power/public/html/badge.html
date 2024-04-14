@@ -35,7 +35,7 @@
          var target = document.currentScript;
          window.addEventListener('load', function() {
            calendar.schedulingButton.load({
-             url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ39AaoPbeRd7ycsfUWxdB9NcBY4Lk0APYtu1kxSGgg4CAqgTWlGaWfZJb5QIXOOT1wJ2lWYYsgk?gv=true',
+             url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Y1rtVtipGdavI8OZYZN3g2rV2Vp16AiivTazY6y9riHl2QxRuIC-yErf3Rp-IYPfcumdeqZUx?gv=true',
              color: '#039BE5',
              label: '進行預約',
              target,
@@ -100,7 +100,13 @@
         <div class="name">
             <p id="title"></p>
         </div>
-        <p id="electricity"></p>
+        <div class="position-relative" style="width: 10%;">
+            <img class="" src="../images/badge/ele_bg.svg" alt="">
+            <p id="electricity" style="position: absolute;
+            margin: 0px;
+            top: 15%;
+            left: 50%;"></p>
+        </div>
     </div>
 
     </div>
@@ -113,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="mid d-flex justify-content-center">
+            <div class="mid d-flex ">
                 <img src="../images/badge/任務框/限時任務.svg" alt="" class="mx-3" onclick="scrollToSection('limited_mission_B')">
                 <img src="../images/badge/任務框/均衡飲食.svg" alt="" class="mx-3" onclick="scrollToSection('balance_diet_B')">
                 <img src="../images/badge/任務框/素食挑戰.svg" alt="" class="mx-3" onclick="scrollToSection('vegetarian_B')">
@@ -128,7 +134,7 @@
                     </div>
                     <div class="col-8 justify-content-center">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge1Modal" alt="">
@@ -136,7 +142,7 @@
                                 <p class="badge-title">吃來乍到</p>
                                 <p class="badge-info">首次拍照或上傳食物</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge2Modal" alt="">
@@ -144,7 +150,7 @@
                                 <p class="badge-title">小吃貨</p>
                                 <p class="badge-info">完成一半種類</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge3Modal" alt="">
@@ -152,7 +158,7 @@
                                 <p class="badge-title">吃心絕對</p>
                                 <p class="badge-info">連續上傳<br>同種類食物三次</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge4Modal" alt="">
@@ -172,7 +178,7 @@
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge5Modal" alt="">
@@ -180,7 +186,7 @@
                                 <p class="badge-title">二號全能飲食大賞</p>
                                 <p class="badge-info">一天攝取六大類食物</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge6Modal" alt="">
@@ -188,7 +194,7 @@
                                 <p class="badge-title">健康主食</p>
                                 <p class="badge-info">完成根莖類、蕎麥麵</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge7Modal" alt="">
@@ -208,7 +214,7 @@
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge8Modal" alt="">
@@ -216,7 +222,7 @@
                                 <p class="badge-title">素食主義</p>
                                 <p class="badge-info">上傳蔬菜類食物五次</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge9Modal" alt="">
@@ -236,7 +242,7 @@
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge10Modal" alt="">
@@ -244,7 +250,7 @@
                                 <p class="badge-title">今晚吃雞 大吉大利</p>
                                 <p class="badge-info">完成雞肉製品</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="image-container">
                                     <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"
                                         data-bs-toggle="modal" data-bs-target="#badge11Modal" alt="">
@@ -252,7 +258,7 @@
                                 <p class="badge-title">你是我的堡</p>
                                 <p class="badge-info">完成堡類</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="row flex-column">
                                     <div class="image-container">
                                         <img src="../images/badge/badges/badge_icon/BadgeLock.svg" type="button"

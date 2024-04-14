@@ -1,12 +1,21 @@
 .container-fluid {
-    padding: 0px;
+    padding: 38px 53px;
 }
+
+#pcVideoContainer {
+    background-image: url(../images/video/0-bg.png);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
 @media screen and (orientation: portrait) {
     .vidFrame {
         min-width: 100vw;
-        height: 100vh;  
+        height: 100vh;
         max-height: -webkit-fill-available;
     }
+
     #pcVideoContainer {
         display: none;
     }

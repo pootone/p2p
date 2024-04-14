@@ -22,26 +22,31 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
   <body>
-    <div class="container-fluid">
+    <div>
       <!-- Google Calendar Appointment Scheduling begin -->
-      <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-      <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+      <script
+        src="https://calendar.google.com/calendar/scheduling-button-script.js"
+        async
+      ></script>
+      <link
+        href="https://calendar.google.com/calendar/scheduling-button-script.css"
+        rel="stylesheet"
+      />
       <script>
-        (function() {
+        (function () {
           var target = document.currentScript;
-          window.addEventListener('load', function() {
+          window.addEventListener("load", function () {
             calendar.schedulingButton.load({
-              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ39AaoPbeRd7ycsfUWxdB9NcBY4Lk0APYtu1kxSGgg4CAqgTWlGaWfZJb5QIXOOT1wJ2lWYYsgk?gv=true',
-              color: '#039BE5',
-              label: '進行預約',
+              url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Y1rtVtipGdavI8OZYZN3g2rV2Vp16AiivTazY6y9riHl2QxRuIC-yErf3Rp-IYPfcumdeqZUx?gv=true",
+              color: "#039BE5",
+              label: "進行預約",
               target,
             });
-            
+
             let btn = document.getElementById("booking");
             let gbtn = document.getElementsByClassName("qxCTlb")[0];
             gbtn.style.display = "none";
-            btn.addEventListener("click", function() {
-              console.log("ci");
+            btn.addEventListener("click", function () {
               gbtn.click();
             });
           });
@@ -176,11 +181,51 @@
         </button>
       </div>
 
+      <!-- PC version -->
       <div class="container-fluid" id="pcVideoContainer">
-        <div class="row">
+        <div class="position-fixed" style="right: 110px">
+          <p
+            class="text-end"
+            style="
+              font-family: 'Grandstander', sans-serif;
+              font-size: 64px;
+              font-weight: 800;
+              color: #555;
+            "
+          >
+            Animation
+          </p>
+        </div>
+        <div class="row mt-4">
           <div
-            class="position-relative d-flex just-content-center"
-            style="width: 27%"
+            class="col-3 position-absolute d-flex flex-column p-0 justify-content-evenly"
+            id="videoBtnts"
+          >
+            <button
+              class="viBtn bg-transparent border-0 p-0"
+              type="button"
+              data-src="1"
+            >
+              <img style="width: 68%" src="../images/video/0.png" alt="" />
+            </button>
+            <button
+              class="viBtn bg-transparent border-0 p-0"
+              type="button"
+              data-src="2"
+            >
+              <img style="width: 68%" src="../images/video/1.png" alt="" />
+            </button>
+            <button
+              class="viBtn bg-transparent border-0 p-0"
+              type="button"
+              data-src="3"
+            >
+              <img style="width: 68%" src="../images/video/1.png" alt="" />
+            </button>
+          </div>
+          <div
+            class="position-relative d-flex justify-content-center mx-auto"
+            style="width: 30%"
           >
             <img class="w-100" src="../images/video/videoBg.svg" alt="" />
             <iframe
@@ -188,7 +233,7 @@
               id="pcVideo"
               width="325"
               height="578"
-              style="width: 75%; height: 87.9%; left: 12%; top: 5%"
+              style="width: 73%; height: 87.9%; left: 13%; top: 6%"
               src="https://www.youtube.com/embed/ALnzmrCoBDo"
               frameborder="0"
               allowfullscreen

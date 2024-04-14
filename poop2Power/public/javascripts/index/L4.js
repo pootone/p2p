@@ -15,13 +15,13 @@ var L4 = new Phaser.Class({
     create: function () {
         // BG
         // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l4-bg");
-        video = this.add.video(config.width / 2, config.height / 2, 'l4_video').setScale(0.85);
+        video = this.add.video(config.width / 2, config.height / 2, 'l4_video').setScale(0.89);
         video.play(true);
 
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
-        sideText = this.add.text(0, 0, "點擊沼氣，讓他們進行火力發電", {
+        sideText = this.add.text(0, 0, "變身沼氣，進入發電廠進行火力發電", {
             // fontFamily: "",
             fontSize: "24px",
             color: "#000"
@@ -29,11 +29,11 @@ var L4 = new Phaser.Class({
         sideText.setOrigin(0.5);
         guideContainer.add(guideTxtBG);
         guideContainer.add(sideText);
-        guideContainer.setPosition(1600+750, isPortrait ? 190 : 250);
+        guideContainer.setPosition(1600 + 750, isPortrait ? 190 : 250);
         this.time.delayedCall(1000, () => { // Use arrow func to use 'this'
             this.tweens.add({
                 targets: guideContainer,
-                x: isPortrait ? config.width/2 : 1600,
+                x: isPortrait ? config.width / 2 : 1600,
                 duration: 1100,
                 ease: 'Back.out'
             });
