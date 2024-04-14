@@ -25,6 +25,7 @@ let l4_static_grass = [];
 let l5_yellow_flower;
 let l5_static_grass = [];
 let l5_static_flower = [];
+let collectWater;
 
 let timer;
 
@@ -90,6 +91,8 @@ var L1 = new Phaser.Class({
         this.load.image("5f", "./images/index/l1/5f.png");
         this.load.image("5g", "./images/index/l1/5g.png");
         this.load.image("5g2", "./images/index/l1/5g2.png");
+
+        this.load.spritesheet("collectWater", "./images/index/l1/collectWater.png", { frameWidth: 310, frameHeight: 150 });
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
 
@@ -438,10 +441,32 @@ var L1 = new Phaser.Class({
             } else if (this.physics.overlap(poopArr[i], flower)) {
                 poopArr[i].destroy();
                 poopArr.splice(i, 1);
+                collectWater = this.physics.add.staticSprite(flower.x + 10, flower.y - 180, "collectWater").setScale(0.6);
+                collectWater.depth = 9;
+                collectWater.anims.create({
+                    key: "collectWater",
+                    frames: this.anims.generateFrameNumbers('collectWater', { start: 0, end: 25 }),
+                    frameRate: 20,
+                });
+                collectWater.anims.play("collectWater");
+                collectWater.on('animationcomplete', function () {
+                    collectWater.setVisible(false);
+                });
                 break;
             } else if (this.physics.overlap(poopArr[i], l4_white_flower)) {
                 poopArr[i].destroy();
                 poopArr.splice(i, 1);
+                collectWater = this.physics.add.staticSprite(l4_white_flower.x, l4_white_flower.y - 280, "collectWater").setScale(0.6);
+                collectWater.depth = 9;
+                collectWater.anims.create({
+                    key: "collectWater",
+                    frames: this.anims.generateFrameNumbers('collectWater', { start: 0, end: 25 }),
+                    frameRate: 20,
+                });
+                collectWater.anims.play("collectWater");
+                collectWater.on('animationcomplete', function () {
+                    collectWater.setVisible(false);
+                });
                 break;
             }
             // this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
