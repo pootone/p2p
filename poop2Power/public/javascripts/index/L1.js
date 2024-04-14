@@ -25,6 +25,7 @@ let l4_static_grass = [];
 let l5_yellow_flower;
 let l5_static_grass = [];
 let l5_static_flower = [];
+let collectWater;
 
 let timer;
 
@@ -90,6 +91,8 @@ var L1 = new Phaser.Class({
         this.load.image("5f", "./images/index/l1/5f.png");
         this.load.image("5g", "./images/index/l1/5g.png");
         this.load.image("5g2", "./images/index/l1/5g2.png");
+
+        this.load.spritesheet("collectWater", "./images/index/l1/collectWater.png", { frameWidth: 310, frameHeight: 150 });
 
         this.load.svg("nextBtn", "./images/index/NEXT_btn.svg");
 
@@ -197,7 +200,7 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 l4_yellow_flower.depth = 2;
-                                l4_white_flower = this.physics.add.sprite(config.width - 280, 700, "l4_white_flower").setScale(0.75);
+                                l4_white_flower = this.physics.add.staticSprite(config.width - 280, 700, "l4_white_flower").setScale(0.75);
                                 l4_white_flower.anims.create({
                                     key: "l4_white_flower",
                                     frames: this.anims.generateFrameNumbers("l4_white_flower", { start: 0, end: 19 }),
@@ -205,8 +208,8 @@ var L1 = new Phaser.Class({
                                     yoyo: true,
                                     repeat: -1
                                 });
-                                l4_white_flower.body.setSize(200, 60);
-                                l4_white_flower.body.setOffset(l4_white_flower.width / 2 - 110, 180);
+                                l4_white_flower.body.setSize(140, 50);
+                                l4_white_flower.body.setOffset(l4_white_flower.width / 2 - 80, 275);
                                 l4_white_flower.depth = 2;
 
                                 // layer 3
@@ -349,7 +352,7 @@ var L1 = new Phaser.Class({
                                 });
                                 grass_r.depth = 5;
 
-                                flower = this.physics.add.sprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
+                                flower = this.physics.add.staticSprite(config.width / 2, config.height - 280, "flower").setScale(0.6);
                                 flower.anims.create({
                                     key: "flower",
                                     frames: this.anims.generateFrameNumbers('flower', { start: 0, end: 14 }),
@@ -358,8 +361,8 @@ var L1 = new Phaser.Class({
                                     repeat: -1
                                 });
                                 flower.depth = 5;
-                                flower.body.setSize(200, 90);
-                                flower.body.setOffset(flower.width / 2 - 90, 210);
+                                flower.body.setSize(130, 50);
+                                flower.body.setOffset(flower.width / 2 - 60, 340);
 
                                 flower.anims.play('flower');
                                 pinkFlower.anims.play('pinkFlower_l');
@@ -427,24 +430,60 @@ var L1 = new Phaser.Class({
     },
     update: function () {
         for (let i = 0; i < poopArr.length; i++) {
+            // Destroy when out of canvas
             if (config.width < poopArr[i].x ||
                 poopArr[i].x + poopArr[i].body.width < 0 ||
                 config.height < poopArr[i].y ||
                 poopArr[i].y + poopArr[i].body.height < 0) {
                 poopArr[i].destroy();
                 poopArr.splice(i, 1);
-                return;
+                break;
+            } else if (this.physics.overlap(poopArr[i], flower)) {
+                poopArr[i].destroy();
+                poopArr.splice(i, 1);
+                collectWater = this.physics.add.staticSprite(flower.x + 10, flower.y - 180, "collectWater").setScale(0.6);
+                collectWater.depth = 9;
+                collectWater.anims.create({
+                    key: "collectWater",
+                    frames: this.anims.generateFrameNumbers('collectWater', { start: 0, end: 25 }),
+                    frameRate: 20,
+                });
+                collectWater.anims.play("collectWater");
+                collectWater.on('animationcomplete', function () {
+                    collectWater.setVisible(false);
+                });
+                break;
+            } else if (this.physics.overlap(poopArr[i], l4_white_flower)) {
+                poopArr[i].destroy();
+                poopArr.splice(i, 1);
+                collectWater = this.physics.add.staticSprite(l4_white_flower.x, l4_white_flower.y - 280, "collectWater").setScale(0.6);
+                collectWater.depth = 9;
+                collectWater.anims.create({
+                    key: "collectWater",
+                    frames: this.anims.generateFrameNumbers('collectWater', { start: 0, end: 25 }),
+                    frameRate: 20,
+                });
+                collectWater.anims.play("collectWater");
+                collectWater.on('animationcomplete', function () {
+                    collectWater.setVisible(false);
+                });
+                break;
             }
-            this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
-                poop.destroy();
-                poopArr.splice(i, 1);
-                return;
-            });
-            this.physics.add.collider(poopArr[i], l4_white_flower, function (poop, flower) {
-                poop.destroy();
-                poopArr.splice(i, 1);
-                return;
-            });
+            // this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
+            //     poop.destroy();
+            //     poopArr.splice(i, 1);
+            // });
+
+            // this.physics.overlap(poopArr[i], flower, function (poop, flower) {
+            //     poop.destroy();
+            //     poopArr.splice(i, 1);
+            //     break;
+            // });
+            // this.physics.overlap(poopArr[i], l4_yellow_flower, function (poop, flower) {
+            //     poop.destroy();
+            //     poopArr.splice(i, 1);
+            //     return;
+            // });
         }
 
         // poopArr.forEach(poop => {
