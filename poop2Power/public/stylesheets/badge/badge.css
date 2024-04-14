@@ -204,9 +204,11 @@ body::-webkit-scrollbar {
     #openWeekWindowBtn {
         display: none;
     }
-    #title{
+
+    #title {
         margin-left: 40px;
     }
+
     .aquarium img {
         content: url('../../images/badge/Aquarium/AquariumRWD.svg');
         float: left;
@@ -243,7 +245,7 @@ body::-webkit-scrollbar {
 
     .mid img {
         width: 30%;
-        
+
     }
 
     .badgeClassBTN {
@@ -263,6 +265,7 @@ body::-webkit-scrollbar {
     .badge .row {
         flex-direction: column;
     }
+
     .badge .col-4 {
         width: 100%;
         text-align: center;
@@ -325,7 +328,7 @@ body::-webkit-scrollbar {
     #buttonContainer {
         top: 55% !important;
         height: 10% !important;
-    } 
+    }
 
     #ache-collect {
         width: 40% !important;
@@ -343,6 +346,14 @@ body::-webkit-scrollbar {
 
     #achieTextContent {
         font-size: 25px !important;
+    }
+
+    #loginModalContent {
+        background-image: url(../../images/badge/loginModal/login-mobile.svg) !important;
+    }
+
+    #loginModalContent>div>img {
+        display: none;
     }
 }
 
