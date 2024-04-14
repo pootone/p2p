@@ -4,9 +4,9 @@ p {
 }
 
 .modal-backdrop {
-    opacity: 0.5;
+    /* opacity: 0.5; */
     /* Adjust the opacity as needed */
-    background-color: rgba(0, 0, 0, 0);
+    /* background-color: rgba(0, 0, 0, 0); */
     /* Adjust the color and alpha as needed */
 }
 
@@ -97,7 +97,7 @@ p {
     height: auto;
 }
 
-.lockTextBox{
+.lockTextBox {
     width: 90%;
     height: auto;
 }
