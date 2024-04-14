@@ -343,7 +343,6 @@ function scrollToBottom() {
 }
 
 function showAchieveModal() {
-    isCloseAwardModal = false; //todelete
     $("#achieModal").modal('show');
 }
 
