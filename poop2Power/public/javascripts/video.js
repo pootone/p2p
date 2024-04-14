@@ -19,7 +19,7 @@ $().ready(function () {
         let src = $(this).data("src");
         $("#pcVideo").attr("src", videoArr[src]);
         $(this).data("src", curPlay);
-        $(this).find('img').attr("src", `../images/video/${curPlay}.png`);
+        $(this).find('img').attr("src", `../images/video/${curPlay}.svg`);
         $("#pcVideoContainer").css("background-image", `url(../images/video/${src}-bg.png)`)
         curPlay = src;
     });
