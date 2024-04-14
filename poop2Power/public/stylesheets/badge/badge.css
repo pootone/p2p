@@ -315,6 +315,7 @@ body::-webkit-scrollbar {
     #achieCongrate {
         font-size: 45px !important;
         top: 20% !important;
+        font-family: sans-serif !important;
     }
 
     #achieBG {
@@ -341,7 +342,7 @@ body::-webkit-scrollbar {
 
     #achieImg {
         /* top: 41% !important; */
-        width: 40%!important;
+        width: 40% !important;
     }
 
     #achieTextContent {
