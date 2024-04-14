@@ -21,7 +21,7 @@ var L3 = new Phaser.Class({
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
-        sideText = this.add.text(0, 0, "點擊產氫菌，讓產氫菌與甲烷菌進行厭氧醱酵", {
+        sideText = this.add.text(0, 0, "產氫菌與甲烷菌進行厭氧醱酵，產出甲烷氣體", {
             // fontFamily: "",
             fontSize: "24px",
             color: "#000"

@@ -19,9 +19,9 @@ var L2 = new Phaser.Class({
         video.play(true);
 
         let guideContainer = this.add.container();
-        let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
+        let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.9, 0.9);
 
-        sideText = this.add.text(0, 0, "賽賽進入了污水處理廠，點擊賽賽進行分解", {
+        sideText = this.add.text(0, 0, "賽賽進入了污水處理廠，在此分解成產氫菌及甲烷菌", {
             // fontFamily: "",
             fontSize: "24px",
             color: "#000"

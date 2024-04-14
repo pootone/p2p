@@ -21,7 +21,7 @@ var L5 = new Phaser.Class({
         let guideContainer = this.add.container();
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
-        sideText = this.add.text(0, 0, "賽賽順利變成電，將他們傳送進家家戶戶", {
+        sideText = this.add.text(0, 0, "賽賽順利變成電，將他們傳送進暗暗的房子裡", {
             // fontFamily: "",
             fontSize: "24px",
             color: "#000"

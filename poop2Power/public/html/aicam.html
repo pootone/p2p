@@ -36,7 +36,7 @@
           var target = document.currentScript;
           window.addEventListener('load', function() {
             calendar.schedulingButton.load({
-              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ39AaoPbeRd7ycsfUWxdB9NcBY4Lk0APYtu1kxSGgg4CAqgTWlGaWfZJb5QIXOOT1wJ2lWYYsgk?gv=true',
+              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Y1rtVtipGdavI8OZYZN3g2rV2Vp16AiivTazY6y9riHl2QxRuIC-yErf3Rp-IYPfcumdeqZUx?gv=true',
               color: '#039BE5',
               label: '進行預約',
               target,
@@ -482,7 +482,7 @@
 
                 <div class="row d-flex justify-content-center">
                   <div class="col-11">
-                    <p class="fs-6" id="aiSug">mhgfhcghjgjhvgh</p>
+                    <p class="fs-6" id="aiSug"></p>
                   </div>
                 </div>
 
@@ -503,14 +503,11 @@
       </div>
       <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">
         <div class="modal-dialog modal-dialog-centered h-100">
-            <div class="modal-content w-100 h-100 position-relative" id="loginModalContent">
+            <div class="modal-content w-100 h-100 position-relative border-0" id="loginModalContent">
                 <div class="modal-body position-relative d-flex align-items-center justify-content-center" style="padding: 0%;">
                     <img src="../images/badge/loginModal/border.svg" alt="" class="position-absolute w-100 h-100">
                     <div id="firebaseui-auth-container" class="top-0"></div>
                 </div>
-                <button class="position-absolute border-0 bg-transparent" id="login_skip" style="top: 6%; right: 5%;">
-                    <img src="../images/badge/loginModal/skip_btn.svg">
-                </button>
             </div>
           </div>
         </div>
