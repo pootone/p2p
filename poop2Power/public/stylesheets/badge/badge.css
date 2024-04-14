@@ -340,8 +340,8 @@ body::-webkit-scrollbar {
     }
 
     #achieImg {
-        top: 41% !important;
-        width: 100%;
+        /* top: 41% !important; */
+        width: 40%!important;
     }
 
     #achieTextContent {
