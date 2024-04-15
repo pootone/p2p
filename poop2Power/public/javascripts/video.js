@@ -1,6 +1,6 @@
 let videoArr = [
-    "https://www.youtube.com/embed/7yBYGV3EXlg", // 甲烷 TODO
-    "https://www.youtube.com/embed/7yBYGV3EXlg", // 電力 TODO
+    "https://www.youtube.com/embed/wDZ4WHelvLw", // 甲烷
+    "https://www.youtube.com/embed/Xem1ZSXDkpQ", // 電力 
     "https://www.youtube.com/embed/ALnzmrCoBDo", // 熱量
     "https://www.youtube.com/embed/7yBYGV3EXlg", // 便秘
 ];
