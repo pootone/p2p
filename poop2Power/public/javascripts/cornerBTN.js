@@ -42,10 +42,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Additional check for initial load
-    if (window.innerWidth <= 768) {
-        rankWindowBtn.style.display = 'none';  
-        weekWindowBtn.style.display = 'none';  
-    }
 });
 

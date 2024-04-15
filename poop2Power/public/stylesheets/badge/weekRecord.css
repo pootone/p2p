@@ -1,19 +1,25 @@
 .floating-window {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 68%;
-    height: 90%;
-    padding: 25px;
+    width: 90%;
+    height: 100%;
     /* background-color: #fff; */
-    background-image: url('../../images/badge/floating_window/BG.png');
+    background-image: url('../../images/badge/floating_window/phoneBG.svg');
     background-size: 100%;
     background-repeat: no-repeat;
     /* border: 1px solid #ccc; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     z-index: 1000;
+}
+.WeekWindow_intro{
+    overflow-y: auto;
+        max-height: 55%;
+        scrollbar-width: thin;
+        scrollbar-color: darkgrey transparent;
+        max-width: 90%;
 }
 
 
