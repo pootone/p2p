@@ -51,6 +51,11 @@ initApp = function (isnewachieve) {
                     if (!isnewachieve && $.cookie("toSaveAchieve")) {
                         collectAchieve();
                     }
+                    getWeeklyAnalysis().then(() => {
+                        getUserData().then(() => {
+                            updateUserData();
+                        });
+                    })
                 });
                 // updateUserData();
             } else {
@@ -226,6 +231,80 @@ function getUserData() {
     })
 }
 
+function getWeeklyAnalysis() {
+    const currentDate = new Date();
+    const today = currentDate.getDay(); // 今天是星期幾（星期日為0，...，星期六為6）
+    const startOfLastWeek = new Date(currentDate);
+    const endOfThisWeek = new Date(currentDate);
+
+    // 計算上週日的日期
+    startOfLastWeek.setDate(currentDate.getDate() - today - 6);
+
+    // 計算這週六的日期
+    endOfThisWeek.setDate(currentDate.getDate() - today + 6);
+
+
+    return new Promise((resolve, reject) => {
+        let userRef = db.collection("users").doc(currentUser.uid);
+        let hisRef = userRef.collection("req_history");
+        let lwData = [];
+        let twData = [];
+
+        if(currentUserData.isNewData) {
+            // Get data in 2 weeks
+            hisRef
+                .where('timestamp', '>=', startOfLastWeek)
+                .where('timestamp', '<=', endOfThisWeek)
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        const docData = doc.data();
+                        const docTimestamp = docData.timestamp.toDate();
+                        if (docTimestamp >= startOfLastWeek && docTimestamp <= endOfThisWeek) {
+                            twData.push({
+                                'food': docData.food,
+                                'ingredient': docData.ingredient,
+                            });
+                        } else {
+                            lwData.push({
+                                'food': docData.food,
+                                'ingredient': docData.ingredient,
+                            });
+                        }
+                    });
+    
+                    $.post("/badge/ana", {
+                        "weekDatas": {
+                            "lastweek": lwData,
+                            "thisweek": twData,
+                        }
+                    })
+                        .done(function (data) {
+                            let resData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                            userRef.set({
+                                weekly_analysis: resData,
+                                isNewData: false
+                            }, { merge: true })
+                            .catch((error) => {
+                                console.error("Error updating user data:", error);
+                            });
+                        })
+                        .fail(function (xhr, status, error) {
+                            console.log(error);
+                        });
+    
+                    resolve();
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                    reject(error);
+                });
+            } else {
+            resolve();
+        }
+
+    })
+}
+
 function updateUserData() {
     $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
     $("#electricity").text(currentUserData ? currentUserData.electricity : "");
@@ -238,6 +317,8 @@ function updateUserData() {
             $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
         })
     }
+    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.ana : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
 }
 
 function collectAchieve() {
