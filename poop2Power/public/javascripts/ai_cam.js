@@ -306,6 +306,7 @@ $().ready(function () {
                             getUserData().then(() => {
                                 achieCheck();
                                 collectElectricity();
+                                saveResult();
                             });
                         } else {
                             achieCheck();
@@ -569,6 +570,7 @@ function imgResCorrect() {
         getUserData().then(() => {
             achieCheck();
             collectElectricity();
+            saveResult();
         });
     } else {
         achieCheck();
@@ -683,6 +685,24 @@ function collectElectricity() {
             // Add collect electricity txt res TODO 
         }).catch((error) => {
             console.error("Error updating user data:", error);
+        });
+    }
+}
+
+// Save aicam result
+function saveResult() {
+    // Need to login first
+    if (currentUser) {
+        var hisRef = db.collection('users').doc(currentUser.uid).collection('req_history').doc();
+
+        // need add img: imgUrl
+        hisRef.set({
+            food: responseData.food,
+            ingredient: responseData.ingredient,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        }, { merge: true }).then(() => {
+        }).catch((error) => {
+            console.error("Error saving user data:", error);
         });
     }
 }
