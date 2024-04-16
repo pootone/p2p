@@ -21,6 +21,7 @@ const corsOptions = {
 var indexRouter = require('./routes/index');
 var aiCamRouter = require('./routes/aiCam');
 var usersRouter = require('./routes/users');
+var badgeRouter = require('./routes/badge');
 var aboutUsRouter = require('./routes/aboutUs');
 var wakeRouter = require('./routes/wake');
 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/index', indexRouter);
 app.use('/aicam', aiCamRouter);
+app.use('/badge', badgeRouter);
 app.use('/users', usersRouter);
 app.use('/aboutUs', aboutUsRouter);
 app.use("/wake", wakeRouter);
