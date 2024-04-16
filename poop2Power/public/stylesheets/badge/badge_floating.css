@@ -150,10 +150,10 @@ p {
         position: fixed;
         top: 60%;
         left: 50%;
-        background-image: url('../../images/badge/floating_window/phoneBG.svg');
+        background-image: url('../../images/badge/floating_window/phnoeBG.png');
         background-size: contain;
         background-repeat: no-repeat;
-        transform: translate(-50%, -50%) scale(1.2);
+        transform: translate(-50%, -50%) scale(1.0);
         /* 调整 scale 的值来缩放内容 */
         border-radius: 10px;
         padding: 20px;
@@ -177,7 +177,8 @@ p {
     .window_container {
         padding: 12px;
         overflow-y: auto;
-        max-height: 55%;
+        max-height: 40vh;
+        /* 定义滚动条样式 */
         scrollbar-width: thin;
         scrollbar-color: darkgrey transparent;
         max-width: 90%;
