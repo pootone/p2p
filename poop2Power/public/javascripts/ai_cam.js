@@ -680,6 +680,7 @@ function collectElectricity() {
 
         userRef.set({
             electricity: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
+            isNewData: true
         }, { merge: true }).then(() => {
             $.removeCookie('toSaveElectricity');
             // Add collect electricity txt res TODO 
