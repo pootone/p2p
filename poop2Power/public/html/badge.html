@@ -1082,22 +1082,21 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6" style="padding: 30px;">
-                        <div class="row" style="height: 40%;">
-                            <img src="../images/badge/WeekRecord/均衡飲食 (2).png" style="width:30%" alt="">
-                            <p style="margin: 20px;" id="wkAnDes">
-                                確保飲食包含足夠的蛋白質、碳水化合物、脂肪、維生素和礦物質。
-                                這有助於維持身體的正常功能和營養需求。
+                        <div class="row mb-3">
+                            <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
+                            <p class="ps-5 pe-2" id="wkAnDes">
+                                還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                             </p>
                         </div>
-                        <div class="row" style="height: 30%;"></div>
-                        <img src="../images/badge/WeekRecord/飲食種類.png" style="width:30%" alt="">
-                        <p style="margin: 20px;" id="wkAnSug">
-                            儘量選擇多樣化的食物，包括新鮮水果、蔬菜、全穀類、豆類、堅果、種子和蛋白質來源。
-                            這有助於確保您獲得不同類型的營養素。
-                        </p>
+                        <div class="row">
+                            <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
+                            <p class="ps-5 pe-2" id="wkAnSug">
+                                還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-md-6" style="text-align: center;">
-                        <img src="../images/badge/WeekRecord/雷達圖.png" alt="" style="width:80%; margin-top: 50px;">
+                    <div class="col-md-5" style="text-align: center;">
+                        <canvas id="wkAnChart" class="w-100 object-fit-contain"></canvas>
                     </div>
                 </div>
             </div>
@@ -1190,6 +1189,7 @@
     <!-- jquery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../javascripts/badge/badge.js"></script>
     <script src="../javascripts/badge/badgeEarn.js"></script>
     <script src="../javascripts/CornerBTN.js"></script>
