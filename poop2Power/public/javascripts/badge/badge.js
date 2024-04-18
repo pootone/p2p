@@ -74,74 +74,6 @@ initApp = function (isnewachieve) {
     );
 }
 
-const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
-
-let wkAnChart;
-
-let chartConfig = {
-    type: "radar",
-    data: {
-        labels: labels,
-        datasets: [
-            {
-                label: "",
-                data: [0, 0, 0, 0]
-            }, {
-                label: "",
-                data: [0, 0, 0, 0]
-            }
-        ]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false, // 上方資料 label 隱藏
-            },
-        },
-        scales: {
-            r: {
-                beginAtZero: true, // 從 0 度開始
-                startAngle: -45, // 旋轉度數
-                angleLines: {
-                    display: true, // 對角線隱藏
-                },
-                grid: { // https://www.chartjs.org/docs/latest/axes/radial/linear.html#grid-line-configuration
-                    display: true, // 隔線顯示
-                    circular: true // 隔線以同心圓方式呈現
-                },
-                max: 10, // 最大數值
-                min: 0, // 最小數值
-                ticks: {
-                    display: false, // 刻度顯示
-                    stepSize: 1 // 隔線寬距
-                },
-                pointLabels: {
-                    font: {
-                        size: 16 // 指標字型大小
-                    },
-                }
-            }
-        },
-        elements: {
-            line: { // https://www.chartjs.org/docs/latest/configuration/elements.html#line-configuration
-                borderWidth: 1,
-                borderColor: "rgba(255, 255, 255, 1)",
-                backgroundColor: "rgba(239, 211, 146, 0.6)",
-            },
-            point: {
-                pointRadius: 4,
-                pointBackgroundColor: [
-                    "rgba(179, 135, 134, 1)",
-                    "rgba(130, 177, 153, 1)",
-                    "rgba(219, 187, 87, 1)",
-                    "rgba(115, 50, 17, 1)",
-                ],
-                pointStyle: 'rect' // https://www.chartjs.org/docs/latest/configuration/elements.html#point-styles
-            },
-        },
-    },
-};
-
 $().ready(function () {
     $("#title").text("Personal Dashboard");
     // Check whether get new achieve
@@ -155,7 +87,6 @@ $().ready(function () {
 
     // Wake aicam page backend
     $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
-    wkAnChart = new Chart($("#wkAnChart"), chartConfig);
     $("#login_skip").click(function () {
         $("#loginModal").hide();
         $.cookie('skipLogin', 'true', { expires: 7 });
@@ -302,7 +233,7 @@ function getUserData() {
 
 function getWeeklyAnalysis() {
     const currentDate = new Date();
-    const today = currentDate.getDay(); // 今天是星期幾（星期日為 0，...，星期六為 6）
+    const today = currentDate.getDay(); // 今天是星期幾（星期日為0，...，星期六為6）
     const startOfLastWeek = new Date(currentDate);
     const endOfThisWeek = new Date(currentDate);
 
@@ -319,7 +250,7 @@ function getWeeklyAnalysis() {
         let lwData = [];
         let twData = [];
 
-        if (currentUserData.isNewData) {
+        if(currentUserData.isNewData) {
             // Get data in 2 weeks
             hisRef
                 .where('timestamp', '>=', startOfLastWeek)
@@ -341,7 +272,7 @@ function getWeeklyAnalysis() {
                             });
                         }
                     });
-
+    
                     $.post("/badge/ana", {
                         "weekDatas": {
                             "lastweek": lwData,
@@ -354,20 +285,20 @@ function getWeeklyAnalysis() {
                                 weekly_analysis: resData,
                                 isNewData: false
                             }, { merge: true })
-                                .catch((error) => {
-                                    console.error("Error updating user data:", error);
-                                });
+                            .catch((error) => {
+                                console.error("Error updating user data:", error);
+                            });
                         })
                         .fail(function (xhr, status, error) {
                             console.log(error);
                         });
-
+    
                     resolve();
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                     reject(error);
                 });
-        } else {
+            } else {
             resolve();
         }
 
@@ -386,8 +317,8 @@ function updateUserData() {
             $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
         })
     }
-    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
-    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.ana : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
 }
 
 function collectAchieve() {
