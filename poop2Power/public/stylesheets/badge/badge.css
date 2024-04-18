@@ -242,6 +242,10 @@ body::-webkit-scrollbar {
         justify-content: flex-start;
     }
 
+    .mid::-webkit-scrollbar {
+        display: none; /* 隐藏滚动条 */
+    }
+
     .mid img {
         width: 30%;
 
