@@ -45,20 +45,24 @@ initApp = function (isnewachieve) {
             // User is signed in.
             if (user) {
                 $("#loginModal").hide();
-                $("#title").text(user.displayName + "'s Dashboard");
                 currentUser = user;
-                getUserData();
-                if($.cookie("toSaveAchieve")) {
-                    collectAchieve();
-                }
+                getUserData().then(() => {
+                    updateUserData();
+                    if (!isnewachieve && $.cookie("toSaveAchieve")) {
+                        collectAchieve();
+                    }
+                    getWeeklyAnalysis().then(() => {
+                        getUserData().then(() => {
+                            updateUserData();
+                        });
+                    })
+                });
                 // updateUserData();
             } else {
                 // User is signed out.
                 if ($.cookie("skipLogin") != 'true' && !isnewachieve) {
                     $("#loginModal").show();
                 }
-                $("#title").text("Personal Dashboard");
-                $("#electricity").text();
                 currentUser = null;
                 currentUserData = null;
                 updateUserData();
@@ -69,6 +73,77 @@ initApp = function (isnewachieve) {
         }
     );
 }
+
+const labels = [["甲烷排放量"], ["電力輸出"], ["便秘風險"], ["熱量"]];
+
+let wkAnChart;
+
+let chartConfig = {
+    type: "radar",
+    data: {
+        labels: labels,
+        datasets: [
+            // this week
+            {
+                label: "本週",
+                data: [0, 0, 0, 0],
+                backgroundColor: "rgba(239, 211, 146, 0.6)",
+            }, { // last week
+                label: "上週",
+                data: [0, 0, 0, 0],
+                backgroundColor: "rgba(147, 155, 166, 0.6)",
+            }
+        ]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: true, // 上方資料 label 隱藏
+                position: 'bottom'
+            },
+        },
+        scales: {
+            r: {
+                beginAtZero: true, // 從 0 度開始
+                startAngle: -45, // 旋轉度數
+                angleLines: {
+                    display: true, // 對角線隱藏
+                },
+                grid: { // https://www.chartjs.org/docs/latest/axes/radial/linear.html#grid-line-configuration
+                    display: true, // 隔線顯示
+                    circular: true // 隔線以同心圓方式呈現
+                },
+                max: 10, // 最大數值
+                min: 0, // 最小數值
+                ticks: {
+                    display: false, // 刻度顯示
+                    stepSize: 1 // 隔線寬距
+                },
+                pointLabels: {
+                    font: {
+                        size: 16 // 指標字型大小
+                    },
+                }
+            }
+        },
+        elements: {
+            line: { // https://www.chartjs.org/docs/latest/configuration/elements.html#line-configuration
+                borderWidth: 1,
+                borderColor: "rgba(255, 255, 255, 1)",
+            },
+            point: {
+                pointRadius: 4,
+                pointBackgroundColor: [
+                    "rgba(179, 135, 134, 1)",
+                    "rgba(130, 177, 153, 1)",
+                    "rgba(219, 187, 87, 1)",
+                    "rgba(115, 50, 17, 1)",
+                ],
+                pointStyle: 'rect' // https://www.chartjs.org/docs/latest/configuration/elements.html#point-styles
+            },
+        },
+    },
+};
 
 $().ready(function () {
     $("#title").text("Personal Dashboard");
@@ -81,6 +156,9 @@ $().ready(function () {
     // if (!) {
     // }
 
+    // Wake aicam page backend
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
+    wkAnChart = new Chart($("#wkAnChart"), chartConfig);
     $("#login_skip").click(function () {
         $("#loginModal").hide();
         $.cookie('skipLogin', 'true', { expires: 7 });
@@ -150,7 +228,6 @@ function closeFloatingWindow() {
 
 // Check wether there's new achieve
 function isNewAchieve() {
-    console.log(currentUrl);
     const range = currentUrl.searchParams.get("range");
     const badge = currentUrl.searchParams.get("badge");
 
@@ -159,22 +236,22 @@ function isNewAchieve() {
         switch (range) {
             case "1": {
                 adjustAchieveModalContent("二號探險家", "4-1.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "10" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "1", electricity: "10" }), { expires: 7 });
                 break;
             }
             case "2": {
                 adjustAchieveModalContent("二號探險家", "4-2.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "20" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "2", electricity: "20" }), { expires: 7 });
                 break;
             }
             case "3": {
                 adjustAchieveModalContent("二號探險家", "4-3.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "30" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "3", electricity: "30" }), { expires: 7 });
                 break;
             }
             case "4": {
                 adjustAchieveModalContent("二號探險家", "4-4.svg");
-                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", electricity: "40" }), { expires: 7 });
+                $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "4", electricity: "40" }), { expires: 7 });
                 break;
             }
         }
@@ -208,44 +285,157 @@ function adjustAchieveModalContent(achieveName, achieveImg) {
 }
 
 function getUserData() {
-    let userRef = db.collection("users").doc(currentUser.uid);
+    return new Promise((resolve, reject) => {
+        let userRef = db.collection("users").doc(currentUser.uid);
 
-    userRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            currentUserData = doc.data();
-            updateUserData();
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                currentUserData = doc.data();
+            } else {
+                console.log("No user data yet");
+            }
+            resolve();
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+            reject(error);
+        });
+    })
+}
+
+function getWeeklyAnalysis() {
+    const currentDate = new Date();
+    const today = currentDate.getDay(); // 今天是星期幾（星期日為 0，...，星期六為 6）
+    const startOfLastWeek = new Date(currentDate);
+    const endOfThisWeek = new Date(currentDate);
+
+    // 計算上週日的日期
+    startOfLastWeek.setDate(currentDate.getDate() - today - 6);
+
+    // 計算這週六的日期
+    endOfThisWeek.setDate(currentDate.getDate() - today + 6);
+
+
+    return new Promise((resolve, reject) => {
+        let userRef = db.collection("users").doc(currentUser.uid);
+        let hisRef = userRef.collection("req_history");
+        let lwData = [];
+        let twData = [];
+
+        if (currentUserData.isNewData) {
+            // Get data in 2 weeks
+            hisRef
+                .where('timestamp', '>=', startOfLastWeek)
+                .where('timestamp', '<=', endOfThisWeek)
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        const docData = doc.data();
+                        const docTimestamp = docData.timestamp.toDate();
+                        if (docTimestamp >= startOfLastWeek && docTimestamp <= endOfThisWeek) {
+                            twData.push({
+                                'food': docData.food,
+                                'ingredient': docData.ingredient,
+                            });
+                        } else {
+                            lwData.push({
+                                'food': docData.food,
+                                'ingredient': docData.ingredient,
+                            });
+                        }
+                    });
+
+                    $.post("https://p2p-wnkb.onrender.com/badge/ana", {
+                        "weekDatas": {
+                            "lastweek": lwData,
+                            "thisweek": twData,
+                        }
+                    })
+                        .done(function (data) {
+                            let resData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                            userRef.set({
+                                weekly_analysis: resData,
+                                isNewData: false
+                            }, { merge: true })
+                                .catch((error) => {
+                                    console.error("Error updating user data:", error);
+                                });
+                        })
+                        .fail(function (xhr, status, error) {
+                            console.log(error);
+                        });
+
+                    resolve();
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                    reject(error);
+                });
         } else {
-            console.log("No user data yet");
+            resolve();
         }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+
+    })
 }
 
 function updateUserData() {
-    $("#electricity").text(currentUserData.electricity || "");
+    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
+    $("#electricity").text(currentUserData ? currentUserData.electricity : "");
+    // Go through all badge
+    // Toggle badge icon display
+    if (currentUserData && currentUserData.badge) {
+        Object.entries(currentUserData.badge).forEach((obj) => {
+            console.log($(`#badge${obj[0]}Modal`));
+            // console.log($(`#badge${obj[0]}Modal`));
+            $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+        })
+    }
+    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    if (currentUserData && currentUserData.weekly_analysis) {
+        // this week
+        chartConfig.data.datasets[0].data =
+            [currentUserData.weekly_analysis.tw_ana.methane,
+            currentUserData.weekly_analysis.tw_ana.electricity,
+            currentUserData.weekly_analysis.tw_ana.constipate,
+            currentUserData.weekly_analysis.tw_ana.calorie];
+        // this week
+        chartConfig.data.datasets[1].data =
+            [currentUserData.weekly_analysis.lw_ana.methane,
+            currentUserData.weekly_analysis.lw_ana.electricity,
+            currentUserData.weekly_analysis.lw_ana.constipate,
+            currentUserData.weekly_analysis.lw_ana.calorie];
+        wkAnChart.update();
+    }
 }
 
 function collectAchieve() {
-    console.log(currentUser);
     if (currentUser) {
         var userRef = db.collection('users').doc(currentUser.uid);
 
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
-        
-        // console.log(currentUserData.electricity + toSaveData.electricity);
-        console.log(currentUserData.electricity);
-        console.log(currentUserData);
 
-        let originalElectricity = parseInt(currentUserData.electricity) || 0;
+        // console.log(currentUserData.electricity + toSaveData.electricity);
+        // console.log(currentUserData.electricity);
+        // console.log(currentUserData);
+
+        let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+
+        let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
+
+        currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
 
         userRef.set({
-            electricity: originalElectricity + parseInt(toSaveData.electricity)
+            electricity: currentElectricity + parseInt(toSaveData.electricity),
+            badge: currentBadge
+        }, { merge: true }).then(() => {
+            $("#achieModal").modal('hide');
+            getUserData().then(() => {
+                updateUserData();
+                $.removeCookie('toSaveAchieve');
+            });
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
         });
-        $("#achieModal").modal('hide');
-        getUserData();
-        $.removeCookie('toSaveAchieve', { path: '/' });
     } else {
         $("#achieModal").modal('hide');
         $("#loginModal").show();

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>No.2</title>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
@@ -24,38 +26,65 @@
     <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon" />
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
-
+  
   <body>
+    <!-- Google Calendar Appointment Scheduling begin -->
+      <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+      <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+      <script>
+        (function() {
+          var target = document.currentScript;
+          window.addEventListener('load', function() {
+            calendar.schedulingButton.load({
+              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Y1rtVtipGdavI8OZYZN3g2rV2Vp16AiivTazY6y9riHl2QxRuIC-yErf3Rp-IYPfcumdeqZUx?gv=true',
+              color: '#039BE5',
+              label: '進行預約',
+              target,
+            });
+            
+            let btn = document.getElementById("booking");
+            let gbtn = document.getElementsByClassName("qxCTlb")[0];
+            gbtn.style.display = "none";
+            btn.addEventListener("click", function() {
+              console.log("ci");
+              gbtn.click();
+            });
+          });
+        })();
+      </script>
+      <!-- end Google Calendar Appointment Scheduling -->
     <div class="container-fluid" style="height: 100vh">
       <div class="fixed-corner">
-        <div class="corner-button" id="toggleMenuBtn">
-          <img src="../images/badge/menu_btn.png" alt="" />
+        <div class="corner-button" id="toggleMenuBtn" style="width: 60px;">
+            <img src="../images/badge/menu_btn.svg" alt="">
         </div>
         <div class="menu-bar">
-          <img src="../images/badge/menuBar/menuBar_BG.png" alt="" srcset="" />
-          <div class="menu_item">
-            <a href="../index.html">
-              <img src="../images/badge/menuBar/首頁.png" alt="" srcset="" />
-            </a>
-            <a href="">
-              <img src="../images/badge/menuBar/相機.png" alt="" srcset="" />
-            </a>
-            <a href="./video.html">
-              <img src="../images/badge/menuBar/資訊.png" alt="" srcset="" />
-            </a>
-            <a href="./badge.html">
-              <img src="../images/badge/menuBar/徽章.png" alt="" srcset="" />
-            </a>
-            <a href="./aboutUs.html">
-              <img
-                src="../images/badge/menuBar/關於我們.png"
-                alt=""
-                srcset=""
-              />
-            </a>
-          </div>
+            <img src="../images/badge/menuBar/menubarBg_long.svg" alt="" srcset="" style="width: 60px; padding-top: 3px;">
+            <div class="menu_item">
+                <a href="../index.html">
+                    <img width="32" height="32" src="../images/badge/menuBar/index.svg" alt="" srcset="">
+                </a>
+                <a href="">
+                    <img width="32" height="32" src="../images/badge/menuBar/cam.svg" alt="" srcset="">
+                </a>
+                <a href="./video.html">
+                    <img width="35" height="35" src="../images/badge/menuBar/video.svg" alt="" srcset="">
+                </a>
+                <a href="./badge.html">
+                    <img width="32" height="32" src="../images/badge/menuBar/badge.svg" alt="" srcset="">
+                </a>
+                <!-- <a href="./aboutUs.html">
+                    <img src="../images/badge/menuBar/關於我們.png" alt="" srcset="">
+                </a> -->
+                <button type="button" class="bg-transparent border-0" id="booking">
+                    <img width="32" height="32" src="../images/badge/menuBar/booking.svg">
+                </button>
+                <button type="button" id="login_signout_btn" class="bg-transparent border-0">
+                    <img width="32" height="32" src="../images/badge/menuBar/logout.svg" alt="login-rounded-right"/>
+                </button>
+            </div>
         </div>
-      </div>
+    </div>
       <div class="row mb-2">
         <div class="col"></div>
         <h3>What do you eat?</h3>
@@ -196,11 +225,12 @@
                   data-bs-dismiss="modal"
                   onclick="awardClose()"
                 ></button>
-                <a
+                <button
                   id="ache-collect"
+                  type="button"
                   class="mx-2 w-25 h-100"
-                  href="./badge.html?isFirst=true"
-                ></a>
+                  onclick="collectAchieve()"
+                ></button>
               </div>
             </div>
           </div>
@@ -233,6 +263,7 @@
                         background-repeat: no-repeat;
                         background-position: center;
                       "
+                      id="explanTitle"
                     ></div>
                     <div class="d-flex w-100 position-absolute top-0">
                       <button
@@ -255,11 +286,12 @@
                   </div>
                 </div>
                 <div
-                  class="row w-100 d-flex justify-content-center mb-3 mx-0"
+                  id="sugRow"
+                  class="row mb-3 mx-0 sugRow"
                   style="height: 33%"
                 >
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100 pt-1 pt-sm-0"
                     style="
                       background-image: url(../images/AI_Cam/LTBG.png);
                       background-size: contain;
@@ -308,7 +340,7 @@
                     </div>
                   </div>
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100 pt-1 pt-sm-0"
                     style="
                       background-image: url(../images/AI_Cam/RTBG.png);
                       background-size: contain;
@@ -332,20 +364,10 @@
                     <div class="position-relative w-100">
                       <lottie-player
                         id="loader"
-                        class="h-50 m-auto"
-                        style="width: 15%; margin-top: 6%"
+                        class="h-50"
+                        style="width: 80%; margin-top: 12%; margin-left: 14%"
                         src="../images/AI_Cam/phone.json"
                         background="transparent"
-                        speed="1"
-                        loop=""
-                        autoplay=""
-                      ></lottie-player>
-                      <lottie-player
-                        id="loader"
-                        src="../images/AI_Cam/road.json"
-                        background="transparent"
-                        class="w-75 mx-auto position-absolute"
-                        style="left: 10%; top: 43%; transform: scaleX(-1)"
                         speed="1"
                         loop=""
                         autoplay=""
@@ -354,11 +376,11 @@
                   </div>
                 </div>
                 <div
-                  class="row w-100 d-flex justify-content-center mb-2 mx-0"
+                  class="row w-100 d-flex justify-content-center mb-2 mx-0 sugRow"
                   style="height: 33%"
                 >
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100 pt-1 pt-sm-0"
                     style="
                       background-image: url(../images/AI_Cam/LBBG.png);
                       background-size: contain;
@@ -398,7 +420,7 @@
                     </div>
                   </div>
                   <div
-                    class="col-6 h-100"
+                    class="col-12 col-sm-6 h-100 pt-1 pt-sm-0"
                     style="
                       background-image: url(../images/AI_Cam/RBBG.png);
                       background-size: contain;
@@ -406,7 +428,7 @@
                       background-position: center;
                     "
                   >
-                    <p class="fs-6 mt-4" style="margin-left: 25%">
+                    <p class="fs-6 mt-4 ms-4 ms-sm-6">
                       會有約<span
                         id="constipateSp"
                         class="p-2"
@@ -448,6 +470,7 @@
                 <div class="row position-relative mb-2 mx-0" style="height: 9%">
                   <div
                     class="h-100"
+                    id="suggestTitle"
                     style="
                       background-image: url(../images/AI_Cam/Suggestion.svg);
                       background-size: contain;
@@ -480,20 +503,18 @@
       </div>
       <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">
         <div class="modal-dialog modal-dialog-centered h-100">
-            <div class="modal-content w-100 h-100 position-relative" id="loginModalContent">
+            <div class="modal-content w-100 h-100 position-relative border-0" id="loginModalContent">
                 <div class="modal-body position-relative d-flex align-items-center justify-content-center" style="padding: 0%;">
                     <img src="../images/badge/loginModal/border.svg" alt="" class="position-absolute w-100 h-100">
                     <div id="firebaseui-auth-container" class="top-0"></div>
                 </div>
-                <button class="position-absolute border-0 bg-transparent" id="login_skip" style="top: 6%; right: 5%;">
-                    <img src="../images/badge/loginModal/skip_btn.svg">
-                </button>
             </div>
           </div>
         </div>
     </div>
       <!-- jquery -->
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js">
         <!-- chart.js -->

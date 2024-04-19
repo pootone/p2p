@@ -11,8 +11,8 @@ const corsOptions = {
     'https://no-2t.netlify.app',
     'https://no-2.netlify.app',
     'http://localhost:5500', //TODO DElETE WHEN DEPLOY!!!!!
-    '127.0.0.1:5500', //TODO DElETE WHEN DEPLOY!!!!!
-    '127.0.0.1:3000' //TODO DElETE WHEN DEPLOY!!!!!
+    'http://127.0.0.1:5500', //TODO DElETE WHEN DEPLOY!!!!!
+    'http://127.0.0.1:3000' //TODO DElETE WHEN DEPLOY!!!!!
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -21,6 +21,7 @@ const corsOptions = {
 var indexRouter = require('./routes/index');
 var aiCamRouter = require('./routes/aiCam');
 var usersRouter = require('./routes/users');
+var badgeRouter = require('./routes/badge');
 var aboutUsRouter = require('./routes/aboutUs');
 var wakeRouter = require('./routes/wake');
 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/index', indexRouter);
 app.use('/aicam', aiCamRouter);
+app.use('/badge', badgeRouter);
 app.use('/users', usersRouter);
 app.use('/aboutUs', aboutUsRouter);
 app.use("/wake", wakeRouter);
