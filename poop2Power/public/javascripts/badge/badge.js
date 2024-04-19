@@ -345,7 +345,7 @@ function getWeeklyAnalysis() {
                         }
                     });
 
-                    $.post("/badge/ana", {
+                    $.post("https://p2p-wnkb.onrender.com/badge/ana", {
                         "weekDatas": {
                             "lastweek": lwData,
                             "thisweek": twData,
@@ -391,19 +391,21 @@ function updateUserData() {
     }
     $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
     $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
-    // this week
-    chartConfig.data.datasets[0].data =
-        [currentUserData.weekly_analysis.tw_ana.methane,
-        currentUserData.weekly_analysis.tw_ana.electricity,
-        currentUserData.weekly_analysis.tw_ana.constipate,
-        currentUserData.weekly_analysis.tw_ana.calorie];
-    // this week
-    chartConfig.data.datasets[1].data =
-        [currentUserData.weekly_analysis.lw_ana.methane,
-        currentUserData.weekly_analysis.lw_ana.electricity,
-        currentUserData.weekly_analysis.lw_ana.constipate,
-        currentUserData.weekly_analysis.lw_ana.calorie];
-    wkAnChart.update();
+    if (currentUserData && currentUserData.weekly_analysis) {
+        // this week
+        chartConfig.data.datasets[0].data =
+            [currentUserData.weekly_analysis.tw_ana.methane,
+            currentUserData.weekly_analysis.tw_ana.electricity,
+            currentUserData.weekly_analysis.tw_ana.constipate,
+            currentUserData.weekly_analysis.tw_ana.calorie];
+        // this week
+        chartConfig.data.datasets[1].data =
+            [currentUserData.weekly_analysis.lw_ana.methane,
+            currentUserData.weekly_analysis.lw_ana.electricity,
+            currentUserData.weekly_analysis.lw_ana.constipate,
+            currentUserData.weekly_analysis.lw_ana.calorie];
+        wkAnChart.update();
+    }
 }
 
 function collectAchieve() {
