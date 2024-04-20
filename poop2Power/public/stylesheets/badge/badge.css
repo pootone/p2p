@@ -209,6 +209,10 @@ body::-webkit-scrollbar {
         font-size: 40px !important;
     }
 
+    #title {
+        font-size: 40px !important;
+    }
+
     .aquarium img {
         content: url('../../images/badge/Aquarium/AquariumRWD.svg');
         float: left;
@@ -229,6 +233,8 @@ body::-webkit-scrollbar {
     #mem_ele {
         width: 27% !important;
         margin-right: 25%;
+        margin-top: auto !important;
+        margin-bottom: 6% !important;
     }
 
     #electricity {
