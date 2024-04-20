@@ -346,6 +346,7 @@ function getWeeklyAnalysis() {
                     });
 
                     $.post("https://p2p-wnkb.onrender.com/badge/ana", {
+                    // $.post("/badge/ana", {
                         "weekDatas": {
                             "lastweek": lwData,
                             "thisweek": twData,
