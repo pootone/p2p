@@ -52,9 +52,7 @@ initApp = function (isnewachieve) {
                         collectAchieve();
                     }
                     getWeeklyAnalysis().then(() => {
-                        getUserData().then(() => {
-                            updateUserData();
-                        });
+                        updateUserData();
                     })
                 });
                 // updateUserData();
@@ -315,14 +313,15 @@ function getWeeklyAnalysis() {
     // 計算這週六的日期
     endOfThisWeek.setDate(currentDate.getDate() - today + 6);
 
-
     return new Promise((resolve, reject) => {
         let userRef = db.collection("users").doc(currentUser.uid);
         let hisRef = userRef.collection("req_history");
         let lwData = [];
         let twData = [];
-
+        
         if (currentUserData.isNewData) {
+            $("#wkAnDes").text("飲食分析中...");
+            $("#wkAnSug").text("飲食分析中...");
             // Get data in 2 weeks
             hisRef
                 .where('timestamp', '>=', startOfLastWeek)
@@ -358,15 +357,20 @@ function getWeeklyAnalysis() {
                                 weekly_analysis: resData,
                                 isNewData: false
                             }, { merge: true })
+                                .then(() => {
+                                    getUserData().then(() => {
+                                        resolve();
+                                    });
+                                })
                                 .catch((error) => {
                                     console.error("Error updating user data:", error);
                                 });
                         })
                         .fail(function (xhr, status, error) {
                             console.log(error);
+                            reject(error);
                         });
 
-                    resolve();
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                     reject(error);
