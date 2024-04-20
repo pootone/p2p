@@ -144,7 +144,7 @@ let chartConfig = {
 };
 
 $().ready(function () {
-    $("#title").text("Personal Dashboard");
+    $("#title").text(" ");
     // Check whether get new achieve
     initApp(isNewAchieve());
     // Initialize the FirebaseUI Widget using Firebase.
@@ -383,7 +383,7 @@ function getWeeklyAnalysis() {
 }
 
 function updateUserData() {
-    $("#title").text(currentUser ? currentUser.displayName + "'s Dashboard" : "Personal Dashboard");
+    $("#title").text(currentUser ? currentUser.displayName + "'s" : " ");
     $("#electricity").text(currentUserData ? currentUserData.electricity : "");
     // Go through all badge
     // Toggle badge icon display
