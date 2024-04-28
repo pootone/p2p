@@ -24,6 +24,7 @@ var L5 = new Phaser.Class({
         this.load.image("K", "./images/index/l5/windows/K.png");
         this.load.image("L", "./images/index/l5/windows/L.png");
         this.load.image("M", "./images/index/l5/windows/M.png");
+        this.load.image('eleParti', './images/index/l5/eleParti.png');
         this.load.video('l5_video', './l5_video.mp4');
         this.load.spritesheet("ele0", "./images/index/l5/ele-1.png", { frameWidth: 275, frameHeight: 340 });
         this.load.spritesheet("ele1", "./images/index/l5/ele-2.png", { frameWidth: 460, frameHeight: 285 });
@@ -128,9 +129,26 @@ var L5 = new Phaser.Class({
                 } 
                 for(let k = 0; k < winArr.length; k++) {
                     if (this.physics.overlap(eleArr[i][j], winArr[k]) && !winArr[k].visible) {
+                        let zone = new Phaser.Geom.Rectangle(0, 0, 200, 100);
+                        this.add.particles(winArr[k].body.x, winArr[k].body.y, 'eleParti', {
+                            emitZone: { source: zone },
+                            speed: { min: -30, max: 30 }, // 特效速度范围
+                            acceleration: { y: 2000 },
+                            angle: { min: 0, max: 360 }, // 特效角度范围
+                            scale: function () {
+                                return Math.random(); // 随机大小
+                            },
+                            scale: { start: 0, end: 0.05 }, // 初始大小和最终大小
+                            blendMode: 'ADD', // 混合模式
+                            lifespan: 5000, // 特效生命周期（毫秒）
+                            gravityY: -5, // 特效的重力
+                            frequency: 90, // 每秒生成的粒子数量
+                            maxParticles: 60 // 最大粒子数量
+                        });
                         eleArr[i][j].destroy();
                         eleArr[i].splice(j, 1);
                         winArr[k].setVisible(true);
+
                         break;
                     }
                 } 
