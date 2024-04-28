@@ -86,7 +86,7 @@ let dialogObserver = new MutationObserver(function (mutations) {
     })
 });
 
-const labels = [["甲烷排放", 0], ["電力輸出", 0], ["便秘風險", 0], ["熱量", 0]];
+const labels = [["熱量", 0], ["便秘風險", 0], ["電力輸出", 0], ["甲烷排放量", 0]];
 
 let chartMoreRadar;
 
@@ -292,19 +292,21 @@ $().ready(function () {
                         responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
                         console.log("Get response success!");
                         console.log("Res data: ", data);
+                        console.log("Res data: ", responseData);
 
-                        appendChart(responseData.result.methane.methane,
-                            responseData.result.electricity.electricity_level,
+                        appendChart(responseData.result.calorie.calorie_value,
                             responseData.result.constipate,
-                            responseData.result.calorie.calorie_value,
-                            responseData.result.suggest);
+                            responseData.result.electricity.electricity_level,
+                            responseData.result.methane.methane,
+                            responseData.result.suggest,
+                            );
 
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
 
                         // Show Achievement Model
                         if (currentUser) {
                             getUserData().then(() => {
-                                achieCheck();
+                                // achieCheck();
                                 collectElectricity();
                                 saveResult();
                             });
@@ -360,16 +362,17 @@ function adjustAchieveModalContent(achieveName, achieveIndex) {
     $("#achieImg").attr("src", `../images/AI_Cam/badge/${achieveIndex}.gif`);
 }
 
-function appendChart(methane, electricity, constipate, calorie, suggest = "") {
+function appendChart(calorie, constipate, electricity, methane, suggest = "") {
     chartConfig.data.datasets[0].data =
-        [methane,
-            electricity,
+        [calorie,
             constipate,
-            calorie];
-    chartConfig.data.labels[0][1] = methane;
-    chartConfig.data.labels[1][1] = electricity;
-    chartConfig.data.labels[2][1] = constipate;
-    chartConfig.data.labels[3][1] = calorie;
+            electricity, 
+            methane
+            ];
+    chartConfig.data.labels[0][1] = calorie;
+    chartConfig.data.labels[1][1] = constipate;
+    chartConfig.data.labels[2][1] = electricity;
+    chartConfig.data.labels[3][1] = methane;
 
     console.log("data.datasets: ", chartConfig.data.datasets[0].data);
 
@@ -557,10 +560,10 @@ function imgResCorrect() {
     $("#imgYes").removeAttr("id");
 
     appendGetReq(responseData.food);
-    appendChart(responseData.result.methane.methane,
-        responseData.result.electricity.electricity_level,
+    appendChart(responseData.result.calorie.calorie_value,
         responseData.result.constipate,
-        responseData.result.calorie.calorie_value,
+        responseData.result.methane.methane,
+        responseData.result.electricity.electricity_level,
         responseData.result.suggest);
 
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
