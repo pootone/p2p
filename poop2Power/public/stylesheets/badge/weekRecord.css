@@ -29,6 +29,7 @@
 
 @media (max-width: 768px) {
     .floating-window {
+        width: 90%!important;
         height: 80%;
         display: none;
         position: fixed;

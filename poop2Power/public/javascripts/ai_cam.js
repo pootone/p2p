@@ -678,15 +678,23 @@ function collectAchieve() {
 function collectElectricity() {
     // Need to login first
     if (currentUser && !$.cookie("toSaveAchieve")) {
-        var userRef = db.collection('users').doc(currentUser.uid);
+        let userRef = db.collection('users').doc(currentUser.uid);
         let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+        let rankRef = db.collection("leaderboard").doc(currentUser.uid);
 
         userRef.set({
             electricity: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
             isNewData: true
         }, { merge: true }).then(() => {
-            $.removeCookie('toSaveElectricity');
-            // Add collect electricity txt res TODO 
+            rankRef.set({
+                elect: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
+                userName: currentUser.displayName
+            }, {merge: true}).then(() => {
+                $.removeCookie('toSaveElectricity');
+                // Add collect electricity txt res TODO 
+            }).catch((error) => {
+                console.error("Error updating leaderboard data:", error);
+            });
         }).catch((error) => {
             console.error("Error updating user data:", error);
         });
