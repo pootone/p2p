@@ -53,7 +53,9 @@ initApp = function (isnewachieve) {
                     }
                     getWeeklyAnalysis().then(() => {
                         updateUserData();
-                    })
+                    });
+                    // Fetch ranking list
+                    fetchRank();
                 });
                 // updateUserData();
             } else {
@@ -63,6 +65,7 @@ initApp = function (isnewachieve) {
                 }
                 currentUser = null;
                 currentUserData = null;
+                fetchRank();
                 updateUserData();
             }
         },
@@ -154,8 +157,10 @@ $().ready(function () {
     // if (!) {
     // }
 
+    // showRankModal();
+
     // Wake aicam page backend
-    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
+    $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
     wkAnChart = new Chart($("#wkAnChart"), chartConfig);
     $("#login_skip").click(function () {
         $("#loginModal").hide();
@@ -269,6 +274,14 @@ function showAchieveModal() {
     $("#achieModal").modal('show');
 }
 
+function showRankModal() {
+    $("#rankModal").modal('show');
+}
+
+function hideRankModal() {
+    $("#rankModal").modal('hide');
+}
+
 function adjustAchieveModalContent(achieveName, achieveImg) {
     let nameLen = achieveName.length;
     if (7 < nameLen) {
@@ -380,6 +393,104 @@ function getWeeklyAnalysis() {
         }
 
     })
+}
+
+function fetchRank() {
+    let rankRef = db.collection("leaderboard");
+    let index = 0;
+
+    if(currentUser) {
+        rankRef
+            .orderBy('elect', "desc")
+            .get()
+            .then(querySnapshot => {
+                $("#rankList").empty();
+                querySnapshot.forEach((doc) => {
+                    const docData = doc.data();
+                    console.log("Data: ", docData);
+                    console.log(index);
+                    if(index < 3) {
+                        console.log("enter");
+                        console.log(currentUser.uid , doc.id);
+                        if(currentUser.uid == doc.id) {
+                            console.log("Same Id");
+                            $(`#top3Bg${index+1}`).attr("src", `../images/badge/rank/${index+1}-t.svg`);
+                        }
+                        $(`#top${index+1}-name`).text(docData.userName);
+                        $(`#top${index+1}-elect`).text(docData.elect);
+                    } else {
+                        let newRank = `<div class="row d-flex mb-2">
+                                <!-- Num -->
+                                <div class="col-1 position-relative px-0 d-flex justify-content-center">
+                                    <img class="w-75" src="../images/badge/rank/rankBg${(currentUser.uid == doc.id)?"Y":""}.svg" alt="">
+                                    <p class="position-absolute m-0" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great'; color: ${(currentUser.uid == doc.id)?'#313131':'#ffffff'};!important">${index+1}</p>
+                                </div>
+                                <!-- Name -->
+                                <div class="col-10 position-relative">
+                                    <img class="w-100" src="../images/badge/rank/nameBg.svg" alt="">
+                                    <p class="position-absolute w-100 text-center" style="left: 0%;
+                                    text-align: center;
+                                    margin: 0%;
+                                    top: 50%;
+                                    transform: translateY(-50%); font-size: 1.5rem;">${docData.userName}</p>
+                                </div>
+                                <!-- Electricity -->
+                                <div class="col-1 d-flex">
+                                    <img src="../images/badge/rank/elec.svg" class="my-auto w-25">
+                                    <p class="ms-2 my-auto" style="font-size: 20px;">${docData.elect}</p>
+                                </div>
+                            </div>`;
+                        $("#rankList").append(newRank);
+                    }
+                    index++;
+                })
+            }).catch((error) => {
+                console.log("Error getting ranking:", error);
+            });
+    } else {
+        rankRef
+            .orderBy('elect', "desc")
+            .get()
+            .then(querySnapshot => {
+                $("#rankList").empty();
+                querySnapshot.forEach((doc) => {
+                    const docData = doc.data();
+                    console.log("Data: ", docData);
+                    console.log(index);
+                    if(index < 3) {
+                        console.log("enter");
+                        $(`#top${index+1}-name`).text(docData.userName);
+                        $(`#top${index+1}-elect`).text(docData.elect);
+                    } else {
+                        let newRank = `<div class="row d-flex mb-2">
+                                <!-- Num -->
+                                <div class="col-1 position-relative px-0 d-flex justify-content-center">
+                                    <img class="w-75" src="../images/badge/rank/rankBg.svg" alt="">
+                                    <p class="position-absolute m-0 text-light" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great';">${index+1}</p>
+                                </div>
+                                <!-- Name -->
+                                <div class="col-10 position-relative">
+                                    <img class="w-100" src="../images/badge/rank/nameBg.svg" alt="">
+                                    <p class="position-absolute w-100 text-center" style="left: 0%;
+                                    text-align: center;
+                                    margin: 0%;
+                                    top: 50%;
+                                    transform: translateY(-50%); font-size: 1.5rem;">${docData.userName}</p>
+                                </div>
+                                <!-- Electricity -->
+                                <div class="col-1 d-flex">
+                                    <img src="../images/badge/rank/elec.svg" class="my-auto w-25">
+                                    <p class="ms-2 my-auto" style="font-size: 20px;">${docData.elect}</p>
+                                </div>
+                            </div>`;
+                        $("#rankList").append(newRank);
+                    }
+                    index++;
+                })
+            }).catch((error) => {
+                console.log("Error getting ranking:", error);
+            });
+    }
 }
 
 function updateUserData() {
