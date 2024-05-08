@@ -157,7 +157,7 @@ $().ready(function () {
     // if (!) {
     // }
 
-    // showRankModal();
+    showRankModal();
 
     // Wake aicam page backend
     $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
@@ -415,6 +415,8 @@ function fetchRank() {
                         if(currentUser.uid == doc.id) {
                             console.log("Same Id");
                             $(`#top3Bg${index+1}`).attr("src", `../images/badge/rank/${index+1}-t.svg`);
+                            // console.log("Same Id");
+                            // $(`#top3Bg${index+1}`).attr("src", `../images/badge/rank/${index+1}-t.svg`);
                         }
                         $(`#top${index+1}-name`).text(docData.userName);
                         $(`#top${index+1}-elect`).text(docData.elect);
