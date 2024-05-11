@@ -10,6 +10,10 @@
     width: 30%
 }
 
+#wkAnPieChart {
+    width: 80%!important;
+}
+
 .floating-window {
     display: none;
     position: fixed;

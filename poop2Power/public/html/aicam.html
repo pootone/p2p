@@ -184,30 +184,18 @@
               >
                 成就解鎖！
               </p>
-              <div id="achieText" class="position-absolute" style="top: 28%">
-                <div
-                  class="position-relative d-flex justify-content-center align-items-center"
-                >
-                  <img
-                    id="achieTxtImg"
-                    src="../images/AI_Cam/achieText-1.svg"
-                    style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
-                  />
-                  <p
-                    id="achieTextContent"
-                    class="position-absolute fw-bold"
-                    style="color: #7c2d01; font-size: 25px; margin: 0px"
-                  >
-                    吃來乍到
-                  </p>
+              <div id="carouselExample" class="carousel slide w-100 position-absolute" style="top: 28%;">
+                <div class="carousel-inner" id="achieModalBadgesContainer">
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
               </div>
-              <img
-                id="achieImg"
-                class="position-absolute"
-                style="width: 20%; top: 37%"
-                src="../images/AI_Cam/badge/1.gif"
-              />
               <div
                 id="buttonContainer"
                 class="d-flex justify-content-center position-absolute w-100"
@@ -456,7 +444,7 @@
                       background-position: center;
                     "
                   >
-                    <p class="fs-6 ms-4 mt-4">
+                    <p class="fs-6 ms-4 mt-4 ps-5">
                       製造了約<span
                         id="electricitySp"
                         class="p-2"
