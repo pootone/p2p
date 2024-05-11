@@ -451,6 +451,7 @@ var L1 = new Phaser.Class({
                 collectWater.anims.play("collectWater");
                 collectWater.on('animationcomplete', function () {
                     collectWater.setVisible(false);
+                    collectWater.destroy();
                 });
                 break;
             } else if (this.physics.overlap(poopArr[i], l4_white_flower)) {
@@ -466,6 +467,7 @@ var L1 = new Phaser.Class({
                 collectWater.anims.play("collectWater");
                 collectWater.on('animationcomplete', function () {
                     collectWater.setVisible(false);
+                    collectWater.destroy();
                 });
                 break;
             }

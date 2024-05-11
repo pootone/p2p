@@ -1,3 +1,19 @@
+.space_row {
+    height: 30%;
+}
+
+.week_img1 {
+    width: 35%
+}
+
+.week_img2 {
+    width: 30%
+}
+
+#wkAnPieChart {
+    width: 80%!important;
+}
+
 .floating-window {
     display: none;
     position: fixed;
@@ -7,7 +23,6 @@
     width: 68%;
     height: 90%;
     padding: 25px;
-    /* background-color: #fff; */
     background-image: url('../../images/badge/floating_window/BG.png');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -16,4 +31,40 @@
     z-index: 1000;
 }
 
+@media (max-width: 768px) {
+    .floating-window {
+        width: 90%!important;
+        height: 80%;
+        display: none;
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        /* background-color: #fff; */
+        background-image: url('../../images/badge/floating_window/phoneBG.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        /* border: 1px solid #ccc; */
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        z-index: 1000;
+    }
 
+    .space_row {
+        height: 0;
+    }
+
+    .WeekWindow_intro {
+        overflow-y: auto;
+        max-height: 60%;
+        scrollbar-width: thin;
+        scrollbar-color: darkgrey transparent;
+        max-width: 100%;
+    }
+
+    .week_img1 {
+        width: 55%
+    }
+
+    .week_img2 {
+        width: 50%
+    }
+}

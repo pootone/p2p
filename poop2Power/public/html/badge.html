@@ -8,7 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth__zh_tw.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"/>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
@@ -18,6 +18,7 @@
     <!-- font -->
     <link href="https://fonts.cdnfonts.com/css/grandstander" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Shippori Mincho' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Fredericka the Great' rel='stylesheet'>
     <link rel="stylesheet" href="../stylesheets/cornerBtn.css">
     <link rel="stylesheet" href="../stylesheets/badge/badge.css">
     <link rel="stylesheet" href="../stylesheets/badge/badge_floating.css">
@@ -27,6 +28,7 @@
 </head>
 
 <body background="../images/badge/BG.png">
+
      <!-- Google Calendar Appointment Scheduling begin -->
      <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
      <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
@@ -57,7 +59,8 @@
             <img src="../images/badge/menu_btn.svg" alt="">
         </div>
         <div class="menu-bar">
-            <img src="../images/badge/menuBar/menubarBg_long.svg" alt="" srcset="" style="width: 60px; padding-top: 3px;">
+            <img src="../images/badge/menuBar/menubarBg_long.svg" alt="" srcset=""
+                style="width: 60px; padding-top: 3px;">
             <div class="menu_item">
                 <a href="../index.html">
                     <img width="32" height="32" src="../images/badge/menuBar/index.svg" alt="" srcset="">
@@ -78,16 +81,14 @@
                     <img width="32" height="32" src="../images/badge/menuBar/booking.svg">
                 </button>
                 <button type="button" id="login_signout_btn" class="bg-transparent border-0">
-                    <img width="32" height="32" src="../images/badge/menuBar/logout.svg" alt="login-rounded-right"/>
+                    <img width="32" height="32" src="../images/badge/menuBar/logout.svg" alt="login-rounded-right" />
                 </button>
             </div>
         </div>
-        <div class="corner-button" id="openRankWindowBtn" style="width: 60px">
-            <a href="./ranking.html" class="rankBtnContainer">
-                <img src="../images/badge/rank.svg" class="rankBtn" alt="">
-                <img src="../images/badge/rank_hover.svg" class="rankBtnHover" alt="">
-            </a>
-        </div>
+        <button class="corner-button bg-transparent border-0 p-0 rankBtnContainer" id="openRankWindowBtn" style="width: 60px" onclick="showRankModal()">
+            <img src="../images/badge/rank.svg" class="rankBtn" alt="">
+            <img src="../images/badge/rank_hover.svg" class="rankBtnHover" alt="">
+        </button>
         <div class="corner-button weekBtnContainer" id="openWeekWindowBtn" style="width: 60px">
             <img src="../images/badge/analysis.svg" class="weekBtn" alt="">
             <img src="../images/badge/analysis_hover.svg" class="weekBtnHover" alt="">
@@ -96,16 +97,14 @@
 
 
 
-    <div class="header">
+    <div class="header mx-auto">
         <div class="name">
-            <p id="title"></p>
+            <p id="title" class="mb-0"></p>
+            <p id="title-txt" class="mb-0">Dashboard</p>
         </div>
-        <div class="position-relative" style="width: 10%;">
-            <img class="" src="../images/badge/ele_bg.svg" alt="">
-            <p id="electricity" style="position: absolute;
-            margin: 0px;
-            top: 15%;
-            left: 50%;"></p>
+        <div class="position-relative d-flex justify-content-center align-items-center" style="width: 10%;" id="mem_ele">
+            <img class="w-100" src="../images/badge/ele_bg.svg" alt="">
+            <p id="electricity" style="position: absolute;"></p>
         </div>
     </div>
 
@@ -120,17 +119,18 @@
             </div>
 
             <div class="mid d-flex ">
-                <img src="../images/badge/任務框/限時任務.svg" alt="" class="mx-3" onclick="scrollToSection('limited_mission_B')">
+                <img src="../images/badge/任務框/限時任務.svg" alt="" class="mx-3"
+                    onclick="scrollToSection('limited_mission_B')">
                 <img src="../images/badge/任務框/均衡飲食.svg" alt="" class="mx-3" onclick="scrollToSection('balance_diet_B')">
                 <img src="../images/badge/任務框/素食挑戰.svg" alt="" class="mx-3" onclick="scrollToSection('vegetarian_B')">
                 <img src="../images/badge/任務框/飲食累積.svg" alt="" class="mx-3" onclick="scrollToSection('diet_combine_B')">
             </div>
-            
+
             <!-- badge跟點開badge都是開同一模板每個徽章都有獨立ID，原始是鎖定圖示，固定名稱描述，靠按鈕ID去傳給JS修改class="image-container"裡面內容 -->
-            <div class="badge"id="limited_mission_B" >
+            <div class="badge" id="limited_mission_B">
                 <div class="row">
                     <div class="col-4 d-flex align-items-center justify-content-end p-3">
-                        <img src="../images/badge/下滑任務框/限時任務.svg" class="badgeClassBTN"  alt="">
+                        <img src="../images/badge/下滑任務框/限時任務.svg" class="badgeClassBTN" alt="">
                     </div>
                     <div class="col-8 justify-content-center">
                         <div class="row">
@@ -171,10 +171,10 @@
                 </div>
             </div>
 
-            <div class="badge" id="balance_diet_B" >
+            <div class="badge" id="balance_diet_B">
                 <div class="row">
                     <div class="col-4 d-flex align-items-center justify-content-end p-3">
-                        <img src="../images/badge/下滑任務框/均衡飲食.svg"alt="" class="badgeClassBTN" >
+                        <img src="../images/badge/下滑任務框/均衡飲食.svg" alt="" class="badgeClassBTN">
                     </div>
                     <div class="col-8">
                         <div class="row">
@@ -207,10 +207,10 @@
                 </div>
             </div>
 
-            <div class="badge" id="vegetarian_B" >
+            <div class="badge" id="vegetarian_B">
                 <div class="row">
                     <div class="col-4 d-flex align-items-center justify-content-end p-3">
-                        <img src="../images/badge/下滑任務框/素食挑戰.svg"alt="" class="badgeClassBTN" >
+                        <img src="../images/badge/下滑任務框/素食挑戰.svg" alt="" class="badgeClassBTN">
                     </div>
                     <div class="col-8">
                         <div class="row">
@@ -235,10 +235,10 @@
                 </div>
             </div>
 
-            <div class="badge" id="diet_combine_B" >
+            <div class="badge" id="diet_combine_B">
                 <div class="row">
                     <div class="col-4 d-flex align-items-center justify-content-end p-3">
-                        <img src="../images/badge/下滑任務框/飲食累積.svg" alt=""  class="badgeClassBTN">
+                        <img src="../images/badge/下滑任務框/飲食累積.svg" alt="" class="badgeClassBTN">
                     </div>
                     <div class="col-8">
                         <div class="row">
@@ -314,19 +314,17 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/蛋.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/蛋.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/框.png" alt=""
-                                            class="lockBox">
+                                        <img src="../images/badge/floating_window/框.png" alt="" class="lockBox">
                                         <div class="overlay-text">
                                             <div class="row content_dis">
                                                 <p>您消耗的蛋排放了約等級2的甲烷排放量</p>
                                             </div>
                                             <div class="row record_anim">
-                                                <img src="../images/badge/floating_window/內容.png"
-                                                    class="lockBox" alt="">
+                                                <img src="../images/badge/floating_window/內容.png" class="lockBox"
+                                                    alt="">
                                             </div>
                                             <div class="row content-trans">
                                                 <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
@@ -336,19 +334,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/千層麵.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/千層麵.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/框.png"
-                                            class="lockBox" alt="" style="width: 100%; height: auto;">
+                                        <img src="../images/badge/floating_window/框.png" class="lockBox" alt=""
+                                            style="width: 100%; height: auto;">
                                         <div class="overlay-text">
                                             <div class="row content_dis">
                                                 <p>您消耗的千層麵排放了約等級9的甲烷排放量</p>
                                             </div>
                                             <div class="row record_anim">
-                                                <img src="../images/badge/floating_window/內容.png"
-                                                    class="lockBox" alt="">
+                                                <img src="../images/badge/floating_window/內容.png" class="lockBox"
+                                                    alt="">
                                             </div>
                                             <div class="row content-trans">
                                                 <p>相當於駕駛普通的汽油引擎汽車行駛 280公里。</p>
@@ -358,13 +355,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" class="little_lockPhoto">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox"
+                                            class="little_lockPhoto">
                                         <p class="little_lockWord">hi</p>
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -376,12 +372,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -393,12 +387,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -503,12 +495,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -554,12 +544,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -640,12 +628,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -698,12 +684,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -756,12 +740,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -815,12 +797,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -874,12 +854,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -932,12 +910,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -991,12 +967,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -1049,12 +1023,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2 mx-auto my-auto ">
-                                        <img src="../images/badge/floating_window/未解鎖小框.png"
-                                            class="lockBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖小框.png" class="lockBox" alt="">
                                     </div>
                                     <div class="col-md-10 position-relative">
-                                        <img src="../images/badge/floating_window/未解鎖框.png"
-                                            class="lockTextBox" alt="">
+                                        <img src="../images/badge/floating_window/未解鎖框.png" class="lockTextBox" alt="">
                                         <div class="overlay-text">
                                             <div class="lockDiscribtion">
                                                 <img src="../images/badge/floating_window/locker.png" class="lock-image"
@@ -1071,42 +1043,56 @@
                 </div>
             </div>
 
-            <div class="floating-window" id="WeekWindow">
+            <div class="floating-window container-fluid" id="WeekWindow">
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col position-relative">
                         <img src="../images/badge/floating_window/back_icon.png" id="closeWeekWindowBtn" alt="">
-                    </div>
-                    <div class="col-md-10">
-                        <p style="font-size: 24px; margin:15px; text-align:center">飲食分析</p>
+                        <span class="position-absolute" style="font-size: 24px;text-align:center; top: 50%; transform: translateY(-50%);">飲食分析</span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6" style="padding: 30px;">
-                        <div class="row" style="height: 40%;">
-                            <img src="../images/badge/WeekRecord/均衡飲食 (2).png" style="width:30%" alt="">
-                            <p style="margin: 20px;" id="wkAnDes">
-                                確保飲食包含足夠的蛋白質、碳水化合物、脂肪、維生素和礦物質。
-                                這有助於維持身體的正常功能和營養需求。
+                <div class="row WeekWindow_intro justify-content-center mb-3">
+                    <!-- <div class="col-md-6" style="padding: 30px;">
+                        <div class="row mb-3">
+                            <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
+                            <p class="ps-5 pe-2" id="wkAnDes">
+                                還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                             </p>
                         </div>
-                        <div class="row" style="height: 30%;"></div>
-                        <img src="../images/badge/WeekRecord/飲食種類.png" style="width:30%" alt="">
-                        <p style="margin: 20px;" id="wkAnSug">
-                            儘量選擇多樣化的食物，包括新鮮水果、蔬菜、全穀類、豆類、堅果、種子和蛋白質來源。
-                            這有助於確保您獲得不同類型的營養素。
+                        <div class="row">
+                            <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
+                            <p class="ps-5 pe-2" id="wkAnSug">
+                                還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                         </p>
+                        </div>
+                    </div> -->
+                    <div class="col-md-5 d-flex justify-content-center me-2" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                        <canvas id="wkAnPieChart" class="h-auto"></canvas>
                     </div>
-                    <div class="col-md-6" style="text-align: center;">
-                        <img src="../images/badge/WeekRecord/雷達圖.png" alt="" style="width:80%; margin-top: 50px;">
+                    <div class="col-md-5 d-flex justify-content-center" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                        <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
                     </div>
                 </div>
-            </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
+                        <p class="ps-5 pe-2" id="wkAnDes">
+                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
+                        <p class="ps-5 pe-2" id="wkAnSug">
+                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
+                        </p>
+                    </div>
+                </div>
         </div>
     </div>
     <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">
         <div class="modal-dialog modal-dialog-centered h-100">
             <div class="modal-content w-100 h-100 position-relative" id="loginModalContent">
-                <div class="modal-body position-relative d-flex align-items-center justify-content-center" style="padding: 0%;">
+                <div class="modal-body position-relative d-flex align-items-center justify-content-center"
+                    style="padding: 0%;">
                     <img src="../images/badge/loginModal/border.svg" alt="" class="position-absolute w-100 h-100">
                     <div id="firebaseui-auth-container" class="top-0"></div>
                 </div>
@@ -1114,75 +1100,112 @@
                     <img src="../images/badge/loginModal/skip_btn.svg">
                 </button>
             </div>
-          </div>
         </div>
+    </div>
     </div>
     <!-- Achieve Modal-->
     <div class="modal modal-lg" id="achieModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content bg-transparent border-0">
-            <div
-              class="modal-body position-relative d-flex justify-content-center"
-            >
-              <img
-                id="achieBG"
-                class="w-100"
-                src="../images/AI_Cam/achieBg.svg"
-              />
-              <p
-                id="achieCongrate"
-                class="fw-bold position-absolute text-light"
-                style="top: 15%; font-size: 50px"
-              >
-                成就解鎖！
-              </p>
-              <div id="achieText" class="position-absolute" style="top: 28%">
-                <div
-                  class="position-relative d-flex justify-content-center align-items-center"
-                >
-                  <img
-                    id="achieTxtImg"
-                    src="../images/AI_Cam/achieText-1.svg"
-                    style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
-                  />
-                  <p
-                    id="achieTextContent"
-                    class="position-absolute fw-bold"
-                    style="color: #7c2d01; font-size: 25px; margin: 0px"
-                  >
-                    吃來乍到
-                  </p>
-                </div>
-              </div>
-              <img
-                id="achieImg"
-                class="position-absolute"
-                style="width: 20%; top: 37%"
-                src="../images/AI_Cam/badge/1.gif"
-              />
-              <div
-                id="buttonContainer"
-                class="d-flex justify-content-center position-absolute w-100"
-                style="top: 70%; height: 8%"
-              >
-                <!-- <button
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body position-relative d-flex justify-content-center">
+                    <img id="achieBG" class="w-100" src="../images/AI_Cam/achieBg.svg" />
+                    <p id="achieCongrate" class="fw-bold position-absolute text-light"
+                        style="top: 15%; font-size: 50px">
+                        成就解鎖！
+                    </p>
+                    <div id="achieText" class="position-absolute" style="top: 28%">
+                        <div class="position-relative d-flex justify-content-center align-items-center">
+                            <img id="achieTxtImg" src="../images/AI_Cam/achieText-1.svg"
+                                style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" />
+                            <p id="achieTextContent" class="position-absolute fw-bold"
+                                style="color: #7c2d01; font-size: 25px; margin: 0px">
+                                吃來乍到
+                            </p>
+                        </div>
+                    </div>
+                    <img id="achieImg" class="position-absolute" style="width: 20%; top: 37%"
+                        src="../images/AI_Cam/badge/1.gif" />
+                    <div id="buttonContainer" class="d-flex justify-content-center position-absolute w-100"
+                        style="top: 70%; height: 8%">
+                        <!-- <button
                   id="ache-cancel"
                   class="mx-2 w-25 h-100"
                   type="button"
                   data-bs-dismiss="modal"
                   onclick="awardClose()"
                 ></button> -->
-                <button
-                  type="button"
-                  id="ache-collect"
-                  class="mx-2 w-25 h-100"
-                  onclick="collectAchieve()"
-                ></button>
-              </div>
+                        <button type="button" id="ache-collect" class="mx-2 w-25 h-100"
+                            onclick="collectAchieve()"></button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    <!-- Rank modal -->
+    <div class="modal modal-lg" id="rankModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw!important; height: 30vh!important;">
+            <div class="modal-content bg-transparent border-0 h-100">
+                <div class="modal-body d-flex justify-content-center h-100">
+                    <div class="position-relative w-100 h-100 d-flex flex-column justify-content-center" style="background-image: url(../images/badge/rank/rankModalBorder.svg); background-size: contain; background-repeat: no-repeat; padding: 5% 7%; max-width: 1287px;max-height: 779px; background-position: center;">
+                        <!-- Header -->
+                        <div class="container-fluid mb-3" style="height: 15%;">
+                            <div class="row">
+                                <div class="col-1">
+                                    <button class="bg-transparent border-0" onclick="hideRankModal()">
+                                        <img src="../images/badge/rank/RankBack.svg" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))">
+                                    </button>
+                                </div>
+                                <div class="col-11">
+                                    <h1 style="font-size: 3.5rem; font-weight: 400;" class="m-0">排行榜</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top3 -->
+                        <div class="container-fluid mb-3" style="height: 25%;">
+                            <div class="row h-100">
+                                <div class="col-4 h-100 position-relative">
+                                    <img class="w-100 h-100" id="top3Bg1" src="../images/badge/rank/1.svg" alt="">
+                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
+                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top1-name"></h4></div>
+                                        <div class="col-4 d-flex">
+                                            <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
+                                            <p class="m-0" id="top1-elect"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 h-100 position-relative">
+                                    <img class="w-100 h-100" id="top3Bg2" src="../images/badge/rank/2.svg" alt="">
+                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
+                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top2-name"></h4></div>
+                                        <div class="col-4 d-flex">
+                                            <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
+                                            <p class="m-0" id="top2-elect"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 h-100 position-relative">
+                                    <img class="w-100 h-100" id="top3Bg3" src="../images/badge/rank/3.svg" alt="">
+                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
+                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top3-name"></h4></div>
+                                        <div class="col-4 d-flex">
+                                            <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
+                                            <p class="m-0" id="top3-elect"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ranking -->
+                        <div class="container-fluid" id="rankList" style="height: 40%; overflow-y: scroll;"></div>
+
+                        <!-- <img src="../images/badge/rank/leaderboardLFlower.gif" class="position-absolute" alt=""> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>&copy; NO2</p>
     </footer>
@@ -1190,6 +1213,7 @@
     <!-- jquery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../javascripts/badge/badge.js"></script>
     <script src="../javascripts/badge/badgeEarn.js"></script>
     <script src="../javascripts/CornerBTN.js"></script>
