@@ -177,9 +177,21 @@ $().ready(function () {
     // appendImgCheck("test"); //TODO
     // appendAskMsg("測試");
     // appendGetReq("漢堡"); //TODO
-    // showAchieveModal();
     // appendAwardCongratulation(); //TODO
     // appendAwardMore(); //TODO
+    // showAchieveModal();
+    // adjustAchieveModalContent([{
+    //     badge_id: "1",
+    //     badge_val: "y",
+    //     badge_name: "吃來乍到",
+    //     electricity: 10
+    // }, {
+    //     badge_id: "2",
+    //     badge_val: {"Grains": "Grains", "OilsFatsNutsAndSeeds": "OilsFatsNutsAndSeeds"},
+    //     badge_name: "小吃貨",
+    //     electricity: 10
+    // }]);
+
     // Preview the image when image input change
     $("#imgFileInput").on("change", function (event) {
         // 抓取上傳的檔案
@@ -306,7 +318,7 @@ $().ready(function () {
                         // Show Achievement Model
                         if (currentUser) {
                             getUserData().then(() => {
-                                // achieCheck();
+                                achieCheck();
                                 collectElectricity();
                                 saveResult();
                             });
@@ -349,17 +361,50 @@ function showAchieveModal() {
     $("#achieModal").modal('show');
 }
 
-function adjustAchieveModalContent(achieveName, achieveIndex) {
-    let nameLen = achieveName.length;
-    if (7 < nameLen) {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-3.svg")
-    } else if (4 < nameLen) {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-2.svg")
-    } else {
-        $("#achieTxtImg").attr("src", "../images/AI_Cam/achieText-1.svg")
-    }
-    $("#achieTextContent").text(achieveName);
-    $("#achieImg").attr("src", `../images/AI_Cam/badge/${achieveIndex}.gif`);
+function adjustAchieveModalContent(getBadges) {
+    let i = 0;
+    $("#achieModalBadgesContainer").empty();
+    getBadges.forEach(function(badge) {
+        let nameLen = badge.badge_name.length;
+        let achieTxtImgSrc;
+        if (7 < nameLen) {
+            achieTxtImgSrc = "../images/AI_Cam/achieText-3.svg";
+        } else if (4 < nameLen) {
+            achieTxtImgSrc = "../images/AI_Cam/achieText-2.svg";
+        } else {
+            achieTxtImgSrc = "../images/AI_Cam/achieText-1.svg";
+        }
+        // electricity: 10 TODO
+        $("#achieModalBadgesContainer").append(
+        `<div class="carousel-item ${(i==0)?"active":""}">
+        <div class="d-flex flex-column align-items-center">
+          <div id="achieText">
+            <div
+              class="position-relative d-flex justify-content-center align-items-center"
+            >
+              <img
+                id="achieTxtImg"
+                src=${achieTxtImgSrc}
+                style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
+              />
+              <p
+                id="achieTextContent"
+                class="position-absolute fw-bold"
+                style="color: #7c2d01; font-size: 25px; margin: 0px"
+              >
+                ${badge.badge_name}
+              </p>
+            </div>
+          </div>
+          <img
+            id="achieImg"
+            style="width: 20%; top: 37%"
+            src="../images/AI_Cam/badge/${badge.badge_id}.gif"
+          />
+        </div>
+      </div>`);
+      i++;
+    });
 }
 
 function appendChart(calorie, constipate, electricity, methane, suggest = "") {
@@ -606,37 +651,164 @@ function getUserData() {
 function achieCheck() {
     // Get the badge
     let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
+    let getBadges = [];
+    let getValues = [];
 
-    // First try
-    if (currentUser && !("1" in currentBadge)) {
-        currentBadgeName = "吃來乍到";
-        adjustAchieveModalContent("吃來乍到", 1);
-        $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
-        $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
-        isCloseAwardModal = false;
-        showAchieveModal();
-    } else {
-        // Query for achieve
-        // let payload = {
-        //     food: "早午餐",
-        //     ingredient: "eggs, bacon, toast, coffee"
-        // }
-        // // $.post("https://p2p-contest-backend.onrender.com/wake", )
-        // $.post("/aicam/achie", payload)
-        //     .done(function (data) {
-        //         console.log(data);
-        //     })
-        //     .fail(function (xhr, status, error) {
-        //         console.log(error);
-        //     })
-        if (!currentUser) {
-
-        } else {
-
-        }
-        // 小吃貨
-        // 拍照或上傳完一半種類的食物
+    let payload = {
+        food: responseData.food,
+        ingredient: responseData.ingredient
     }
+    $.post("https://p2p-wnkb.onrender.com/aicam/achie", )
+    // $.post("/aicam/achie", payload) //TODO
+        .done(function (data) {
+            try {
+                badgeResult = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                console.log(badgeResult);
+
+                /// Log in ///
+                if(currentUser) {
+                    // 1 First try
+                    if(!("1" in currentBadge)) {
+                        getBadges.push({
+                            badge_id: "1",
+                            badge_val: "y",
+                            badge_name: "吃來乍到",
+                            electricity: 10
+                        });
+                    }
+                    // 2 Half category
+                    if((!("2" in currentBadge) || Object.keys(currentBadge["2"]).length < 3) && 
+                    (badgeResult["SixCategoriesofFood"]["Grains"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["OilsFatsNutsAndSeeds"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["LegumesFishEggsMeatAndTheirProducts"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["DairyProducts"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["Vegetables"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["Fruits"]!="none")) {
+                        let toSave = {};
+                        for(let key in badgeResult["SixCategoriesofFood"]) {
+                            if(badgeResult["SixCategoriesofFood"][key] != "none") {
+                                toSave[key] = badgeResult["SixCategoriesofFood"][key];
+                            }
+                        }
+
+                        if(!currentBadge["2"]){
+                            currentBadge["2"] = {};
+                        }
+                        Object.assign(currentBadge["2"], toSave);
+
+                        if(Object.keys(currentBadge["2"]).length >= 3) {
+                            getBadges.push({
+                                badge_id: "2",
+                                badge_val:  currentBadge["2"],
+                                badge_name: "小吃貨",
+                                electricity: 10
+                            });
+                        } else {
+                            getValues.push({
+                                badge_id: "2",
+                                badge_val: currentBadge["2"]
+                            });
+                        }
+                    }
+
+                    // 6 Healthy Staple Foods
+                    // if(!("6" in currentBadge) && badgeResult["Healthy Staple Foods"] == "6") {
+                    //     getBadges.push({
+                    //         badge_id: "6",
+                    //         badge_val: "y",
+                    //         badge_name: "健康主食",
+                    //         electricity: 10
+                    //     });
+                    // }
+                    
+                    // 7 NaturalSugars
+                    // if(!("7" in currentBadge) && badgeResult["NaturalSugars"] == "7") {
+                    //     getBadges.push({
+                    //         badge_id: "7",
+                    //         badge_val: "y",
+                    //         badge_name: "天然能量甜點",
+                    //         electricity: 10
+                    //     });
+                    // }
+                    // 8 Vegan
+                    // if(!("8" in currentBadge) && badgeResult["Vegan"] == "8") {
+                    //     getBadges.push({
+                    //         badge_id: "8",
+                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
+                    //         badge_name: "素食主義",
+                    //         electricity: 30
+                    //     });
+                    // }
+                    // 10 Meat
+                    // if(!("10" in currentBadge) && badgeResult["Meat"] == "10") {
+                    //     getBadges.push({
+                    //         badge_id: "10",
+                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
+                    //         badge_name: "九天玄女 降肉",
+                    //         electricity: 10
+                    //     });
+                    // }
+                    // 12 FoodFlavor
+                    // if(!("12" in currentBadge) && badgeResult["FoodFlavor"] == "12") {
+                    //     getBadges.push({
+                    //         badge_id: "12",
+                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
+                    //         badge_name: "異國風情",
+                    //         electricity: 10
+                    //     });
+                    // }
+                } 
+                /// Regular badges ///
+                // 9 HighProteinDiet
+                if(!("9" in currentBadge) && badgeResult["HighProteinDiet"] == "9") {
+                    getBadges.push({
+                        badge_id: "9",
+                        badge_val: "y",
+                        badge_name: "肌情四射",
+                        electricity: 10
+                    });
+                }
+                
+                // 11 Burger
+                if(!("11" in currentBadge) && badgeResult["Burger"] == "11") {
+                    getBadges.push({
+                        badge_id: "11",
+                        badge_val: "y", 
+                        badge_name: "你是我的堡",
+                        electricity: 10
+                    });
+                }
+                
+                console.log(getBadges);
+                console.log(getBadges.length);
+                // Get new badge
+                if(getBadges.length > 0) {
+                    // currentBadgeName = "吃來乍到";
+                    adjustAchieveModalContent(getBadges);
+                    $.cookie('toSaveAchieve', JSON.stringify(getBadges), { expires: 7 });
+                    $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
+                    isCloseAwardModal = false;
+                    showAchieveModal();
+                    
+                    // // currentBadgeName = "吃來乍到";
+                    // adjustAchieveModalContent(getBadges);
+                    // $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
+                    // $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
+                    // isCloseAwardModal = false;
+                    // showAchieveModal();
+                }
+                // Update achieve progress 
+                else if(getValues.length > 0) {
+
+                }
+            } catch (e) {
+                appendRetryMsg();
+                console.log("Badge check error: ", e);
+            }
+        })
+        .fail(function (xhr, status, error) {
+            console.log(error);
+        })
 }
 
 function collectAchieve() {
@@ -651,13 +823,16 @@ function collectAchieve() {
         // console.log(currentUserData);
 
         let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
-
+        let awardElectricity = 0;
         let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
-
-        currentBadge[toSaveData.badge_id] = toSaveData.badge_val;
+        console.log("safe");
+        toSaveData.forEach(function(data) {
+            currentBadge[data.badge_id] = data.badge_val;
+            awardElectricity += data.electricity;
+        });
 
         userRef.set({
-            electricity: currentElectricity + parseInt(toSaveElectricity.electricity) + parseInt(toSaveData.electricity),
+            electricity: currentElectricity + parseInt(toSaveElectricity.electricity) + awardElectricity,
             badge: currentBadge
         }, { merge: true }).then(() => {
             $("#achieModal").modal('hide');

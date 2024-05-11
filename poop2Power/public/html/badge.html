@@ -1042,11 +1042,15 @@
                 </div>
             </div>
 
-            <div class="floating-window" id="WeekWindow">
-                <img src="../images/badge/floating_window/back_icon.png" id="closeWeekWindowBtn" alt="">
-                <p style="font-size: 24px;text-align:center">飲食分析</p>
-                <div class="row WeekWindow_intro">
-                    <div class="col-md-6" style="padding: 30px;">
+            <div class="floating-window container-fluid" id="WeekWindow">
+                <div class="row">
+                    <div class="col position-relative">
+                        <img src="../images/badge/floating_window/back_icon.png" id="closeWeekWindowBtn" alt="">
+                        <span class="position-absolute" style="font-size: 24px;text-align:center; top: 50%; transform: translateY(-50%);">飲食分析</span>
+                    </div>
+                </div>
+                <div class="row WeekWindow_intro justify-content-center mb-3">
+                    <!-- <div class="col-md-6" style="padding: 30px;">
                         <div class="row mb-3">
                             <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
                             <p class="ps-5 pe-2" id="wkAnDes">
@@ -1058,12 +1062,29 @@
                             <p class="ps-5 pe-2" id="wkAnSug">
                                 還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                         </p>
+                        </div>
+                    </div> -->
+                    <div class="col-md-5 d-flex justify-content-center me-2" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                        <canvas id="wkAnPieChart" class="h-auto"></canvas>
+                    </div>
+                    <div class="col-md-5 d-flex justify-content-center" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                        <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
                     </div>
                 </div>
-                <div class="col-md-5" style="text-align: center;">
-                    <canvas id="wkAnChart" class="w-100 h-100"></canvas>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
+                        <p class="ps-5 pe-2" id="wkAnDes">
+                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
+                        <p class="ps-5 pe-2" id="wkAnSug">
+                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
+                        </p>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="modal modal-xl" tabindex="-1" id="loginModal" style="height: 95%;">

@@ -78,6 +78,7 @@ initApp = function (isnewachieve) {
 const labels = [["甲烷排放量"], ["電力輸出"], ["便秘風險"], ["熱量"]];
 
 let wkAnChart;
+let wkAnPieChart;
 
 let chartConfig = {
     type: "radar",
@@ -146,6 +147,38 @@ let chartConfig = {
     },
 };
 
+
+
+const pieConfig = {
+    type: 'doughnut',
+    data: {
+        labels: ["豆魚蛋肉類", "全穀雜糧類", "蔬菜類", "水果類", "乳品類", "油脂與堅果種子類"],
+        datasets: [
+            {
+                // label: "本週",
+                data: [20, 20, 8, 34, 18, 20],
+                backgroundColor: [
+                    "rgba(250, 235, 169, 0.6)",
+                    "rgba(231, 203, 131, 0.6)",
+                    "rgba(252, 223, 158, 0.6)",
+                    "rgba(207, 175, 93, 0.6)",
+                    "rgba(242, 221, 179, 0.6)",
+                    "rgba(170, 150, 94, 0.6)",                    
+                ],
+            }
+        ]
+    },
+    options: {
+      responsive: true,
+      radius: 90,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      },
+    },
+};
+
 $().ready(function () {
     $("#title").text(" ");
     // Check whether get new achieve
@@ -157,11 +190,14 @@ $().ready(function () {
     // if (!) {
     // }
 
-    showRankModal();
+    // showRankModal(); //TODO
+    // const floatingWindow = document.getElementById("WeekWindow"); //TODO
+    // floatingWindow.style.display = "block"; //TODO
 
     // Wake aicam page backend
     $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
     wkAnChart = new Chart($("#wkAnChart"), chartConfig);
+    wkAnPieChart = new Chart($("#wkAnPieChart"), pieConfig);
     $("#login_skip").click(function () {
         $("#loginModal").hide();
         $.cookie('skipLogin', 'true', { expires: 7 });
@@ -238,22 +274,22 @@ function isNewAchieve() {
     if (range) {
         switch (range) {
             case "1": {
-                adjustAchieveModalContent("二號探險家", "4-1.svg");
+                adjustAchieveModalContent("二號探險家", "4-1.gif");
                 $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "1", electricity: "10" }), { expires: 7 });
                 break;
             }
             case "2": {
-                adjustAchieveModalContent("二號探險家", "4-2.svg");
+                adjustAchieveModalContent("二號探險家", "4-2.gif");
                 $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "2", electricity: "20" }), { expires: 7 });
                 break;
             }
             case "3": {
-                adjustAchieveModalContent("二號探險家", "4-3.svg");
+                adjustAchieveModalContent("二號探險家", "4-3.gif");
                 $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "3", electricity: "30" }), { expires: 7 });
                 break;
             }
             case "4": {
-                adjustAchieveModalContent("二號探險家", "4-4.svg");
+                adjustAchieveModalContent("二號探險家", "4-4.gif");
                 $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "4", badge_val: "4", electricity: "40" }), { expires: 7 });
                 break;
             }
@@ -357,33 +393,48 @@ function getWeeklyAnalysis() {
                         }
                     });
 
-                    $.post("https://p2p-wnkb.onrender.com/badge/ana", {
-                    // $.post("/badge/ana", {
+                    $.post("https://p2p-wnkb.onrender.com/badge/ana/radar", {
+                    // $.post("/badge/ana/radar", {
                         "weekDatas": {
                             "lastweek": lwData,
                             "thisweek": twData,
                         }
                     })
                         .done(function (data) {
-                            let resData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                            userRef.set({
-                                weekly_analysis: resData,
-                                isNewData: false
-                            }, { merge: true })
-                                .then(() => {
-                                    getUserData().then(() => {
-                                        resolve();
-                                    });
+                            let radarData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                            $.post("https://p2p-wnkb.onrender.com/badge/ana/pie", {
+                            // $.post("/badge/ana/pie", {
+                                "weekDatas": {
+                                    "lastweek": lwData,
+                                    "thisweek": twData,
+                                }
+                            })
+                                .done(function (data) {
+                                    console.log("ana pie ing...");
+                                    let pieData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
+                                    userRef.set({
+                                        weekly_analysis_radar: radarData,
+                                        weekly_analysis_pie: pieData,
+                                        isNewData: false,
+                                    }, { merge: true })
+                                        .then(() => {
+                                            getUserData().then(() => {
+                                                resolve();
+                                            });
+                                        })
+                                        .catch((error) => {
+                                            console.error("Error updating user data:", error);
+                                        });
                                 })
-                                .catch((error) => {
-                                    console.error("Error updating user data:", error);
+                                .fail(function (xhr, status, error) {
+                                    console.log(error);
+                                    reject(error);
                                 });
                         })
                         .fail(function (xhr, status, error) {
                             console.log(error);
                             reject(error);
                         });
-
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                     reject(error);
@@ -407,16 +458,14 @@ function fetchRank() {
                 $("#rankList").empty();
                 querySnapshot.forEach((doc) => {
                     const docData = doc.data();
-                    console.log("Data: ", docData);
-                    console.log(index);
                     if(index < 3) {
-                        console.log("enter");
-                        console.log(currentUser.uid , doc.id);
                         if(currentUser.uid == doc.id) {
-                            console.log("Same Id");
-                            $(`#top3Bg${index+1}`).attr("src", `../images/badge/rank/${index+1}-t.svg`);
-                            // console.log("Same Id");
-                            // $(`#top3Bg${index+1}`).attr("src", `../images/badge/rank/${index+1}-t.svg`);
+                            let decorate = `<img src="../images/badge/rank/topDec.svg" style="position: absolute;
+                            width: 85%;
+                            transform: translate(-52%, -44%);
+                            top: 50%;
+                            left: 50%;" alt="">`;
+                            $(`#top3Bg${index+1}`).parent().append(decorate);
                         }
                         $(`#top${index+1}-name`).text(docData.userName);
                         $(`#top${index+1}-elect`).text(docData.elect);
@@ -507,22 +556,33 @@ function updateUserData() {
             $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
         })
     }
-    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
-    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis) ? currentUserData.weekly_analysis.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
-    if (currentUserData && currentUserData.weekly_analysis) {
+    $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis_radar) ? currentUserData.weekly_analysis_radar.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    $("#wkAnSug").text((currentUserData && currentUserData.weekly_analysis_radar) ? currentUserData.weekly_analysis_radar.sug : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
+    if (currentUserData && currentUserData.weekly_analysis_radar && currentUserData.weekly_analysis_pie ) {
         // this week
         chartConfig.data.datasets[0].data =
-            [currentUserData.weekly_analysis.tw_ana.methane,
-            currentUserData.weekly_analysis.tw_ana.electricity,
-            currentUserData.weekly_analysis.tw_ana.constipate,
-            currentUserData.weekly_analysis.tw_ana.calorie];
+            [currentUserData.weekly_analysis_radar.tw_ana.methane,
+            currentUserData.weekly_analysis_radar.tw_ana.electricity_level,
+            currentUserData.weekly_analysis_radar.tw_ana.constipate,
+            currentUserData.weekly_analysis_radar.tw_ana.caloric];
         // this week
         chartConfig.data.datasets[1].data =
-            [currentUserData.weekly_analysis.lw_ana.methane,
-            currentUserData.weekly_analysis.lw_ana.electricity,
-            currentUserData.weekly_analysis.lw_ana.constipate,
-            currentUserData.weekly_analysis.lw_ana.calorie];
+            [currentUserData.weekly_analysis_radar.lw_ana.methane,
+            currentUserData.weekly_analysis_radar.lw_ana.electricity_level,
+            currentUserData.weekly_analysis_radar.lw_ana.constipate,
+            currentUserData.weekly_analysis_radar.lw_ana.caloric];
+
+        pieConfig.data.datasets[0].data = [
+            currentUserData.weekly_analysis_pie.LegumesFishEggsMeatAndTheirProducts_P,
+            currentUserData.weekly_analysis_pie.WholeGrains_P,
+            currentUserData.weekly_analysis_pie.Vegetables_P,
+            currentUserData.weekly_analysis_pie.Fruits_P,
+            currentUserData.weekly_analysis_pie.DairyProducts_P,
+            currentUserData.weekly_analysis_pie.OilsFatsNutsAndSeeds_P,
+        ];
+
         wkAnChart.update();
+        wkAnPieChart.update();
     }
 }
 
