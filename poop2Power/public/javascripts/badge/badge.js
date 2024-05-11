@@ -362,6 +362,7 @@ function getWeeklyAnalysis() {
     // 計算這週六的日期
     endOfThisWeek.setDate(currentDate.getDate() - today + 6);
 
+
     return new Promise((resolve, reject) => {
         let userRef = db.collection("users").doc(currentUser.uid);
         let hisRef = userRef.collection("req_history");
@@ -392,7 +393,6 @@ function getWeeklyAnalysis() {
                             });
                         }
                     });
-
                     $.post("https://p2p-wnkb.onrender.com/badge/ana/radar", {
                     // $.post("/badge/ana/radar", {
                         "weekDatas": {
@@ -543,7 +543,6 @@ function fetchRank() {
             });
     }
 }
-
 function updateUserData() {
     $("#title").text(currentUser ? currentUser.displayName + "'s" : " ");
     $("#electricity").text(currentUserData ? currentUserData.electricity : "");
