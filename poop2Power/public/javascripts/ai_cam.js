@@ -472,8 +472,8 @@ car_distance = 0, phone_battery = 0, run_distance = 0) {
     $("#calorieSp").text("等級" + calorie);
 
     $("#car_distance").text(car_distance+"km");
-    $("#phone_battery").text(phone_battery+"min");
-    $("#run_distance").text(run_distance+"km");
+    $("#phone_battery").text(phone_battery+"%");
+    $("#run_distance").text(run_distance+"m");
 
     // Add chart to the dialog block
     $("#dialog-container").append(row);
