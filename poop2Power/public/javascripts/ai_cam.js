@@ -172,7 +172,7 @@ $().ready(function () {
     }, 2000);
 
     // appendLoader(); //TODO
-    // appendChart(1, 2, 3, 4);//TODO
+    // appendChart(1, 2, 3, 4, "說明範例", 6, 7, 8);//TODO
     // $("#chartMoreModal").modal('show');//TODO
     // appendImgCheck("test"); //TODO
     // appendAskMsg("測試");
@@ -311,6 +311,9 @@ $().ready(function () {
                             responseData.result.electricity.electricity_level,
                             responseData.result.methane.methane,
                             responseData.result.suggest,
+                            responseData.result.methane.car_distance,
+                            responseData.result.electricity.phone_battery,
+                            responseData.result.calorie.run_distance,
                             );
 
                         $("#modalTitle").text("您消耗的" + payload.description + "......");
@@ -407,7 +410,8 @@ function adjustAchieveModalContent(getBadges) {
     });
 }
 
-function appendChart(calorie, constipate, electricity, methane, suggest = "") {
+function appendChart(calorie, constipate, electricity, methane, suggest = "", 
+car_distance = 0, phone_battery = 0, run_distance = 0) {
     chartConfig.data.datasets[0].data =
         [calorie,
             constipate,
@@ -466,6 +470,10 @@ function appendChart(calorie, constipate, electricity, methane, suggest = "") {
     $("#electricitySp").text("等級" + electricity);
     $("#constipateSp").text("等級" + constipate);
     $("#calorieSp").text("等級" + calorie);
+
+    $("#car_distance").text(car_distance+"km");
+    $("#phone_battery").text(phone_battery+"min");
+    $("#run_distance").text(run_distance+"km");
 
     // Add chart to the dialog block
     $("#dialog-container").append(row);
@@ -607,9 +615,13 @@ function imgResCorrect() {
     appendGetReq(responseData.food);
     appendChart(responseData.result.calorie.calorie_value,
         responseData.result.constipate,
-        responseData.result.methane.methane,
         responseData.result.electricity.electricity_level,
-        responseData.result.suggest);
+        responseData.result.methane.methane,
+        responseData.result.suggest,
+        responseData.result.methane.car_distance,
+        responseData.result.electricity.phone_battery,
+        responseData.result.calorie.run_distance,
+        );
 
     $("#modalTitle").text("您消耗的" + responseData.food + "......");
 

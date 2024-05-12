@@ -298,12 +298,13 @@
                     <div class="position-relative">
                       <div class="d-flex flex-column align-items-center" style="width: 11%; margin-left: 15%;">
                         <p class="m-0" 
+                        id="run_distance"
                         style="
                         padding: 23%;
                         background-image: url(../images/AI_Cam/val_bg.svg);
                         background-repeat: no-repeat;
                         background-size: contain;
-                        background-position: center;">2km</p>
+                        background-position: center;">0km</p>
                         <img
                           src="../images/AI_Cam/run.gif"
                           style="width: 100%; transform: scaleX(-1);"
@@ -344,15 +345,8 @@
                     ></span
                     >的便秘風險
                   </p>
-                  <div class="w-100 position-relative">
+                  <div class="w-100 position-relative" style="margin-top: 11.6%;">
                     <div class="d-flex flex-column align-items-center" style="width: 14%; margin-left: 50%;">
-                      <p class="m-0" 
-                      style="
-                      padding: 17%;
-                      background-image: url(../images/AI_Cam/val_bg.svg);
-                      background-repeat: no-repeat;
-                      background-size: contain;
-                      background-position: center;">20%</p>
                       <img
                         src="../images/AI_Cam/poop.gif"
                         style="
@@ -368,7 +362,7 @@
                       src="../images/AI_Cam/road.json"
                       background="transparent"
                       class="w-75 mx-auto position-absolute"
-                      style="left: 14%; top: 48%; transform: scaleX(-1)"
+                      style="left: 14%; top: 46%; transform: scaleX(-1)"
                       speed="1"
                       loop=""
                       autoplay=""
@@ -405,12 +399,13 @@
                     <div class="position-relative">
                       <div class="d-flex flex-column align-items-center" style="width: 22%; margin-left: 25%;">
                         <p class="m-0" 
+                        id="car_distance"
                         style="
                         padding: 12%;
                         background-image: url(../images/AI_Cam/val_bg.svg);
                         background-repeat: no-repeat;
                         background-size: contain;
-                        background-position: center;">2km</p>
+                        background-position: center;">0km</p>
                         <lottie-player
                         id="loader"
                         src="../images/AI_Cam/car.json"
@@ -458,16 +453,25 @@
                       >的電力輸出
                     </p>
                     <div class="position-relative w-100">
-                      <lottie-player
-                        id="loader"
-                        class="h-50"
-                        style="width: 80%; margin-top: 12%; margin-left: 14%"
-                        src="../images/AI_Cam/phone.json"
-                        background="transparent"
-                        speed="1"
-                        loop=""
-                        autoplay=""
-                      ></lottie-player>
+                      <div class="d-flex flex-column align-items-center" style="width: 80%; margin-left: 14%; margin-top: 4%;">
+                        <p class="m-0" 
+                          id="phone_battery"
+                          style="
+                          padding: 3.5%;
+                          background-image: url(../images/AI_Cam/val_bg.svg);
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          background-position: center;">0min</p>
+                        <lottie-player
+                          id="loader"
+                          class="h-50"
+                          src="../images/AI_Cam/phone.json"
+                          background="transparent"
+                          speed="1"
+                          loop=""
+                          autoplay=""
+                        ></lottie-player>
+                      </div>
                     </div>
                   </div>
                 </div>
