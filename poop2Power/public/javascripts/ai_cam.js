@@ -471,7 +471,7 @@ car_distance = 0, phone_battery = 0, run_distance = 0) {
     $("#constipateSp").text("等級" + constipate);
     $("#calorieSp").text("等級" + calorie);
 
-    $("#car_distance").text(car_distance+"km");
+    $("#car_distance").text(car_distance+"m");
     $("#phone_battery").text(phone_battery+"%");
     $("#run_distance").text(run_distance+"m");
 
