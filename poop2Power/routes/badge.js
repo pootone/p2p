@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const OpenAI = require('openai');
 
-const openaiTxt = new OpenAI({ apiKey: process.env.GPT_TXT_API_KEY });
+const openaiTxt = new OpenAI({ apiKey: process.env.GPT_IMG_API_KEY });
 
 async function weeklyAnalysisRadar(desc = null) {
     try {
