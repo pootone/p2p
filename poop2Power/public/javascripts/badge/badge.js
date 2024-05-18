@@ -191,8 +191,8 @@ $().ready(function () {
     // }
 
     // showRankModal(); //TODO
-    const floatingWindow = document.getElementById("WeekWindow"); //TODO
-    floatingWindow.style.display = "block"; //TODO
+    // const floatingWindow = document.getElementById("WeekWindow"); //TODO
+    // floatingWindow.style.display = "block"; //TODO
 
     // Wake aicam page backend
     $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
