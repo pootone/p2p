@@ -34,7 +34,7 @@
 @media (max-width: 768px) {
     .floating-window {
         width: 90%!important;
-        height: 80%;
+        height: auto;
         display: none;
         position: fixed;
         top: 50%;
@@ -46,6 +46,7 @@
         background-size: contain;
         /* border: 1px solid #ccc; */
         /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        padding: 6% 8.5%!important;
         z-index: 1000;
     }
 
@@ -67,5 +68,17 @@
 
     .week_img2 {
         width: 50%
+    }
+
+    #wkAnPieChart {
+        width: 91%!important;
+    }
+
+    #wkAnChart {
+        width: 91.5%!important;
+    }
+
+    #wlAnCon {
+        height: 555px!important;
     }
 }

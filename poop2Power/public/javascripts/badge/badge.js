@@ -191,8 +191,8 @@ $().ready(function () {
     // }
 
     // showRankModal(); //TODO
-    // const floatingWindow = document.getElementById("WeekWindow"); //TODO
-    // floatingWindow.style.display = "block"; //TODO
+    const floatingWindow = document.getElementById("WeekWindow"); //TODO
+    floatingWindow.style.display = "block"; //TODO
 
     // Wake aicam page backend
     $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
@@ -618,4 +618,18 @@ function collectAchieve() {
         $("#achieModal").modal('hide');
         $("#loginModal").show();
     }
+}
+
+function showWLPie() {
+    $("#pieBtn").attr("src", "../images/badge/WeekRecord/pie-sel.svg");
+    $("#radarBtn").attr("src", "../images/badge/WeekRecord/radar.svg");
+    $("#wkAnPieChart").parent().removeClass("d-none");
+    $("#wkAnChart").parent().addClass("d-none");
+}
+
+function showWLRadar() {
+    $("#pieBtn").attr("src", "../images/badge/WeekRecord/pie.svg");
+    $("#radarBtn").attr("src", "../images/badge/WeekRecord/radar-sel.svg");
+    $("#wkAnChart").parent().removeClass("d-none");
+    $("#wkAnPieChart").parent().addClass("d-none");
 }
