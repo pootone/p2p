@@ -1050,40 +1050,41 @@
                         <span class="position-absolute" style="font-size: 24px;text-align:center; top: 50%; transform: translateY(-50%);">飲食分析</span>
                     </div>
                 </div>
-                <div class="row WeekWindow_intro justify-content-center mb-3">
-                    <!-- <div class="col-md-6" style="padding: 30px;">
-                        <div class="row mb-3">
+                <div class="container-fluid" id="wlAnCon" style="height: 95%; overflow: scroll;">
+                    <div class="row d-sm-none mb-2">
+                        <div class="col-4 p-0 me-2">
+                            <button class="bg-transparent border-0 w-100 p-0" type="button" onclick="showWLPie()">
+                                <img src="../images/badge/WeekRecord/pie-sel.svg" id="pieBtn" class="w-100">
+                            </button>
+                        </div>
+                        <div class="col-4 p-0">
+                            <button class="bg-transparent border-0 w-100 p-0" type="button" onclick="showWLRadar()">
+                                <img src="../images/badge/WeekRecord/radar.svg" id="radarBtn" class="w-100">
+                            </button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row WeekWindow_intro justify-content-center mb-3 m-auto">
+                        <div class="col col-md-5 d-flex justify-content-center me-md-2 ps-0" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                            <canvas id="wkAnPieChart" class="h-auto"></canvas>
+                        </div>
+                        <div class="col col-md-5 d-flex justify-content-center d-none d-sm-block ps-0" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                            <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-5">
                             <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
                             <p class="ps-5 pe-2" id="wkAnDes">
                                 還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                             </p>
                         </div>
-                        <div class="row">
+                        <div class="col-md-5">
                             <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
                             <p class="ps-5 pe-2" id="wkAnSug">
                                 還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
+                            </p>
                         </div>
-                    </div> -->
-                    <div class="col-md-5 d-flex justify-content-center me-2" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
-                        <canvas id="wkAnPieChart" class="h-auto"></canvas>
-                    </div>
-                    <div class="col-md-5 d-flex justify-content-center" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
-                        <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-5">
-                        <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
-                        <p class="ps-5 pe-2" id="wkAnDes">
-                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
-                        <p class="ps-5 pe-2" id="wkAnSug">
-                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
                     </div>
                 </div>
         </div>
