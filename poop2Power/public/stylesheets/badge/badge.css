@@ -311,7 +311,6 @@ body::-webkit-scrollbar {
 
     .mid img {
         width: 30%;
-
     }
 
     .badgeClassBTN {
@@ -319,7 +318,6 @@ body::-webkit-scrollbar {
         margin-bottom: 0;
         margin-right: 50%;
     }
-
 
     .row>* {
         padding-right: 0;
@@ -346,6 +344,10 @@ body::-webkit-scrollbar {
     .badge .row>div {
         /* width: 100%; */
         margin-bottom: 20px;
+    }
+
+    .chartPR {
+        background-image: url(../../images/badge/WeekRecord/chartBGMobile.png)!important;
     }
 
     #rankCon {
