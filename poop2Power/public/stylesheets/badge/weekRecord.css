@@ -70,12 +70,8 @@
         width: 50%
     }
 
-    #wkAnPieChart {
-        width: 91%!important;
-    }
-
-    #wkAnChart {
-        width: 91.5%!important;
+    #wkAnPieChart, #wkAnChart {
+        width: 100%!important;
     }
 
     #wlAnCon {
