@@ -1050,40 +1050,41 @@
                         <span class="position-absolute" style="font-size: 24px;text-align:center; top: 50%; transform: translateY(-50%);">飲食分析</span>
                     </div>
                 </div>
-                <div class="row WeekWindow_intro justify-content-center mb-3">
-                    <!-- <div class="col-md-6" style="padding: 30px;">
-                        <div class="row mb-3">
+                <div class="container-fluid" id="wlAnCon" style="height: 95%; overflow: scroll;">
+                    <div class="row d-sm-none mb-2">
+                        <div class="col-4 p-0 me-2">
+                            <button class="bg-transparent border-0 w-100 p-0" type="button" onclick="showWLPie()">
+                                <img src="../images/badge/WeekRecord/pie-sel.svg" id="pieBtn" class="w-100">
+                            </button>
+                        </div>
+                        <div class="col-4 p-0">
+                            <button class="bg-transparent border-0 w-100 p-0" type="button" onclick="showWLRadar()">
+                                <img src="../images/badge/WeekRecord/radar.svg" id="radarBtn" class="w-100">
+                            </button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row WeekWindow_intro justify-content-center mb-3 m-auto">
+                        <div class="col col-md-5 d-flex justify-content-center me-md-2 ps-0" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                            <canvas id="wkAnPieChart" class="h-auto"></canvas>
+                        </div>
+                        <div class="col col-md-5 d-flex justify-content-center d-none d-sm-block ps-0" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
+                            <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-5">
                             <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
                             <p class="ps-5 pe-2" id="wkAnDes">
                                 還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
                             </p>
                         </div>
-                        <div class="row">
+                        <div class="col-md-5">
                             <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
                             <p class="ps-5 pe-2" id="wkAnSug">
                                 還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
+                            </p>
                         </div>
-                    </div> -->
-                    <div class="col-md-5 d-flex justify-content-center me-2" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
-                        <canvas id="wkAnPieChart" class="h-auto"></canvas>
-                    </div>
-                    <div class="col-md-5 d-flex justify-content-center" style="text-align: center; background-image: url(../images/badge/WeekRecord/chartBG.png); background-repeat: no-repeat; background-size: contain;">
-                        <canvas id="wkAnChart" class="w-75 h-auto"></canvas>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-5">
-                        <img src="../images/badge/WeekRecord/des.svg" class="mb-3" style="width:30%" alt="">
-                        <p class="ps-5 pe-2" id="wkAnDes">
-                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="../images/badge/WeekRecord/sug.svg" class="mb-3" style="width:30%" alt="">
-                        <p class="ps-5 pe-2" id="wkAnSug">
-                            還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！
-                        </p>
                     </div>
                 </div>
         </div>
@@ -1143,20 +1144,20 @@
     </div>
     <!-- Rank modal -->
     <div class="modal modal-lg" id="rankModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw!important; height: 30vh!important;">
+        <div class="modal-dialog modal-dialog-centered m-auto" id="rankModelDialog">
             <div class="modal-content bg-transparent border-0 h-100">
                 <div class="modal-body d-flex justify-content-center h-100">
-                    <div class="position-relative w-100 h-100 d-flex flex-column justify-content-center" style="background-image: url(../images/badge/rank/rankModalBorder.svg); background-size: contain; background-repeat: no-repeat; padding: 5% 7%; max-width: 1287px;max-height: 779px; background-position: center;">
+                    <div class="position-relative w-100 h-100 d-flex flex-column justify-content-center" style="background-image: url(../images/badge/rank/rankModalBorder.svg); background-size: contain; background-repeat: no-repeat; padding: 5% 7%; max-width: 1287px;max-height: 779px; background-position: center;" id="rankCon">
                         <!-- Header -->
-                        <div class="container-fluid mb-3" style="height: 15%;">
+                        <div class="container-fluid mb-sm-3" style="height: 15%;" id="headerH">
                             <div class="row">
-                                <div class="col-1">
-                                    <button class="bg-transparent border-0" onclick="hideRankModal()">
-                                        <img src="../images/badge/rank/RankBack.svg" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))">
+                                <div class="col-3 col-sm-1 p-0 p-sm-2 ps-sm-3">
+                                    <button class="bg-transparent border-0 w-100" onclick="hideRankModal()">
+                                        <img src="../images/badge/rank/RankBack.svg" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25)); width: 100%;">
                                     </button>
                                 </div>
-                                <div class="col-11">
-                                    <h1 style="font-size: 3.5rem; font-weight: 400;" class="m-0">排行榜</h1>
+                                <div class="col-8 col-sm-11 ps-0 ps-sm-2">
+                                    <h1 style="font-size: 3.5rem; font-weight: 400;" id="leaderboardTitle" class="m-0">排行榜</h1>
                                 </div>
                             </div>
                         </div>
@@ -1164,31 +1165,31 @@
                         <!-- Top3 -->
                         <div class="container-fluid mb-3" style="height: 25%;">
                             <div class="row h-100">
-                                <div class="col-4 h-100 position-relative">
+                                <div class="col-12 col-sm-4 h-50 h-sm-100 position-relative">
                                     <img class="w-100 h-100" id="top3Bg1" src="../images/badge/rank/1.svg" alt="">
-                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
-                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top1-name"></h4></div>
-                                        <div class="col-4 d-flex">
+                                    <div class="row position-absolute w-50 w-sm-100 d-flex top3Row" style="top: 55%;">
+                                        <div class="col-12 col-sm-7 text-end"><h4 class="rank-m-fs m-0 text-truncate" style="font-weight: 300;" id="top1-name"></h4></div>
+                                        <div class="col-6 col-sm-4 d-flex mx-sm-0 mx-auto">
                                             <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
-                                            <p class="m-0" id="top1-elect"></p>
+                                            <p class="m-0 rank-m-fs" id="top1-elect"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 h-100 position-relative">
+                                <div class="col-6 col-sm-4 h-50 h-sm-100 position-relative">
                                     <img class="w-100 h-100" id="top3Bg2" src="../images/badge/rank/2.svg" alt="">
-                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
-                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top2-name"></h4></div>
-                                        <div class="col-4 d-flex">
+                                    <div class="row position-absolute w-100 d-flex top3Row" style="top: 55%;">
+                                        <div class="col-12 col-sm-7 text-end"><h4 class="rank-m-fs m-0 text-truncate" style="font-weight: 300;" id="top2-name"></h4></div>
+                                        <div class="col-6 col-sm-4 d-flex mx-sm-0 mx-auto">
                                             <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
                                             <p class="m-0" id="top2-elect"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 h-100 position-relative">
+                                <div class="col-6 col-sm-4 h-50 h-sm-100 position-relative">
                                     <img class="w-100 h-100" id="top3Bg3" src="../images/badge/rank/3.svg" alt="">
-                                    <div class="row position-absolute w-100 d-flex" style="top: 55%;">
-                                        <div class="col-7 text-end"><h4 style="font-weight: 300;" id="top3-name"></h4></div>
-                                        <div class="col-4 d-flex">
+                                    <div class="row position-absolute w-100 d-flex top3Row" style="top: 55%;">
+                                        <div class="col-12 col-sm-7 text-end"><h4 class="rank-m-fs m-0 text-truncate" style="font-weight: 300;" id="top3-name"></h4></div>
+                                        <div class="col-6 col-sm-4 d-flex mx-sm-0 mx-auto">
                                             <img src="../images/badge/rank/elec.svg" class="my-auto w-25 me-2">
                                             <p class="m-0" id="top3-elect"></p>
                                         </div>
