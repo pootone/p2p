@@ -470,23 +470,23 @@ function fetchRank() {
                         $(`#top${index+1}-name`).text(docData.userName);
                         $(`#top${index+1}-elect`).text(docData.elect);
                     } else {
-                        let newRank = `<div class="row d-flex mb-2">
+                        let newRank = `<div class="row px-2 p-sm-0 mx-auto d-flex mb-2 rankRow justify-content-center">
                                 <!-- Num -->
                                 <div class="col-1 position-relative px-0 d-flex justify-content-center">
-                                    <img class="w-75" src="../images/badge/rank/rankBg${(currentUser.uid == doc.id)?"Y":""}.svg" alt="">
-                                    <p class="position-absolute m-0" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great'; color: ${(currentUser.uid == doc.id)?'#313131':'#ffffff'};!important">${index+1}</p>
+                                    <img class="w-100 w-sm-75" src="../images/badge/rank/rankBg${(currentUser.uid == doc.id)?"Y":""}.svg" alt="">
+                                    <p class="position-absolute m-0 fs-1_15rem" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great'; color: ${(currentUser.uid == doc.id)?'#313131':'#ffffff'};!important">${index+1}</p>
                                 </div>
                                 <!-- Name -->
-                                <div class="col-10 position-relative">
-                                    <img class="w-100" src="../images/badge/rank/nameBg.svg" alt="">
-                                    <p class="position-absolute w-100 text-center" style="left: 0%;
+                                <div class="col-7 col-sm-10 position-relative">
+                                    <img class="w-100 m-hide" src="../images/badge/rank/nameBg.svg" alt="">
+                                    <p class="position-absolute w-100 text-center fs-1_15rem text-truncate" style="left: 0%;
                                     text-align: center;
                                     margin: 0%;
                                     top: 50%;
                                     transform: translateY(-50%); font-size: 1.5rem;">${docData.userName}</p>
                                 </div>
                                 <!-- Electricity -->
-                                <div class="col-1 d-flex">
+                                <div class="col-3 col-sm-1 d-flex">
                                     <img src="../images/badge/rank/elec.svg" class="my-auto w-25">
                                     <p class="ms-2 my-auto" style="font-size: 20px;">${docData.elect}</p>
                                 </div>
@@ -513,23 +513,23 @@ function fetchRank() {
                         $(`#top${index+1}-name`).text(docData.userName);
                         $(`#top${index+1}-elect`).text(docData.elect);
                     } else {
-                        let newRank = `<div class="row d-flex mb-2">
+                        let newRank = `<div class="row px-2 p-sm-0 mx-auto d-flex mb-2 rankRow justify-content-center">
                                 <!-- Num -->
                                 <div class="col-1 position-relative px-0 d-flex justify-content-center">
-                                    <img class="w-75" src="../images/badge/rank/rankBg.svg" alt="">
-                                    <p class="position-absolute m-0 text-light" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great';">${index+1}</p>
+                                    <img class="w-100 w-sm-75" src="../images/badge/rank/rankBg.svg" alt="">
+                                    <p class="position-absolute m-0 text-light fs-1_15rem" style="top: 50%; transform: translateY(-50%); font-size: 2rem; font-family: 'Fredericka the Great';">${index+1}</p>
                                 </div>
                                 <!-- Name -->
-                                <div class="col-10 position-relative">
-                                    <img class="w-100" src="../images/badge/rank/nameBg.svg" alt="">
-                                    <p class="position-absolute w-100 text-center" style="left: 0%;
+                                <div class="col-7 col-sm-10 position-relative">
+                                    <img class="w-100 m-hide" src="../images/badge/rank/nameBg.svg" alt="">
+                                    <p class="position-absolute w-100 text-center fs-1_15rem text-truncate" style="left: 0%;
                                     text-align: center;
                                     margin: 0%;
                                     top: 50%;
                                     transform: translateY(-50%); font-size: 1.5rem;">${docData.userName}</p>
                                 </div>
                                 <!-- Electricity -->
-                                <div class="col-1 d-flex">
+                                <div class="col-3 col-sm-1 d-flex">
                                     <img src="../images/badge/rank/elec.svg" class="my-auto w-25">
                                     <p class="ms-2 my-auto" style="font-size: 20px;">${docData.elect}</p>
                                 </div>
