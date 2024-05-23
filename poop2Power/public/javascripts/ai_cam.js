@@ -661,7 +661,7 @@ function achieCheck() {
         food: responseData.food,
         ingredient: responseData.ingredient
     }
-    $.post("https://p2p-wnkb.onrender.com/aicam/achie", )
+    $.post("https://p2p-wnkb.onrender.com/aicam/achie", payload)
     // $.post("/aicam/achie", payload) //TODO
         .done(function (data) {
             try {
@@ -694,6 +694,7 @@ function achieCheck() {
                             }
                         }
 
+                        // If badge "2" not exist, create an empty object
                         if(!currentBadge["2"]){
                             currentBadge["2"] = {};
                         }
@@ -709,8 +710,68 @@ function achieCheck() {
                         } else {
                             getValues.push({
                                 badge_id: "2",
-                                badge_val: currentBadge["2"]
+                                badge_val: currentBadge["2"],
+                                progress: Object.keys(currentBadge["2"]).length/3*100
                             });
+                        }
+                    }
+                    
+                    // 3 Same category for three times
+                    if((!("3" in currentBadge) || (currentBadge["3"] != "y")) && 
+                    (badgeResult["SixCategoriesofFood"]["Grains"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["OilsFatsNutsAndSeeds"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["LegumesFishEggsMeatAndTheirProducts"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["DairyProducts"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["Vegetables"]!="none"||
+                    badgeResult["SixCategoriesofFood"]["Fruits"]!="none")) {
+                        let toSave = {};
+                        for(let key in badgeResult["SixCategoriesofFood"]) {
+                            if(badgeResult["SixCategoriesofFood"][key] != "none") {
+                                toSave[key] = badgeResult["SixCategoriesofFood"][key];
+                            }
+                        }
+                        
+                        // If badge "3" not exist, create an empty object
+                        if(!currentBadge["3"]){
+                            currentBadge["3"] = {};
+                            Object.assign(currentBadge["3"], {"1": toSave});
+                            getValues.push({
+                                badge_id: "3",
+                                badge_val: currentBadge["3"],
+                                progress: 33
+                            });
+                        } else {
+                            // If there's no correspond category, reset object
+                            let lastHistory =
+                            currentBadge["3"][`${Object.keys(currentBadge["3"]).length}`];
+                            // If this time is all different from last time, reset object
+                            if(!Object.keys(lastHistory).some(key => new Set(Object.keys(toSave)).has(key))) {
+                                currentBadge["3"] = {};
+                                Object.assign(currentBadge["3"], {"1": toSave});
+                                getValues.push({
+                                    badge_id: "3",
+                                    badge_val: currentBadge["3"],
+                                    progress: 33
+                                });
+                            } else {
+                                if(Object.keys(currentBadge["3"]).length == 2 && 
+                                Object.keys(toSave).some(key => new Set(Object.keys(lastHistory)).has(key) &&
+                                new Set(Object.keys(currentBadge["3"][1])).has(key))) {
+                                    getBadges.push({
+                                        badge_id: "3",
+                                        badge_val:  "y",
+                                        badge_name: "吃心絕對",
+                                        electricity: 30
+                                    });
+                                } else {
+                                    Object.assign(currentBadge["3"], {"2": toSave});
+                                    getValues.push({
+                                        badge_id: "3",
+                                        badge_val: currentBadge["3"],
+                                        progress: 66
+                                    });
+                                }
+                            }
                         }
                     }
 
@@ -802,7 +863,12 @@ function achieCheck() {
                 }
                 // Update achieve progress 
                 else if(getValues.length > 0) {
-
+                    // adjustAchieveModalContent(getValues); -> adjustPopContent
+                    $.cookie('toSaveProgress', JSON.stringify(getValues), { expires: 7 });
+                    $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
+                    // isCloseAwardModal = false;
+                    collectProgress();
+                    // showAchieveModal(); -> showProgress
                 }
             } catch (e) {
                 appendRetryMsg();
@@ -821,14 +887,9 @@ function collectAchieve() {
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
         let toSaveElectricity = JSON.parse($.cookie("toSaveElectricity"));
 
-        // console.log(currentUserData.electricity + toSaveData.electricity);
-        // console.log(currentUserData.electricity);
-        // console.log(currentUserData);
-
-        let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
+        let currentElectricity = (currentUserData && currentUserData.electricity) ? parseInt(currentUserData.electricity) : 0;
         let awardElectricity = 0;
-        let currentBadge = currentUserData && currentUserData.badge ? currentUserData.badge : {};
-        console.log("safe");
+        let currentBadge = (currentUserData && currentUserData.badge) ? currentUserData.badge : {};
         toSaveData.forEach(function(data) {
             currentBadge[data.badge_id] = data.badge_val;
             awardElectricity += data.electricity;
@@ -850,6 +911,35 @@ function collectAchieve() {
         $("#loginModal").show();
     }
     currentBadgeName = null;
+}
+
+function collectProgress() {
+    if (currentUser) {
+        var userRef = db.collection('users').doc(currentUser.uid);
+
+        let toSaveData = JSON.parse($.cookie("toSaveProgress"));
+        let toSaveElectricity = JSON.parse($.cookie("toSaveElectricity"));
+
+        let currentElectricity = (currentUserData && currentUserData.electricity) ? parseInt(currentUserData.electricity) : 0;
+        let currentBadge = (currentUserData && currentUserData.badge) ? currentUserData.badge : {};
+        toSaveData.forEach(function(data) {
+            currentBadge[data.badge_id] = data.badge_val;
+        });
+
+        userRef.set({
+            electricity: currentElectricity + parseInt(toSaveElectricity.electricity),
+            badge: currentBadge
+        }, { merge: false }).then(() => {
+            getUserData().then(() => {
+                $.removeCookie('toSaveAchieve');
+            });
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
+        });
+    } else {
+        $("#achieModal").modal('hide');
+        $("#loginModal").show();
+    }
 }
 
 // Save electricity without new badge
