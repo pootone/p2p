@@ -543,6 +543,7 @@ function updateUserData() {
     // Toggle badge icon display
     if (currentUserData && currentUserData.badge) {
         Object.entries(currentUserData.badge).forEach((obj) => {
+            // TODO 待補進度版本
             console.log($(`#badge${obj[0]}Modal`));
             // console.log($(`#badge${obj[0]}Modal`));
             $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
