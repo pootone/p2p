@@ -265,10 +265,9 @@ function closeFloatingWindow() {
     }
 }
 
-// Check wether there's new achieve
+// Check whether there's new achieve
 function isNewAchieve() {
     const range = currentUrl.searchParams.get("range");
-    const badge = currentUrl.searchParams.get("badge");
 
     // Visit exhibition
     if (range) {
@@ -296,13 +295,7 @@ function isNewAchieve() {
         }
         showAchieveModal();
         return true;
-    } else if (badge) {
-        switch (badge) {
-            case "1st":
-                break;
-        }
-        return true;
-    }
+    } 
     return false;
 }
 
@@ -590,10 +583,6 @@ function collectAchieve() {
         var userRef = db.collection('users').doc(currentUser.uid);
 
         let toSaveData = JSON.parse($.cookie("toSaveAchieve"));
-
-        // console.log(currentUserData.electricity + toSaveData.electricity);
-        // console.log(currentUserData.electricity);
-        // console.log(currentUserData);
 
         let currentElectricity = currentUserData && currentUserData.electricity ? parseInt(currentUserData.electricity) : 0;
 
