@@ -471,53 +471,11 @@ var L1 = new Phaser.Class({
                 });
                 break;
             }
-            // this.physics.add.collider(poopArr[i], flower, function (poop, flower) {
-            //     poop.destroy();
-            //     poopArr.splice(i, 1);
-            // });
-
-            // this.physics.overlap(poopArr[i], flower, function (poop, flower) {
-            //     poop.destroy();
-            //     poopArr.splice(i, 1);
-            //     break;
-            // });
-            // this.physics.overlap(poopArr[i], l4_yellow_flower, function (poop, flower) {
-            //     poop.destroy();
-            //     poopArr.splice(i, 1);
-            //     return;
-            // });
         }
-
-        // poopArr.forEach(poop => {
-        //     // 生成随机方向和速度
-        //     var randomAngle = Phaser.Math.Between(0, 360);
-        //     var velocity = new Phaser.Math.Vector2();
-        //     velocity.setToPolar(randomAngle, 1); // 设置速度，这里假设速度为100
-
-        //     // 更新精灵位置
-        //     poop.x += velocity.x * this.time.deltaTime / 1000; // deltaTime用于使移动更加平滑
-        //     poop.y += velocity.y * this.time.deltaTime / 1000;
-
-        //     // 边界检测，如果精灵超出屏幕边界，重新定位到屏幕内
-        //     if (poop.x < 0) {
-        //         poop.x = 800;
-        //     } else if (poop.x > 800) {
-        //         poop.x = 0;
-        //     }
-
-        //     if (poop.y < 0) {
-        //         poop.y = 600;
-        //     } else if (poop.y > 600) {
-        //         poop.y = 0;
-        //     }
-        // })
 
         // Move the bg by pointer position
         let pointerDeltaX = lastPointerX - this.input.activePointer.x;
         let pointerDeltaY = lastPointerY - this.input.activePointer.y;
-
-        // bg.x += pointerDeltaX * depth1;
-        // bg.y += pointerDeltaY * depth1;
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;

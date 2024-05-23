@@ -273,8 +273,6 @@ $().ready(function () {
 
                         try {
                             responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                            console.log("Get response success!");
-                            console.log("Res data: ", data);
                             uploadImg = null;
 
                             responseData.food = payload.description == "" ? responseData.food : payload.description;
@@ -302,9 +300,6 @@ $().ready(function () {
 
                     try {
                         responseData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                        console.log("Get response success!");
-                        console.log("Res data: ", data);
-                        console.log("Res data: ", responseData);
 
                         appendChart(responseData.result.calorie.calorie_value,
                             responseData.result.constipate,
@@ -328,10 +323,6 @@ $().ready(function () {
                         } else {
                             achieCheck();
                         }
-                        // setTimeout(function () {
-                        //     isCloseAwardModal = false;
-                        //     showAchieveModal()
-                        // }, 1500);
                     } catch (e) {
                         $("#loader").remove();
                         appendRetryMsg();
