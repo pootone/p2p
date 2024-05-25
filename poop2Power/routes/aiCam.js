@@ -45,7 +45,7 @@ async function gptQueryTxt(desc = null) {
   try {
     console.log("Req data:" + desc);
     const response = await openaiTxt.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-turbo",
       messages: [
         {
           role: "system",
@@ -70,7 +70,7 @@ async function gptAchieQuery(data = null) {
   try {
     console.log("Req data:" + data);
     const response = await openaiTxt.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-turbo",
       messages: [
         {
           role: "system",
