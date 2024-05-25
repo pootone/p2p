@@ -626,10 +626,6 @@ function imgResCorrect() {
     } else {
         achieCheck();
     }
-    // setTimeout(function () {
-    //     isCloseAwardModal = false;
-    //     showAchieveModal();
-    // }, 1500);
 }
 
 function getUserData() {
