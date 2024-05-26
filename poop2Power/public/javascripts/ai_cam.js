@@ -699,7 +699,7 @@ function achieCheck() {
                         if(Object.keys(currentBadge["2"]).length >= 3) {
                             getBadges.push({
                                 badge_id: "2",
-                                badge_val:  currentBadge["2"],
+                                badge_val:  "y",
                                 badge_name: "小吃貨",
                                 electricity: 10
                             });
@@ -772,55 +772,148 @@ function achieCheck() {
                     }
 
                     // 6 Healthy Staple Foods
-                    // if(!("6" in currentBadge) && badgeResult["Healthy Staple Foods"] == "6") {
-                    //     getBadges.push({
-                    //         badge_id: "6",
-                    //         badge_val: "y",
-                    //         badge_name: "健康主食",
-                    //         electricity: 10
-                    //     });
-                    // }
+                    if((!("6" in currentBadge) || currentBadge["6"] != "y") && 
+                    badgeResult["Healthy Staple Foods"] == "6") {
+                        let times = parseInt(currentBadge["6"]);
+                        if(!("6" in currentBadge)) {
+                            getValues.push({
+                                badge_id: "6",
+                                badge_val: 1,
+                                progress: 10
+                            });
+                        } 
+                        // If not reach 9 times, puls one
+                        else if(times < 9) {
+                            getValues.push({
+                                badge_id: "6",
+                                badge_val: times+1,
+                                progress: (times+1)*10
+                            });
+                        }
+                        else {
+                            getBadges.push({
+                                badge_id: "6",
+                                badge_val: "y",
+                                badge_name: "健康主食",
+                                electricity: 10
+                            });
+                        }
+                    }
                     
                     // 7 NaturalSugars
-                    // if(!("7" in currentBadge) && badgeResult["NaturalSugars"] == "7") {
-                    //     getBadges.push({
-                    //         badge_id: "7",
-                    //         badge_val: "y",
-                    //         badge_name: "天然能量甜點",
-                    //         electricity: 10
-                    //     });
-                    // }
+                    if((!("7" in currentBadge) || currentBadge["7"] != "y") && 
+                    badgeResult["NaturalSugars"] == "7") {
+                        let times = parseInt(currentBadge["7"]);
+                        if(!("7" in currentBadge)) {
+                            getValues.push({
+                                badge_id: "7",
+                                badge_val: 1,
+                                progress: 10
+                            });
+                        } 
+                        // If not reach 9 times, puls one
+                        else if(times < 9) {
+                            getValues.push({
+                                badge_id: "7",
+                                badge_val: times+1,
+                                progress: (times+1)*10
+                            });
+                        }
+                        else {
+                            getBadges.push({
+                                badge_id: "7",
+                                badge_val: "y",
+                                badge_name: "天然能量甜點",
+                                electricity: 10
+                            });
+                        }
+                    }
+
                     // 8 Vegan
-                    // if(!("8" in currentBadge) && badgeResult["Vegan"] == "8") {
-                    //     getBadges.push({
-                    //         badge_id: "8",
-                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
-                    //         badge_name: "素食主義",
-                    //         electricity: 30
-                    //     });
-                    // }
+                    if((!("8" in currentBadge) || currentBadge["8"] != "y") && 
+                    badgeResult["Vegan"] == "8") {
+                        let times = parseInt(currentBadge["8"]);
+                        if(!("8" in currentBadge)) {
+                            getValues.push({
+                                badge_id: "8",
+                                badge_val: 1,
+                                progress: 10
+                            });
+                        } 
+                        // If not reach 9 times, puls one
+                        else if(times < 9) {
+                            getValues.push({
+                                badge_id: "8",
+                                badge_val: times+1,
+                                progress: (times+1)*10
+                            });
+                        }
+                        else {
+                            getBadges.push({
+                                badge_id: "8",
+                                badge_val: "y",
+                                badge_name: "素食主義",
+                                electricity: 30
+                            });
+                        }
+                    }
                     // 10 Meat
-                    // if(!("10" in currentBadge) && badgeResult["Meat"] == "10") {
-                    //     getBadges.push({
-                    //         badge_id: "10",
-                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
-                    //         badge_name: "九天玄女 降肉",
-                    //         electricity: 10
-                    //     });
-                    // }
+                    if((!("10" in currentBadge) || currentBadge["10"] != "y") && 
+                    badgeResult["Meat"] == "10") {
+                        let times = parseInt(currentBadge["10"]);
+                        if(!("10" in currentBadge)) {
+                            getValues.push({
+                                badge_id: "10",
+                                badge_val: 1,
+                                progress: 1/3*100
+                            });
+                        } 
+                        // If not reach 2 times, puls one
+                        else if(times < 2) {
+                            getValues.push({
+                                badge_id: "10",
+                                badge_val: times+1,
+                                progress: (times+1)/3*100
+                            });
+                        }
+                        else {
+                            getBadges.push({
+                                badge_id: "10",
+                                badge_val: "y",
+                                badge_name: "九天玄女 降肉",
+                                electricity: 10
+                            });
+                        }
+                    }
+
                     // 12 FoodFlavor
-                    // if(!("12" in currentBadge) && badgeResult["FoodFlavor"] == "12") {
-                    //     getBadges.push({
-                    //         badge_id: "12",
-                    //         // badge_val: 0, // 需讀取已達成幾次，累加次數
-                    //         badge_name: "異國風情",
-                    //         electricity: 10
-                    //     });
-                    // }
+                    if((!("12" in currentBadge) || currentBadge["12"] != "y") && 
+                    badgeResult["FoodFlavor"] != "none") {
+                        if(!currentBadge["12"]){
+                            currentBadge["12"] = {};
+                        }
+                        if(!new Set(Object.keys(currentBadge["12"])).has(badgeResult["FoodFlavor"])) {
+                            if(Object.keys(currentBadge["12"]).length < 5){
+                                Object.assign(currentBadge["12"], {[badgeResult["FoodFlavor"]]: badgeResult["FoodFlavor"]});
+                                getValues.push({
+                                    badge_id: "12",
+                                    badge_val: currentBadge["12"],
+                                    progress: Object.keys(currentBadge["12"]).length/6*100
+                                });
+                            } else {
+                                getBadges.push({
+                                    badge_id: "12",
+                                    badge_val: "y",
+                                    badge_name: "異國風情",
+                                    electricity: 10
+                                });
+                            }
+                        }
+                    }
                 } 
                 /// Regular badges ///
                 // 9 HighProteinDiet
-                if(!("9" in currentBadge) && badgeResult["HighProteinDiet"] == "9") {
+                if((!("9" in currentBadge) || currentBadge["9"] != "y") && badgeResult["HighProteinDiet"] == "9") {
                     getBadges.push({
                         badge_id: "9",
                         badge_val: "y",
@@ -830,7 +923,7 @@ function achieCheck() {
                 }
                 
                 // 11 Burger
-                if(!("11" in currentBadge) && badgeResult["Burger"] == "11") {
+                if((!("11" in currentBadge) || currentBadge["11"] != "y") && badgeResult["Burger"] == "11") {
                     getBadges.push({
                         badge_id: "11",
                         badge_val: "y", 
@@ -849,13 +942,6 @@ function achieCheck() {
                     $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
                     isCloseAwardModal = false;
                     showAchieveModal();
-                    
-                    // // currentBadgeName = "吃來乍到";
-                    // adjustAchieveModalContent(getBadges);
-                    // $.cookie('toSaveAchieve', JSON.stringify({ badge_id: "1", badge_val: "y", electricity: 10 }), { expires: 7 });
-                    // $.cookie('toSaveElectricity', JSON.stringify({ electricity: responseData.result.electricity.electricity_level }), { expires: 7 });
-                    // isCloseAwardModal = false;
-                    // showAchieveModal();
                 }
                 // Update achieve progress 
                 else if(getValues.length > 0) {
