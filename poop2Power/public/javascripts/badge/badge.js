@@ -544,11 +544,11 @@ function updateUserData() {
     if (currentUserData && currentUserData.badge) {
         Object.entries(currentUserData.badge).forEach((obj) => {
             if(obj[1] == "y") {
-                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.svg`);
             }
             // Exhibition badge 
             else if(obj[0] == 4 && 0 < parseInt(obj[1]) && parseInt(obj[1]) < 5){
-                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge4-${obj[1]}.svg`);
             }
             // TODO 待補進度版本
             console.log($(`#badge${obj[0]}Modal`));

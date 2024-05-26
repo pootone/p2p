@@ -782,7 +782,7 @@ function achieCheck() {
                                 progress: 10
                             });
                         } 
-                        // If not reach 9 times, puls one
+                        // If not reach 9 times, plus one
                         else if(times < 9) {
                             getValues.push({
                                 badge_id: "6",
@@ -795,7 +795,7 @@ function achieCheck() {
                                 badge_id: "6",
                                 badge_val: "y",
                                 badge_name: "健康主食",
-                                electricity: 10
+                                electricity: 30
                             });
                         }
                     }
@@ -811,7 +811,7 @@ function achieCheck() {
                                 progress: 10
                             });
                         } 
-                        // If not reach 9 times, puls one
+                        // If not reach 9 times, plus one
                         else if(times < 9) {
                             getValues.push({
                                 badge_id: "7",
@@ -824,7 +824,7 @@ function achieCheck() {
                                 badge_id: "7",
                                 badge_val: "y",
                                 badge_name: "天然能量甜點",
-                                electricity: 10
+                                electricity: 30
                             });
                         }
                     }
@@ -840,7 +840,7 @@ function achieCheck() {
                                 progress: 10
                             });
                         } 
-                        // If not reach 9 times, puls one
+                        // If not reach 9 times, plus one
                         else if(times < 9) {
                             getValues.push({
                                 badge_id: "8",
@@ -868,7 +868,7 @@ function achieCheck() {
                                 progress: 1/3*100
                             });
                         } 
-                        // If not reach 2 times, puls one
+                        // If not reach 2 times, plus one
                         else if(times < 2) {
                             getValues.push({
                                 badge_id: "10",
@@ -881,7 +881,7 @@ function achieCheck() {
                                 badge_id: "10",
                                 badge_val: "y",
                                 badge_name: "九天玄女 降肉",
-                                electricity: 10
+                                electricity: 15
                             });
                         }
                     }
