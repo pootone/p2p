@@ -23,18 +23,6 @@ $().ready(function () {
         $("#pcVideoContainer").css("background-image", `url(../images/video/${src}-bg.png)`)
         curPlay = src;
     });
-
-    // if(isMobileDevice)
-    // Rotate phone animation
-    // $(window).on("orientationchange", function (event) {
-    //   if (window.orientation == 0 && isMobileDevice()) {
-    //     // Portrait Mode
-    //     $("#rotatePhone").css("display", "block");
-    //   } else {
-    //     $("#rotatePhone").css("display", "none");
-    //   }
-    //   console.log(window.orientation == 0);
-    // });
 });
 
 function handleOrientation(event) {

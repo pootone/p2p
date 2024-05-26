@@ -155,14 +155,6 @@ var L5 = new Phaser.Class({
             }
         }
 
-
-        // Move the bg by pointer position
-        let pointerDeltaX = lastPointerX - this.input.activePointer.x;
-        let pointerDeltaY = lastPointerY - this.input.activePointer.y;
-
-        // bg.x += pointerDeltaX * depth1;
-        // bg.y += pointerDeltaY * depth1;
-
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
 
