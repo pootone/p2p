@@ -795,7 +795,7 @@ function achieCheck() {
                                 badge_id: "6",
                                 badge_val: "y",
                                 badge_name: "健康主食",
-                                electricity: 10
+                                electricity: 30
                             });
                         }
                     }
@@ -824,7 +824,7 @@ function achieCheck() {
                                 badge_id: "7",
                                 badge_val: "y",
                                 badge_name: "天然能量甜點",
-                                electricity: 10
+                                electricity: 30
                             });
                         }
                     }
@@ -881,7 +881,7 @@ function achieCheck() {
                                 badge_id: "10",
                                 badge_val: "y",
                                 badge_name: "九天玄女 降肉",
-                                electricity: 10
+                                electricity: 15
                             });
                         }
                     }
