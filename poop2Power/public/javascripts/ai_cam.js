@@ -44,20 +44,14 @@ initApp = function () {
         function (user) {
             // User is signed in.
             if (user) {
-                // $("#loginModal").hide();
                 currentUser = user;
                 getUserData().then(() => {
-                    // updateUserData();
                     if ($.cookie("toSaveAchieve") || $.cookie("toSaveElectricity")) {
                         collectAchieve();
                     }
                 });
-                // console.log(currentUser.uid);
             } else {
                 // User is signed out.
-                // if ($.cookie("skipLogin") != 'true') {
-                //     $("#loginModal").show();
-                // }
                 $("#guide-dialog-login").show();
                 currentUser = null;
             }
@@ -289,7 +283,7 @@ $().ready(function () {
                         console.log(error);
                     });
             }
-            // 若只有文字則送 gpt-3.5-turbo
+            // 若只有文字則送 gpt-4-turbo
             else {
                 appendAskMsg(payload.description);
                 appendGetReq(payload.description);
@@ -1194,7 +1188,6 @@ function appendAwardMore() {
 
     container.appendChild(bg);
     container.appendChild(txt);
-    // container.appendChild(button);
 
     let row = document.createElement("div");
     row.classList.add("row", "w-100", "mb-2", "position-relative");

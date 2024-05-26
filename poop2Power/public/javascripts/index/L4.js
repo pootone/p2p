@@ -14,7 +14,6 @@ var L4 = new Phaser.Class({
     },
     create: function () {
         // BG
-        // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l4-bg");
         video = this.add.video(config.width / 2, config.height / 2, 'l4_video').setScale(0.89);
         video.play(true);
 
@@ -22,7 +21,6 @@ var L4 = new Phaser.Class({
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.85, 0.9);
 
         sideText = this.add.text(0, 0, "變身沼氣，進入發電廠進行火力發電", {
-            // fontFamily: "",
             fontSize: "24px",
             color: "#000"
         });
@@ -58,7 +56,5 @@ var L4 = new Phaser.Class({
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
-
-
     }
 });
