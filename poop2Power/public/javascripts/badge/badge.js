@@ -543,10 +543,16 @@ function updateUserData() {
     // Toggle badge icon display
     if (currentUserData && currentUserData.badge) {
         Object.entries(currentUserData.badge).forEach((obj) => {
+            if(obj[1] == "y") {
+                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+            }
+            // Exhibition badge 
+            else if(obj[0] == 4 && 0 < parseInt(obj[1]) && parseInt(obj[1]) < 5){
+                $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
+            }
             // TODO 待補進度版本
             console.log($(`#badge${obj[0]}Modal`));
             // console.log($(`#badge${obj[0]}Modal`));
-            $(`img[data-bs-target='#badge${obj[0]}Modal']`).attr("src", `../images/badge/badges/badge_icon/badge${obj[0]}.png`);
         })
     }
     $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis_radar) ? currentUserData.weekly_analysis_radar.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");
