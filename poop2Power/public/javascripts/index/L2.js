@@ -14,7 +14,6 @@ var L2 = new Phaser.Class({
     },
     create: function () {
         // BG
-        // bg = this.add.image(config.width / 2, config.height / 2 - 83, "l2-bg");
         video = this.add.video(config.width / 2, config.height / 2, 'l2_video').setScale(0.79);
         video.play(true);
 
@@ -22,7 +21,6 @@ var L2 = new Phaser.Class({
         let guideTxtBG = this.add.image(0, 0, "guideTxtBG").setScale(isPortrait ? 0.75 : 0.9, 0.9);
 
         sideText = this.add.text(0, 0, "賽賽進入了污水處理廠，在此分解成產氫菌及甲烷菌", {
-            // fontFamily: "",
             fontSize: "24px",
             color: "#000"
         });
@@ -49,16 +47,7 @@ var L2 = new Phaser.Class({
         lastPointerY = this.input.activePointer.y;
     },
     update: function () {
-        // Move the bg by pointer position
-        let pointerDeltaX = lastPointerX - this.input.activePointer.x;
-        let pointerDeltaY = lastPointerY - this.input.activePointer.y;
-
-        // bg.x += pointerDeltaX * depth1;
-        // bg.y += pointerDeltaY * depth1;
-
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
-
-
     }
 });

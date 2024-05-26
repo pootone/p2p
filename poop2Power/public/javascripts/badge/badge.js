@@ -187,8 +187,6 @@ $().ready(function () {
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
     ui.start("#firebaseui-auth-container", uiConfig);
-    // if (!) {
-    // }
 
     // showRankModal(); //TODO
     // const floatingWindow = document.getElementById("WeekWindow"); //TODO
@@ -220,7 +218,6 @@ function showImage(buttonId) {
 
     var button = document.getElementById('button-' + buttonId);
     button.disabled = true;
-    // button.style.backgroundColor = '#ccc'; 
 
 
     smallImage.onclick = function () {
@@ -552,7 +549,6 @@ function updateUserData() {
             }
             // TODO 待補進度版本
             console.log($(`#badge${obj[0]}Modal`));
-            // console.log($(`#badge${obj[0]}Modal`));
         })
     }
     $("#wkAnDes").text((currentUserData && currentUserData.weekly_analysis_radar) ? currentUserData.weekly_analysis_radar.des : "還沒有足夠資料可以分析呦，快去試試 AI 食光機吧！");

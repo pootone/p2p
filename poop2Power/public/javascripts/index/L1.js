@@ -99,16 +99,6 @@ var L1 = new Phaser.Class({
         this.load.audio('bgm1', './music/BGM1.wav');
     },
     create: function () {
-        // Rectangle for adjust poop gen position
-        // const graphics = this.add.graphics({ lineStyle: { width: 2, color: 0x00ff00 }, fillStyle: { color: 0xff0000 } });
-
-        // const rect = new Phaser.Geom.Rectangle(100, 150, config.width - 200, 800);
-
-        // //  The green rectangle is the original one
-        // graphics.strokeRectShape(rect);
-        // graphics.depth = 99;
-        // Rectangle for adjust poop gen position
-
         // BG
         bg = this.physics.add.staticSprite(config.width / 2, config.height / 2, "bg-empty");
         bg.setDisplaySize(config.width, config.height);
@@ -472,10 +462,6 @@ var L1 = new Phaser.Class({
                 break;
             }
         }
-
-        // Move the bg by pointer position
-        let pointerDeltaX = lastPointerX - this.input.activePointer.x;
-        let pointerDeltaY = lastPointerY - this.input.activePointer.y;
 
         lastPointerX = this.input.activePointer.x;
         lastPointerY = this.input.activePointer.y;
