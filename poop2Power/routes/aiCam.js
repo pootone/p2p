@@ -12,7 +12,7 @@ const openaiTxt = new OpenAI({ apiKey: process.env.GPT_IMG_API_KEY });
 async function gptQuery(img = '', desc = null) {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -21,11 +21,13 @@ async function gptQuery(img = '', desc = null) {
         {
           role: "user",
           content: [
-            { type: "text", text: desc || "What’s in this image?" },
+            { type: "text", text: desc || "" },
             {
               type: "image_url",
               // Could be img url or base 64 img data
-              image_url: img
+              image_url: {
+                url: img
+              }
             },
           ],
         },
@@ -45,7 +47,7 @@ async function gptQueryTxt(desc = null) {
   try {
     console.log("Req data:" + desc);
     const response = await openaiTxt.chat.completions.create({
-      model: "gpt-4-turbo",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -70,7 +72,7 @@ async function gptAchieQuery(data = null) {
   try {
     console.log("Req data:" + data);
     const response = await openaiTxt.chat.completions.create({
-      model: "gpt-4-turbo",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",

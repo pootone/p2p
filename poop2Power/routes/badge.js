@@ -12,7 +12,7 @@ async function weeklyAnalysisRadar(desc = null) {
     try {
         console.log("Req data:" + desc);
         const response = await openaiTxt.chat.completions.create({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [
                 {
                     role: "system",
@@ -49,7 +49,7 @@ async function weeklyAnalysisPie(desc = null) {
     try {
         console.log("Req data:" + desc);
         const response = await openaiTxt.chat.completions.create({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [
                 {
                     role: "system",
