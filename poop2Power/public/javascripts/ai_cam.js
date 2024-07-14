@@ -312,7 +312,7 @@ $().ready(function () {
                             getUserData().then(() => {
                                 achieCheck();
                                 collectElectricity();
-                                saveResult();
+                                // saveResult();
                             });
                         } else {
                             achieCheck();
@@ -615,7 +615,7 @@ function imgResCorrect() {
         getUserData().then(() => {
             achieCheck();
             collectElectricity();
-            saveResult();
+            // saveResult();
         });
     } else {
         achieCheck();
@@ -1028,14 +1028,18 @@ function collectElectricity() {
 
         userRef.set({
             electricity: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
-            isNewData: true
+            isNewData: true,
+            isTest: true
         }, { merge: true }).then(() => {
+            // debugger;
             rankRef.set({
                 elect: currentElectricity + parseInt(responseData.result.electricity.electricity_level),
                 userName: currentUser.displayName
-            }, {merge: true}).then(() => {
+            }, { merge: true }).then(() => {
+                debugger;
                 $.removeCookie('toSaveElectricity');
                 // Add collect electricity txt res TODO 
+                saveResult();
             }).catch((error) => {
                 console.error("Error updating leaderboard data:", error);
             });
@@ -1047,6 +1051,7 @@ function collectElectricity() {
 
 // Save aicam result
 function saveResult() {
+    debugger;
     // Need to login first
     if (currentUser) {
         var hisRef = db.collection('users').doc(currentUser.uid).collection('req_history').doc();
