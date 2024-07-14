@@ -111,7 +111,7 @@ let chartConfig = {
                 angleLines: {
                     display: true, // 對角線隱藏
                 },
-                grid: { // https://www.chartjs.org/docs/latest/axes/radial/linear.html#grid-line-configuration
+                grid: { // ://www.chartjs.org/docs/latest/axes/radial/linear.html#grid-line-configuration
                     display: true, // 隔線顯示
                     circular: true // 隔線以同心圓方式呈現
                 },
@@ -129,7 +129,7 @@ let chartConfig = {
             }
         },
         elements: {
-            line: { // https://www.chartjs.org/docs/latest/configuration/elements.html#line-configuration
+            line: { // ://www.chartjs.org/docs/latest/configuration/elements.html#line-configuration
                 borderWidth: 1,
                 borderColor: "rgba(255, 255, 255, 1)",
             },
@@ -141,7 +141,7 @@ let chartConfig = {
                     "rgba(219, 187, 87, 1)",
                     "rgba(115, 50, 17, 1)",
                 ],
-                pointStyle: 'rect' // https://www.chartjs.org/docs/latest/configuration/elements.html#point-styles
+                pointStyle: 'rect' // ://www.chartjs.org/docs/latest/configuration/elements.html#point-styles
             },
         },
     },
@@ -193,7 +193,7 @@ $().ready(function () {
     // floatingWindow.style.display = "block"; //TODO
 
     // Wake aicam page backend
-    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
+    $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
     wkAnChart = new Chart($("#wkAnChart"), chartConfig);
     wkAnPieChart = new Chart($("#wkAnPieChart"), pieConfig);
     $("#login_skip").click(function () {
@@ -383,7 +383,7 @@ function getWeeklyAnalysis() {
                             });
                         }
                     });
-                    $.post("https://p2p-contest-backend.onrender.com/badge/ana/radar", {
+                    $.post("https://p2p-wnkb.onrender.com/badge/ana/radar", {
                     // $.post("/badge/ana/radar", {
                         "weekDatas": {
                             "lastweek": lwData,
@@ -392,7 +392,7 @@ function getWeeklyAnalysis() {
                     })
                         .done(function (data) {
                             let radarData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                            $.post("https://p2p-contest-backend.onrender.com/badge/ana/pie", {
+                            $.post("https://p2p-wnkb.onrender.com/badge/ana/pie", {
                             // $.post("/badge/ana/pie", {
                                 "weekDatas": {
                                     "lastweek": lwData,
