@@ -1051,7 +1051,6 @@ function collectElectricity() {
 
 // Save aicam result
 function saveResult() {
-    debugger;
     // Need to login first
     if (currentUser) {
         var hisRef = db.collection('users').doc(currentUser.uid).collection('req_history').doc();
