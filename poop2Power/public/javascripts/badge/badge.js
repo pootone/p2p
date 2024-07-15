@@ -193,7 +193,7 @@ $().ready(function () {
     // floatingWindow.style.display = "block"; //TODO
 
     // Wake aicam page backend
-    $.post("https://p2p-wnkb.onrender.com/wake", {}, function (data, status) { });
+    $.post("https://p2p-contest-backend.onrender.com/wake", {}, function (data, status) { });
     wkAnChart = new Chart($("#wkAnChart"), chartConfig);
     wkAnPieChart = new Chart($("#wkAnPieChart"), pieConfig);
     $("#login_skip").click(function () {
@@ -352,6 +352,7 @@ function getWeeklyAnalysis() {
     // 計算這週六的日期
     endOfThisWeek.setDate(currentDate.getDate() - today + 6);
 
+
     return new Promise((resolve, reject) => {
         let userRef = db.collection("users").doc(currentUser.uid);
         let hisRef = userRef.collection("req_history");
@@ -382,8 +383,7 @@ function getWeeklyAnalysis() {
                             });
                         }
                     });
-
-                    $.post("https://p2p-wnkb.onrender.com/badge/ana/radar", {
+                    $.post("https://p2p-contest-backend.onrender.com/badge/ana/radar", {
                     // $.post("/badge/ana/radar", {
                         "weekDatas": {
                             "lastweek": lwData,
@@ -392,7 +392,7 @@ function getWeeklyAnalysis() {
                     })
                         .done(function (data) {
                             let radarData = JSON.parse(data.message.content.replace("```json", "").replace("```", ""));
-                            $.post("https://p2p-wnkb.onrender.com/badge/ana/pie", {
+                            $.post("https://p2p-contest-backend.onrender.com/badge/ana/pie", {
                             // $.post("/badge/ana/pie", {
                                 "weekDatas": {
                                     "lastweek": lwData,
@@ -533,7 +533,6 @@ function fetchRank() {
             });
     }
 }
-
 function updateUserData() {
     $("#title").text(currentUser ? currentUser.displayName + "'s" : " ");
     $("#electricity").text(currentUserData ? currentUserData.electricity : "");
