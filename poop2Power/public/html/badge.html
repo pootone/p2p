@@ -28,31 +28,32 @@
 </head>
 
 <body background="../images/badge/BG.png">
-    <!-- Google Calendar Appointment Scheduling begin -->
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script>
-        (function () {
-            var target = document.currentScript;
-            window.addEventListener('load', function () {
-                calendar.schedulingButton.load({
-                    url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Y1rtVtipGdavI8OZYZN3g2rV2Vp16AiivTazY6y9riHl2QxRuIC-yErf3Rp-IYPfcumdeqZUx?gv=true',
-                    color: '#039BE5',
-                    label: '進行預約',
-                    target,
-                });
 
-                let btn = document.getElementById("booking");
-                let gbtn = document.getElementsByClassName("qxCTlb")[0];
-                gbtn.style.display = "none";
-                btn.addEventListener("click", function () {
-                    console.log("ci");
-                    gbtn.click();
-                });
-            });
-        })();
-    </script>
-    <!-- end Google Calendar Appointment Scheduling -->
+     <!-- Google Calendar Appointment Scheduling begin -->
+     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+     <script>
+       (function() {
+         var target = document.currentScript;
+         window.addEventListener('load', function() {
+           calendar.schedulingButton.load({
+             url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1U9cKLblHQhCFWPww6sut8-QkZ-MBO-LTwQ496fqukz9kWUAZ7PDA3Kex-e5fwZHDdbx0YPYT9?gv=true',
+             color: '#039BE5',
+             label: '進行預約',
+             target,
+           });
+           
+           let btn = document.getElementById("booking");
+           let gbtn = document.getElementsByClassName("qxCTlb")[0];
+           gbtn.style.display = "none";
+           btn.addEventListener("click", function() {
+             console.log("ci");
+             gbtn.click();
+           });
+         });
+       })();
+     </script>
+     <!-- end Google Calendar Appointment Scheduling -->
     <div class="fixed-corner">
         <div class="corner-button" id="toggleMenuBtn" style="width: 60px;">
             <img src="../images/badge/menu_btn.svg" alt="">
